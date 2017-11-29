@@ -1,5 +1,5 @@
 import React from "react";
-import ModalForm from "../LoginModalForm"
+import ModalForm from "../LoginModalForm";
 
 const Modal = () => {
   // Add this to the login button
