@@ -40,6 +40,11 @@ var PhotosSchema = new Schema({
   }]
 });
 
+PhotosSchema.virtual('likesCount').
+  get(function(){
+    return this.likes.length;
+});
+
 var Photos = mongoose.model("Photos", PhotosSchema);
 
 module.exports = Photos;

@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var UsersSchema = new Schema({
   email: {
     type: String,
+    lowercase: true,
     required: true,
     unique: true
   },
@@ -29,7 +30,8 @@ var UsersSchema = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ['user', 'admin']
+    enum: ['user', 'admin'],
+    default: 'user'
   },
   profilePicture: {
     type: String
