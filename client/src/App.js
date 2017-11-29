@@ -12,7 +12,7 @@ const App = () =>
         <Route exact path="/signup" component={Signup} />
       </Switch>
     </div>
-  </Router>;;
+  </Router>;
 
 export default App;
 
