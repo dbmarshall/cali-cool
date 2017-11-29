@@ -14,6 +14,6 @@ var AlbumTagsSchema = new Schema({
   }]
 });
 
-var AlbumTags = mongoose.model("Tags", AlbumTagsSchema);
+var AlbumTags = mongoose.model("AlbumTags", AlbumTagsSchema);
 
 module.exports = AlbumTags;

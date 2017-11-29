@@ -14,6 +14,6 @@ var PhotoTagsSchema = new Schema({
   }]
 });
 
-var PhotoTags = mongoose.model("Tags", PhotoTagsSchema);
+var PhotoTags = mongoose.model("PhotoTags", PhotoTagsSchema);
 
 module.exports = PhotoTags;

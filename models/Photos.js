@@ -10,7 +10,7 @@ var PhotosSchema = new Schema({
   },
   album: {
     type: Schema.Types.ObjectId,
-    ref: "Albums"
+    ref: "Albums",
     // TBD: Whether to enforce here or app level?
     required: true
   },
