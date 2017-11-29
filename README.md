@@ -41,8 +41,6 @@
     yarn start
     ```
 
-3. Load local or Heroku deployment (see below), then enter search terms, save articles, and create annotations for saved articles.
-
 ## Available Node Commands and URLs
 
 **Local:** 

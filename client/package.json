@@ -4,8 +4,12 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "moment": "^2.19.2",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-bootstrap-modal": "^4.0.0",
     "react-dom": "^16.0.0",
+    "react-moment": "^0.6.8",
     "react-scripts": "1.0.14"
   },
   "scripts": {
