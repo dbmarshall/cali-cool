@@ -20,6 +20,7 @@ seeder.connect('mongodb://localhost/calicool_db', function() {
  
     // Callback to populate DB once collections have been cleared
     seeder.populateModels(data, function() {
+      console.log(data[0].documents);
       seeder.disconnect();
     });
  
