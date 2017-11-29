@@ -1,14 +1,7 @@
 import React from "react";
-import ModalForm from "../LoginModalForm";
 
-const Modal = () => {
-  // Add this to the login button
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-  </button>
-
-  render() {
-    return (
+const LoginModal = () => 
+    
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -19,7 +12,6 @@ const Modal = () => {
             </button>
           </div>
           <div class="modal-body">
-            <ModalForm/>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -29,8 +21,5 @@ const Modal = () => {
       </div>
     </div>
 
-      )
-  }
-}
 
-export default Modal;
+export default LoginModal;
