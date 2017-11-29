@@ -11,7 +11,6 @@ var PhotosSchema = new Schema({
   album: {
     type: Schema.Types.ObjectId,
     ref: "Albums",
-    // TBD: Whether to enforce here or app level?
     required: true
   },
   comments: [{
@@ -37,7 +36,11 @@ var PhotosSchema = new Schema({
   tags: [{
     type: Schema.Types.ObjectId,
     ref: "PhotoTags"
-  }]
+  }],
+  thumbnail: {
+    type: String,
+    required: true
+  }
 });
 
 PhotosSchema.virtual('likesCount').
