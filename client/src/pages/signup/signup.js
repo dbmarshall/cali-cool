@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-const Signup = () => {
+class Signup extends Component{
   render() {
     return (
       <div>
-        <form action="/api/signup" method="POST">
+        <form action="/api/signup" method="post">
            <div className="form-group">
               <label>First Name</label>
               <input type="text" className="form-control" name="firstName" />
@@ -32,7 +32,6 @@ const Signup = () => {
 
           <button type="submit" className="btn btn-warning btn-lg">Signup</button>
         </form>
-
         <hr/>
         <p>Already have an account? <a href="/login">Login</a></p>
         <p>Or go <a href="/">home</a>.</p>
