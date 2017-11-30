@@ -17,8 +17,7 @@ var UsersSchema = new Schema({
   },
   passWord: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   firstName: {
     type: String,

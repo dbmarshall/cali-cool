@@ -17,7 +17,7 @@ const Header = () =>
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
-        <li className="active"><a href="#/user/:id">My Account<span className="sr-only">(current)</span></a>
+        <li className="active"><a href="/user/:id">My Account<span className="sr-only">(current)</span></a>
         </li>
         <li>
           <Link to="/login">Login</Link>
@@ -27,6 +27,9 @@ const Header = () =>
           </li>
         <li>
           <a href="/signup">Signup</a>
+          </li>
+        <li>
+          <a href="/publish">Publish</a>
           </li>
       </ul>
     </div>
