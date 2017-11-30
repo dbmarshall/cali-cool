@@ -1,5 +1,6 @@
 import React from "react";
 import LoginModal from "../LoginModal";
+import { Link } from 'react-router-dom';
 
 const Header = () =>
   <div>
@@ -12,18 +13,21 @@ const Header = () =>
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
       </button>
-      <a className="navbar-brand" href="#">Cali.Cool</a>
+      <a className="navbar-brand" href="/">Cali.Cool</a>
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
-        <li className="active"><a href="#">My Account<span className="sr-only">(current)</span></a></li>
-        <li><a data-toggle="modal" data-target="#exampleModal">Login</a></li>
-        <li><a href="#">Logout</a></li>
-        <li><a href="/signup">Signup</a></li>
-        <li className="dropdown">
-          <ul className="dropdown-menu">
-          </ul>
+        <li className="active"><a href="#/user/:id">My Account<span className="sr-only">(current)</span></a>
         </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/logout">Logout</Link>
+          </li>
+        <li>
+          <a href="/signup">Signup</a>
+          </li>
       </ul>
     </div>
   </div>
