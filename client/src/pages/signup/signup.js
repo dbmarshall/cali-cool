@@ -25,9 +25,9 @@ class Signup extends Component{
     API.signUpUser({
       firstName:this.state.firstName,
       lastName:this.state.lastName,
-      userName:this.state.userName,
+      username:this.state.userName,
       email:this.state.email,
-      passWord:this.state.passWord
+      password:this.state.passWord
     })
     .then(res => console.log(res))
     .catch(err => console.log(err));

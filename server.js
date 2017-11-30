@@ -28,7 +28,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
-
 //Config ==============================
 const db = require("./models");
 require('./config/passport')(passport);
