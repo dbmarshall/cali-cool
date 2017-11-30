@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
+import { Link } from "react-router-dom";
 
 class Signup extends Component{
   
@@ -20,8 +22,18 @@ class Signup extends Component{
 
   handleFormSubmit = event => {
     event.preventDefault();
-    
-  }
+    API.signUpUser({
+      firstName:this.state.firstName,
+      lastName:this.state.lastName,
+      userName:this.state.userName,
+      email:this.state.email,
+      passWord:this.state.passWord
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+
+  };
+
   render() {
     return (
       <div className="container">
@@ -74,8 +86,9 @@ class Signup extends Component{
           <button type="submit" className="btn btn-warning btn-lg">Signup</button>
         </form>
         <hr/>
-        <p>Already have an account? <a href="/login">Login</a></p>
-        <p>Or go <a href="/">home</a>.</p>
+        <p>Already have an account? 
+        <Link to="/login">Login</Link></p>
+        <p>Or go <Link to="/">home</Link>.</p>
     </div>
       )
   }
