@@ -9,8 +9,7 @@ class Signup extends Component{
     lastName: "",
     userName:"",
     email: "",
-    passWord: "",
-    role:""
+    passWord: ""
   };
 
    handleInputChange = event => {
