@@ -6,7 +6,7 @@ module.exports = {
   Comments: require("./Comments"),
   Invitees: require("./Invitees"),
   Photos: require("./Photos"),
-  PhotoTags: require(".PhotoTags"),
+  PhotoTags: require("./PhotoTags"),
   Tags: require("./Tags"),
   Users: require("./Users")
 };
