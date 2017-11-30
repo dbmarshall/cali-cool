@@ -18,6 +18,7 @@ var AlbumsSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Comments"
   }],
+  //use $addToSet to push data to prevent duplication
   likes: [{
     type: Schema.Types.ObjectId,
     ref: "Users"
