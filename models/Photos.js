@@ -24,8 +24,9 @@ var PhotosSchema = new Schema({
   }],
   imageUploadId: {
     type: String,
-    //TBD: enforce it to true when upload feature is implemented
-    // required: true
+    // TBD: enforce it to true when upload feature is implemented
+    // required: true,
+    // unique: true
   },
   dateCreated: {
     type: Date,
