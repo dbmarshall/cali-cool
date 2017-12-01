@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class Header extends Component {
@@ -47,12 +47,9 @@ class Header extends Component {
            <LinkContainer to="/signup">
               <NavItem eventKey={1}>Signup</NavItem>
             </LinkContainer>
-            <LinkContainer to="/login">
               <NavItem 
-              eventKey={2}
               onClick={this.showModal}
               >Login</NavItem>
-            </LinkContainer>
             <LinkContainer to="/logout">
               <NavItem eventKey={3}>Signup</NavItem>
             </LinkContainer>
@@ -72,7 +69,6 @@ class Header extends Component {
           <p>Some Content here</p>
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
           <button 
           className='btn btn-primary' 
           onClick={this.saveAndClose}>
