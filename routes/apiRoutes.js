@@ -8,7 +8,7 @@ module.exports = function(router, passport) {
   //   res.send("route hit today")
   // });
 
-  router.post('/api/signup', passport.authenticate('local-signup', {
+  router.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
