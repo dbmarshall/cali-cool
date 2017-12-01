@@ -1,42 +1,37 @@
 import React from "react";
 import LoginModal from "../LoginModal";
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavItem, } from 'react-bootstrap';
 
 const Header = () =>
-  <div>
-  <nav className="navbar navbar-default">
-    <div className="container-fluid">
-    <div className="navbar-header">
-      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span className="sr-only">Toggle navigation</span>
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>
-      </button>
-      <Link to="/" className="navbar-brand">Cali.Cool</Link>
-    </div>
-    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul className="nav navbar-nav">
-        <li> 
-        <Link to="/user/:id">My Account<span className="sr-only">(current)</span></Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/logout">Logout</Link>
-          </li>
-        <li>
+ <Navbar inverse collapseOnSelect>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <Link to="/">Cali.Cool</Link>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      <Nav>
+        <NavItem eventKey={1} >
+          <Link to="/user/:id">My Account</Link>
+        </NavItem>
+        <NavItem eventKey={2} >
+           <Link to="/publish">Publish</Link>
+        </NavItem>
+      </Nav>
+      <Nav pullRight>
+        <NavItem eventKey={1} > 
           <Link to="/signup">Signup</Link>
-          </li>
-        <li>
-          <Link to="/publish">Publish</Link>
-          </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  <LoginModal />
-</div>
+        </NavItem>
+        <NavItem eventKey={2} >
+          <Link to="/login">Login</Link>
+        </NavItem>
+        <NavItem eventKey={3}> 
+          <Link to="/logout">Logout</Link>
+        </NavItem>
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
 
 export default Header;
