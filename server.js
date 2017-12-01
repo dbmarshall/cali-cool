@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+app.use(routes);
 
 // Middleware ==============================
 app.use(bodyParser.urlencoded({ extended: false }));

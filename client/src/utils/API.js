@@ -6,5 +6,9 @@ export default {
 
   signUpUser: function(userData) {
     return axios.post("api/signup", userData);
+  },
+
+  getRecentPhotos: function(){
+    return axios.get("/api/photos/recent")
   }
 };
