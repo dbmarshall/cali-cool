@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class Header extends Component {
 
@@ -35,25 +36,26 @@ class Header extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} >
-              <Link to="/user/:id">My Account</Link>
-            </NavItem>
-            <NavItem eventKey={2} >
-               <Link to="/publish">Publish</Link>
-            </NavItem>
+            <LinkContainer to="/user/:id">
+              <NavItem eventKey={1}>My Account</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/publish">
+              <NavItem eventKey={2}>Publish</NavItem>
+            </LinkContainer>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} > 
-              <Link to="/signup">Signup</Link>
-            </NavItem>
-            <NavItem eventKey={2} >
-              <p
-              onClick={this.showModal} >Login
-              </p>
-            </NavItem>
-            <NavItem eventKey={3}> 
-              <Link to="/logout">Logout</Link>
-            </NavItem>
+           <LinkContainer to="/signup">
+              <NavItem eventKey={1}>Signup</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/login">
+              <NavItem 
+              eventKey={2}
+              onClick={this.showModal}
+              >Login</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/logout">
+              <NavItem eventKey={3}>Signup</NavItem>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
