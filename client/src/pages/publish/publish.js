@@ -106,7 +106,8 @@ class Publish extends Component {
                               <button 
                                 type="submit" 
                                 className="btn btn-default btn-primary" 
-                                style={{marginTop: '10px'}}>
+                                style={{marginTop: '10px'}}
+                                disabled={!this.state.file}>
                                 Upload
                               </button>
                             </div>
