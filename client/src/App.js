@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Signup from "./pages/signup";
+import Publish from "./pages/publish";
 
 const App = () => 
 
@@ -10,6 +11,7 @@ const App = () =>
       <Header />
       <Switch>
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/publish" component={Publish} />
       </Switch>
     </div>
   </Router>;
