@@ -27,6 +27,7 @@ module.exports = function(router, passport) {
         req.logout();
         res.redirect('/');
     });
+// Testing route for session data
 
   // router.get('/signup', function(req, res) {
   //       console.log("hellow work");
