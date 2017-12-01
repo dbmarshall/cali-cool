@@ -25,13 +25,23 @@ class Publish extends Component {
         name: name,
         imagePreviewUrl: reader.result
       });
+    };
 
       // console.log('file: ', this.state.file)
       // console.log('name: ', this.state.name)
       // console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
-    };
 
     reader.readAsDataURL(file);
+
+  }
+
+  clearPreview = () => {
+
+    this.setState({
+      file: '',
+      name: '',
+      imagePreviewUrl: ''
+    });
 
   }
 
@@ -82,7 +92,8 @@ class Publish extends Component {
                               />
                             </div>*/}
                             <div className="form-group">
-                              <label htmlFor="fileupload">Choose an image to upload:</label><br/>
+                              <label htmlFor="fileupload">Choose an image to upload:</label>
+                              <br/>
                               <div className="input-group">
                                 <label className="input-group-btn">
                                     <span className="btn btn-primary">
@@ -104,10 +115,10 @@ class Publish extends Component {
                                 />
                               </div>
                               <button 
+                                disabled={!this.state.file}
                                 type="submit" 
                                 className="btn btn-default btn-primary" 
-                                style={{marginTop: '10px'}}
-                                disabled={!this.state.file}>
+                                style={{marginTop: '10px'}}>
                                 Upload
                               </button>
                             </div>
@@ -132,6 +143,19 @@ class Publish extends Component {
                                 maxHeight: '118px'
                               }}
                             />
+                            {this.state.imagePreviewUrl && 
+                              <button 
+                                onClick={this.clearPreview}
+                                type="button" 
+                                className="close"
+                                style={{
+                                  position: 'absolute', 
+                                  zIndex: '10',
+                                  top: '0', 
+                                  right: '20px'
+                                }}>
+                                &times;
+                              </button>}
                           </div>
 
                         </div>
