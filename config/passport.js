@@ -29,42 +29,42 @@ module.exports = function(passport) {
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        email : 'email',
-        passWord : 'passWord',
+        userName : 'username',
+        passWord : 'password',
         
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) {
+    function(req, userName, passWord, done) {
 
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
-
+            console.log('the username is ', userName)
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+
+        User.findOne({ userName : userName }, function(err, user) {
             // if there are any errors, return the error
-            if (err)
+            // console.log("before conditional", user)
+            if (err) {
+                console.log("passport error")
                 return done(err);
+            }
 
             // check to see if theres already a user with that email
             if (user) {
+                console.log("Existing user is: ", user)
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
                 console.log("made it to new user")
                 // if there is no user with that email
                 // create the user
-                console.log("email", req.body.email)
-                console.log("firstName", req.body.firstName)
-                console.log("lastName", req.body.lastName)
-                console.log("username", req.body.username)
-                console.log("password", password);
 
                 var newUser = new User();
                 console.log(req.body.email);
                 // set the user's local credentials
-                newUser.email    = req.body.email;
-                newUser.passWord = newUser.generateHash(password);
+                newUser.email = req.body.email;
+                newUser.passWord = newUser.generateHash(passWord);
                 newUser.userName = req.body.username;
                 newUser.firstName = req.body.firstName;
                 newUser.lastName = req.body.lastName;

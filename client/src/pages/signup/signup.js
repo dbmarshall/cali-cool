@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
-class Signup extends Component{
+class Signup extends Component {
   
   state = {
     firstName: "",
     lastName: "",
     userName:"",
     email: "",
-    passWord: "",
-    role:""
+    passWord: ""
   };
 
    handleInputChange = event => {
@@ -29,7 +28,10 @@ class Signup extends Component{
       email:this.state.email,
       password:this.state.passWord
     })
-    .then(res => console.log(res))
+    .then(res => {
+      
+      // window.location.href = "http://localhost:3000/";
+      console.log(res)})
     .catch(err => console.log(err));
 
   };
