@@ -13,11 +13,12 @@ const Header = () =>
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
       </button>
-      <a className="navbar-brand" href="/">Cali.Cool</a>
+      <Link to="/" className="navbar-brand">Cali.Cool</Link>
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
-        <li className="active"><a href="/user/:id">My Account<span className="sr-only">(current)</span></a>
+        <li> 
+        <Link to="/user/:id">My Account<span className="sr-only">(current)</span></Link>
         </li>
         <li>
           <Link to="/login">Login</Link>
@@ -26,10 +27,10 @@ const Header = () =>
           <Link to="/logout">Logout</Link>
           </li>
         <li>
-          <a href="/signup">Signup</a>
+          <Link to="/signup">Signup</Link>
           </li>
         <li>
-          <a href="/publish">Publish</a>
+          <Link to="/publish">Publish</Link>
           </li>
       </ul>
     </div>
