@@ -1,25 +1,47 @@
-import React from "react";
+import React, { Component } from "react";
 
-const LoginModal = () => 
-    
-      <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">Login</h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+var Modal = require('react-bootstrap-modal')
+ 
+class LoginModal extends Component {
+ 
+  state = {
+    open: false
+  }
+  
+  openModal = () => this.setState({open: true})
+
+  render(){
+ 
+    let closeModal = () => this.setState({ open: false })
+ 
+    let saveAndClose = () => this.setState({ open: false })
+ 
+    return (
+      <div>
+        <button onClick={this.openModal} type='button'>Launch modal</button>
+ 
+        <Modal
+          show={this.state.open}
+          onHide={this.closeModal}
+          aria-labelledby="ModalHeader"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id='ModalHeader'>A Title Goes here</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Some Content here</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
+ 
+            <button className='btn btn-primary' onClick={this.saveAndClose}>
+              Save
             </button>
-          </div>
-          <div className="modal-body">
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Save changes</button>
-          </div>
-        </div>
+          </Modal.Footer>
+        </Modal>
       </div>
-    </div>
-
-
+    )
+  }
+}
+ 
 export default LoginModal;
