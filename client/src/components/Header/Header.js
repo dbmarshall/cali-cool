@@ -51,7 +51,7 @@ class Header extends Component {
               onClick={this.showModal}
               >Login</NavItem>
             <LinkContainer to="/logout">
-              <NavItem eventKey={3}>Signup</NavItem>
+              <NavItem eventKey={3}>Logout</NavItem>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>
@@ -63,10 +63,10 @@ class Header extends Component {
         aria-labelledby="ModalHeader"
       >
         <Modal.Header closeButton>
-          <Modal.Title id='ModalHeader'>A Title Goes here</Modal.Title>
+          <Modal.Title id='ModalHeader'>Login into your Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Some Content here</p>
+          <p>Going to add FORM HERE</p>
         </Modal.Body>
         <Modal.Footer>
           <button 
