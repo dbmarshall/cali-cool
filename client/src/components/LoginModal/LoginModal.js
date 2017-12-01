@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import Modal from 'react-bootstrap-modal';
 
-var Modal = require('react-bootstrap-modal')
  
 class LoginModal extends Component {
  
   state = {
     open: false
-  }
+  };
   
-  openModal = () => this.setState({open: true})
+
+  openModal = () => {
+    console.log("open modal hit");
+    this.setState({open: true})};
 
   render(){
  
@@ -22,7 +25,7 @@ class LoginModal extends Component {
  
         <Modal
           show={this.state.open}
-          onHide={this.closeModal}
+          onHide={closeModal}
           aria-labelledby="ModalHeader"
         >
           <Modal.Header closeButton>
@@ -34,7 +37,7 @@ class LoginModal extends Component {
           <Modal.Footer>
             <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
  
-            <button className='btn btn-primary' onClick={this.saveAndClose}>
+            <button className='btn btn-primary' onClick={saveAndClose}>
               Save
             </button>
           </Modal.Footer>
