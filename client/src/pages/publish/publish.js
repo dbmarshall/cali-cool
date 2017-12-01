@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import cloudinary from 'cloudinary';
 import {Image} from 'cloudinary-react';
 // Or for more advanced usage:
 // import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';

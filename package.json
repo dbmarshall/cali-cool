@@ -19,15 +19,6 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-<<<<<<< HEAD
-=======
-    "body-parser": "^1.18.2",
-    "cloudinary": "^1.9.1",
-    "express": "^4.15.4",
-    "mongoose": "^4.13.5",
-    "mongoose-seed": "^0.4.0",
-    "morgan": "^1.9.0",
->>>>>>> development
     "bcrypt-nodejs": "latest",
     "body-parser": "^1.18.2",
     "cloudinary": "^1.9.1",
