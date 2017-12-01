@@ -14,6 +14,12 @@ module.exports = function(router, passport) {
         failureFlash : true // allow flash messages
     }));
 
+  router.get("/signup", function(req,res) {
+    console.log("passport send me here");
+    res.end();
+
+  })
+
 
   router.use(function(req, res) {
     // res.sendFile(path.join(__dirname, "../client/build/index.html"));

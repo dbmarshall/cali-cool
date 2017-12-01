@@ -29,9 +29,14 @@ class Signup extends Component {
       password:this.state.passWord
     })
     .then(res => {
+      console.log(res.request.responseURL)
+      // if (res.request.responseURL === window.location.host + "/") {
+      //   // window.location.href = res.request.responseURL;
+      //   console.log("successful login will redirect to /")
+      // }
+      window.location.href = res.request.responseURL;
       
-      // window.location.href = "http://localhost:3000/";
-      console.log(res)})
+    })
     .catch(err => console.log(err));
 
   };
