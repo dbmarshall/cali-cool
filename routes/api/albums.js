@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const articlesController = require("../../controllers/albumsController");
+const albumsController = require("../../controllers/albumsController");
 
 //Routes goes here 
 

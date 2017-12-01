@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Modal from 'react-bootstrap-modal';
-
  
 class LoginModal extends Component {
  
