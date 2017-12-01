@@ -13,7 +13,6 @@ class Publish extends Component{
                 <Image cloudName="cali-cool" publicId="fsreqp3pxpjxku5trmxb" width="200" height="200" crop="thumb"/>
                 <br/>
                 thumbnail cropped at 200x200
-                
             </div>
 
         );
