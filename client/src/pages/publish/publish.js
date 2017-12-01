@@ -139,7 +139,7 @@ class Publish extends Component {
                               id="img-preview" 
                               alt="Upload preview..." 
                               style={{
-                                maxWidth: '100%', 
+                                maxWidth: '96%', 
                                 maxHeight: '118px'
                               }}
                             />
