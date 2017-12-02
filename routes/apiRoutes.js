@@ -10,10 +10,17 @@ module.exports = function(router, passport) {
         failureFlash : true // allow flash messages
     }));
 
-  router.get("/signup", function(req,res) {
-    console.log("passport send me here");
-    res.end();
+  router.get("/signup", isLoggedIn, function(req,res) {
+    // console.log("this is resonse from user ", res.session.passport.user)
+    console.log(req.user);
+    console.log("user is logged in and we are in the get route");
+    var obj = {
+      "userName": req.user.userName,
+      "loggedIn" : true
+    }
 
+    console.log(obj)
+    res.send(obj);
   })
 
   // Login in section
@@ -28,13 +35,6 @@ module.exports = function(router, passport) {
         res.redirect('/');
     });
 
-  // router.get('/signup', function(req, res) {
-  //       console.log("hellow work");
-
-  //       // console.log("This is the sessiong foruser ", req.session.passport.user);
-  //       // req.logout();
-  //       // res.redirect('/');
-  //   });
 
   router.use(function(req, res) {
     // res.sendFile(path.join(__dirname, "../client/build/index.html"));
@@ -50,5 +50,16 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
+    console.log("user not logged in");
     res.redirect('/');
 }
+
+// function getCurrentuserId(req){
+//   var userId;
+//     if(req.isAuthenticated()){
+//       userId = req.session.passport.user;
+//     } else {
+//       userId = false
+//     }
+//     return userId
+// }

@@ -26,6 +26,13 @@ class Header extends Component {
   saveAndClose = event => {
     this.setState({ open: false })};
 
+  logoutUser = event => {
+    API.logout()
+    .then(res => {
+      console.log(res)
+    });
+  }
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -84,9 +91,10 @@ class Header extends Component {
               <NavItem 
               onClick={this.showModal}
               >Login</NavItem>
-            <LinkContainer to="/logout">
-              <NavItem eventKey={3}>Logout</NavItem>
-            </LinkContainer>
+              <NavItem 
+              eventKey={3}
+              onClick={this.logoutUser}
+              >Logout</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

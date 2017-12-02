@@ -16,7 +16,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(session({ secret: 'california' })); // session secret
+// app.use(session({ secret: 'california' })); // session secret
+
+
+app.use( session( { secret: 'california',
+                    cookie: { maxAge: 60000 },
+                    rolling: true,
+                    resave: true, 
+                    saveUninitialized: false
+                  }
+         )
+);
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());

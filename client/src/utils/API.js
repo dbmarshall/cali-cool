@@ -3,6 +3,10 @@ import axios from "axios";
 export default {
   // Hits API for articles
   //  (API Documentation: https://developer.nytimes.com)  
+  userId: function() {
+    console.log("mounted componet");
+    return axios.get("/signup")
+  },
 
   signUpUser: function(userData) {
     return axios.post("api/signup", userData);
@@ -12,5 +16,12 @@ export default {
     console.log(userData);
     return axios.post("api/login", userData);
     // return axios.post("api/signup", userData);
+  },
+
+  logout: function() {
+    console.log("logout route hit")
+    return axios.get("/logout");
   }
+
+
 };

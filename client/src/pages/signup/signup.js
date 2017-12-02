@@ -12,6 +12,18 @@ class Signup extends Component {
     passWord: ""
   };
 
+  componentDidMount() {
+    this.getUserId()
+  }
+
+  getUserId = event => {
+    API.userId()
+    .then(res => {
+      console.log(res.data.loggedIn);
+      console.log(res.data.userName);
+    })
+  }
+
    handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
