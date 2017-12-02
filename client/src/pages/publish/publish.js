@@ -1,16 +1,26 @@
 import React, { Component } from "react";
+import { DropdownButton, MenuItem } from 'react-bootstrap';
+import API from "../../utils/API";
 
 class Publish extends Component {
 
   state = {
-    results: [],
+    // results: [],
     file: '', 
     name: '', 
-    imagePreviewUrl: ''
+    imagePreviewUrl: '', 
+    width: '',
+    height: '',
+    specs: '',
+    title: '', 
+    caption: '', 
+    albumselect: '', 
+    albuminput: '', 
+    published: ''
   };
 
   componentDidMount() {
-    // this.loadArticles()
+    // this.loadAlbums()
   }
 
   handleBrowse = event => {
@@ -19,17 +29,28 @@ class Publish extends Component {
     let file = event.target.files[0];
     let name = event.target.files[0].name;
 
+    reader.onload = () => {
+      let img = new Image();
+      img.onload = () => {
+        this.setState({
+          width: img.width,
+          height: img.height,
+          specs: '(' + img.width + 'x' + img.height + ')'
+        });
+      };
+      img.src = reader.result;
+    };
+
     reader.onloadend = () => {
       this.setState({
         file: file,
         name: name,
         imagePreviewUrl: reader.result
       });
-    };
-
       // console.log('file: ', this.state.file)
-      // console.log('name: ', this.state.name)
-      // console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
+      console.log('name: ', this.state.name)
+      console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
+    };
 
     reader.readAsDataURL(file);
 
@@ -40,7 +61,10 @@ class Publish extends Component {
     this.setState({
       file: '',
       name: '',
-      imagePreviewUrl: ''
+      imagePreviewUrl: '', 
+      width: '',
+      height: '',
+      specs: ''
     });
 
   }
@@ -54,11 +78,11 @@ class Publish extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // API.apiPublish(this.state.topic, this.state.startyear, this.state.endyear)
-    //   .then(res => {
-    //     this.setState({ results: res, topic: "", startyear: "", endyear: "" });
-    //   })
-    //   .catch(err => console.log(err));
+    API.apiPublish(this.state.name, this.state.imagePreviewUrl, this.state.title, this.state.caption)
+      .then(res => {
+        this.setState({ results: res, topic: "", startyear: "", endyear: "" });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -80,48 +104,93 @@ class Publish extends Component {
                         <div className="panel-body">
                     
                           <form onSubmit={this.handleFormSubmit}>
-                            {/*<div className="form-group">
-                              <label htmlFor="topic">Topic:</label><br/>
-                              <input
-                                value={this.state.topic}
-                                onChange={this.handleInputChange}
-                                name="topic"
-                                placeholder="Enter Search Topic"
-                                className="form-control" 
-                                id="topic"
-                              />
-                            </div>*/}
+
                             <div className="form-group">
                               <label htmlFor="fileupload">Choose an image to upload:</label>
-                              <br/>
                               <div className="input-group">
                                 <label className="input-group-btn">
-                                    <span className="btn btn-primary">
-                                        Browse&hellip; 
-                                        <input 
-                                          onChange={this.handleBrowse}
-                                          type="file" 
-                                          name="fileupload" 
-                                          style={{display: 'none'}} 
-                                          multiple 
-                                         />
-                                    </span>
+                                  <span className="btn btn-primary">
+                                      Browse&hellip; 
+                                      <input 
+                                        onChange={this.handleBrowse}
+                                        type="file" 
+                                        name="fileupload" 
+                                        accept=".jpg, .jpeg, .png"
+                                        style={{display: 'none'}} 
+                                        multiple 
+                                       />
+                                  </span>
                                 </label>
                                 <input 
-                                  value={this.state.name}
+                                  value={this.state.name + ' ' + this.state.specs}
                                   type="text" 
                                   className="form-control"  
                                   readOnly
                                 />
                               </div>
-                              <button 
-                                disabled={!this.state.file}
-                                type="submit" 
-                                className="btn btn-default btn-primary" 
-                                style={{marginTop: '10px'}}>
-                                Upload
-                              </button>
+                              <span className="small">
+                                Please, upload images at least 1600px in width.
+                              </span>
                             </div>
+
+                            <div className="form-group">
+                              <label htmlFor="title">Photo Title:</label>
+                              <input 
+                                value={this.state.title}
+                                onChange={this.handleInputChange}
+                                name="title"
+                                placeholder="required" 
+                                className="form-control" 
+                                id="title"
+                              />
+                            </div>
+
+                            <div className="form-group">
+                              <label htmlFor="caption">Photo Caption:</label>
+                              <textarea 
+                                value={this.state.caption}
+                                onChange={this.handleInputChange}
+                                name="caption"
+                                placeholder="" 
+                                className="form-control" 
+                                id="caption"
+                              ></textarea>
+                            </div>
+
+                            <div className="form-group">
+                              <label htmlFor="albumselect">Select an Album:</label>
+                              <br/>
+                              <DropdownButton 
+                                value={this.state.albumselect}
+                                onChange={this.handleInputChange}
+                                name="albumselect"
+                                title="Default" 
+                                id="albumselect">
+                                <MenuItem eventKey="1">Coast</MenuItem>
+                                <MenuItem eventKey="2">Mountains</MenuItem>
+                                <MenuItem eventKey="3">Central Valley</MenuItem>
+                              </DropdownButton>
+                            </div>
+                            <div className="form-group">
+                              <label htmlFor="albuminput">Or Create a New Album:</label>
+                              <input 
+                                value={this.state.albuminput}
+                                onChange={this.handleInputChange}
+                                name="albuminput"
+                                placeholder="" 
+                                className="form-control" 
+                                id="albuminput"
+                              />
+                            </div>
+
+                            <button 
+                              disabled={!this.state.file || !this.state.title}
+                              type="submit" 
+                              className="btn btn-default btn-primary" 
+                              style={{marginTop: '10px'}}>
+                              Upload
+                            </button>
+
                           </form>
 
                         </div>
