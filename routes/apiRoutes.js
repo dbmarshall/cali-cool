@@ -16,7 +16,7 @@ module.exports = function(router, passport) {
 
   })
 
-  // Login
+  // Login in section
   router.post('/api/login', passport.authenticate('local-login', {
         successRedirect : '/', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
