@@ -261,7 +261,8 @@ var photosData = {
       'album': album_minu_yosemitte_id,
       'comments': [comments_yosemitte_photo_1_minu_1, comments_yosemitte_photo_1_josh_1],
       'likes': [user_id_minu, user_id_josh, user_id_jack],
-      'caption': 'Tanaya Lake',
+      'title': 'Tanaya Lake',
+      'caption': 'Tanaya Lake is worth the trip whenever you can make it.',
       'link': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg',
       'thumbnail': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg'
     },
@@ -271,7 +272,8 @@ var photosData = {
       'album': album_minu_yosemitte_id,
       'comments': [comments_yosemitte_photo_2_josh_1],
       'likes': [user_id_josh, user_id_david],
-      'caption': 'Yosemitte Falls',
+      'title': 'Yosemitte Falls',
+      'caption': 'There is no waterfall like Yosemitte Falls, great in the summer and winter.',
       'link': 'http://www.travelyosemite.com/media/198282/yosemite-falls-81171613_1000x667.jpg?anchor=center&mode=crop&width=1000&height=667&rnd=131012949160000000',
       'thumbnail': 'http://www.travelyosemite.com/media/198282/yosemite-falls-81171613_1000x667.jpg?anchor=center&mode=crop&width=1000&height=667&rnd=131012949160000000'
     },
@@ -280,7 +282,8 @@ var photosData = {
       'owner': user_id_minu,
       'album': album_minu_yosemitte_id,
       'likes': [user_id_josh, user_id_david, user_id_jill],
-      'caption': 'Glacier Point',
+      'title': 'Glacier Point',
+      'caption': 'From 2013',
       'link': 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg',
       'thumbnail': 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg'
     },
@@ -289,7 +292,8 @@ var photosData = {
       'owner': user_id_minu,
       'album': album_minu_yosemitte_id,
       'likes': [user_id_minu],
-      'caption': 'Sun Set',
+      'title': 'Sun Set',
+      'caption': 'What\'s better than a sunset?',
       'link': 'https://www.nationalgeographic.com/content/dam/travel/photos/000/926/92681.jpg',
       'thumbnail': 'https://www.nationalgeographic.com/content/dam/travel/photos/000/926/92681.jpg'
     },
@@ -299,7 +303,8 @@ var photosData = {
       'owner': user_id_jack,
       'album': album_jack_goldengate_id,
       'likes': [user_id_minu],
-      'caption' :'Old Bridge',
+      'title' :'Old Bridge',
+      'caption' :'Some old bridge somewhere.',
       'link': 'http://cdn.history.com/sites/2/2017/05/GettyImages-495282443.jpg',
       'thumbnail': 'http://cdn.history.com/sites/2/2017/05/GettyImages-495282443.jpg'
     },
@@ -308,7 +313,8 @@ var photosData = {
       'owner': user_id_jack,
       'album': album_jack_goldengate_id,
       'likes': [user_id_minu, user_id_jack, user_id_jill, user_id_david, user_id_josh],
-      'caption': 'Full View',
+      'title': 'Full View',
+      'caption': 'As opposed to partial view.',
       'link': 'http://www.history.com/s3static/video-thumbnails/AETN-History_VMS/21/201/tdih-jan05-HD.jpg',
       'thumbnail': 'http://www.history.com/s3static/video-thumbnails/AETN-History_VMS/21/201/tdih-jan05-HD.jpg'
     },
@@ -317,7 +323,8 @@ var photosData = {
       'owner': user_id_jack,
       'album': album_jack_goldengate_id,
       'likes': [user_id_minu],
-      'caption': 'Golden Gate At Night',
+      'title': 'Golden Gate At Night',
+      'caption': 'Luv, luv, lov the bridge at night. Daytime with fog is cool, too.  Cali cool.',
       'link': 'https://cdn-images-1.medium.com/max/1600/1*NZ33GHUb7yNEfWBxLv9psw.jpeg',
       'thumbnail': 'https://cdn-images-1.medium.com/max/1600/1*NZ33GHUb7yNEfWBxLv9psw.jpeg'
     },
@@ -327,7 +334,8 @@ var photosData = {
       'owner': user_id_josh,
       'album': album_josh_beaches_id,
       'likes': [user_id_minu, user_id_david, user_id_josh],
-      'caption' :'Beach one',
+      'title' :'Beach one',
+      'caption' :'Hundreds of miles of coastline in California.',
       'link': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQf9BEGCggBmcPGxAO7DDXAHBo7Dra3hFonpXvXfqFXsfztGJ-1Q',
       'thumbnail': 'http://travel.home.sndimg.com/content/dam/images/travel/fullset/2014/05/06/cd/top-10-southern-california-beaches-la-jolla.rend.hgtvcom.1280.720.suffix/1491584248515.jpeg'
     },
@@ -336,7 +344,8 @@ var photosData = {
       'owner': user_id_josh,
       'album': album_josh_beaches_id,
       'likes': [user_id_minu, user_id_david],
-      'caption' :'Beach two',
+      'title' :'Beach two',
+      'caption' :'Another incredible scene.',
       'link': 'http://travel.home.sndimg.com/content/dam/images/travel/fullset/2016/03/07/california-beach-getaway-pismo-beach.jpg.rend.hgtvcom.966.725.suffix/1491592782974.jpeg',
       'thumbnail': 'http://travel.home.sndimg.com/content/dam/images/travel/fullset/2016/03/07/california-beach-getaway-pismo-beach.jpg.rend.hgtvcom.966.725.suffix/1491592782974.jpeg'
     },
@@ -345,7 +354,8 @@ var photosData = {
       'owner': user_id_josh,
       'album': album_josh_beaches_id,
       'likes': [user_id_minu],
-      'caption' :'Beach Three',
+      'title' :'Beach Three',
+      'caption' :'You love the beach, too?',
       'link': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROPKsOwJqSLul9-D_eLlQrHLwiU8jyt6xnIU0c5G773mC-O-WE',
       'thumbnail': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROPKsOwJqSLul9-D_eLlQrHLwiU8jyt6xnIU0c5G773mC-O-WE'
     },
@@ -354,7 +364,8 @@ var photosData = {
       'owner': user_id_josh,
       'album': album_josh_beaches_id,
       'likes': [user_id_minu],
-      'caption' :'Beach Four',
+      'title' :'Beach Four',
+      'caption' :'Kind of chilly, but there are some great warm days here.',
       'link': 'https://mustdotravels.com/wp-content/uploads/2017/05/WikiCoruralglass-beach-wiki-Edited.jpg',
       'thumbnail': 'https://mustdotravels.com/wp-content/uploads/2017/05/WikiCoruralglass-beach-wiki-Edited.jpg'
     },
@@ -363,7 +374,8 @@ var photosData = {
       'owner': user_id_josh,
       'album': album_josh_beaches_id,
       'likes': [user_id_minu],
-      'caption' :'Beach Five',
+      'title' :'Beach Five',
+      'caption' :'I love this place.',
       'link': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkX-9A7kp43tARu8zRDQbd8IiVApO2K9geYYKhKv1aQWGb64dU',
       'thumbnail': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkX-9A7kp43tARu8zRDQbd8IiVApO2K9geYYKhKv1aQWGb64dU'
     }
