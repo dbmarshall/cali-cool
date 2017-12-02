@@ -18,7 +18,6 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 // app.use(session({ secret: 'california' })); // session secret
 
-
 app.use( session( { secret: 'california',
                     cookie: { maxAge: 60000 },
                     rolling: true,

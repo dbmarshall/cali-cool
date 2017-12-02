@@ -3,9 +3,9 @@ import axios from "axios";
 export default {
   // Hits API for articles
   //  (API Documentation: https://developer.nytimes.com)  
-  userId: function() {
+  sessionData: function() {
     console.log("mounted componet");
-    return axios.get("/signup")
+    return axios.get("/session")
   },
 
   signUpUser: function(userData) {

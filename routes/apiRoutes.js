@@ -12,13 +12,14 @@ module.exports = function(router, passport) {
         session: false
     }));
 
-  router.get("/signup", isLoggedIn, function(req,res) {
+  router.get("/session", isLoggedIn, function(req,res) {
     // console.log("this is resonse from user ", res.session.passport.user)
     console.log(req.user);
     console.log("user is logged in and we are in the get route");
     var obj = {
       "userName": req.user.userName,
-      "loggedIn" : true
+      "loggedIn" : true,
+      "userId" : req.user._id
     }
 
     console.log(obj)

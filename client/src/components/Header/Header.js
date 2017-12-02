@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem, Modal, Form, FormGroup, Col, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -13,7 +12,10 @@ class Header extends Component {
     this.state = {
     open: false,
     userName:"",
-    passWord:""
+    passWord:"",
+    isLoggedIn: false,
+    displayUser:"",
+    userId:""
     }
   };
 
@@ -29,9 +31,37 @@ class Header extends Component {
   logoutUser = event => {
     API.logout()
     .then(res => {
-      console.log(res)
-    });
+      this.setState({
+        isLoggedIn:false
+      })
+    })
   }
+
+  componentDidMount() {
+    this.getSessionData()
+  }
+
+  getSessionData = event => {
+    API.sessionData()
+    .then(res => {
+      const isLoggedIn =res.data.loggedIn;
+      const loggedInUser = res.data.userName
+      const mongoId = res.data.userId
+      
+      if (isLoggedIn === true) {
+        this.setState({
+          isLoggedIn: true,
+          displayUser: loggedInUser,
+          userId: mongoId
+        });
+      }
+      else{
+        console.log("user isn't logged in");
+      }
+    })
+    .catch(err => console.log(err))
+  }
+
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -57,12 +87,11 @@ class Header extends Component {
     //     // window.location.href = res.request.responseURL;
     //     console.log("successful login will redirect to /")
     //   }
-    //   window.location.href = res.request.responseURL;
+      window.location.href = res.request.responseURL;
       
     })
     // .catch(err => console.log(err));
   };
-
 
   render(){
 
@@ -70,32 +99,59 @@ class Header extends Component {
        <div>
      <Navbar inverse collapseOnSelect>
         <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Cali.Cool</Link>
-          </Navbar.Brand>
+            <LinkContainer to="/">
+              <Navbar.Brand 
+              onClick={this.getSessionData}>
+                Cali.Cool
+              </Navbar.Brand>
+            </LinkContainer>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <LinkContainer to="/user/:id">
-              <NavItem eventKey={1}>My Account</NavItem>
+            {this.state.isLoggedIn !== true ? (
+              <Nav>
+              <NavItem 
+              eventKey={1}
+              onClick={this.getSessionData}
+              >Welcome Guest!</NavItem>
+              </Nav>
+              ) : (
+              <Nav>
+              <LinkContainer to={'/user/' + this.state.userId}>
+              <NavItem 
+              eventKey={1}
+              onClick={this.getSessionData}
+              >{this.state.displayUser} Account</NavItem>
             </LinkContainer>
+            </Nav>
+              )}
             <LinkContainer to="/publish">
-              <NavItem eventKey={2}>Publish</NavItem>
+              <NavItem 
+              eventKey={2}
+              onClick={this.getSessionData}
+              >Publish</NavItem>
             </LinkContainer>
           </Nav>
-          <Nav pullRight>
-           <LinkContainer to="/signup">
+          {this.state.isLoggedIn !== true ? (
+            <Nav pullRight>
+            <LinkContainer to="/signup">
               <NavItem eventKey={1}>Signup</NavItem>
             </LinkContainer>
               <NavItem 
-              onClick={this.showModal}
-              >Login</NavItem>
-              <NavItem 
-              eventKey={3}
-              onClick={this.logoutUser}
-              >Logout</NavItem>
-          </Nav>
+                onClick={this.showModal}
+              > Login
+              </NavItem>
+              </Nav>
+                ) : (
+              <Nav pullRight>
+               <NavItem 
+                eventKey={3}
+                onClick={this.logoutUser}
+              > Logout
+              </NavItem>
+              </Nav>
+            )}
         </Navbar.Collapse>
       </Navbar>
         
@@ -152,7 +208,7 @@ class Header extends Component {
         </Modal.Body>
       </Modal>
   </div>
-      )
+      );
   }
 
 
