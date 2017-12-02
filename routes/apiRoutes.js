@@ -4,10 +4,12 @@ const router = require("express").Router();
 module.exports = function(router, passport) {
 
   // Sign a user
-  router.post('/api/signup', passport.authenticate('local-signup', {
+  router.post('/api/signup', 
+    passport.authenticate('local-signup',{
         successRedirect : '/', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        failureFlash : true, // allow flash messages
+        session: false
     }));
 
   router.get("/signup", isLoggedIn, function(req,res) {
@@ -21,6 +23,10 @@ module.exports = function(router, passport) {
 
     console.log(obj)
     res.send(obj);
+  })
+
+  router.get('/login', function(req, res) {
+    console.log(req.flash('signupMessage'));
   })
 
   // Login in section
