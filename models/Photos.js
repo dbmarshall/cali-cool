@@ -40,6 +40,10 @@ var PhotosSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "PhotoTags"
   }],
+  title: {
+    type: String,
+    required: true
+  },
   caption: {
     type: String
   },
