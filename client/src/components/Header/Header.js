@@ -44,18 +44,16 @@ class Header extends Component {
       password:this.state.passWord
     })
     .then(res => {
-      console.log(res);
-    //   console.log(res.request.responseURL)
-    //   if (res.request.responseURL === window.location.host + "/") {
-    //     // window.location.href = res.request.responseURL;
-    //     console.log("successful login will redirect to /")
-    //   }
-    //   window.location.href = res.request.responseURL;
+      console.log(res.request.responseURL)
+      if (res.request.responseURL === window.location.host + "/") {
+        // window.location.href = res.request.responseURL;
+        console.log("successful login will redirect to /")
+      }
+      window.location.href = res.request.responseURL;
       
     })
-    // .catch(err => console.log(err));
-  };
-
+    .catch(err => console.log(err));
+  }
 
   render(){
 
@@ -79,7 +77,7 @@ class Header extends Component {
           </Nav>
           <Nav pullRight>
            <LinkContainer to="/signup">
-              <NavItem eventKey={1}>Signup</NavItem>
+              <NavItem eventKey={1} >Signup</NavItem>
             </LinkContainer>
               <NavItem 
               onClick={this.showModal}

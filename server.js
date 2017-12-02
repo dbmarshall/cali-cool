@@ -43,7 +43,7 @@ mongoose.connect(
 );
 
 // Routes ==============================
-require('./routes/apiRoutes.js')(app, passport) // load our routes and pass in our app and fully configured passport
+require('./routes/api/authentication.js')(app, passport) // load our routes and pass in our app and fully configured passport
 
 // Send every request to the React app
 // Define any API routes before this runs

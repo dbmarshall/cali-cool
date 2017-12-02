@@ -30,15 +30,17 @@ class Signup extends Component {
     })
     .then(res => {
       console.log(res.request.responseURL)
-      // if (res.request.responseURL === window.location.host + "/") {
-      //   // window.location.href = res.request.responseURL;
-      //   console.log("successful login will redirect to /")
-      // }
-      window.location.href = res.request.responseURL;
+    //   if (res.request.responseURL === window.location.host + "/") {
+    //     window.location.href = res.request.responseURL;
+    //     console.log("successful login will redirect to /");
+    //   }
+    //  else {
+    //   console.log("need to stay on signup page");
+    //  }
       
     })
-    .catch(err => console.log(err));
-
+    .catch(err => console.log(err))
+    
   };
 
   render() {
