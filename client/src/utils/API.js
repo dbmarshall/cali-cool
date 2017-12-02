@@ -5,12 +5,12 @@ export default {
   //  (API Documentation: https://developer.nytimes.com)  
 
   signUpUser: function(userData) {
-    return axios.post("api/signup", userData);
+    return axios.post("/api/signup", userData);
   },
 
   loginUser: function(userData) {
     console.log(userData);
-    return axios.post("api/login", userData);
+    return axios.post("/api/login", userData);
     // return axios.post("api/signup", userData);
 },
   getRecentPhotos: function(){
