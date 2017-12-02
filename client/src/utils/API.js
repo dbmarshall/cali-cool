@@ -12,5 +12,8 @@ export default {
     console.log(userData);
     return axios.post("api/login", userData);
     // return axios.post("api/signup", userData);
+},
+  getRecentPhotos: function(){
+    return axios.get("/api/photos/recent")
   }
 };
