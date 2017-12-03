@@ -19,7 +19,7 @@ export default {
 
   logout: function() {
     console.log("logout route hit")
-    return axios.get("/logout");
+    return axios.get("/api/authentication/logout");
   }
 
 

@@ -30,6 +30,11 @@ const passport = require('passport');
         failureFlash : true // allow flash messages
     }));
 
+    router.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+
  function isLoggedIn(req, res, next) {
     
     // if user is authenticated in the session, carry on 

@@ -17,7 +17,6 @@ app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(routes);
 
 app.use(cookieParser()); // read cookies (needed for auth)
 // app.use(session({ secret: 'california' })); // session secret
@@ -46,7 +45,7 @@ if (process.env.NODE_ENV === "production") {
 //Config ==============================
 const db = require("./models");
 require('./config/passport')(passport);
-require('./routes/apiRoutes.js')(app, passport)
+app.use(routes);
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
