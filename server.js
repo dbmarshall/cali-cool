@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser()); // read cookies (needed for auth)
 // app.use(session({ secret: 'california' })); // session secret
 
-app.use( session( { secret: 'california',
+app.use( session( { secret: keys.secret,
                     cookie: { maxAge: 60000 },
                     rolling: true,
                     resave: true, 

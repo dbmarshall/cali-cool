@@ -11,21 +11,14 @@
 // const app = express();
 // const session = require('express-session');
 
-// module.exports = {
+// var keys =
+  
+//   { "cloudinary" : cloudinary.config({ 
+//             cloud_name: "XXXXXXX",
+//             api_key: "XXXXXXXX",
+//             api_secret: "XXXXXXXX"
+//           }),
+//     "secret": "XXXXXX"
+//   }
 
-//   app.use( session( { secret: 'xxxx',
-//                     cookie: { maxAge: 60000 },
-//                     rolling: true,
-//                     resave: true, 
-//                     saveUninitialized: false
-//                   }
-//          )
-// );
-//   cloudinary.config({ 
-//       cloud_name: 'xxxxxxxx', 
-//       api_key: 'xxxxxxxx', 
-//       api_secret: 'xxxxxxxx' 
-//     });
-
-// }
-//   
+//   module.exports = keys;

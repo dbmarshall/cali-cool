@@ -62,12 +62,3 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
-// function getCurrentuserId(req){
-//   var userId;
-//     if(req.isAuthenticated()){
-//       userId = req.session.passport.user;
-//     } else {
-//       userId = false
-//     }
-//     return userId
-// }
