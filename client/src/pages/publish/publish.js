@@ -2,6 +2,9 @@ import React, { Component } from "react";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 import API from "../../utils/API";
 
+const owner = '5a221a8793404dd2c1ff8b68';
+const albums = [5a221a8793404dd2c1ff8b6d, 5a221a8793404dd2c1ff8b6f];
+
 class Publish extends Component {
 
   state = {
@@ -248,9 +251,8 @@ class Publish extends Component {
                                   id="albumselect"
                                   className="form-control">
                                   <option value="default">Select</option>
-                                  <option value="Coastal">Coastal</option>
-                                  <option value="Mountains">Mountains</option>
-                                  <option value="Central Valley">Central Valley</option>
+                                  <option value="5a221a8793404dd2c1ff8b6f">SanFrancisco Golden Gate</option>
+                                  <option value="5a221a8793404dd2c1ff8b6d">Yosemite - ThanksGiving Break</option>
                                 </select>
 
                                 <input 
