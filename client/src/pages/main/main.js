@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import API from '../../utils/API';
+
 import Gallery from 'react-photo-gallery';
 import Lightbox from 'react-images';
 
-  const styles = {
-  aMargin: {
-    position: "absolute",
-    bottom: 0,
-    color: "white",
-    marginLeft: "50"
-  }
-};
+import Like from '../../components/Like'
+import Comment from '../../components/Comment'
 
 class Main extends Component{
 
   state = {
-    currentImage: 0,
+    currentImageIndex: 0,
     lightboxIsOpen: false,
-    thumbnails : []
+    
+    thumbnails : [],
+    photos: [],
+    isCarouselModalOpen: false,
+    currentPhoto: {}
   }
 
   componentDidMount(){
@@ -28,7 +27,7 @@ class Main extends Component{
     API.getRecentPhotos()
     .then(res => {
       const thumbs = this.getThumbnailArray(res.data);
-      this.setState({thumbnails: thumbs});
+      this.setState({thumbnails: thumbs, photos: res.data, minu: "min"});
     })
     .catch(err => console.log(err));
   }
@@ -42,30 +41,33 @@ class Main extends Component{
 
   openLightbox = (event, obj) => {
     this.setState({
-      currentImage: obj.index,
+      currentImageIndex: obj.index,
       lightboxIsOpen: true,
+      currentPhoto: this.state.photos[obj.index]
     });
   }
 
   closeLightbox = () => {
     this.setState({
-      currentImage: 0,
+      currentImageIndex: 0,
       lightboxIsOpen: false,
     });
   }
   gotoPrevious = () => {
     this.setState({
-      currentImage: this.state.currentImage - 1,
+      currentImageIndex: this.state.currentImageIndex - 1,
+      currentPhoto: this.state.photos[this.state.currentImageIndex - 1]
     });
   }
   gotoNext = () => {
     this.setState({
-      currentImage: this.state.currentImage + 1,
+      currentImageIndex: this.state.currentImageIndex + 1,
+      currentPhoto: this.state.photos[this.state.currentImageIndex + 1]
     });
   }
 
-
   render(){
+
     return (
       <div className="container">
         <div className="jumbotron">  
@@ -75,18 +77,26 @@ class Main extends Component{
 
         <div>
           <h4>Recent Photo uploads</h4>
-          
-            <Gallery photos={this.state.thumbnails} onClick={this.openLightbox}/>
-            <Lightbox images={this.state.thumbnails}
-              onClose={this.closeLightbox}
-              onClickPrev={this.gotoPrevious}
-              onClickNext={this.gotoNext}
-              currentImage={this.state.currentImage}
-              isOpen={this.state.lightboxIsOpen}
-              customControls = {[<a style={styles.aMargin}>hello</a>,
-                <h1>sbcsabcjbasdjcbsdjk</h1>]}
-            />
-          
+
+            <Gallery photos={this.state.thumbnails} onClick={this.openLightbox}/>  
+              <Lightbox images={this.state.thumbnails}
+                onClose={this.closeLightbox}
+                onClickPrev={this.gotoPrevious}
+                onClickNext={this.gotoNext}
+                currentImage={this.state.currentImageIndex}
+                isOpen={this.state.lightboxIsOpen}
+                backdropClosesModal={true}
+                showCloseButton={false} 
+                customControls={[
+                  <a style={{position: "absolute", top: "15px", fontSize: "1.2em", color: "white"}} 
+                    key={1}>Album Title</a>,
+                  <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
+                    key={2}></Like>,
+                  <Comment style={{position: "absolute", bottom: "60px", left: "90px"}} 
+                    key={3}></Comment>
+                ]}
+              />
+          }
         </div>
       </div>
     );

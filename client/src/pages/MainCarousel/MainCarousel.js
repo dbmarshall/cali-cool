@@ -1,40 +1,29 @@
 import React, { Component } from "react";
-import { Carousel } from 'react-responsive-carousel';
 import API from '../../utils/API';
-
+import Gallery from 'react-photo-gallery';
+import Lightbox from 'react-images';
+import CarouselModal from '../../components/CarouselModal';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+
 const styles = {
-
-  para: {
+  aMargin: {
     position: "absolute",
-    top: "10px",
-    marginLeft: "20px",
-    color: "white"
-  },
-
-  imageStyle: {
-    position: "relative",
-    display: 'block', // removes browser default gutter
-    height: 'auto',
-    margin: '0 auto', // maintain center on very short screens OR very narrow image
-    maxWidth: '100%',
-  },
-
-  imageDiv: {
-    backgroundColor: "red",
-    justifyContent: 'center',
-    alignItems: 'center',
-    verticalAlign: 'middle'
+    bottom: 0,
+    color: "white",
+    marginLeft: "50"
   }
-
-}
+};
 
 class MainCarousel extends Component{
 
-
   state = {
-    images : []
+    currentImage: 0,
+    lightboxIsOpen: false,
+    
+    thumbnails : [],
+    photos: [],
+    isCarouselModalOpen: false,
   }
 
   componentDidMount(){
@@ -44,35 +33,56 @@ class MainCarousel extends Component{
   loadRecentPhotos = () => {
     API.getRecentPhotos()
     .then(res => {
-      const photos = this.getImages(res.data);
-      console.log("photos", photos);
-      this.setState({images: photos});
+      const thumbs = this.getThumbnailArray(res.data);
+      this.setState({thumbnails: thumbs, photos: res.data, minu: "min"});
+      console.log(this.state)
     })
     .catch(err => console.log(err));
   }
 
-  getImages = (photos) => {
-    return photos.map(function(photo){
-      return photo.link;
+  getThumbnailArray = (photos) => {
+    const thumbnails = photos.map(function(photo){
+      return { src: photo.thumbnail, width: 4, height: 3 , caption: photo.caption};
     });
+    return thumbnails;
   }
 
 
-  render() {
+  openCarouselModal = (event, obj) => {
+    this.setState({ 
+      isCarouselModalOpen: true, 
+      currentImage: obj.index
+    });
+  }
+
+  closeCarouselModal = () => {
+    console.log("parent close")
+    this.setState({ isCarouselModalOpen: false});
+  }
+
+  render(){
     return (
-      <div class="container">
-      <Carousel showThumbs={false}>
-        {
-          this.state.images.map(function(image){
-            return <div style={styles.imageDiv}>
-                <h1 >Album</h1>
-                <img src={image} alt="hi" style={styles.imageStyle}/>
-                <p> comments</p>
-                
-            </div>
-          })
-        }
-      </Carousel>
+      <div className="container">
+        <div className="jumbotron">  
+          <h1>Cali.Cool</h1>
+          <p>A growing visual record of what's going down in our state</p>
+        </div>
+
+        <div>
+          <h4>Recent Photo uploads</h4>
+
+            <Gallery photos={this.state.thumbnails} onClick={this.openCarouselModal}/>  
+              { this.state.isCarouselModalOpen && 
+               
+                <CarouselModal
+                photos={this.state.photos} 
+                isOpen={this.state.isCarouselModalOpen}
+                onClose={this.closeCarouselModal}
+                currentImage={this.state.currentImage}/>
+            }
+            />
+          }
+        </div>
       </div>
     );
   }
