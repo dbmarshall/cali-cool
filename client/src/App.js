@@ -4,10 +4,9 @@ import Header from "./components/Header";
 import Signup from "./pages/signup";
 import Publish from "./pages/publish";
 import Main from "./pages/main";
+// import MainCarousel from "./pages/MainCarousel";
 
-
-const App = () => 
-
+const App = () =>
   <Router>
     <div>
       <Header />
