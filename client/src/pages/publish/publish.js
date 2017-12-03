@@ -102,6 +102,9 @@ class Publish extends Component {
       albumtext: ''
     });
 
+    let dropDown = document.getElementById('albumselect');
+    dropDown.selectedIndex = 0;
+
   };
 
   handleInputChange = event => {
@@ -137,13 +140,19 @@ class Publish extends Component {
 
       // console.log('this.state.albumselect: ', this.state.albumselect);
       // console.log('this.state.albumtext: ', this.state.albumtext);
-      console.log('this.state.albumchoice: ', this.state.albumchoice);
+      // console.log('this.state.albumchoice: ', this.state.albumchoice);
 
+    // if (this.state.albumtext === '' && this.state.albumselect === '') {
+    //   this.setState({
+    //     albumchoice: ''
+    //   });
+    // }
+    
     API.savePhoto({
         // imageUploadId: this.state.name,
         title: this.state.title, 
         caption: this.state.caption, 
-        album: 'default',
+        album: this.state.albumchoice,
         // filePath: this.state.path
         // image: this.state.imagePreviewUrl
       })
@@ -237,9 +246,8 @@ class Publish extends Component {
                                   onChange={this.handleInputChange}
                                   name="albumselect"
                                   id="albumselect"
-                                  className="form-control"
-                                  style={{float: 'left'}}>
-                                  <option value="grapefruit">Select</option>
+                                  className="form-control">
+                                  <option value="default">Select</option>
                                   <option value="Coastal">Coastal</option>
                                   <option value="Mountains">Mountains</option>
                                   <option value="Central Valley">Central Valley</option>
@@ -310,6 +318,7 @@ class Publish extends Component {
                               <button 
                                 onClick={this.clearPreview}
                                 type="button" 
+                                title="Deselect this photo"
                                 className="close"
                                 style={{
                                   position: 'absolute', 
