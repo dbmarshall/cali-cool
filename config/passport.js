@@ -105,8 +105,9 @@ module.exports = function(passport) {
             // if no user is found, return the message
             if (!user) {
                 console.log("No user found")
-                console.log(req.flash("no user f"))
-                return done(null, false, req.flash('loginMessage', 'No user found.'))
+                req.flash("no user f")
+                // return done(null, false, req.flash('loginMessage', 'No user found.'))
+                return done(null, false, {'message': "no user found"})
             }
                  // req.flash is the way to set flashdata using connect-flash
             else { 

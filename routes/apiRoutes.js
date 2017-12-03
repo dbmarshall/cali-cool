@@ -26,9 +26,10 @@ module.exports = function(router, passport) {
     res.send(obj);
   })
 
-  router.get('/login', function(req, res) {
-    console.log(req.flash('signupMessage'));
-  })
+// Flash message test
+  // router.get('/login', function(req, res) {
+  //   console.log(req.session.message)
+  // })
 
   // Login in section
   router.post('/api/login', passport.authenticate('local-login', {
