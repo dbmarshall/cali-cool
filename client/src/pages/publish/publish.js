@@ -6,16 +6,17 @@ class Publish extends Component {
 
   state = {
     // results: [],
-    file: '', 
-    name: '', 
-    imagePreviewUrl: '', 
+    file: '',
+    name: '',
+    filePath: '',
+    imagePreviewUrl: '',
     width: '',
     height: '',
     specs: '',
-    title: '', 
-    caption: '', 
-    albumselect: '', 
-    albuminput: '', 
+    title: '',
+    caption: '',
+    albums: '',
+    album: '',
     published: ''
   };
 
@@ -23,11 +24,20 @@ class Publish extends Component {
     // this.loadAlbums()
   }
 
+  loadAlbums = () => {
+    API.getAlbums()
+      .then(res =>
+        this.setState({ albums: res.data})
+      )
+      .catch(err => console.log(err));
+  };
+
   handleBrowse = event => {
 
     let reader = new FileReader();
     let file = event.target.files[0];
     let name = event.target.files[0].name;
+    // let path = event.target.files[0].webkitRelativePath;
 
     reader.onload = () => {
       let img = new Image();
@@ -45,10 +55,12 @@ class Publish extends Component {
       this.setState({
         file: file,
         name: name,
+        // filePath: path,
         imagePreviewUrl: reader.result
       });
-      // console.log('file: ', this.state.file)
+      console.log('file: ', this.state.file)
       console.log('name: ', this.state.name)
+      console.log('path: ', this.state.path)
       console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
     };
 
@@ -61,10 +73,28 @@ class Publish extends Component {
     this.setState({
       file: '',
       name: '',
+      // filePath: '',
       imagePreviewUrl: '', 
       width: '',
       height: '',
       specs: ''
+    });
+
+  }
+
+  clearAll = () => {
+
+    this.setState({
+      file: '', 
+      name: '', 
+      // filePath: '',
+      imagePreviewUrl: '', 
+      width: '',
+      height: '',
+      specs: '',
+      title: '', 
+      caption: '', 
+      album: ''
     });
 
   }
@@ -78,10 +108,19 @@ class Publish extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.apiPublish(this.state.name, this.state.imagePreviewUrl, this.state.title, this.state.caption)
-      .then(res => {
-        this.setState({ results: res, topic: "", startyear: "", endyear: "" });
+    API.savePhoto({
+        // imageUploadId: this.state.name,
+        title: this.state.title, 
+        caption: this.state.caption, 
+        album: 'default',
+        // filePath: this.state.path
+        // image: this.state.imagePreviewUrl
       })
+      .then(
+        // res => this.loadArticles();
+        // this.setState({ results: res, title: '', caption: '' });
+        this.clearAll()
+      )
       .catch(err => console.log(err));
   };
 
@@ -166,15 +205,15 @@ class Publish extends Component {
                                 name="albumselect"
                                 title="Default" 
                                 id="albumselect">
-                                <MenuItem eventKey="1">Coast</MenuItem>
+                                {/*<MenuItem eventKey="1">Coast</MenuItem>
                                 <MenuItem eventKey="2">Mountains</MenuItem>
-                                <MenuItem eventKey="3">Central Valley</MenuItem>
+                                <MenuItem eventKey="3">Central Valley</MenuItem>*/}
                               </DropdownButton>
                             </div>
                             <div className="form-group">
                               <label htmlFor="albuminput">Or Create a New Album:</label>
                               <input 
-                                value={this.state.albuminput}
+                                value={this.state.album}
                                 onChange={this.handleInputChange}
                                 name="albuminput"
                                 placeholder="" 
