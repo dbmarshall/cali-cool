@@ -4,15 +4,14 @@ import Header from "./components/Header";
 import Signup from "./pages/signup";
 import Publish from "./pages/publish";
 import Main from "./pages/main";
+// import MainCarousel from "./pages/MainCarousel";
 
-
-const App = () => 
-
+const App = () =>
   <Router>
     <div>
       <Header />
       <Switch>
-        <Route exact path="/" render={() => <h1>Hellow world</h1>}/>
+        <Route exact path="/" component={Main} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/publish" component={Publish} />
       </Switch>

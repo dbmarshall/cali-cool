@@ -20,6 +20,10 @@ export default {
   logout: function() {
     console.log("logout route hit")
     return axios.get("/api/authentication/logout");
+  },
+
+  getRecentPhotos: function(){
+    return axios.get("/api/photos/recent")
   }
 
 

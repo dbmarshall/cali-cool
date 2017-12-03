@@ -11,7 +11,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const keys = require("./config/keys");
 
-
 // Middleware ==============================
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json());
