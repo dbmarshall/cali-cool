@@ -17,8 +17,4 @@ export default {
 
 };
 
-// axios.put(url, imageFile, {
-//   headers: {
-//     'Content-Type': imageFile.type
-//   }
-// });
+

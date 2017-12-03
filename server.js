@@ -15,9 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev')); // log every request to the console
 
-// Add routes, both API and view
-app.use(routes);
-
 // Passport
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(session({ secret: 'california' })); // session secret
@@ -26,6 +23,9 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 require('./config/passport')(passport);
 require('./routes/apiRoutes.js')(app, passport) // load our routes and pass in our app and fully configured passport
+
+// Add routes, both API and view
+app.use(routes);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
