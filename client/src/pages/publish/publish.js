@@ -11,7 +11,6 @@ class Publish extends Component {
     // results: [],
     file: '',
     name: '',
-    // filePath: '',
     imagePreviewUrl: '',
     width: '',
     height: '',
@@ -21,7 +20,6 @@ class Publish extends Component {
     albums: '',
     albumchoice: '',
     albumselect: '',
-    // albumdropdown: '',
     albumtext: '',
     published: ''
   };
@@ -43,7 +41,6 @@ class Publish extends Component {
     let reader = new FileReader();
     let file = event.target.files[0];
     let name = event.target.files[0].name;
-    // let path = event.target.files[0].webkitRelativePath;
 
     reader.onload = () => {
       let img = new Image();
@@ -77,7 +74,6 @@ class Publish extends Component {
     this.setState({
       file: '',
       name: '',
-      // filePath: '',
       imagePreviewUrl: '', 
       width: '',
       height: '',
@@ -91,7 +87,6 @@ class Publish extends Component {
     this.setState({
       file: '', 
       name: '', 
-      // filePath: '',
       imagePreviewUrl: '', 
       width: '',
       height: '',
@@ -101,7 +96,6 @@ class Publish extends Component {
       album: '', 
       albumchoice: '',
       albumselect: '', 
-      // albumdropdown: '', 
       albumtext: ''
     });
 
@@ -134,31 +128,14 @@ class Publish extends Component {
     // console.log('this.state.albumchoice: ', this.state.albumchoice);
   };
 
-  // handleSelectChange = event => {
-  //   console.log(event);
-  // };
-
   handleFormSubmit = event => {
     event.preventDefault();
-
-      // console.log('this.state.albumselect: ', this.state.albumselect);
-      // console.log('this.state.albumtext: ', this.state.albumtext);
-      // console.log('this.state.albumchoice: ', this.state.albumchoice);
-
-    // if (this.state.albumtext === '' && this.state.albumselect === '') {
-    //   this.setState({
-    //     albumchoice: ''
-    //   });
-    // }
     
     API.savePhoto({
-        // imageUploadId: this.state.name,
         title: this.state.title, 
         caption: this.state.caption, 
         album: this.state.albumchoice, 
         owner: owner,
-        // filePath: this.state.path
-        // image: this.state.imagePreviewUrl
       })
       .then(
         // res => this.loadArticles();
