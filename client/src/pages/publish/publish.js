@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DropdownButton, FormControl, InputGroup, MenuItem } from 'react-bootstrap';
+// import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 import API from "../../utils/API";
 
 class Publish extends Component {
@@ -8,7 +8,7 @@ class Publish extends Component {
     // results: [],
     file: '',
     name: '',
-    filePath: '',
+    // filePath: '',
     imagePreviewUrl: '',
     width: '',
     height: '',
@@ -16,7 +16,9 @@ class Publish extends Component {
     title: '',
     caption: '',
     albums: '',
+    albumchoice: '',
     albumselect: '',
+    // albumdropdown: '',
     albumtext: '',
     published: ''
   };
@@ -56,18 +58,16 @@ class Publish extends Component {
       this.setState({
         file: file,
         name: name,
-        // filePath: path,
         imagePreviewUrl: reader.result
       });
-      console.log('file: ', this.state.file)
-      console.log('name: ', this.state.name)
-      console.log('path: ', this.state.path)
-      console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
+      // console.log('file: ', this.state.file)
+      // console.log('name: ', this.state.name)
+      // console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
     };
 
     reader.readAsDataURL(file);
 
-  }
+  };
 
   clearPreview = () => {
 
@@ -81,7 +81,7 @@ class Publish extends Component {
       specs: ''
     });
 
-  }
+  };
 
   clearAll = () => {
 
@@ -96,22 +96,49 @@ class Publish extends Component {
       title: '', 
       caption: '', 
       album: '', 
+      albumchoice: '',
       albumselect: '', 
+      // albumdropdown: '', 
       albumtext: ''
     });
 
-  }
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-    // console.log(this.state.value)
+    // console.log(event.target.name);
+    // console.log(event.target.value);
+    // console.log(event);
+    if (name === 'albumtext') {
+      let dropDown = document.getElementById('albumselect');
+      dropDown.selectedIndex = 0;
+      this.setState({
+        albumchoice: value,
+        albumselect: ''
+      });
+    } else if (name === 'albumselect') {
+      this.setState({
+        albumchoice: value,
+        albumtext: ''
+      });
+    }
+    // console.log('this.state.albumchoice: ', this.state.albumchoice);
   };
+
+  // handleSelectChange = event => {
+  //   console.log(event);
+  // };
 
   handleFormSubmit = event => {
     event.preventDefault();
+
+      // console.log('this.state.albumselect: ', this.state.albumselect);
+      // console.log('this.state.albumtext: ', this.state.albumtext);
+      console.log('this.state.albumchoice: ', this.state.albumchoice);
+
     API.savePhoto({
         // imageUploadId: this.state.name,
         title: this.state.title, 
@@ -142,6 +169,7 @@ class Publish extends Component {
                 <div className="panel-body">
 
                   <div className="row">
+
                     <div className="col-md-5 col-md-offset-1">
                       <div className="panel panel-default">
                         <div className="panel-body">
@@ -149,7 +177,7 @@ class Publish extends Component {
                           <form onSubmit={this.handleFormSubmit}>
 
                             <div className="form-group">
-                              <label htmlFor="fileupload">Choose an image to upload:</label>
+                              <label htmlFor="fileupload">Choose a photograph to upload:</label>
                               <div className="input-group">
                                 <label className="input-group-btn">
                                   <span className="btn btn-primary">
@@ -177,76 +205,77 @@ class Publish extends Component {
                             </div>
 
                             <div className="form-group">
-                              <label htmlFor="title">Photo Title:</label>
+                              <label htmlFor="title">Title:</label>
                               <input 
                                 value={this.state.title}
                                 onChange={this.handleInputChange}
                                 name="title"
+                                id="title"
                                 placeholder="required" 
                                 className="form-control" 
-                                id="title"
                               />
                             </div>
 
                             <div className="form-group">
-                              <label htmlFor="caption">Photo Caption:</label>
+                              <label htmlFor="caption">Caption:</label>
                               <textarea 
                                 value={this.state.caption}
                                 onChange={this.handleInputChange}
                                 name="caption"
+                                id="caption"
                                 placeholder="" 
                                 className="form-control" 
-                                id="caption"
                               ></textarea>
                             </div>
 
                             <div className="form-group">
-                              <label htmlFor="albumselect">Select an Album:</label>
+                              <label htmlFor="albumselect">Album:</label>
                               <br/>
-                              <InputGroup>
-                                <DropdownButton
-                                  componentClass={InputGroup.Button}
-                                  value={this.state.albumselect}
+                              <div className="input-group">
+
+                                <select 
                                   onChange={this.handleInputChange}
+                                  name="albumselect"
                                   id="albumselect"
-                                  title="Default"
-                                >
-                                  <MenuItem key="1">Item</MenuItem>
-                                </DropdownButton>
-                                <FormControl 
+                                  className="form-control"
+                                  style={{float: 'left'}}>
+                                  <option value="grapefruit">Select</option>
+                                  <option value="Coastal">Coastal</option>
+                                  <option value="Mountains">Mountains</option>
+                                  <option value="Central Valley">Central Valley</option>
+                                </select>
+
+                                <input 
                                   value={this.state.albumtext}
                                   onChange={this.handleInputChange}
-                                  type="text"
-                                  id="albumtext"
-                                  placeholder="Enter new album name here" />
-                              </InputGroup>
-                            </div>
+                                  name="albumtext"
+                                  id="albumtext" 
+                                  placeholder="Enter new album name here" 
+                                  className="form-control" 
+                                  style={{marginTop: '4px'}}
+                                />
 
-                            {/*
-                            <div className="form-group">
-                              <DropdownButton 
-                                value={this.state.albumselect}
-                                onChange={this.handleInputChange}
-                                name="albumselect"
-                                title="Default" 
-                                id="albumselect">
-                                <MenuItem eventKey="1">Coast</MenuItem>
-                                <MenuItem eventKey="2">Mountains</MenuItem>
-                                <MenuItem eventKey="3">Central Valley</MenuItem>
-                              </DropdownButton>
+                                {/*<DropdownButton 
+                                  name="albumdropdown"
+                                  title="Default" 
+                                  id="albumdropdown"
+                                  componentClass={InputGroup.Button}>
+                                  <MenuItem 
+                                    onSelect={this.handleSelectChange}
+                                    value="Coastal"
+                                    eventKey="1">
+                                    Coastal
+                                  </MenuItem>
+                                  <MenuItem 
+                                    onSelect={this.handleSelectChange}
+                                    value="Mountains"
+                                    eventKey="2">
+                                    Mountains
+                                  </MenuItem>
+                                </DropdownButton>*/}
+
+                              </div>
                             </div>
-                            <div className="form-group">
-                              <label htmlFor="albuminput">Or Create a New Album:</label>
-                              <input 
-                                value={this.state.album}
-                                onChange={this.handleInputChange}
-                                name="albuminput"
-                                placeholder="" 
-                                className="form-control" 
-                                id="albuminput"
-                              />
-                            </div>
-                            */}
 
                             <button 
                               disabled={!this.state.file || !this.state.title}
@@ -295,6 +324,7 @@ class Publish extends Component {
                         </div>
                       </div>
                     </div>
+
                   </div>
 
                 </div>
