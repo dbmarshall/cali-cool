@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { DropdownButton, FormControl, InputGroup, MenuItem } from 'react-bootstrap';
 import API from "../../utils/API";
 
 class Publish extends Component {
@@ -16,7 +16,8 @@ class Publish extends Component {
     title: '',
     caption: '',
     albums: '',
-    album: '',
+    albumselect: '',
+    albumtext: '',
     published: ''
   };
 
@@ -94,7 +95,9 @@ class Publish extends Component {
       specs: '',
       title: '', 
       caption: '', 
-      album: ''
+      album: '', 
+      albumselect: '', 
+      albumtext: ''
     });
 
   }
@@ -104,6 +107,7 @@ class Publish extends Component {
     this.setState({
       [name]: value
     });
+    // console.log(this.state.value)
   };
 
   handleFormSubmit = event => {
@@ -199,15 +203,36 @@ class Publish extends Component {
                             <div className="form-group">
                               <label htmlFor="albumselect">Select an Album:</label>
                               <br/>
+                              <InputGroup>
+                                <DropdownButton
+                                  componentClass={InputGroup.Button}
+                                  value={this.state.albumselect}
+                                  onChange={this.handleInputChange}
+                                  id="albumselect"
+                                  title="Default"
+                                >
+                                  <MenuItem key="1">Item</MenuItem>
+                                </DropdownButton>
+                                <FormControl 
+                                  value={this.state.albumtext}
+                                  onChange={this.handleInputChange}
+                                  type="text"
+                                  id="albumtext"
+                                  placeholder="Enter new album name here" />
+                              </InputGroup>
+                            </div>
+
+                            {/*
+                            <div className="form-group">
                               <DropdownButton 
                                 value={this.state.albumselect}
                                 onChange={this.handleInputChange}
                                 name="albumselect"
                                 title="Default" 
                                 id="albumselect">
-                                {/*<MenuItem eventKey="1">Coast</MenuItem>
+                                <MenuItem eventKey="1">Coast</MenuItem>
                                 <MenuItem eventKey="2">Mountains</MenuItem>
-                                <MenuItem eventKey="3">Central Valley</MenuItem>*/}
+                                <MenuItem eventKey="3">Central Valley</MenuItem>
                               </DropdownButton>
                             </div>
                             <div className="form-group">
@@ -221,6 +246,7 @@ class Publish extends Component {
                                 id="albuminput"
                               />
                             </div>
+                            */}
 
                             <button 
                               disabled={!this.state.file || !this.state.title}
