@@ -96,7 +96,6 @@ class Main extends Component{
                     key={3}></Comment>
                 ]}
               />
-          }
         </div>
       </div>
     );
