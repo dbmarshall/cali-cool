@@ -155,7 +155,8 @@ class Publish extends Component {
         // imageUploadId: this.state.name,
         title: this.state.title, 
         caption: this.state.caption, 
-        album: this.state.albumchoice,
+        album: this.state.albumchoice, 
+        owner: owner,
         // filePath: this.state.path
         // image: this.state.imagePreviewUrl
       })
