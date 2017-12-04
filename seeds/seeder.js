@@ -1,3 +1,7 @@
+/* 
+  RUN THIS FILE FROM ROOT DIRECTORY:
+  `node seeds/seeder.js`
+*/ 
 var seeder = require('mongoose-seed');
 const mongoose = require("mongoose");
  
