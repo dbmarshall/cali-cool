@@ -41,6 +41,7 @@ class Header extends Component {
     this.getSessionData()
   }
 
+
   getSessionData = event => {
     API.sessionData()
     .then(res => {
@@ -58,6 +59,9 @@ class Header extends Component {
       else{
         console.log("user isn't logged in");
       }
+    })
+    .then(res => {
+      sessionStorage.setItem("userID", this.state.userId);
     })
     .catch(err => console.log(err))
   }
