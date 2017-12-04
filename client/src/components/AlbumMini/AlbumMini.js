@@ -12,6 +12,17 @@ const albumMiniWrapper = {
   margin:"5px",
 }
 
+const albumMini = {
+  backgroundColor:"#c6c6c6",
+  borderRadius:"10px"
+
+}
+
+const header = {
+  color: "white",
+  margin: "5px"
+}
+
 
 class AlbumMini extends Component {
 
@@ -20,8 +31,8 @@ class AlbumMini extends Component {
     return (
       <div className= "container">
         <div className="wrapper">
-          <div className="albumMini" style={{backgroundColor:"#c6c6c6"}}>
-            <div><p style={{color: "white"}}>Protype Album Mini</p></div>
+          <div style={albumMini}>
+            <div><p style={header}>Protype Album Mini</p></div>
             <div >
               <Grid>
                <Row style={albumMiniWrapper}>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, FormControl, ControlLabel, Grid, Row, Col, Image, } from 'react-bootstrap';
+import { Grid, Row, Col, Image, } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AlbumMini from '../../components/AlbumMini'
 // import API from '../../utils/API';
+
 
 class User extends Component {
 
@@ -10,26 +11,6 @@ class User extends Component {
 
     return (
       <div className= "container">
-        <div>
-        <h2> Invite a friend (placeholder) </h2>
-        <Form inline>
-          <FormGroup controlId="formInlineName">
-            <ControlLabel>Name</ControlLabel>
-            {' '}
-            <FormControl type="text" placeholder="Jane Doe" />
-          </FormGroup>
-          {' '}
-          <FormGroup controlId="formInlineEmail">
-            <ControlLabel>Email</ControlLabel>
-            {' '}
-            <FormControl type="email" placeholder="jane.doe@example.com" />
-          </FormGroup>
-          {' '}
-          <Button type="submit" bsStyle="primary">
-            Send invitation
-          </Button>
-        </Form>
-        </div>
          <div>
             <h2>Jane's Profile</h2>
             <Grid>
