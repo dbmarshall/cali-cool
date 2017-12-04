@@ -10,7 +10,7 @@ class Likes extends Component{
       ...this.props.style,
       color: "white",
       fontSize: "1.1em",
-      backgroundColor   : 'rgba(0, 0, 0, 0)',
+      backgroundColor : 'rgba(0, 0, 0, 0)',
       border: "none"
     }
   }

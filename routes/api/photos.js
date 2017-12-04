@@ -3,6 +3,9 @@ const photosController = require("../../controllers/photosController");
 
 //Routes goes here — match with "/api/photos"
 router.route("/recent")
-  .get(photosController.findAll);
+  .get(photosController.recent);
+
+router.route("/mostLiked")
+  .get(photosController.mostLiked);
 
 module.exports = router;

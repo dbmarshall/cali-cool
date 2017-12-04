@@ -2,6 +2,15 @@ const mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
+var schemaOptions = {
+    toObject: {
+      virtuals: true
+    }
+    ,toJSON: {
+      virtuals: true
+    }
+  };
+
 var PhotosSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
@@ -57,7 +66,7 @@ var PhotosSchema = new Schema({
     // required: true
   }
 
-});
+}, schemaOptions);
 
 PhotosSchema.virtual('likesCount').
   get(function(){
@@ -74,7 +83,7 @@ PhotosSchema.virtual('imageUrl').
 
 PhotosSchema.virtual('thumbnailUrl').
   get(function(){
-    return baseUrl + 'c_thumb,g_center,h_200,w_200/' + this.imageUploadId + '/.png';
+    return baseUrl + 'c_thumb,g_center,h_200,w_200/' + this.imageUploadId + imageExtension;
 });
 
 var Photos = mongoose.model("Photos", PhotosSchema);
