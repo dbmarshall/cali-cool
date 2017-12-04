@@ -3,8 +3,7 @@ import API from "../../utils/API";
 // import AlbumsSelect from "../../components/AlbumsSelect";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
-const owner = '5a2503a444c0c5fa341719c3';
-// const albums = ['5a221a8793404dd2c1ff8b6d', '5a221a8793404dd2c1ff8b6f'];
+const owner = '5a25122f8155e9fbe54471ec';
 
 class Publish extends Component {
 
@@ -64,9 +63,6 @@ class Publish extends Component {
         name: name,
         imagePreviewUrl: reader.result
       });
-      // console.log('file: ', this.state.file)
-      // console.log('name: ', this.state.name)
-      // console.log('imagePreviewUrl: ', this.state.imagePreviewUrl)
     };
 
     reader.readAsDataURL(file);
@@ -112,9 +108,6 @@ class Publish extends Component {
 
   // Clears album selection
   clearSelect = () => {
-    // console.log('clearSelect');
-    // let dropDown = document.getElementById('albumselect');
-    // dropDown.selectedIndex = 0;
     let dropDownComp = document.getElementById('albumselect');
     if (dropDownComp) {
       dropDownComp.selectedIndex = 0;
@@ -127,9 +120,6 @@ class Publish extends Component {
     this.setState({
       [name]: value
     });
-    // console.log(event.target.name);
-    // console.log(event.target.value);
-    // console.log(event);
     if (name === 'albumtext') {
       this.clearSelect();
       this.setState({
@@ -149,37 +139,26 @@ class Publish extends Component {
   // Handles form submit
   handleFormSubmit = event => {
     event.preventDefault();
-
-      console.log('this.state.albumname: ', this.state.albumname);
-      console.log('this.state.albumId: ', this.state.albumId);
     
     // Checks whether a value entered for "new album name".
     // If not, then go straight to addPhotoUpdateAlbum().
     if (this.state.albumtext) {
-
-        // console.log('YES, this.state.albumtext');
 
       API.createAlbum(owner, { 
         title: this.state.albumname, 
         owner: owner
       })
       .then(res => 
-        // console.log('THEN res.data._id: ', res.data._id)
         this.setState({ 
           albumId: res.data._id
         })
       )
-      // .then(res => 
-      //   console.log('API.createAlbum() res.data._id 2: ', res.data._id)
-      // )
       .then( () => 
         this.addPhotoUpdateAlbum()
       )
       .catch(err => console.log(err));
 
     } else {
-
-        // console.log('NO, this.state.albumtext');
 
       this.addPhotoUpdateAlbum();
 
@@ -189,7 +168,6 @@ class Publish extends Component {
 
   // Adds new photo and inserts new photo ID into Albums collection
   addPhotoUpdateAlbum = () => {
-      console.log('BEFORE SAVEPHOTO this.state.albumId:', this.state.albumId);
     API.savePhoto(owner, {
       title: this.state.phototitle, 
       caption: this.state.photocaption, 
@@ -197,7 +175,7 @@ class Publish extends Component {
       owner: owner
     })
     .then(
-      console.log('SAVEPHOTO THEN')
+      // console.log('SAVEPHOTO THEN')
       // res => this.loadArticles();
       // this.setState({ published: 'Your photo has been published!' })
     )
@@ -259,7 +237,7 @@ class Publish extends Component {
                             <div className="form-group">
                               <label htmlFor="title">Title:</label>
                               <input 
-                                value={this.state.title}
+                                value={this.state.phototitle}
                                 onChange={this.handleInputChange}
                                 name="phototitle"
                                 id="phototitle"
@@ -271,7 +249,7 @@ class Publish extends Component {
                             <div className="form-group">
                               <label htmlFor="caption">Caption:</label>
                               <textarea 
-                                value={this.state.caption}
+                                value={this.state.photocaption}
                                 onChange={this.handleInputChange}
                                 name="photocaption"
                                 id="photocaption"
