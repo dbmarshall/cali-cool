@@ -85,11 +85,12 @@ class AlbumPreview extends Component{
             backdropClosesModal={true}
             showCloseButton={false} 
             customControls={[
-              <a href="" style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
+              <a style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
                 <span className="glyphicon glyphicon-user"></span>
                 <span style={{marginLeft: "5px"}}>{this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}</span>
               </a>,
-              <a style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
+              <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
+                style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
                 {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
               </a>,
               <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
