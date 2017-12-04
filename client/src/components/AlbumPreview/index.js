@@ -1,1 +1,1 @@
-export {default} from "./AlbumPreview.js"
+export {default} from "./AlbumPreview.js";
