@@ -110,46 +110,42 @@ class Header extends Component {
         <Navbar.Collapse>
           <Nav>
             {this.state.isLoggedIn !== true ? (
-              <Nav>
-              <NavItem 
-              eventKey={1}
-              onClick={this.getSessionData}
-              >Welcome Guest!</NavItem>
-              </Nav>
+                <NavItem 
+                eventKey={1}
+                onClick={this.getSessionData}
+                >Welcome Guest!</NavItem>
               ) : (
-              <Nav>
-              <LinkContainer to={'/user/' + this.state.userId}>
-              <NavItem 
-              eventKey={1}
-              onClick={this.getSessionData}
-              >{this.state.displayUser} Account</NavItem>
-            </LinkContainer>
-            </Nav>
+                <LinkContainer to={'/user/' + this.state.userId}>
+                  <NavItem 
+                  eventKey={1}
+                  onClick={this.getSessionData}
+                  >{this.state.displayUser} Account</NavItem>
+                </LinkContainer>
               )}
-            <LinkContainer to="/publish">
-              <NavItem 
-              eventKey={2}
-              onClick={this.getSessionData}
-              >Publish</NavItem>
-            </LinkContainer>
           </Nav>
           {this.state.isLoggedIn !== true ? (
             <Nav pullRight>
-            <LinkContainer to="/signup">
-              <NavItem eventKey={1}>Signup</NavItem>
-            </LinkContainer>
-              <NavItem 
-                onClick={this.showModal}
-              > Login
-              </NavItem>
-              </Nav>
+              <LinkContainer to="/signup">
+                <NavItem eventKey={1}>Signup</NavItem>
+              </LinkContainer>
+                <NavItem 
+                  onClick={this.showModal}
+                > Login
+                </NavItem>
+            </Nav>
                 ) : (
-              <Nav pullRight>
-               <NavItem 
+            <Nav pullRight>
+              <LinkContainer to="/publish">
+                <NavItem 
+                eventKey={2}
+                onClick={this.getSessionData}
+                >Publish</NavItem>
+              </LinkContainer>
+              <NavItem 
                 eventKey={3}
                 onClick={this.logoutUser}
-              > Logout
-              </NavItem>
+                >Logout
+                </NavItem>
               </Nav>
             )}
         </Navbar.Collapse>
