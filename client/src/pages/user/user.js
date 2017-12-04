@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Row, Col, Image, } from 'react-bootstrap';
+import { Button,Grid, Row, Col, Image, } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AlbumMini from '../../components/AlbumMini'
 // import API from '../../utils/API';
@@ -12,6 +12,11 @@ class User extends Component {
     return (
       <div className= "container">
          <div>
+         <Grid>
+          <Row>
+            <Button href="/publish" bsStyle="primary">Add Photos</Button>
+          </Row>
+         </Grid>
             <h2>Jane's Profile</h2>
             <Grid>
               <Row>
