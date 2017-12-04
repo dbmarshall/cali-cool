@@ -3,7 +3,7 @@ import API from "../../utils/API";
 // import AlbumsSelect from "../../components/AlbumsSelect";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
-const owner = '5a25122f8155e9fbe54471ec';
+const owner = '5a257cd50bf6d51f821058d3';
 
 class Publish extends Component {
 

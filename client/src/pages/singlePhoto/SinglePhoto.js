@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Button, Grid, Row, Col, Image, form, FormControl, Badge, ListGroup, ListGroupItem } from 'react-bootstrap';
 // Check with Minu if I can use LIKE for this component
 // import Like from "../../components/Like";
+import API from "../../utils/API";
+
 const btnStyle = {
   marginTop: "5px",
   marginBottom: "5px"
@@ -25,10 +27,14 @@ class SinglePhoto extends Component {
       dateAdded:"",
       likes: "",
       commentContent: "",
-      phtoId:""
+      photoId:""
 
     }
 
+  }
+
+  componentDidMount() {
+    this.getPhotoData()
   }
   // What happens when user deletes? redirect to?
    handleInputChange = event => {
@@ -50,6 +56,22 @@ class SinglePhoto extends Component {
     // .catch(err => console.log(err));
 
   };
+
+  getPhotoData = event => {
+    API.singlePhotoData({})
+    .then(res => {
+      console.log(res);
+    })
+  }
+  // Like component
+    // GET
+    // POST
+
+  // Comment component
+    // GET
+    // POST
+
+  // Delete component
 
 
   render(){

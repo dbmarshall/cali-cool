@@ -41,6 +41,9 @@ export default {
 
   savePhoto: function(userId, photoData){
     return axios.post("/api/users/" + userId + "/photos/new", photoData)
+  },
+  singlePhotoData: function() {
+    return axios.get("api/photo/:id")
   }
 
 };
