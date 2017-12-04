@@ -1,3 +1,4 @@
+// Requirements ==============================
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -16,10 +17,8 @@ app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
+// Passport ==============================
 app.use(cookieParser()); // read cookies (needed for auth)
-// app.use(session({ secret: 'california' })); // session secret
-
 app.use( session( { secret: keys.secret,
                     cookie: { maxAge: 60000 },
                     rolling: true,
@@ -28,7 +27,6 @@ app.use( session( { secret: keys.secret,
                   }
          )
 );
-
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
@@ -37,9 +35,6 @@ app.use(flash());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// ****** ERRORS occur when using app.use(routes)*****
-
 
 //Config ==============================
 const db = require("./models");
@@ -55,11 +50,6 @@ mongoose.connect(
     useMongoClient: true
   }
 );
-
-// Routes ==============================
- // load our routes and pass in our app and fully configured passport
-// Send every request to the React app
-// Define any API routes before this runs
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
