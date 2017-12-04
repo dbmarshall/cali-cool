@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const photosController = require("../../controllers/photosController");
 
-//Routes goes here
 router.route("/recent")
-  .get(photosController.findAll);
+  .get(photosController.recent);
+
+router.route("/mostLiked")
+  .get(photosController.mostLiked);
 
 module.exports = router;

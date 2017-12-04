@@ -24,7 +24,14 @@ export default {
 
   getRecentPhotos: function(){
     return axios.get("/api/photos/recent")
-  }
+  },
 
+  getMostLikedPhotos: function(){
+    return axios.get("/api/photos/mostLiked")
+  },
+
+  getAlbumById: function(albumId){
+    return axios.get("/api/albums/" + albumId)
+  }
 
 };
