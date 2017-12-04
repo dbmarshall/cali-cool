@@ -35,7 +35,12 @@ class Header extends Component {
         isLoggedIn:false
       })
     })
-  }
+    .then(res => {
+      sessionStorage.clear();
+    })
+    .catch(err =>{console.log(err)
+    })
+  };
 
   componentDidMount() {
     this.getSessionData()
@@ -55,13 +60,11 @@ class Header extends Component {
           displayUser: loggedInUser,
           userId: mongoId
         });
+        sessionStorage.setItem("userId", this.state.userId);
       }
-      else{
+      else {
         console.log("user isn't logged in");
       }
-    })
-    .then(res => {
-      sessionStorage.setItem("userID", this.state.userId);
     })
     .catch(err => console.log(err))
   }

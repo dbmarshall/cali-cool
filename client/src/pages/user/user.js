@@ -7,6 +7,17 @@ import AlbumMini from '../../components/AlbumMini'
 
 class User extends Component {
 
+  constructor(props){
+    super(props);
+    console.log(props)
+    this.state = {
+
+    }
+
+  }
+
+  componet
+
   render(){
 
     return (

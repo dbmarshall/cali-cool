@@ -3,7 +3,11 @@ import API from "../../utils/API";
 // import AlbumsSelect from "../../components/AlbumsSelect";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
-const owner = '5a257cd50bf6d51f821058d3';
+
+// const session = sessionStorage.getItem("key");
+// console.log(session)
+// const owner = "5a257cd50bf6d51f821058d5";
+// console.log(owner)
 
 class Publish extends Component {
 
@@ -21,23 +25,27 @@ class Publish extends Component {
     albumname: '',
     albumselect: '',
     albumtext: '',
-    albumId: ''//,
+    albumId: ''//
     // published: ''
   };
 
   componentDidMount() {
     this.loadAlbums();
+    this.getSessionData();
   }
 
+  getSessionData = event => {
+    const session = sessionStorage.getItem("userId");
+    return session;
+  }
   // Load existing albums for select
   loadAlbums = () => {
-    API.getUserAlbums(owner)
+    API.getUserAlbums(this.getSessionData())
       .then(res =>
         this.setState({ albums: res.data})
       )
       .catch(err => console.log(err));
   };
-
   // User image selection
   handleBrowse = event => {
 
@@ -144,9 +152,9 @@ class Publish extends Component {
     // If not, then go straight to addPhotoUpdateAlbum().
     if (this.state.albumtext) {
 
-      API.createAlbum(owner, { 
+      API.createAlbum(this.getSessionData(), { 
         title: this.state.albumname, 
-        owner: owner
+        owner: this.getSessionData()
       })
       .then(res => 
         this.setState({ 
@@ -168,16 +176,16 @@ class Publish extends Component {
 
   // Adds new photo and inserts new photo ID into Albums collection
   addPhotoUpdateAlbum = () => {
-    API.savePhoto(owner, {
+    API.savePhoto(this.getSessionData(), {
       title: this.state.phototitle, 
       caption: this.state.photocaption, 
       album: this.state.albumId, 
-      owner: owner
+      owner: this.getSessionData()
     })
     .then( res => 
 
       API.updateAlbumPhoto(
-        owner, 
+        this.getSessionData(), 
         this.state.albumId, {
           photo: res.data._id
         })
