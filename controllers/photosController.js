@@ -42,7 +42,35 @@ module.exports = {
       .limit(12)
       .then(photos => {
 
-      res.json(photos);
+        
+        
+        const photoIdArray = photos.map(function(photo){
+          return photo._id;
+        });
+
+        db.Photos
+        .find( {_id : { $in : photoIdArray }})
+        .populate({
+          path: "album",
+          select: ["_id", "title"]
+        })
+        .populate({
+          path: "owner",
+          select: ["_id", "userName"]
+        })
+        .then(photoDBModels => {
+
+          let results = [];
+          photoIdArray.forEach(function(refPhotoId){
+            let result = photoDBModels.filter(function(photoObj){
+              return (refPhotoId.toString() == photoObj._id.toString());
+            });
+            results.push(result);
+          });
+          console.log("4: ",results.length);
+
+          res.json(results);
+        })
       })
       .catch(err => res.status(422).json(err));
   }
