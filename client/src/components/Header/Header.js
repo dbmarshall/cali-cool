@@ -35,11 +35,17 @@ class Header extends Component {
         isLoggedIn:false
       })
     })
-  }
+    .then(res => {
+      sessionStorage.clear();
+    })
+    .catch(err =>{console.log(err)
+    })
+  };
 
   componentDidMount() {
     this.getSessionData()
   }
+
 
   getSessionData = event => {
     API.sessionData()
@@ -54,8 +60,9 @@ class Header extends Component {
           displayUser: loggedInUser,
           userId: mongoId
         });
+        sessionStorage.setItem("userId", this.state.userId);
       }
-      else{
+      else {
         console.log("user isn't logged in");
       }
     })
@@ -68,14 +75,14 @@ class Header extends Component {
     this.setState({
       [name] : value
     });
-    console.log(this.state.userName)
-    console.log(this.state.passWord)
+    // console.log(this.state.userName)
+    // console.log(this.state.passWord)
   }
 
    handleFormSubmit = event => {
     event.preventDefault();
-    console.log(this.state.userName)
-    console.log(this.state.passWord)
+    // console.log(this.state.userName)
+    // console.log(this.state.passWord)
     API.loginUser({
       username:this.state.userName,
       password:this.state.passWord

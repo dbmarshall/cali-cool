@@ -28,5 +28,20 @@ module.exports = {
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  findUser: function(req, res) {
+    console.log('findUser req.body:' ,req.body)
+    // db.Users
+    // .find({_id:})
+  },
+    findUsersAlbums: function(req, res) {
+    console.log(req);
+  //   db.Albums
+  //     .find({req.params.id})
+  //     .populate("photos")
+  //     .populate("owner")
+  //     .populate("comments")
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
   }
 };

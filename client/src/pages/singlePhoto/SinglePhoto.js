@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Button, Grid, Row, Col, Image, form, FormControl, Badge, ListGroup, ListGroupItem } from 'react-bootstrap';
 // Check with Minu if I can use LIKE for this component
 // import Like from "../../components/Like";
+import API from "../../utils/API";
+
 const btnStyle = {
   marginTop: "5px",
   marginBottom: "5px"
@@ -13,6 +15,64 @@ const commentDiv = {
 }
 
 class SinglePhoto extends Component {
+
+  constructor(props){
+    super(props);
+    console.log(props)
+    this.state = {
+      photoTitle:"",
+      caption:"",
+      albumName:"",
+      userId:"",
+      dateAdded:"",
+      likes: "",
+      commentContent: "",
+      photoId:""
+
+    }
+
+  }
+
+  componentDidMount() {
+    this.getPhotoData()
+  }
+  // What happens when user deletes? redirect to?
+   handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state.commentContent)
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.commentContent);
+    // })
+    // .then(res => {
+    //   console.log(res)
+      
+    // })
+    // .catch(err => console.log(err));
+
+  };
+
+  getPhotoData = event => {
+    API.singlePhotoData({})
+    .then(res => {
+      console.log(res);
+    })
+  }
+  // Like component
+    // GET
+    // POST
+
+  // Comment component
+    // GET
+    // POST
+
+  // Delete component
+
 
   render(){
 
@@ -56,14 +116,15 @@ class SinglePhoto extends Component {
                 <Grid>
                  <Row>
                   <Col xs={6} md={6}>
-                    <form>
+                    <form onSubmit={this.handleFormSubmit}>
                       <FormControl
                         id="formControlsText"
                         type="text"
                         label="Text"
                         placeholder="Enter text"
-                        name="comment"
-                        value=""
+                        name="commentContent"
+                        value={this.state.commentContent}
+                        onChange={this.handleInputChange}
                       />
                       <Button type="submit">
                         Add Comment

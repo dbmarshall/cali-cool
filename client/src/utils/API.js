@@ -12,12 +12,10 @@ export default {
   },
 
   loginUser: function(userData) {
-    console.log(userData);
     return axios.post("/api/authentication/login", userData);
   },
 
   logout: function() {
-    console.log("logout route hit")
     return axios.get("/api/authentication/logout");
   },
 
@@ -51,5 +49,15 @@ export default {
 
   savePhoto: function(userId, photoData){
     return axios.post("/api/users/" + userId + "/photos/new", photoData)
+  },
+
+  singlePhotoData: function() {
+    return axios.get("/api/photos/:id")
+  },
+
+  userProfileData: function(userId) {
+    console.log(userId.id)
+    return axios.get("/api/users/" + userId.id);
   }
+
 };
