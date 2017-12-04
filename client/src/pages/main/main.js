@@ -1,69 +1,34 @@
 import React, { Component } from "react";
 import API from '../../utils/API';
 
-import Gallery from 'react-photo-gallery';
-import Lightbox from 'react-images';
-
-import Like from '../../components/Like'
-import Comment from '../../components/Comment'
+import AlbumPreview from '../../components/AlbumPreview'
 
 class Main extends Component{
 
   state = {
-    currentImageIndex: 0,
-    lightboxIsOpen: false,
-    
-    thumbnails : [],
-    photos: [],
-    isCarouselModalOpen: false,
-    currentPhoto: {}
+    recentPhotos: [],
+    mostLikedPhotos:[]
   }
 
   componentDidMount(){
     this.loadRecentPhotos();
+    this.loadMostLikedPhotos();
   };
 
   loadRecentPhotos = () => {
     API.getRecentPhotos()
     .then(res => {
-      const thumbs = this.getThumbnailArray(res.data);
-      this.setState({thumbnails: thumbs, photos: res.data, minu: "min"});
+      this.setState({recentPhotos: res.data});
     })
     .catch(err => console.log(err));
   }
 
-  getThumbnailArray = (photos) => {
-    const thumbnails = photos.map(function(photo){
-      return { src: photo.thumbnail, width: 4, height: 3 , caption: photo.caption};
-    });
-    return thumbnails;
-  }
-
-  openLightbox = (event, obj) => {
-    this.setState({
-      currentImageIndex: obj.index,
-      lightboxIsOpen: true,
-      currentPhoto: this.state.photos[obj.index]
-    });
-  }
-
-  closeLightbox = () => {
-    this.setState({
-      currentImageIndex: 0,
-      lightboxIsOpen: false,
-    });
-  }
-  gotoPrevious = () => {
-    this.setState({
-      currentImageIndex: this.state.currentImageIndex - 1,
-      currentPhoto: this.state.photos[this.state.currentImageIndex - 1]
-    });
-  }
-  gotoNext = () => {
-    this.setState({
-      currentImageIndex: this.state.currentImageIndex + 1,
-      currentPhoto: this.state.photos[this.state.currentImageIndex + 1]
-    });
+  loadMostLikedPhotos = () => {
+    API.getRecentPhotos()
+    .then(res => {
+      this.setState({mostLikedPhotos: res.data});
+    })
+    .catch(err => console.log(err));
   }
 
   render(){
@@ -75,29 +40,14 @@ class Main extends Component{
           <p>A growing visual record of what's going down in our state</p>
         </div>
 
-        <div>
-          <h4>Recent Photo uploads</h4>
+        <h4>Most Liked Photos</h4>
+        {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
 
-            <Gallery photos={this.state.thumbnails} onClick={this.openLightbox}/>  
-              <Lightbox images={this.state.thumbnails}
-                onClose={this.closeLightbox}
-                onClickPrev={this.gotoPrevious}
-                onClickNext={this.gotoNext}
-                currentImage={this.state.currentImageIndex}
-                isOpen={this.state.lightboxIsOpen}
-                backdropClosesModal={true}
-                showCloseButton={false} 
-                customControls={[
-                  <a style={{position: "absolute", top: "15px", fontSize: "1.2em", color: "white"}} 
-                    key={1}>Album Title</a>,
-                  <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
-                    key={2}></Like>,
-                  <Comment style={{position: "absolute", bottom: "60px", left: "90px"}} 
-                    key={3}></Comment>
-                ]}
-              />
-          }
-        </div>
+        <hr/>
+
+        <h4>Recent Photo uploads</h4>
+        {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
+
       </div>
     );
   }
