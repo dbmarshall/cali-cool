@@ -15,16 +15,11 @@ const App = () =>
       <Header />
       <Switch>
         <Route exact path="/" component={Main} />
-<<<<<<< HEAD
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/publish" component={Publish} />
         <Route exact path="/album/:id" component={AlbumView} />
-=======
-        <Route path="/signup" component={Signup} />
-        <Route path="/publish" component={Publish} />
-        <Route path="/user/:id" component={User} />
-        <Route path="/photo/:id" component={SinglePhoto} />
->>>>>>> 99aa17789ba38a824226bc2991634a8d15329bb8
+        <Route exact path="/user/:id" component={User} />
+        <Route exact path="/photo/:id" component={SinglePhoto} />
       </Switch>
     </div>
   </Router>;

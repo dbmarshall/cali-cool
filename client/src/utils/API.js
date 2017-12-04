@@ -25,14 +25,14 @@ export default {
     return axios.get("/api/photos/recent")
   },
 
-<<<<<<< HEAD
   getMostLikedPhotos: function(){
     return axios.get("/api/photos/mostLiked")
   },
 
   getAlbumById: function(albumId){
     return axios.get("/api/albums/" + albumId)
-=======
+  },
+
   getUserAlbums: function(userId){
       // console.log("utils/API getUserAlbums route: /api/users/" + userId + "/albums");
     return axios.get("/api/users/" + userId + "/albums")
@@ -51,7 +51,5 @@ export default {
 
   savePhoto: function(userId, photoData){
     return axios.post("/api/users/" + userId + "/photos/new", photoData)
->>>>>>> 99aa17789ba38a824226bc2991634a8d15329bb8
   }
-
 };
