@@ -9,15 +9,26 @@ const flash = require('connect-flash');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
-app.use(routes);
+const keys = require("./config/keys");
 
 // Middleware ==============================
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(morgan('dev')); // log every request to the console
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(session({ secret: 'california' })); // session secret
+// app.use(session({ secret: 'california' })); // session secret
+
+app.use( session( { secret: keys.secret,
+                    cookie: { maxAge: 60000 },
+                    rolling: true,
+                    resave: true, 
+                    saveUninitialized: false
+                  }
+         )
+);
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
@@ -27,10 +38,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// ****** ERRORS occur when using app.use(routes)*****
+
 
 //Config ==============================
 const db = require("./models");
 require('./config/passport')(passport);
+app.use(routes);
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
@@ -43,14 +57,9 @@ mongoose.connect(
 );
 
 // Routes ==============================
-require('./routes/apiRoutes.js')(app, passport) // load our routes and pass in our app and fully configured passport
-
+ // load our routes and pass in our app and fully configured passport
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
-  // res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  res.redirect("/");
-});
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);

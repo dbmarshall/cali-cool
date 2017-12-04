@@ -26,7 +26,6 @@ class AlbumPreview extends Component{
       thumbnails: thumbs,
       photos: photos
     });
-    console.log(this.state);
   }
 
   getThumbnailArray = () => {
@@ -86,7 +85,7 @@ class AlbumPreview extends Component{
             backdropClosesModal={true}
             showCloseButton={false} 
             customControls={[
-              <a href="" style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}}>
+              <a href="" style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
                 <span className="glyphicon glyphicon-user"></span>
                 <span style={{marginLeft: "5px"}}>{this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}</span>
               </a>,

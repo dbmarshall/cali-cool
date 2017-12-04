@@ -13,7 +13,7 @@ class Main extends Component{
   componentDidMount(){
     this.loadRecentPhotos();
     this.loadMostLikedPhotos();
-  };
+  }
 
   loadRecentPhotos = () => {
     API.getRecentPhotos()
@@ -47,7 +47,6 @@ class Main extends Component{
 
         <h4>Recent Photo uploads</h4>
         {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
-
       </div>
     );
   }

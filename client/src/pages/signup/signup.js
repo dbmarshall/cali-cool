@@ -12,6 +12,7 @@ class Signup extends Component {
     passWord: ""
   };
 
+  
    handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -33,7 +34,7 @@ class Signup extends Component {
       // if (res.request.responseURL === window.location.host + "/") {
       //   // window.location.href = res.request.responseURL;
       //   console.log("successful login will redirect to /")
-      // }
+      // } 
       window.location.href = res.request.responseURL;
       
     })
