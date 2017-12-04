@@ -111,9 +111,9 @@ module.exports = function(passport) {
             }
                  // req.flash is the way to set flashdata using connect-flash
             else { 
-                console.log('user found', user)
-                console.log("passWord is ", passWord)
-                console.log(user.validPassword(passWord))
+                // console.log('user found', user)
+                // console.log("passWord is ", passWord)
+                // console.log(user.validPassword(passWord))
 
             // if the user is found but the password is wrong
                 if (!user.validPassword(passWord)){
