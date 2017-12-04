@@ -1,10 +1,7 @@
-/* 
-  RUN THIS FILE FROM ROOT DIRECTORY:
-  `node seeds/seeder.js`
-*/ 
 var seeder = require('mongoose-seed');
 const mongoose = require("mongoose");
  
+// Connect to MongoDB via Mongoose
 // Connect to MongoDB via Mongoose
 seeder.connect(process.env.MONGODB_URI || "mongodb://localhost/calicool_db", function() {
 
@@ -81,9 +78,9 @@ var usersData = {
   'documents': [
     {
       '_id': user_id_minu,
-      'email': 'minuEmiliajames@gmail.com',
+      'email': 'minuemiliajames@gmail.com',
       'userName': 'minu',
-      'passWord': 'minu',
+      'passWord': '$2a$08$gjjry6DbnjhZ7PsRnoA/cOJa8usqcZS8Jp0w64DGA2rGA/0DCFwSm',
       'firstName': 'Minu',
       'lastName': 'James',
       'role': 'admin',
@@ -93,7 +90,7 @@ var usersData = {
       '_id': user_id_david,
       'email': 'davidbryanmarshall@gmail.com',
       'userName': 'david',
-      'passWord': 'david',
+      'passWord': '$2a$08$SNgZ61kxWNplIwnJJ.C7se0bu5B1Z3iy8gh.0COFESJZso1i7QNKi',
       'firstName': 'David',
       'lastName': 'Marshall',
       'role': 'admin',
@@ -103,7 +100,7 @@ var usersData = {
       '_id': user_id_josh,
       'email': 'siversonj@gmail.com',
       'userName': 'josh',
-      'passWord': 'josh',
+      'passWord': '$2a$08$vw2MutAR3bThg4Ce3I8x.O3ce/KQGi5HnuxLnu/AjQ5zfMqe5awL.',
       'firstName': 'Josh',
       'lastName': 'Siverson',
       'role': 'admin',
@@ -113,7 +110,7 @@ var usersData = {
       '_id': user_id_jack,
       'email': 'jack@gmail.com',
       'userName': 'jack',
-      'passWord': 'jack',
+      'passWord': '$2a$08$v1nQ2jJNXZvr3LT4Y0KFu.LVwG3jkgQvMfiMMn984zrsn1Ot7ax1y',
       'firstName': 'Jack',
       'lastName': 'Berkeley',
       'role': 'user',
@@ -123,7 +120,7 @@ var usersData = {
       '_id': user_id_jill,
       'email': 'jill@gmail.com',
       'userName': 'jill',
-      'passWord': 'jill',
+      'passWord': '$2a$08$YqAtmqKKfBimF8R.laBw1eH5eceb000p3/KSevbR7AGkcDgUzmOnG',
       'firstName': 'Jill',
       'lastName': 'Berkeley',
       'role': 'user',
