@@ -15,6 +15,6 @@ router.route("/:id/photos/new")
   .post(usersController.createPhoto);
 
 router.route("/:id")
-  .get(usersController.findAllUserAlbums);
+  .get(usersController.findUsersAlbums);
 
 module.exports = router;

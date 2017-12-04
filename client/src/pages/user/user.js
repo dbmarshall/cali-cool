@@ -2,21 +2,31 @@ import React, { Component } from "react";
 import { Button,Grid, Row, Col, Image, } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AlbumMini from '../../components/AlbumMini'
-// import API from '../../utils/API';
+import API from '../../utils/API';
 
 
 class User extends Component {
 
   constructor(props){
     super(props);
-    console.log(props)
     this.state = {
-
-    }
+      userId: this.props.location.pathname.split('/')[2]
+    } 
 
   }
 
-  componet
+  componentDidMount(){
+   API.userProfileData({
+    id: this.state.userId
+  })
+   .then( res => {
+    console.log(res)
+   })
+   .catch(err => {
+    console.log(err)
+   })
+  }
+
 
   render(){
 
