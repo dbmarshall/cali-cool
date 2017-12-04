@@ -1,19 +1,23 @@
+/* 
+  RUN THIS FILE FROM ROOT DIRECTORY:
+  `node seeds/seeder.js`
+*/ 
 var seeder = require('mongoose-seed');
 const mongoose = require("mongoose");
  
 // Connect to MongoDB via Mongoose
-seeder.connect('mongodb://localhost/calicool_db', function() {
- 
+seeder.connect(process.env.MONGODB_URI || "mongodb://localhost/calicool_db", function() {
+
   // Load Mongoose models
   seeder.loadModels([
-    '../models/Users.js',
-    '../models/Invitees.js',
-    '../models/Tags.js',
-    '../models/Albums.js',
-    '../models/Photos.js',
-    '../models/Comments.js',
-    '../models/PhotoTags.js',
-    '../models/AlbumTags.js'
+    './models/Users.js',
+    './models/Invitees.js',
+    './models/Tags.js',
+    './models/Albums.js',
+    './models/Photos.js',
+    './models/Comments.js',
+    './models/PhotoTags.js',
+    './models/AlbumTags.js'
   ]);
  
   // Clear specified collections
