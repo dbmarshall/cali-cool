@@ -1,34 +1,48 @@
 import axios from "axios";
 
 export default {
-  // Hits API for articles
-  //  (API Documentation: https://developer.nytimes.com)  
-  apiArticles: function(topic, startYear, endYear) {
-    let apikey = `24881b82f17b48b299e435dbc820ef19`;
-    let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${apikey}&q=${topic}&begin_date=${startYear}0101&end_date=${endYear}1231&fl=web_url,headline,pub_date`;
-    return axios.get(url)
-      .then(res => {
-        return res.data.response.docs;
-      });
+  
+  sessionData: function() {
+    console.log("mounted componet");
+    return axios.get("/api/authentication/session")
   },
-  // Get all articles
-  getArticles: function() {
-    return axios.get("/api/articles");
+
+  signUpUser: function(userData) {
+    return axios.post("/api/authentication/signup", userData);
   },
-  // Save an article to the database
-  saveArticle: function(articleData) {
-    return axios.post("/api/articles", articleData);
+
+  loginUser: function(userData) {
+    console.log(userData);
+    return axios.post("/api/authentication/login", userData);
   },
-  // Delete an article with the given id
-  deleteArticle: function(id) {
-    return axios.delete("/api/articles/" + id);
+
+  logout: function() {
+    console.log("logout route hit")
+    return axios.get("/api/authentication/logout");
   },
-  // Save a comment for a given article
-  saveComment: function(commentData) {
-    return axios.post("/api/articles/" + commentData.id, commentData);
+
+  getRecentPhotos: function(){
+    return axios.get("/api/photos/recent")
   },
-  // Delete an article with the given id
-  deleteComment: function(id) {
-    return axios.delete("/api/articles/comments/" + id);
+
+  getUserAlbums: function(userId){
+      // console.log("utils/API getUserAlbums route: /api/users/" + userId + "/albums");
+    return axios.get("/api/users/" + userId + "/albums")
+  },
+
+  createAlbum: function(userId, albumData){
+    return axios.post("/api/users/" + userId + "/albums/new", albumData)
+  },
+
+  updateAlbumPhoto: function(userId, albumId, photoId){
+      // console.log('utils/API updateAlbumPhoto userId: ', userId);
+      // console.log('utils/API updateAlbumPhoto albumId: ', albumId);
+      console.log("utils/API updateAlbumPhoto route: /api/users/" + userId + "/albums/" + albumId);
+    return axios.post("/api/users/" + userId + "/albums/" + albumId, photoId)
+  },
+
+  savePhoto: function(userId, photoData){
+    return axios.post("/api/users/" + userId + "/photos/new", photoData)
   }
+
 };

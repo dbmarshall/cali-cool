@@ -1,7 +1,13 @@
 const router = require("express").Router();
-const articleRoutes = require("./articles");
 
-// Article & Comment routes
-router.use("/articles", articleRoutes);
+const authenticationRoutes = require("./authentication");
+const userRoutes = require("./users");
+const photoRoutes = require("./photos");
+const albumRoutes = require("./albums");
+
+router.use("/authentication", authenticationRoutes);
+router.use("/users", userRoutes);
+router.use("/photos", photoRoutes);
+router.use("/albums", albumRoutes);
 
 module.exports = router;
