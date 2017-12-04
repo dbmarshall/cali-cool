@@ -1,23 +1,19 @@
-/* 
-  RUN THIS FILE FROM ROOT DIRECTORY:
-  `node seeds/seeder.js`
-*/ 
 var seeder = require('mongoose-seed');
 const mongoose = require("mongoose");
  
 // Connect to MongoDB via Mongoose
-seeder.connect(process.env.MONGODB_URI || "mongodb://localhost/calicool_db", function() {
-
+seeder.connect('mongodb://localhost/calicool_db', function() {
+ 
   // Load Mongoose models
   seeder.loadModels([
-    './models/Users.js',
-    './models/Invitees.js',
-    './models/Tags.js',
-    './models/Albums.js',
-    './models/Photos.js',
-    './models/Comments.js',
-    './models/PhotoTags.js',
-    './models/AlbumTags.js'
+    '../models/Users.js',
+    '../models/Invitees.js',
+    '../models/Tags.js',
+    '../models/Albums.js',
+    '../models/Photos.js',
+    '../models/Comments.js',
+    '../models/PhotoTags.js',
+    '../models/AlbumTags.js'
   ]);
  
   // Clear specified collections
@@ -81,9 +77,9 @@ var usersData = {
   'documents': [
     {
       '_id': user_id_minu,
-      'email': 'minuEmiliajames@gmail.com',
+      'email': 'minuemiliajames@gmail.com',
       'userName': 'minu',
-      'passWord': 'minu',
+      'passWord': '$2a$08$ENH5TNP7coDIViaGzvoKKuypq2Bg.QzIi.LarmL.qfYdL3mQIPLTS',
       'firstName': 'Minu',
       'lastName': 'James',
       'role': 'admin',
@@ -93,7 +89,7 @@ var usersData = {
       '_id': user_id_david,
       'email': 'davidbryanmarshall@gmail.com',
       'userName': 'david',
-      'passWord': 'david',
+      'passWord': '$2a$08$TtuXb367cQbfRZNaJ4tEoONJxD5MaAJlT9CgmwPaOGZpy./fUmQA.',
       'firstName': 'David',
       'lastName': 'Marshall',
       'role': 'admin',
@@ -103,7 +99,7 @@ var usersData = {
       '_id': user_id_josh,
       'email': 'siversonj@gmail.com',
       'userName': 'josh',
-      'passWord': 'josh',
+      'passWord': '$2a$08$Oa9Y8PW5dHwM6nVstpgwBeGfPUVHhymvMkf/uRXnS7G/lgyXbznu2',
       'firstName': 'Josh',
       'lastName': 'Siverson',
       'role': 'admin',
@@ -113,7 +109,7 @@ var usersData = {
       '_id': user_id_jack,
       'email': 'jack@gmail.com',
       'userName': 'jack',
-      'passWord': 'jack',
+      'passWord': '$2a$08$UgCcx86fGSZvfOVYr5Vf1uZ4KxTJKBQeDLV8I7zmImPYswmYYzXwi',
       'firstName': 'Jack',
       'lastName': 'Berkeley',
       'role': 'user',
@@ -123,7 +119,7 @@ var usersData = {
       '_id': user_id_jill,
       'email': 'jill@gmail.com',
       'userName': 'jill',
-      'passWord': 'jill',
+      'passWord': '$2a$08$jJNdZ9Wtq9oDULjh5nSlEuAyiEkixUGsrKZ.PBph1sihteFvxuL0q',
       'firstName': 'Jill',
       'lastName': 'Berkeley',
       'role': 'user',
