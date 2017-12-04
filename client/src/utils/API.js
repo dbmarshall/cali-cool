@@ -26,15 +26,23 @@ export default {
   },
 
   getUserAlbums: function(userId){
-      console.log("utils/API route: /api/user/" + userId + "/albums");
-    return axios.post("/api/user/" + userId + "/albums")
+      // console.log("utils/API getUserAlbums route: /api/users/" + userId + "/albums");
+    return axios.get("/api/users/" + userId + "/albums")
+  },
+
+  createAlbum: function(userId, albumData){
+    return axios.post("/api/users/" + userId + "/albums/new", albumData)
+  },
+
+  updateAlbumPhoto: function(userId, albumId, photoId){
+      // console.log('utils/API updateAlbumPhoto userId: ', userId);
+      // console.log('utils/API updateAlbumPhoto albumId: ', albumId);
+      console.log("utils/API updateAlbumPhoto route: /api/users/" + userId + "/albums/" + albumId);
+    return axios.post("/api/users/" + userId + "/albums/" + albumId, photoId)
   },
 
   savePhoto: function(userId, photoData){
-      console.log('utils/API userId: ', userId);
-      console.log('utils/API photoData: ', photoData);
-      console.log("utils/API route: /api/user/" + userId + "/photos/new");
-    return axios.post("/api/user/" + userId + "/photos/new", photoData)
+    return axios.post("/api/users/" + userId + "/photos/new", photoData)
   }
 
 };
