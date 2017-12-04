@@ -12,12 +12,10 @@ export default {
   },
 
   loginUser: function(userData) {
-    console.log(userData);
     return axios.post("/api/authentication/login", userData);
   },
 
   logout: function() {
-    console.log("logout route hit")
     return axios.get("/api/authentication/logout");
   },
 

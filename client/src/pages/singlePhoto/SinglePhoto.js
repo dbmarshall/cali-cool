@@ -14,6 +14,44 @@ const commentDiv = {
 
 class SinglePhoto extends Component {
 
+  constructor(props){
+    super(props);
+    console.log(props)
+    this.state = {
+      photoTitle:"",
+      caption:"",
+      albumName:"",
+      userId:"",
+      dateAdded:"",
+      likes: "",
+      commentContent: "",
+      phtoId:""
+
+    }
+
+  }
+  // What happens when user deletes? redirect to?
+   handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state.commentContent)
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.commentContent);
+    // })
+    // .then(res => {
+    //   console.log(res)
+      
+    // })
+    // .catch(err => console.log(err));
+
+  };
+
+
   render(){
 
     return (
@@ -56,14 +94,15 @@ class SinglePhoto extends Component {
                 <Grid>
                  <Row>
                   <Col xs={6} md={6}>
-                    <form>
+                    <form onSubmit={this.handleFormSubmit}>
                       <FormControl
                         id="formControlsText"
                         type="text"
                         label="Text"
                         placeholder="Enter text"
-                        name="comment"
-                        value=""
+                        name="commentContent"
+                        value={this.state.commentContent}
+                        onChange={this.handleInputChange}
                       />
                       <Button type="submit">
                         Add Comment
