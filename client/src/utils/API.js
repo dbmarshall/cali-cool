@@ -25,9 +25,16 @@ export default {
     return axios.get("/api/photos/recent")
   },
 
-  savePhoto: function(photoData){
+  getUserAlbums: function(userId){
+      console.log("utils/API route: /api/user/" + userId + "/albums");
+    return axios.post("/api/user/" + userId + "/albums")
+  },
+
+  savePhoto: function(userId, photoData){
+      console.log('utils/API userId: ', userId);
       console.log('utils/API photoData: ', photoData);
-    return axios.post("/api/photos/new", photoData)
+      console.log("utils/API route: /api/user/" + userId + "/photos/new");
+    return axios.post("/api/user/" + userId + "/photos/new", photoData)
   }
 
 };

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 
 const owner = '5a221a8793404dd2c1ff8b68';
-const albums = ['5a221a8793404dd2c1ff8b6d', '5a221a8793404dd2c1ff8b6f'];
+// const albums = ['5a221a8793404dd2c1ff8b6d', '5a221a8793404dd2c1ff8b6f'];
 
 class Publish extends Component {
 
@@ -20,18 +20,19 @@ class Publish extends Component {
     albums: '',
     albumchoice: '',
     albumselect: '',
-    albumtext: '',
-    published: ''
+    albumtext: ''//,
+    // published: ''
   };
 
   componentDidMount() {
-    // this.loadAlbums()
+    this.loadAlbums();
   }
 
   loadAlbums = () => {
-    API.getAlbums()
+    API.getUserAlbums(owner)
       .then(res =>
-        this.setState({ albums: res.data})
+        console.log('publish.js res.data: ', res.data)
+        // this.setState({ albums: res.data})
       )
       .catch(err => console.log(err));
   };
