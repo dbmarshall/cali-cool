@@ -5,8 +5,8 @@ const AlbumsSelect = props => {
 
     <select 
       onChange={() => props.handleInputChange()}
-      name="albumselectcomp"
-      id="albumselectcomp"
+      name="albumselect"
+      id="albumselect"
       className="form-control">
       <option value="default">Select</option>
       {props.albums.map( (albums , i) => (

@@ -3,7 +3,7 @@ import API from "../../utils/API";
 // import AlbumsSelect from "../../components/AlbumsSelect";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
-const owner = '5a221a8793404dd2c1ff8b6b';
+const owner = '5a2503a444c0c5fa341719c3';
 // const albums = ['5a221a8793404dd2c1ff8b6d', '5a221a8793404dd2c1ff8b6f'];
 
 class Publish extends Component {
@@ -16,8 +16,8 @@ class Publish extends Component {
     width: '',
     height: '',
     specs: '',
-    title: '',
-    caption: '',
+    phototitle: '',
+    photocaption: '',
     albums: '',
     albumname: '',
     albumselect: '',
@@ -97,8 +97,8 @@ class Publish extends Component {
       width: '',
       height: '',
       specs: '',
-      title: '', 
-      caption: '', 
+      phototitle: '', 
+      photocaption: '', 
       album: '', 
       albumname: '',
       albumselect: '', 
@@ -116,7 +116,9 @@ class Publish extends Component {
     // let dropDown = document.getElementById('albumselect');
     // dropDown.selectedIndex = 0;
     let dropDownComp = document.getElementById('albumselect');
-    dropDownComp.selectedIndex = 0;
+    if (dropDownComp) {
+      dropDownComp.selectedIndex = 0;
+    }
   };
 
   // Handles any form input change
@@ -132,47 +134,54 @@ class Publish extends Component {
       this.clearSelect();
       this.setState({
         albumname: value,
-        albumselect: ''
+        albumselect: '',
+        albumId: ''
       });
     } else if (name === 'albumselect') {
       this.setState({
-        albumname: value,
+        albumId: value,
+        albumname: '',
         albumtext: ''
       });
     }
-    // console.log('this.state.albumname: ', this.state.albumname);
   };
 
   // Handles form submit
   handleFormSubmit = event => {
     event.preventDefault();
 
-      console.log('this.state.albumname: ', this.state.albumname)
+      console.log('this.state.albumname: ', this.state.albumname);
+      console.log('this.state.albumId: ', this.state.albumId);
     
     // Checks whether a value entered for "new album name".
     // If not, then go straight to addPhotoUpdateAlbum().
     if (this.state.albumtext) {
 
-        console.log('YES, this.state.albumtext');
+        // console.log('YES, this.state.albumtext');
 
       API.createAlbum(owner, { 
         title: this.state.albumname, 
         owner: owner
       })
-      .then(res =>
-        // console.log('res.data._id: ', res.data._id)
-        this.setState({ albumId: res.data._id})
+      .then(res => 
+        // console.log('THEN res.data._id: ', res.data._id)
+        this.setState({ 
+          albumId: res.data._id
+        })
       )
-      .then(
+      // .then(res => 
+      //   console.log('API.createAlbum() res.data._id 2: ', res.data._id)
+      // )
+      .then( () => 
         this.addPhotoUpdateAlbum()
       )
       .catch(err => console.log(err));
 
-    // } else {
+    } else {
 
-    //     console.log('NO, this.state.albumtext');
+        // console.log('NO, this.state.albumtext');
 
-    //   this.addPhotoUpdateAlbum();
+      this.addPhotoUpdateAlbum();
 
     }
 
@@ -180,14 +189,15 @@ class Publish extends Component {
 
   // Adds new photo and inserts new photo ID into Albums collection
   addPhotoUpdateAlbum = () => {
-      console.log('inside addPhotoUpdateAlbum()');
+      console.log('BEFORE SAVEPHOTO this.state.albumId:', this.state.albumId);
     API.savePhoto(owner, {
-      title: this.state.title, 
-      caption: this.state.caption, 
+      title: this.state.phototitle, 
+      caption: this.state.photocaption, 
       album: this.state.albumId, 
       owner: owner
     })
     .then(
+      console.log('SAVEPHOTO THEN')
       // res => this.loadArticles();
       // this.setState({ published: 'Your photo has been published!' })
     )
@@ -251,8 +261,8 @@ class Publish extends Component {
                               <input 
                                 value={this.state.title}
                                 onChange={this.handleInputChange}
-                                name="title"
-                                id="title"
+                                name="phototitle"
+                                id="phototitle"
                                 placeholder="required" 
                                 className="form-control" 
                               />
@@ -263,8 +273,8 @@ class Publish extends Component {
                               <textarea 
                                 value={this.state.caption}
                                 onChange={this.handleInputChange}
-                                name="caption"
-                                id="caption"
+                                name="photocaption"
+                                id="photocaption"
                                 placeholder="" 
                                 className="form-control" 
                               ></textarea>
