@@ -183,6 +183,7 @@ class Publish extends Component {
         })
       .then( 
         // ?? 
+        this.clearAll()
       )
       .catch(err => console.log(err))
 
