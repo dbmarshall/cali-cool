@@ -12,7 +12,7 @@ const passport = require('passport');
 // api/authentication/session
  router.get("/session", isLoggedIn, function(req,res) {
     // console.log("this is resonse from user ", res.session.passport.user)
-    console.log(req.user);
+    // console.log(req.user);
     console.log("user is logged in and we are in the get route");
     var obj = {
       "userName": req.user.userName,
@@ -20,7 +20,7 @@ const passport = require('passport');
       "userId" : req.user._id
     }
 
-    console.log(obj)
+    // console.log(obj)
     res.send(obj);
   })
 

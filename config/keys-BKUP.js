@@ -6,19 +6,19 @@
   so actual data never posted publicly
 */
 
-// var cloudinary = require('cloudinary');
-// const express = require("express");
-// const app = express();
-// const session = require('express-session');
+var cloudinary = require('cloudinary');
+const express = require('express');
+const app = express();
+const session = require('express-session');
 
-// var keys =
+var keys =
   
-//   { "cloudinary" : cloudinary.config({ 
-//             cloud_name: "XXXXXXX",
-//             api_key: "XXXXXXXX",
-//             api_secret: "XXXXXXXX"
-//           }),
-//     "secret": "XXXXXX"
-//   }
+  { 'cloudinary' : cloudinary.config({ 
+            cloud_name: "XXXXXXX",
+            api_key: "XXXXXXXX",
+            api_secret: "XXXXXXXX"
+          }),
+    'secret': 'XXXXXX'
+  }
 
-//   module.exports = keys;
+  module.exports = keys;
