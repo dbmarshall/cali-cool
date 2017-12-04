@@ -5,7 +5,4 @@ const photosController = require("../../controllers/photosController");
 router.route("/recent")
   .get(photosController.findAll);
 
-router.route("/new")
-  .post(photosController.createPhoto);
-
 module.exports = router;
