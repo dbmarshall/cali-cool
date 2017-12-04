@@ -15,6 +15,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  addPhototoAlbum: function(req, res) {
+    console.log('addPhototoAlbum req.body.photo: ', req.body.photo)
+    db.Albums
+      .findOneAndUpdate({ _id: req.params.album }, {$push: { photos: req.body.photo }}, { new: true })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   createPhoto: function(req, res) {
     console.log('createPhoto req.body: ', req.body)
     db.Photos

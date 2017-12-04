@@ -8,6 +8,9 @@ router.route("/:id/albums")
 router.route("/:id/albums/new")
   .post(usersController.createAlbum);
 
+router.route("/:id/albums/:album")
+  .post(usersController.addPhototoAlbum);
+
 router.route("/:id/photos/new")
   .post(usersController.createPhoto);
 

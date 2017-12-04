@@ -174,15 +174,20 @@ class Publish extends Component {
       album: this.state.albumId, 
       owner: owner
     })
-    .then(
-      // console.log('SAVEPHOTO THEN')
-      // res => this.loadArticles();
-      // this.setState({ published: 'Your photo has been published!' })
+    .then( res => 
+
+      API.updateAlbumPhoto(
+        owner, 
+        this.state.albumId, {
+          photo: res.data._id
+        })
+      .then( 
+        // ?? 
+      )
+      .catch(err => console.log(err))
+
     )
-    .then(
-      this.clearAll()
-    )
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
   };
 
   render() {
