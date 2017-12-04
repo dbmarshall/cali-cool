@@ -24,7 +24,7 @@ class Main extends Component{
   }
 
   loadMostLikedPhotos = () => {
-    API.getRecentPhotos()
+    API.getMostLikedPhotos()
     .then(res => {
       this.setState({mostLikedPhotos: res.data});
     })

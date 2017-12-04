@@ -55,7 +55,7 @@ class AlbumView extends Component{
             <ul className="list-group">
             {this.state.albumObj.comments &&
               this.state.albumObj.comments.map(function(comment){
-              return <li className="list-group-item">{comment.comment}</li>
+              return <li key={comment._id} className="list-group-item">{comment.comment}</li>
             })}
             </ul>
             <div className="input-group">
@@ -63,8 +63,6 @@ class AlbumView extends Component{
                 placeholder="Write comment..." aria-describedby="basic-addon2"></input>
               <span className="input-group-addon" id="basic-addon2">Post</span>
             </div>
-
-            
           </div>
           <hr/>
         </div>

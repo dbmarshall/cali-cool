@@ -45,7 +45,7 @@ class AlbumPreview extends Component{
   openLightbox = (event, obj) => {
     const current = this.state.photoObjs[obj.index];
     this.setState({
-      currentImageIndex: obj.index,
+      currentImageIndex: obj.index, 
       lightboxIsOpen: true,
       currentPhoto: current
     });
@@ -72,6 +72,10 @@ class AlbumPreview extends Component{
     });
   }
 
+  updateLike(){
+    console.log("update like parent clicked");
+  }
+
   render(){
     return (
       <div>
@@ -93,9 +97,12 @@ class AlbumPreview extends Component{
                 style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
                 {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
               </a>,
-              <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
-                key={2}></Like>,
-              <Comment style={{position: "absolute", bottom: "60px", left: "90px"}} 
+
+             <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
+                key={2} updateLike={this.updateLike}
+                likesCount={this.state.currentPhoto.likesCount}></Like>,
+
+              <Comment style={{position: "absolute", bottom: "60px", left: "150px"}} 
                 key={3}></Comment>
             ]}
           />
