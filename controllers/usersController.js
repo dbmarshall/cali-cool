@@ -7,5 +7,19 @@ module.exports = {
       .sort({ _id: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  createAlbum: function(req, res) {
+    console.log('createAlbum req.body: ', req.body)
+    db.Albums
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  createPhoto: function(req, res) {
+    console.log('createPhoto req.body: ', req.body)
+    db.Photos
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };
