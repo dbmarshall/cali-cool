@@ -8,4 +8,7 @@ router.route("/recent")
 router.route("/mostLiked")
   .get(photosController.mostLiked);
 
+router.route("/:id")
+  .get(photosController.singlePhoto);
+
 module.exports = router;

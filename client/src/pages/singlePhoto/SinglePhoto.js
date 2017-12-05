@@ -18,8 +18,9 @@ class SinglePhoto extends Component {
 
   constructor(props){
     super(props);
-    console.log(props)
+    // console.log(props)
     this.state = {
+      photoId: this.props.location.pathname.split('/')[2],
       photoTitle:"",
       caption:"",
       albumName:"",
@@ -27,8 +28,6 @@ class SinglePhoto extends Component {
       dateAdded:"",
       likes: "",
       commentContent: "",
-      photoId:""
-
     }
 
   }
@@ -58,10 +57,14 @@ class SinglePhoto extends Component {
   };
 
   getPhotoData = event => {
-    API.singlePhotoData({})
+    console.log(this.state.photoId)
+    API.singlePhotoData(
+    { id:this.state.photoId
+    })
     .then(res => {
       console.log(res);
     })
+    .catch(err => console.log(err))
   }
   // Like component
     // GET
