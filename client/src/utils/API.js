@@ -57,8 +57,13 @@ export default {
   },
 
   getUserProfileData: function(userId) {
-    console.log(userId.id)
+    // console.log(userId.id)
     return axios.get("/api/users/" + userId.id);
+  },
+
+  deletePhoto: function(photoId) {
+    console.log(photoId)
+    return axios.delete("/api/photos/" +photoId)
   }
 
 };

@@ -25,11 +25,13 @@ class SinglePhoto extends Component {
       image:"",
       caption:"",
       albumId:"",
+      albumName:"",
       userId:"",
       dateAdded:"",
       likes: "",
       commentContent: "",
-      userAuth:""
+      userAuth:"",
+      userName:""
     }
 
   }
@@ -69,9 +71,11 @@ class SinglePhoto extends Component {
         photoTitle: res.data[0].title,
         image: res.data[0].link,
         caption: res.data[0].caption,
-        albumId: res.data[0].album,
+        albumId: res.data[0].album._id,
         userId: res.data[0].owner._id,
-        userAuth:sessionStorage.getItem("userId")
+        userAuth:sessionStorage.getItem("userId"),
+        albumName:res.data[0].album.title,
+        userName:res.data[0].owner.userName,
       })
       console.log(this.state.userId)
       console.log(this.state.userAuth)
@@ -87,6 +91,17 @@ class SinglePhoto extends Component {
     // POST
 
   // Delete component
+  handleDelete = event => {
+    console.log("delete button clicked")
+    API.deletePhoto(this.state.photoId)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  }
+
+
+  // Set as profile photo
 
 
   render(){
@@ -109,10 +124,10 @@ class SinglePhoto extends Component {
               <Row>
                 <Col xs={6} md={6}>
                  <p> 
-                  <a href={'/album/' + this.state.albumId}>Album </a> 
+                  <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
                   by 
                     <span>
-                     <a href={'/user/' + this.state.userId}> User </a> 
+                     <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
                      </span>
                     <span>date added</span> 
                   </p>
@@ -132,7 +147,14 @@ class SinglePhoto extends Component {
                 </Row>
                 <Row>
                   <Col xs={6} md={6}>
-                      <Button bsStyle="primary" bsSize="large" style={btnStyle}>Delete Photo</Button>
+                      <Button 
+                      bsStyle="primary" 
+                      bsSize="large" 
+                      style={btnStyle}
+                      value={this.state.photoId}
+                      onClick={this.handleDelete}
+                      >Delete
+                      Photo</Button>
                   </Col>
                 </Row>
                   <div style={commentDiv}>

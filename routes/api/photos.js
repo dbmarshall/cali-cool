@@ -9,6 +9,7 @@ router.route("/mostLiked")
   .get(photosController.mostLiked);
 
 router.route("/:id")
-  .get(photosController.getSinglePhoto);
+  .get(photosController.getSinglePhoto)
+  .delete(photosController.deletePhoto)
 
 module.exports = router;
