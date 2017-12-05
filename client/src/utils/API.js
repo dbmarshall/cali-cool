@@ -51,12 +51,12 @@ export default {
     return axios.post("/api/users/" + userId + "/photos/new", photoData)
   },
 
-  singlePhotoData: function(photoId) {
+  getSinglePhotoData: function(photoId) {
     // console.log(photoId)
     return axios.get("/api/photos/" + photoId.id)
   },
 
-  userProfileData: function(userId) {
+  getUserProfileData: function(userId) {
     console.log(userId.id)
     return axios.get("/api/users/" + userId.id);
   }

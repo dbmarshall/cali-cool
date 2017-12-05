@@ -37,7 +37,7 @@ module.exports = {
     findUsersAlbums: function(req, res) {
     console.log(req.params.id);
     db.Albums
-      .find({owner: req.params.id})
+      .find({"owner": req.params.id})
       .populate("photos")
       .populate("owner")
       .then(dbModel => res.json(dbModel))

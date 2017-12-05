@@ -59,7 +59,7 @@ class SinglePhoto extends Component {
 
   getPhotoData = event => {
     console.log(this.state.photoId)
-    API.singlePhotoData(
+    API.getSinglePhotoData(
     { id:this.state.photoId
     })
     .then(res => {
