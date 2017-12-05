@@ -30,14 +30,14 @@ class AlbumPreview extends Component{
 
   getThumbnailArray = () => {
     const thumbnails = this.state.photoObjs.map(function(photo){
-      return { src: photo.thumbnail, width: 4, height: 3 , caption: photo.caption};
+      return { src: photo.thumbnailUrl, width: 4, height: 3 , caption: photo.caption};
     });
     return thumbnails;
   }
 
   getPhotoArray = () => {
     const photos = this.state.photoObjs.map(function(photo){
-      return { src: photo.link, caption: photo.caption, thumbnail: photo.thumbnail};
+      return { src: photo.imageUrl, caption: photo.caption, thumbnail: photo.thumbnailUrl};
     });
     return photos;
   }

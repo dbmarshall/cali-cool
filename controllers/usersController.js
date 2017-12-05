@@ -43,7 +43,8 @@ module.exports = {
         .create(newObj)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
-    });
+    }, 
+      { upload_preset: "cali-cool-ucb" });
   },
 
   findUser: function(req, res) {

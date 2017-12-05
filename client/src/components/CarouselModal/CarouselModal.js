@@ -92,7 +92,7 @@ class CarouselModal extends Component{
                         
                         <div className="row">
                           <div className="col-md-12" style={{textAlign: "center"}}> 
-                            <img src={photo.link} />
+                            <img src={photo.imageUrl} />
                           </div>
                         </div>
                         

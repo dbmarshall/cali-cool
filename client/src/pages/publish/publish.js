@@ -259,7 +259,7 @@ class Publish extends Component {
                               </div>
                               <span className="small">
                                 Please, upload images at least 1600px in width.<br/>
-                                Maximum allowable filesize is 10mb.
+                                Maximum allowable filesize is 5mb.
                               </span>
                             </div>
 

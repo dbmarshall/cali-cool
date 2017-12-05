@@ -19,7 +19,7 @@ const AlbumMiniPhotos = props => {
        {props.photos.map((photo, i) => {
           return (
             <Col xs={2} md={2} lg={2} style={albumPhotoStyle} key={photo.id}>
-                <Image src={photo.link} thumbnail />
+                <Image src={photo.imageUrl} thumbnail />
               </Col>
             )
         })}
