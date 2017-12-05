@@ -28,7 +28,8 @@ class SinglePhoto extends Component {
       userId:"",
       dateAdded:"",
       likes: "",
-      commentContent: ""
+      commentContent: "",
+      userAuth:""
     }
 
   }
@@ -69,8 +70,11 @@ class SinglePhoto extends Component {
         image: res.data[0].link,
         caption: res.data[0].caption,
         albumId: res.data[0].album,
-        userId: res.data[0].owner
+        userId: res.data[0].owner._id,
+        userAuth:sessionStorage.getItem("userId")
       })
+      console.log(this.state.userId)
+      console.log(this.state.userAuth)
     })
     .catch(err => console.log(err))
   }
@@ -119,48 +123,84 @@ class SinglePhoto extends Component {
                     <Button bsStyle="primary" bsSize="large">Like! <Badge> 42</Badge></Button>
                 </Col>
               </Row>
-              <Row>
+              {this.state.userId === this.state.userAuth ? (
+                <div>
+                <Row>
                 <Col xs={6} md={6}>
                     <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
                 </Col>
-              </Row>
-              <Row>
-                <Col xs={6} md={6}>
-                    <Button bsStyle="primary" bsSize="large" style={btnStyle}>Delete Photo</Button>
-                </Col>
-              </Row>
-              </Grid>
-              <div style={commentDiv}>
-                <Grid>
-                 <Row>
-                  <Col xs={6} md={6}>
-                    <form onSubmit={this.handleFormSubmit}>
-                      <FormControl
-                        id="formControlsText"
-                        type="text"
-                        label="Text"
-                        placeholder="Enter text"
-                        name="commentContent"
-                        value={this.state.commentContent}
-                        onChange={this.handleInputChange}
-                      />
-                      <Button type="submit">
-                        Add Comment
-                      </Button>
-                    </form>
-                  </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} md={8}>
-                      <ListGroup>
-                        <ListGroupItem>Wow what a great photo!</ListGroupItem>
-                        <ListGroupItem>Amazing</ListGroupItem>
-                        <ListGroupItem>How cool!</ListGroupItem>
-                      </ListGroup>
+                  <Col xs={6} md={6}>
+                      <Button bsStyle="primary" bsSize="large" style={btnStyle}>Delete Photo</Button>
                   </Col>
                 </Row>
-              </Grid>
-            </div>
+                  <div style={commentDiv}>
+                    <Grid>
+                     <Row>
+                      <Col xs={6} md={6}>
+                        <form onSubmit={this.handleFormSubmit}>
+                          <FormControl
+                            id="formControlsText"
+                            type="text"
+                            label="Text"
+                            placeholder="Enter text"
+                            name="commentContent"
+                            value={this.state.commentContent}
+                            onChange={this.handleInputChange}
+                          />
+                          <Button type="submit">
+                            Add Comment
+                          </Button>
+                        </form>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={6} md={8}>
+                          <ListGroup>
+                            <ListGroupItem>Wow what a great photo!</ListGroupItem>
+                            <ListGroupItem>Amazing</ListGroupItem>
+                            <ListGroupItem>How cool!</ListGroupItem>
+                          </ListGroup>
+                      </Col>
+                    </Row>
+                  </Grid>
+                </div>
+                </div>
+                ) : (
+                <div style={commentDiv}>
+                  <Grid>
+                   <Row>
+                    <Col xs={6} md={6}>
+                      <form onSubmit={this.handleFormSubmit}>
+                        <FormControl
+                          id="formControlsText"
+                          type="text"
+                          label="Text"
+                          placeholder="Enter text"
+                          name="commentContent"
+                          value={this.state.commentContent}
+                          onChange={this.handleInputChange}
+                        />
+                        <Button type="submit">
+                          Add Comment
+                        </Button>
+                      </form>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={6} md={8}>
+                        <ListGroup>
+                          <ListGroupItem>Wow what a great photo!</ListGroupItem>
+                          <ListGroupItem>Amazing</ListGroupItem>
+                          <ListGroupItem>How cool!</ListGroupItem>
+                        </ListGroup>
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+                )}
+            </Grid>
           </div>
       </div>
       );
