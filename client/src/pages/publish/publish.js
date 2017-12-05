@@ -72,7 +72,7 @@ class Publish extends Component {
         // file: file,
         name: name,
         imagePreviewUrl: objectURL
-      }, () => {
+      // }, () => {
         // can run post-setState functions like this
       });
     };
