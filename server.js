@@ -14,7 +14,7 @@ const keys = require("./config/keys");
 
 // Middleware ==============================
 app.use(morgan('dev')); // log every request to the console
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Passport ==============================
