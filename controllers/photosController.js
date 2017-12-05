@@ -73,5 +73,13 @@ module.exports = {
         })
       })
       .catch(err => res.status(422).json(err));
+  },
+
+  singlePhoto: function(req, res) {
+    db.Photos
+    .find({_id: req.params.id})
+    .populate("comments")
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   }
 };
