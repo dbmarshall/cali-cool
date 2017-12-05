@@ -64,11 +64,12 @@ export default {
 
   deletePhoto: function(photoId) {
     console.log(photoId)
-    return axios.delete("/api/photos/" +photoId)
+    return axios.delete("/api/photos/" + photoId)
   },
 
-  postPhotoComment: function(commentData) {
+  createPhotoComment: function(commentData) {
     console.log(commentData);
+    return axios.post("/api/users/" + commentData.userId + "/comments", commentData )
   }
 
 

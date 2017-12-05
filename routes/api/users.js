@@ -17,4 +17,7 @@ router.route("/:id/photos/new")
 router.route("/:id")
   .get(usersController.findUsersAlbums);
 
+router.route("/:id/comments")
+  .post(usersController.createComment)
+
 module.exports = router;

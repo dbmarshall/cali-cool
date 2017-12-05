@@ -11,7 +11,9 @@ class AlbumPhotoComment extends Component {
 
     state = {
       photoId: this.props.photoId,
-      commentContent:""
+      userId: this.props.userId,
+      commentContent:"",
+      commentId:""
     } 
 
     handleInputChange = event => {
@@ -25,16 +27,17 @@ class AlbumPhotoComment extends Component {
     handleFormSubmit = event => {
     event.preventDefault();
     console.log(this.state.photoId)
+    console.log(this.state.userId)
     console.log(this.state.commentContent)
-    // API.postPhotoComment({
-    //   photoId:this.state.photoId,
-    //   comment:this.state.commentContent
-    // })
-    // .then(res => {
-    //   console.log(res)
-    // })
-    // .catch(err => {
-    //   console.log(err)})
+    API.createPhotoComment({
+      userId:this.state.userId,
+      comment:this.state.commentContent
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)})
   };
 
   render(){

@@ -60,6 +60,11 @@ module.exports = {
     .populate("owner")
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
+  },
+
+  createComment: function(req, res) {
+    console.log("server id", req.params.id)
+    console.log("sever commment", req.body.comment)
   }
 
 };

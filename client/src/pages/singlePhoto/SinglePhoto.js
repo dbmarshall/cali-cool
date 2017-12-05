@@ -38,10 +38,9 @@ class SinglePhoto extends Component {
   // What happens when user deletes? redirect to?
    
   getPhotoData = event => {
-    console.log(this.state.photoId)
+    // console.log(this.state.photoId)
     API.getSinglePhotoData(
-    { id:this.state.photoId
-    })
+    { id:this.state.photoId })
     .then(res => {
       console.log(res.data);
       this.setState({
@@ -55,7 +54,8 @@ class SinglePhoto extends Component {
         userName:res.data[0].owner.userName,
       })
       console.log(this.state.userId)
-      console.log(this.state.userAuth)
+      console.log("user auth on single", this.state.userAuth);
+      console.log("user photo on single", this.state.photoId);
     })
     .catch(err => console.log(err))
   }
@@ -130,13 +130,11 @@ class SinglePhoto extends Component {
                       Photo</Button>
                   </Col>
                 </Row>
-                  <AlbumPhotoComment 
-                  photoId={this.state.photoId} 
-                  />
                 </div>
                 ) : (
                   <AlbumPhotoComment 
                   photoId={this.state.photoId}
+                  userId={this.state.userAuth}
                   />
                 )} 
             </Grid>
