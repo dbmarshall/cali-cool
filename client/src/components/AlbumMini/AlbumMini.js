@@ -34,12 +34,14 @@ class AlbumMini extends Component {
         <div className="wrapper">
         {this.props.albums.map((album,i) => {
             return (
-              <div style={albumMini} key={album._id}>
-                <div>
-                  <p style={header}>{album.title}</p>
+              <a href={'/album/' + album._id} key={album._id} >
+                <div style={albumMini} >
+                  <div>
+                    <p style={header}>{album.title}</p>
+                  </div>
+                  <AlbumMiniPhotos photos={album.photos} />
                 </div>
-                <AlbumMiniPhotos photos={album.photos} />
-              </div>
+              </a>
               )
         })}
           
