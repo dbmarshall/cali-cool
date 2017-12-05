@@ -74,12 +74,20 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-
-  singlePhoto: function(req, res) {
+  getSinglePhoto: function(req, res) {
     db.Photos
     .find({_id: req.params.id})
     .populate("comments")
+    .populate("owner")
+    .populate("album")
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
+  },
+
+  deletePhoto: function(req, res) {
+    // console.log(req.params.id)
+    db.Photos
+    .find({_id: req.params.id})
+
   }
 };
