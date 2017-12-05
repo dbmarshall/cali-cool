@@ -58,6 +58,15 @@ export default {
   userProfileData: function(userId) {
     console.log(userId.id)
     return axios.get("/api/users/" + userId.id);
-  }
+  },
 
+  likePhoto: function(userId, photoId){
+    console.log(userId, photoId);
+    return axios.post("/api/users/" + userId + "/photos/" + photoId + "/like");
+  },
+
+  dislikePhoto: function(userId, photoId){
+    console.log(userId, photoId);
+    return axios.put("/api/users/" + userId + "/photos/" + photoId + "/like");
+  }
 };

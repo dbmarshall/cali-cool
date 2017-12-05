@@ -72,11 +72,89 @@ class AlbumPreview extends Component{
     });
   }
 
-  updateLike(){
+  updateLike = () =>{
+    // let newPhotoObj = this.state.currentPhoto;
+    // const userIndex = newPhotoObj.likes.indexOf(sessionStorage.getItem("userId"));
+    // console.log("currentUser", userIndex);
+
+    // if(userIndex > -1){
+    //   newPhotoObj.likes.splice(userIndex, 1);
+    // }
+    // else{
+    //   newPhotoObj.likes.push(sessionStorage.getItem("userId"));
+    // }
+
+    // let newPhotoObjs = this.state.photoObjs;
+    // newPhotoObjs[this.state.currentImageIndex] = newPhotoObj;
+
+    // this.setState({
+    //    photoObjs : newPhotoObjs      
+    // });
+
+    const userIndex = this.state.photoObjs[this.state.currentImageIndex].
+      likes.indexOf(sessionStorage.getItem("userId"));
+    console.log("currentUser", userIndex);
+    if(userIndex > -1){
+      this.state.photoObjs[this.state.currentImageIndex].likes.splice(userIndex, 1);
+    }
+    else{
+      this.state.photoObjs[this.state.currentImageIndex].likes.push(sessionStorage.getItem("userId"));
+    }
+
+    this.forceUpdate();
+
     console.log("update like parent clicked");
   }
 
+  doesUserLikeCurrentPhoto(){
+    if(sessionStorage.getItem("userId") && this.state.currentPhoto.likes){
+      for(let userId of this.state.currentPhoto.likes){
+        if(userId.toString() === sessionStorage.getItem("userId")){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  getCustomControls(){
+    let customControls = [
+
+      <a style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
+        <span className="glyphicon glyphicon-user"></span>
+        <span style={{marginLeft: "5px"}}>{this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}</span>
+      </a>,
+
+      <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
+        style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
+        {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
+      </a>
+    ];
+
+    if(sessionStorage.getItem("userId")){
+      customControls.push(
+        <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
+        key={2} updateLike={this.updateLike}
+        likesCount={this.state.currentPhoto.likes && this.state.currentPhoto.likes.length}
+        parentId={this.state.currentPhoto._id}
+        parentType="photo"
+        isLiked={this.doesUserLikeCurrentPhoto()}
+        currentPhoto={this.state.currentPhoto}></Like>);
+
+      customControls.push( 
+        <Comment style={{position: "absolute", bottom: "60px", left: "110px"}} 
+        key={3}></Comment>);
+    }
+
+    // console.log(sessionStorage.getItem("userId"), 
+    //             customControls.length);
+
+    return customControls;
+
+  }
+
   render(){
+    {console.log(this.state.currentPhoto.likes)}
     return (
       <div>
         <Gallery photos={this.state.thumbnails} onClick={this.openLightbox}/>  
@@ -88,23 +166,7 @@ class AlbumPreview extends Component{
             isOpen={this.state.lightboxIsOpen}
             backdropClosesModal={true}
             showCloseButton={false} 
-            customControls={[
-              <a style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
-                <span className="glyphicon glyphicon-user"></span>
-                <span style={{marginLeft: "5px"}}>{this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}</span>
-              </a>,
-              <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
-                style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
-                {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
-              </a>,
-
-             <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
-                key={2} updateLike={this.updateLike}
-                likesCount={this.state.currentPhoto.likesCount}></Like>,
-
-              <Comment style={{position: "absolute", bottom: "60px", left: "150px"}} 
-                key={3}></Comment>
-            ]}
+            customControls={this.getCustomControls()}
           />
       </div>
     );
