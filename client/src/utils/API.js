@@ -65,6 +65,11 @@ export default {
   deletePhoto: function(photoId) {
     console.log(photoId)
     return axios.delete("/api/photos/" +photoId)
+  },
+
+  postPhotoComment: function(commentData) {
+    console.log(commentData);
   }
+
 
 };

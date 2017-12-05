@@ -51,13 +51,13 @@ class SinglePhoto extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log(this.state.commentContent);
-    // })
-    // .then(res => {
-    //   console.log(res)
-      
-    // })
-    // .catch(err => console.log(err));
-
+    API.postPhotoComment({
+      photoId:this.state.photoId,
+      comment:this.state.commentContent})
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err));
   };
 
   getPhotoData = event => {
@@ -83,10 +83,6 @@ class SinglePhoto extends Component {
     .catch(err => console.log(err))
   }
   // Like component
-    // GET
-    // POST
-
-  // Comment component
     // GET
     // POST
 
@@ -171,7 +167,7 @@ class SinglePhoto extends Component {
                             value={this.state.commentContent}
                             onChange={this.handleInputChange}
                           />
-                          <Button type="submit">
+                          <Button type="submit" bsStyle="primary" >
                             Add Comment
                           </Button>
                         </form>
@@ -194,20 +190,20 @@ class SinglePhoto extends Component {
                   <Grid>
                    <Row>
                     <Col xs={6} md={6}>
-                      <form onSubmit={this.handleFormSubmit}>
-                        <FormControl
-                          id="formControlsText"
-                          type="text"
-                          label="Text"
-                          placeholder="Enter text"
-                          name="commentContent"
-                          value={this.state.commentContent}
-                          onChange={this.handleInputChange}
-                        />
-                        <Button type="submit">
-                          Add Comment
-                        </Button>
-                      </form>
+                       <form onSubmit={this.handleFormSubmit}>
+                          <FormControl
+                            id="formControlsText"
+                            type="text"
+                            label="Text"
+                            placeholder="Enter text"
+                            name="commentContent"
+                            value={this.state.commentContent}
+                            onChange={this.handleInputChange}
+                          />
+                          <Button type="submit" bsStyle="primary" >
+                            Add Comment
+                          </Button>
+                        </form>
                     </Col>
                   </Row>
                   <Row>

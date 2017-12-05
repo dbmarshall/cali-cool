@@ -88,16 +88,13 @@ class Header extends Component {
       password:this.state.passWord
     })
     .then(res => {
-      console.log(res);
-    //   console.log(res.request.responseURL)
-    //   if (res.request.responseURL === window.location.host + "/") {
-    //     // window.location.href = res.request.responseURL;
-    //     console.log("successful login will redirect to /")
-    //   }
-      window.location.href = res.request.responseURL;
-      
+      this.closeModal();
     })
-    // .catch(err => console.log(err));
+    .then(res => {
+      // ****Working on this redirect, go to albums****
+      // this.props.location.reload();
+    })
+    .catch(err => console.log(err));
   };
 
   render(){
