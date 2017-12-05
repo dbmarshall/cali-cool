@@ -3,11 +3,7 @@ import API from "../../utils/API";
 // import AlbumsSelect from "../../components/AlbumsSelect";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
-
-// const session = sessionStorage.getItem("key");
-// console.log(session)
-// const owner = "5a257cd50bf6d51f821058d5";
-// console.log(owner)
+let ownerId;
 
 class Publish extends Component {
 
@@ -30,22 +26,24 @@ class Publish extends Component {
   };
 
   componentDidMount() {
-    this.loadAlbums();
     this.getSessionData();
-  }
+    this.loadAlbums();
+  };
 
+  // Load User/Owner ID
   getSessionData = event => {
-    const session = sessionStorage.getItem("userId");
-    return session;
-  }
-  // Load existing albums for select
+    ownerId = sessionStorage.getItem("userId");
+  };
+
+  // Load existing albums for select pulldown
   loadAlbums = () => {
-    API.getUserAlbums(this.getSessionData())
+    API.getUserAlbums(ownerId)
       .then(res =>
         this.setState({ albums: res.data})
       )
       .catch(err => console.log(err));
   };
+
   // User image selection
   handleBrowse = event => {
 
@@ -152,9 +150,9 @@ class Publish extends Component {
     // If not, then go straight to addPhotoUpdateAlbum().
     if (this.state.albumtext) {
 
-      API.createAlbum(this.getSessionData(), { 
+      API.createAlbum(ownerId, { 
         title: this.state.albumname, 
-        owner: this.getSessionData()
+        owner: ownerId
       })
       .then(res => 
         this.setState({ 
@@ -176,16 +174,16 @@ class Publish extends Component {
 
   // Adds new photo and inserts new photo ID into Albums collection
   addPhotoUpdateAlbum = () => {
-    API.savePhoto(this.getSessionData(), {
+    API.savePhoto(ownerId, {
       title: this.state.phototitle, 
       caption: this.state.photocaption, 
       album: this.state.albumId, 
-      owner: this.getSessionData()
+      owner: ownerId
     })
     .then( res => 
 
       API.updateAlbumPhoto(
-        this.getSessionData(), 
+        ownerId, 
         this.state.albumId, {
           photo: res.data._id
         })
