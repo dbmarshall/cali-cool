@@ -10,21 +10,28 @@ class User extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userId: this.props.location.pathname.split('/')[2]
+      userId: this.props.location.pathname.split('/')[2],
+      userAlbums:[],
+      userProfilePhoto:"",
+
     } 
 
   }
 
   componentDidMount(){
+    this.getUserInfo()
+  }
+
+  getUserInfo = event => {
    API.userProfileData({
-    id: this.state.userId
-  })
-   .then( res => {
-    console.log(res)
-   })
-   .catch(err => {
-    console.log(err)
-   })
+      id: this.state.userId })
+     .then(res => {
+      console.log(res.data);
+      this.setState({ 
+      userAlbums: res.data })
+      console.log(this.state.userAlbums)
+     })
+     .catch(err => console.log(err));
   }
 
 
@@ -47,7 +54,8 @@ class User extends Component {
               </Row>
             </Grid>
             </div>
-        <AlbumMini />
+        <AlbumMini 
+          albums={this.state.userAlbums} />
         <div>
           <h1>Default Album componet to go here</h1>
         </div>
