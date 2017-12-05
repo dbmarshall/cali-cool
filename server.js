@@ -14,7 +14,7 @@ const keys = require("./config/keys");
 
 // Middleware ==============================
 app.use(morgan('dev')); // log every request to the console
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'})); // Reset default for data_uri blobs
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Passport ==============================
@@ -51,12 +51,6 @@ mongoose.connect(
     useMongoClient: true
   }
 );
-
-// Send every request to the React app
-// Define any API routes before this runs
-// app.get("*", function(req, res) {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
