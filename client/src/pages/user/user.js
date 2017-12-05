@@ -12,7 +12,8 @@ class User extends Component {
     this.state = {
       userId: this.props.location.pathname.split('/')[2],
       userAlbums:[],
-      userProfilePhoto:"",
+      profilePhoto:"",
+      profileTitle:""
 
     } 
 
@@ -28,8 +29,11 @@ class User extends Component {
      .then(res => {
       console.log(res.data);
       this.setState({ 
-      userAlbums: res.data })
-      console.log(this.state.userAlbums)
+      userAlbums: res.data,
+      profileTitle: res.data[0].owner.firstName,
+      profilePhoto: res.data[0].owner.profilePicture
+    })
+      // console.log(this.state.userAlbums)
      })
      .catch(err => console.log(err));
   }
@@ -45,11 +49,11 @@ class User extends Component {
             <Button href="/publish" bsStyle="primary">Add Photos</Button>
           </Row>
          </Grid>
-            <h2>Jane's Profile</h2>
+            <h2>{this.state.profileTitle}'s Page</h2>
             <Grid>
               <Row>
                 <Col xs={6} md={3}>
-                  <Image src="https://i.pinimg.com/736x/23/9e/a3/239ea3028a12dc33bda27d300d7f67ce--california-palm-trees-california-love.jpg" rounded={true} responsive={true}/>
+                  <Image src={this.state.profilePhoto} rounded={true} responsive={true}/>
                 </Col>
               </Row>
             </Grid>

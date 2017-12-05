@@ -39,6 +39,7 @@ module.exports = {
     db.Albums
       .find({owner: req.params.id})
       .populate("photos")
+      .populate("owner")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
