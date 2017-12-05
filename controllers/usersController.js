@@ -35,13 +35,11 @@ module.exports = {
     // .find({_id:})
   },
     findUsersAlbums: function(req, res) {
-    console.log(req);
-  //   db.Albums
-  //     .find({req.params.id})
-  //     .populate("photos")
-  //     .populate("owner")
-  //     .populate("comments")
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
+    console.log(req.params.id);
+    db.Albums
+      .find({owner: req.params.id})
+      .populate("photos")
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };
