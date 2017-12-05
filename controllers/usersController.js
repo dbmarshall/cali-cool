@@ -31,6 +31,7 @@ module.exports = {
   createPhoto: function(req, res) {
     // console.log('createPhoto req.body.data_uri: ', req.body.data_uri);
     cloudinary.uploader.upload(req.body.data_uri, function(result) { 
+        console.log('result: ', result);
       imageUploadId = result.public_id;
         // console.log('imageUploadId: ', imageUploadId);
       newObj = req.body;
