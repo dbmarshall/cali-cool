@@ -43,12 +43,12 @@ export default {
   updateAlbumPhoto: function(userId, albumId, photoId){
       // console.log('utils/API updateAlbumPhoto userId: ', userId);
       // console.log('utils/API updateAlbumPhoto albumId: ', albumId);
-      console.log("utils/API updateAlbumPhoto route: /api/users/" + userId + "/albums/" + albumId);
+      // console.log("utils/API updateAlbumPhoto route: /api/users/" + userId + "/albums/" + albumId);
     return axios.post("/api/users/" + userId + "/albums/" + albumId, photoId)
   },
 
   savePhoto: function(userId, photoData){
-      console.log('utils/API savePhoto photoData: ', photoData);
+      // console.log('utils/API savePhoto photoData: ', photoData);
     return axios.post("/api/users/" + userId + "/photos/new", photoData)
   },
 

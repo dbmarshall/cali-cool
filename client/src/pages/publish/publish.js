@@ -4,6 +4,7 @@ import API from "../../utils/API";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
 let ownerId;
+let data_uri;
 let objectURL;
 
 class Publish extends Component {
@@ -52,7 +53,8 @@ class Publish extends Component {
     let file = event.target.files[0];
     let name = event.target.files[0].name;
     objectURL = window.URL.createObjectURL(file);
-      // console.log('objectURL: ', objectURL);
+      console.log('objectURL: ', objectURL);
+      // console.log('file: ', file);
 
     reader.onload = () => {
       let img = new Image();
@@ -63,7 +65,8 @@ class Publish extends Component {
           specs: '(' + img.width + 'x' + img.height + ')'
         });
       };
-      // img.src = reader.result;
+      data_uri = reader.result;
+        // console.log('data_uri: ', data_uri);
 
     };
 
@@ -71,7 +74,7 @@ class Publish extends Component {
       this.setState({
         // file: file,
         name: name,
-        imagePreviewUrl: objectURL
+        imagePreviewUrl: data_uri
       // }, () => {
         // can run post-setState functions like this
       });
@@ -187,7 +190,7 @@ class Publish extends Component {
       caption: this.state.photocaption, 
       album: this.state.albumId, 
       owner: ownerId,
-      blob: this.state.imagePreviewUrl
+      data_uri: this.state.imagePreviewUrl
     })
     .then( res => 
 
@@ -201,8 +204,8 @@ class Publish extends Component {
         this.clearAll()
       )
       .then(
-        // Removes image blob to prevent memory leaks
-        // window.URL.revokeObjectURL(objectURL)
+        // Removes image data_uri to prevent memory leaks
+        window.URL.revokeObjectURL(objectURL)
       )
       .catch(err => console.log(err))
 
@@ -256,7 +259,7 @@ class Publish extends Component {
                               </div>
                               <span className="small">
                                 Please, upload images at least 1600px in width.<br/>
-                                Maximum allowable filesize is 5mb.
+                                Maximum allowable filesize is 10mb.
                               </span>
                             </div>
 
