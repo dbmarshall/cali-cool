@@ -1,6 +1,4 @@
 const db = require("../models");
-const cloudinary = require('cloudinary');
-const keys = require("../config/keys");
 
 module.exports = {
   findAllUserAlbums: function(req, res) {
@@ -25,25 +23,11 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createPhoto: function(req, res) {
-    console.log('createPhoto req.body.blob: ', req.body.blob)
-    cloudinary.uploader.upload(req.body.blob, function(result) { 
-        console.log('cloudinary result: ', result)
-
-      // format = '.' + result.format;
-      // imgName = result.public_id + format;
-      //   console.log('imgName: ', imgName);
-
-      // imgURL = result.url;
-      //   console.log('imgURL: ', imgURL);
-
-      // thumbURL = cloudinary.url(imgName, {width: 200, height: 200, crop: "thumb", gravity: "center"});
-      //   console.log('thumbURL: ', thumbURL);
-
-    });
-    // db.Photos
-    //   .create(req.body)
-    //   .then(dbModel => res.json(dbModel))
-    //   .catch(err => res.status(422).json(err));
+    console.log('createPhoto req.body: ', req.body)
+    db.Photos
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
   findUser: function(req, res) {
     console.log('findUser req.body:' ,req.body)
