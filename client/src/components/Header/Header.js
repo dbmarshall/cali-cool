@@ -64,6 +64,7 @@ class Header extends Component {
       }
       else {
         console.log("user isn't logged in");
+        sessionStorage.clear();
       }
     })
     .catch(err => console.log(err))
