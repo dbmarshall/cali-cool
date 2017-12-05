@@ -21,7 +21,7 @@ module.exports = {
   },
 
   addPhototoAlbum: function(req, res) {
-    console.log('addPhototoAlbum req.body.photo: ', req.body.photo)
+    // console.log('addPhototoAlbum req.body.photo: ', req.body.photo)
     db.Albums
       .findOneAndUpdate({ _id: req.params.album }, {$push: { photos: req.body.photo }}, { new: true })
       .then(dbModel => res.json(dbModel))
