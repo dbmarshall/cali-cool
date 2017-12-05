@@ -22,12 +22,13 @@ class SinglePhoto extends Component {
     this.state = {
       photoId: this.props.location.pathname.split('/')[2],
       photoTitle:"",
+      image:"",
       caption:"",
-      albumName:"",
+      albumId:"",
       userId:"",
       dateAdded:"",
       likes: "",
-      commentContent: "",
+      commentContent: ""
     }
 
   }
@@ -62,7 +63,14 @@ class SinglePhoto extends Component {
     { id:this.state.photoId
     })
     .then(res => {
-      console.log(res);
+      console.log(res.data);
+      this.setState({
+        photoTitle: res.data[0].title,
+        image: res.data[0].link,
+        caption: res.data[0].caption,
+        albumId: res.data[0].album,
+        userId: res.data[0].owner
+      })
     })
     .catch(err => console.log(err))
   }
@@ -85,18 +93,25 @@ class SinglePhoto extends Component {
             <Grid>
               <Row>
                 <Col>
-                   <h2>Photo Title</h2>
+                   <h2>{this.state.photoTitle}</h2>
                 </Col>
               </Row>
               <Row>
                 <Col xs={6} md={6}>
-                  <Image src="https://static.pexels.com/photos/356968/pexels-photo-356968.jpeg" rounded={true} responsive={true}/>
-                  <p>Caption</p>
+                  <Image src={this.state.image} rounded={true} responsive={true}/>
+                  <p>{this.state.caption}</p>
                 </Col>
               </Row>
               <Row>
                 <Col xs={6} md={6}>
-                 <p>Album <span> (link) </span> by <span> User </span><span>date added</span></p>
+                 <p> 
+                  <a href={'/album/' + this.state.albumId}>Album </a> 
+                  by 
+                    <span>
+                     <a href={'/user/' + this.state.userId}> User </a> 
+                     </span>
+                    <span>date added</span> 
+                  </p>
                 </Col>
               </Row>
                <Row>
