@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Passport ==============================
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use( session( { secret: keys.secret,
-                    cookie: { maxAge: 60000 },
+                    cookie: { maxAge: 900000 },
                     rolling: true,
                     resave: true, 
                     saveUninitialized: false

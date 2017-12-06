@@ -63,8 +63,23 @@ export default {
   },
 
   deletePhoto: function(photoId) {
+    // console.log(photoId)
+    return axios.delete("/api/photos/" + photoId)
+  },
+
+  createPhotoComment: function(commentData) {
+    console.log(commentData);
+    return axios.post("/api/users/" + commentData.userId + "/comments", commentData )
+  },
+
+  insertCommentToPhoto: function(commentData) {
+    console.log(commentData)
+    return axios.post("/api/photos/" + commentData.photoId + "/comments", commentData)
+  },
+
+  getComments: function(photoId) {
     console.log(photoId)
-    return axios.delete("/api/photos/" +photoId)
+    return axios.get("/api/photos/" + photoId.id + "/comments")
   },
 
   likePhoto: function(userId, photoId){
@@ -89,5 +104,10 @@ export default {
 
   searchForAlbumsByTitle: function(searchStr){
     return axios.get("/api/albums/search/title/" + searchStr);
+  },
+  
+  updateProfilePhoto: function(userData) {
+    console.log(userData);
+    return axios.put("/api/users/" + userData.userId + "/profilephoto", userData)
   }
 };

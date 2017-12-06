@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Button, Grid, Row, Col, Image, form, FormControl, Badge, ListGroup, ListGroupItem } from 'react-bootstrap';
-// Check with Minu if I can use LIKE for this component
-// import Like from "../../components/Like";
+import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
+import Like from "../../components/Like";
+import AlbumPhotoComment from "../../components/AlbumPhotoComment";
 import API from "../../utils/API";
 
 const btnStyle = {
@@ -9,10 +9,11 @@ const btnStyle = {
   marginBottom: "5px"
 }
 
-const commentDiv = {
-  marginTop: "10px",
-  marginBottom: "10px"
+const likeTemp = {
+  backgroundColor: "grey"
 }
+
+const sessionKeyUserId = "userId";
 
 class SinglePhoto extends Component {
 
@@ -28,10 +29,11 @@ class SinglePhoto extends Component {
       albumName:"",
       userId:"",
       dateAdded:"",
-      likes: "",
-      commentContent: "",
+      likesCount: 0,
       userAuth:"",
-      userName:""
+      userName:"",
+      photoObj:{},
+      imageUploadId:""
     }
 
   }
@@ -40,55 +42,66 @@ class SinglePhoto extends Component {
     this.getPhotoData()
   }
   // What happens when user deletes? redirect to?
-   handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-    console.log(this.state.commentContent)
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    console.log(this.state.commentContent);
-    // })
-    // .then(res => {
-    //   console.log(res)
-      
-    // })
-    // .catch(err => console.log(err));
-
-  };
-
+   
   getPhotoData = event => {
-    console.log(this.state.photoId)
+    // console.log(this.state.photoId)
     API.getSinglePhotoData(
-    { id:this.state.photoId
-    })
+    { id:this.state.photoId })
     .then(res => {
-      console.log(res.data);
+      console.log("singe page data", res.data[0]);
       this.setState({
         photoTitle: res.data[0].title,
-        image: res.data[0].link,
+        image: res.data[0].imageUrl,
         caption: res.data[0].caption,
         albumId: res.data[0].album._id,
         userId: res.data[0].owner._id,
         userAuth:sessionStorage.getItem("userId"),
         albumName:res.data[0].album.title,
         userName:res.data[0].owner.userName,
+        photoObj:res.data[0],
+        likesCount: res.data[0].likes.length,
+        imageUploadId:res.data[0].imageUploadId
       })
       console.log(this.state.userId)
-      console.log(this.state.userAuth)
+      console.log("user auth on single", this.state.userAuth);
+      console.log("user photo on single", this.state.photoId);
     })
     .catch(err => console.log(err))
   }
-  // Like component
-    // GET
-    // POST
+  
+  updateLike =() => {
+    const loggedInUserId = sessionStorage.getItem(sessionKeyUserId);
+    // console.log(loggedInUserId);
+    // console.log(this.state.likesCount)
+    const userIndex = this.state.photoObj.likes.indexOf(loggedInUserId);
+    console.log(userIndex)
 
-  // Comment component
-    // GET
-    // POST
+    if(userIndex > -1){
+      this.state.photoObj.likes.splice(userIndex, 1);
+      API.unlikePhoto(loggedInUserId, this.state.photoObj._id);
+      this.setState({
+        likesCount: this.state.likesCount - 1
+      })
+    }
+    else{
+      this.state.photoObj.likes.push(loggedInUserId);
+      API.likePhoto(loggedInUserId, this.state.photoObj._id);
+      this.setState({
+        likesCount: this.state.likesCount + 1
+      })
+    }    
+  }
+
+   doesUserLikeAlbum = () => {
+    if(sessionStorage.getItem("userId") && this.state.photoObj.likes){
+      for(let userId of this.state.photoObj.likes){
+        if(userId.toString() === sessionStorage.getItem(sessionKeyUserId)){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   // Delete component
   handleDelete = event => {
@@ -102,6 +115,18 @@ class SinglePhoto extends Component {
 
 
   // Set as profile photo
+  handleSetProfilePhoto = event => {
+    console.log("set profile clicked")
+    API.updateProfilePhoto({
+      userId:this.state.userAuth,
+      photoId: this.state.photoId,
+      imageUploadId: this.state.imageUploadId
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  }
 
 
   render(){
@@ -134,94 +159,51 @@ class SinglePhoto extends Component {
                 </Col>
               </Row>
                <Row>
-                <Col xs={6} md={6}>
-                    <Button bsStyle="primary" bsSize="large">Like! <Badge> 42</Badge></Button>
+                <Col xs={6} md={6} style={likeTemp}>
+                    <Like position={{marginLeft: "10px"}}
+                      likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
+                      updateLike={this.updateLike}
+                      isLiked={this.doesUserLikeAlbum()}>
+                    </Like>
                 </Col>
               </Row>
-              {this.state.userId === this.state.userAuth ? (
+              { (this.state.userId === this.state.userAuth) ? (
                 <div>
-                <Row>
-                <Col xs={6} md={6}>
-                    <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
-                </Col>
-                </Row>
-                <Row>
-                  <Col xs={6} md={6}>
-                      <Button 
-                      bsStyle="primary" 
-                      bsSize="large" 
-                      style={btnStyle}
-                      value={this.state.photoId}
-                      onClick={this.handleDelete}
-                      >Delete
-                      Photo</Button>
-                  </Col>
-                </Row>
-                  <div style={commentDiv}>
-                    <Grid>
-                     <Row>
-                      <Col xs={6} md={6}>
-                        <form onSubmit={this.handleFormSubmit}>
-                          <FormControl
-                            id="formControlsText"
-                            type="text"
-                            label="Text"
-                            placeholder="Enter text"
-                            name="commentContent"
-                            value={this.state.commentContent}
-                            onChange={this.handleInputChange}
-                          />
-                          <Button type="submit">
-                            Add Comment
-                          </Button>
-                        </form>
-                      </Col>
+                    <Row>
+                    <Col xs={6} md={6}>
+                        <Button 
+                          bsStyle="primary" 
+                          bsSize="large" 
+                          style={btnStyle}
+                          onClick={this.handleSetProfilePhoto}
+                          value={this.state.photoId}
+                          name="setProfile"
+                          >
+                          Set as Profile Photo</Button>
+                    </Col>
                     </Row>
                     <Row>
-                      <Col xs={6} md={8}>
-                          <ListGroup>
-                            <ListGroupItem>Wow what a great photo!</ListGroupItem>
-                            <ListGroupItem>Amazing</ListGroupItem>
-                            <ListGroupItem>How cool!</ListGroupItem>
-                          </ListGroup>
+                      <Col xs={6} md={6}>
+                          <Button 
+                          bsStyle="primary" 
+                          bsSize="large" 
+                          style={btnStyle}
+                          value={this.state.imageUploadId}
+                          onClick={this.handleDelete}
+                          >Delete
+                          Photo</Button>
                       </Col>
                     </Row>
-                  </Grid>
+                    </div>
+                ) : 
+                  (null)      
+              }
+                <div>
+                <AlbumPhotoComment 
+                    photoId={this.state.photoId}
+                    userAuth={this.state.userAuth}
+                    />
                 </div>
-                </div>
-                ) : (
-                <div style={commentDiv}>
-                  <Grid>
-                   <Row>
-                    <Col xs={6} md={6}>
-                      <form onSubmit={this.handleFormSubmit}>
-                        <FormControl
-                          id="formControlsText"
-                          type="text"
-                          label="Text"
-                          placeholder="Enter text"
-                          name="commentContent"
-                          value={this.state.commentContent}
-                          onChange={this.handleInputChange}
-                        />
-                        <Button type="submit">
-                          Add Comment
-                        </Button>
-                      </form>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} md={8}>
-                        <ListGroup>
-                          <ListGroupItem>Wow what a great photo!</ListGroupItem>
-                          <ListGroupItem>Amazing</ListGroupItem>
-                          <ListGroupItem>How cool!</ListGroupItem>
-                        </ListGroup>
-                    </Col>
-                  </Row>
-                </Grid>
-              </div>
-                )}
             </Grid>
           </div>
       </div>

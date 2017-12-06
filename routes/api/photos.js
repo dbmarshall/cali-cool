@@ -11,5 +11,9 @@ router.route("/mostLiked")
 router.route("/:id")
   .get(photosController.getSinglePhoto)
   .delete(photosController.deletePhoto)
+  
+router.route("/:id/comments")
+  .post(photosController.insertCommentIntoPhotoArray)
+  .get(photosController.getAllPhotoComments)
 
 module.exports = router;

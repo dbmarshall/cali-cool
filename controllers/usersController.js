@@ -47,12 +47,6 @@ module.exports = {
       { upload_preset: "cali-cool-ucb" });
   },
 
-  findUser: function(req, res) {
-    console.log('findUser req.body:' ,req.body)
-    // db.Users
-    // .find({_id:})
-  },
-
   likePhoto: function(req, res) {
     console.log(req.params.id, req.params.photoId)
     db.Users
@@ -124,9 +118,35 @@ module.exports = {
   console.log(req.params.id);
   db.Albums
     .find({"owner": req.params.id})
-    .populate("photos")
+    .populate({
+      path: "photos",
+      options: {limit: 5},
+      sort: {dateCreated:'desc'}
+    })
     .populate("owner")
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
-  }
+
+  },
+
+  createComment: function(req, res) {
+    db.Comments
+    .create({
+      comment: req.body.comment,
+      user: req.params.id
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  updateProfilePhoto: function(req, res) {
+    console.log("user Id", req.params.id)
+    console.log("photo url", req.body.imageUploadId)
+    db.Users
+    .findOneAndUpdate({ _id: req.params.id }, { profilePicture: req.body.imageUploadId }, { new: true })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+
 };

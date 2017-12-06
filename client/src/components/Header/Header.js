@@ -24,7 +24,9 @@ class Header extends Component {
     this.setState({open: true})}
 
   closeModal = event => {
-      this.setState({ open: false })}
+      this.setState({ open: false })
+      window.location.reload()
+    }
  
   saveAndClose = event => {
     this.setState({ open: false })};
@@ -66,6 +68,7 @@ class Header extends Component {
       else {
         sessionStorage.clear();
         console.log("user isn't logged in");
+        sessionStorage.clear();
       }
     })
     .catch(err => console.log(err))
@@ -90,16 +93,13 @@ class Header extends Component {
       password:this.state.passWord
     })
     .then(res => {
-      console.log(res);
-    //   console.log(res.request.responseURL)
-    //   if (res.request.responseURL === window.location.host + "/") {
-    //     // window.location.href = res.request.responseURL;
-    //     console.log("successful login will redirect to /")
-    //   }
-      window.location.href = res.request.responseURL;
-      
+      this.closeModal();
     })
-    // .catch(err => console.log(err));
+    .then(res => {
+      // ****Working on this redirect, go to albums****
+      // this.props.location.reload();
+    })
+    .catch(err => console.log(err));
   };
 
   render(){
