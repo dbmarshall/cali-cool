@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-import { Button, Grid, Row, Col, Image, Badge} from 'react-bootstrap';
-// Check with Minu if I can use LIKE for this component
-// import Like from "../../components/Like";
-import AlbumPhotoComment from "../../components/AlbumPhotoComment"
+import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
+import Like from "../../components/Like";
+import AlbumPhotoComment from "../../components/AlbumPhotoComment";
 import API from "../../utils/API";
 
 const btnStyle = {
   marginTop: "5px",
   marginBottom: "5px"
 }
+
+const likeTemp = {
+  backgroundColor: "grey"
+}
+
+const sessionKeyUserId = "userId";
 
 class SinglePhoto extends Component {
 
@@ -24,9 +29,10 @@ class SinglePhoto extends Component {
       albumName:"",
       userId:"",
       dateAdded:"",
-      likes: "",
+      likesCount: 0,
       userAuth:"",
-      userName:""
+      userName:"",
+      photoObj:{}
     }
 
   }
@@ -41,7 +47,7 @@ class SinglePhoto extends Component {
     API.getSinglePhotoData(
     { id:this.state.photoId })
     .then(res => {
-      // console.log(res.data);
+      console.log("singe page data", res.data[0]);
       this.setState({
         photoTitle: res.data[0].title,
         image: res.data[0].link,
@@ -51,6 +57,8 @@ class SinglePhoto extends Component {
         userAuth:sessionStorage.getItem("userId"),
         albumName:res.data[0].album.title,
         userName:res.data[0].owner.userName,
+        photoObj:res.data[0],
+        likesCount: res.data[0].likes.length
       })
       // console.log(this.state.userId)
       // console.log("user auth on single", this.state.userAuth);
@@ -58,9 +66,40 @@ class SinglePhoto extends Component {
     })
     .catch(err => console.log(err))
   }
-  // Like component
-    // GET
-    // POST
+  
+  updateLike =() => {
+    const loggedInUserId = sessionStorage.getItem(sessionKeyUserId);
+    console.log(loggedInUserId);
+    console.log(this.state.likesCount)
+    const userIndex = this.state.photoObj.likes.indexOf(loggedInUserId);
+    console.log(userIndex)
+
+    if(userIndex > -1){
+      this.state.photoObj.likes.splice(userIndex, 1);
+      API.unlikePhoto(loggedInUserId, this.state.photoObj._id);
+      this.setState({
+        likesCount: this.state.likesCount - 1
+      })
+    }
+    else{
+      this.state.photoObj.likes.push(loggedInUserId);
+      API.likePhoto(loggedInUserId, this.state.photoObj._id);
+      this.setState({
+        likesCount: this.state.likesCount + 1
+      })
+    }    
+  }
+
+   doesUserLikeAlbum = () => {
+    if(sessionStorage.getItem("userId") && this.state.photoObj.likes){
+      for(let userId of this.state.photoObj.likes){
+        if(userId.toString() === sessionStorage.getItem(sessionKeyUserId)){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   // Delete component
   handleDelete = event => {
@@ -106,29 +145,37 @@ class SinglePhoto extends Component {
                 </Col>
               </Row>
                <Row>
-                <Col xs={6} md={6}>
-                    <Button bsStyle="primary" bsSize="large">Like! <Badge> 42</Badge></Button>
+                <Col xs={6} md={6} style={likeTemp}>
+                    <Like position={{marginLeft: "10px"}}
+                      likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
+                      updateLike={this.updateLike}
+                      isLiked={this.doesUserLikeAlbum()}>
+                    </Like>
                 </Col>
               </Row>
               {this.state.userId === this.state.userAuth ? (
                 <div>
-                <Row>
-                <Col xs={6} md={6}>
-                    <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
-                </Col>
-                </Row>
-                <Row>
+                  <Row>
                   <Col xs={6} md={6}>
-                      <Button 
-                      bsStyle="primary" 
-                      bsSize="large" 
-                      style={btnStyle}
-                      value={this.state.photoId}
-                      onClick={this.handleDelete}
-                      >Delete
-                      Photo</Button>
+                      <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
                   </Col>
-                </Row>
+                  </Row>
+                  <Row>
+                    <Col xs={6} md={6}>
+                        <Button 
+                        bsStyle="primary" 
+                        bsSize="large" 
+                        style={btnStyle}
+                        value={this.state.photoId}
+                        onClick={this.handleDelete}
+                        >Delete
+                        Photo</Button>
+                    </Col>
+                  </Row>
+                  <AlbumPhotoComment 
+                      photoId={this.state.photoId}
+                      userId={this.state.userAuth}
+                      />
                 </div>
                 ) : (
                   <AlbumPhotoComment 
