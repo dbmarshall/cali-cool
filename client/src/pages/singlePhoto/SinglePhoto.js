@@ -50,7 +50,7 @@ class SinglePhoto extends Component {
       console.log("singe page data", res.data[0]);
       this.setState({
         photoTitle: res.data[0].title,
-        image: res.data[0].link,
+        image: res.data[0].imageUrl,
         caption: res.data[0].caption,
         albumId: res.data[0].album._id,
         userId: res.data[0].owner._id,
