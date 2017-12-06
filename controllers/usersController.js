@@ -123,7 +123,7 @@ module.exports = {
       options: 
       { limit: 5 ,
         sort: {
-          _id: -1
+          dateUpdated: -1
         }
       }
     })
