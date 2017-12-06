@@ -9,7 +9,8 @@ class Signup extends Component {
     lastName: "",
     userName:"",
     email: "",
-    passWord: ""
+    passWord: "",
+    defaultProfilePhoto: "https://static.pexels.com/photos/258447/pexels-photo-258447.jpeg"
   };
 
   
@@ -27,7 +28,8 @@ class Signup extends Component {
       lastName:this.state.lastName,
       username:this.state.userName,
       email:this.state.email,
-      password:this.state.passWord
+      password:this.state.passWord,
+      profilePicture:this.state.defaultProfilePhoto
     })
     .then(res => {
       console.log(res.request.responseURL)

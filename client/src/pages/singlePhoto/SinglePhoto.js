@@ -18,17 +18,20 @@ class SinglePhoto extends Component {
 
   constructor(props){
     super(props);
-    console.log(props)
+    // console.log(props)
     this.state = {
+      photoId: this.props.location.pathname.split('/')[2],
       photoTitle:"",
+      image:"",
       caption:"",
+      albumId:"",
       albumName:"",
       userId:"",
       dateAdded:"",
       likes: "",
       commentContent: "",
-      photoId:""
-
+      userAuth:"",
+      userName:""
     }
 
   }
@@ -58,10 +61,26 @@ class SinglePhoto extends Component {
   };
 
   getPhotoData = event => {
-    API.singlePhotoData({})
-    .then(res => {
-      console.log(res);
+    console.log(this.state.photoId)
+    API.getSinglePhotoData(
+    { id:this.state.photoId
     })
+    .then(res => {
+      console.log(res.data);
+      this.setState({
+        photoTitle: res.data[0].title,
+        image: res.data[0].link,
+        caption: res.data[0].caption,
+        albumId: res.data[0].album._id,
+        userId: res.data[0].owner._id,
+        userAuth:sessionStorage.getItem("userId"),
+        albumName:res.data[0].album.title,
+        userName:res.data[0].owner.userName,
+      })
+      console.log(this.state.userId)
+      console.log(this.state.userAuth)
+    })
+    .catch(err => console.log(err))
   }
   // Like component
     // GET
@@ -72,6 +91,17 @@ class SinglePhoto extends Component {
     // POST
 
   // Delete component
+  handleDelete = event => {
+    console.log("delete button clicked")
+    API.deletePhoto(this.state.photoId)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  }
+
+
+  // Set as profile photo
 
 
   render(){
@@ -82,18 +112,25 @@ class SinglePhoto extends Component {
             <Grid>
               <Row>
                 <Col>
-                   <h2>Photo Title</h2>
+                   <h2>{this.state.photoTitle}</h2>
                 </Col>
               </Row>
               <Row>
                 <Col xs={6} md={6}>
-                  <Image src="https://static.pexels.com/photos/356968/pexels-photo-356968.jpeg" rounded={true} responsive={true}/>
-                  <p>Caption</p>
+                  <Image src={this.state.image} rounded={true} responsive={true}/>
+                  <p>{this.state.caption}</p>
                 </Col>
               </Row>
               <Row>
                 <Col xs={6} md={6}>
-                 <p>Album <span> (link) </span> by <span> User </span><span>date added</span></p>
+                 <p> 
+                  <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
+                  by 
+                    <span>
+                     <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
+                     </span>
+                    <span>date added</span> 
+                  </p>
                 </Col>
               </Row>
                <Row>
@@ -101,48 +138,91 @@ class SinglePhoto extends Component {
                     <Button bsStyle="primary" bsSize="large">Like! <Badge> 42</Badge></Button>
                 </Col>
               </Row>
-              <Row>
+              {this.state.userId === this.state.userAuth ? (
+                <div>
+                <Row>
                 <Col xs={6} md={6}>
                     <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
                 </Col>
-              </Row>
-              <Row>
-                <Col xs={6} md={6}>
-                    <Button bsStyle="primary" bsSize="large" style={btnStyle}>Delete Photo</Button>
-                </Col>
-              </Row>
-              </Grid>
-              <div style={commentDiv}>
-                <Grid>
-                 <Row>
-                  <Col xs={6} md={6}>
-                    <form onSubmit={this.handleFormSubmit}>
-                      <FormControl
-                        id="formControlsText"
-                        type="text"
-                        label="Text"
-                        placeholder="Enter text"
-                        name="commentContent"
-                        value={this.state.commentContent}
-                        onChange={this.handleInputChange}
-                      />
-                      <Button type="submit">
-                        Add Comment
-                      </Button>
-                    </form>
-                  </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} md={8}>
-                      <ListGroup>
-                        <ListGroupItem>Wow what a great photo!</ListGroupItem>
-                        <ListGroupItem>Amazing</ListGroupItem>
-                        <ListGroupItem>How cool!</ListGroupItem>
-                      </ListGroup>
+                  <Col xs={6} md={6}>
+                      <Button 
+                      bsStyle="primary" 
+                      bsSize="large" 
+                      style={btnStyle}
+                      value={this.state.photoId}
+                      onClick={this.handleDelete}
+                      >Delete
+                      Photo</Button>
                   </Col>
                 </Row>
-              </Grid>
-            </div>
+                  <div style={commentDiv}>
+                    <Grid>
+                     <Row>
+                      <Col xs={6} md={6}>
+                        <form onSubmit={this.handleFormSubmit}>
+                          <FormControl
+                            id="formControlsText"
+                            type="text"
+                            label="Text"
+                            placeholder="Enter text"
+                            name="commentContent"
+                            value={this.state.commentContent}
+                            onChange={this.handleInputChange}
+                          />
+                          <Button type="submit">
+                            Add Comment
+                          </Button>
+                        </form>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={6} md={8}>
+                          <ListGroup>
+                            <ListGroupItem>Wow what a great photo!</ListGroupItem>
+                            <ListGroupItem>Amazing</ListGroupItem>
+                            <ListGroupItem>How cool!</ListGroupItem>
+                          </ListGroup>
+                      </Col>
+                    </Row>
+                  </Grid>
+                </div>
+                </div>
+                ) : (
+                <div style={commentDiv}>
+                  <Grid>
+                   <Row>
+                    <Col xs={6} md={6}>
+                      <form onSubmit={this.handleFormSubmit}>
+                        <FormControl
+                          id="formControlsText"
+                          type="text"
+                          label="Text"
+                          placeholder="Enter text"
+                          name="commentContent"
+                          value={this.state.commentContent}
+                          onChange={this.handleInputChange}
+                        />
+                        <Button type="submit">
+                          Add Comment
+                        </Button>
+                      </form>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={6} md={8}>
+                        <ListGroup>
+                          <ListGroupItem>Wow what a great photo!</ListGroupItem>
+                          <ListGroupItem>Amazing</ListGroupItem>
+                          <ListGroupItem>How cool!</ListGroupItem>
+                        </ListGroup>
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+                )}
+            </Grid>
           </div>
       </div>
       );

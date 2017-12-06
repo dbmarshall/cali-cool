@@ -3,17 +3,15 @@ import API from "../../utils/API";
 // import AlbumsSelect from "../../components/AlbumsSelect";
 // import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
-
-// const session = sessionStorage.getItem("key");
-// console.log(session)
-// const owner = "5a257cd50bf6d51f821058d5";
-// console.log(owner)
+let ownerId;
+let data_uri;
+let objectURL;
 
 class Publish extends Component {
 
   state = {
     // results: [],
-    file: '',
+    // file: '',
     name: '',
     imagePreviewUrl: '',
     width: '',
@@ -30,28 +28,33 @@ class Publish extends Component {
   };
 
   componentDidMount() {
-    this.loadAlbums();
     this.getSessionData();
-  }
+    this.loadAlbums();
+  };
 
+  // Load User/Owner ID
   getSessionData = event => {
-    const session = sessionStorage.getItem("userId");
-    return session;
-  }
-  // Load existing albums for select
+    ownerId = sessionStorage.getItem("userId");
+  };
+
+  // Load existing albums for select pulldown
   loadAlbums = () => {
-    API.getUserAlbums(this.getSessionData())
+    API.getUserAlbums(ownerId)
       .then(res =>
         this.setState({ albums: res.data})
       )
       .catch(err => console.log(err));
   };
+
   // User image selection
-  handleBrowse = event => {
+  handleFileBrowse = event => {
 
     let reader = new FileReader();
     let file = event.target.files[0];
     let name = event.target.files[0].name;
+    objectURL = window.URL.createObjectURL(file);
+      console.log('objectURL: ', objectURL);
+      // console.log('file: ', file);
 
     reader.onload = () => {
       let img = new Image();
@@ -62,14 +65,18 @@ class Publish extends Component {
           specs: '(' + img.width + 'x' + img.height + ')'
         });
       };
-      img.src = reader.result;
+      data_uri = reader.result;
+        // console.log('data_uri: ', data_uri);
+
     };
 
     reader.onloadend = () => {
       this.setState({
-        file: file,
+        // file: file,
         name: name,
-        imagePreviewUrl: reader.result
+        imagePreviewUrl: data_uri
+      // }, () => {
+        // can run post-setState functions like this
       });
     };
 
@@ -81,7 +88,7 @@ class Publish extends Component {
   clearPreview = () => {
 
     this.setState({
-      file: '',
+      // file: '',
       name: '',
       imagePreviewUrl: '', 
       width: '',
@@ -95,7 +102,7 @@ class Publish extends Component {
   clearAll = () => {
 
     this.setState({
-      file: '', 
+      // file: '', 
       name: '', 
       imagePreviewUrl: '', 
       width: '',
@@ -148,13 +155,15 @@ class Publish extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     
+    // console.log('this.state.imagePreviewUrl: ', this.state.imagePreviewUrl);
+
     // Checks whether a value entered for "new album name".
     // If not, then go straight to addPhotoUpdateAlbum().
     if (this.state.albumtext) {
 
-      API.createAlbum(this.getSessionData(), { 
+      API.createAlbum(ownerId, { 
         title: this.state.albumname, 
-        owner: this.getSessionData()
+        owner: ownerId
       })
       .then(res => 
         this.setState({ 
@@ -176,22 +185,27 @@ class Publish extends Component {
 
   // Adds new photo and inserts new photo ID into Albums collection
   addPhotoUpdateAlbum = () => {
-    API.savePhoto(this.getSessionData(), {
+    API.savePhoto(ownerId, {
       title: this.state.phototitle, 
       caption: this.state.photocaption, 
       album: this.state.albumId, 
-      owner: this.getSessionData()
+      owner: ownerId,
+      data_uri: this.state.imagePreviewUrl
     })
     .then( res => 
 
       API.updateAlbumPhoto(
-        this.getSessionData(), 
+        ownerId, 
         this.state.albumId, {
           photo: res.data._id
         })
       .then( 
-        // ?? 
+        // Clears states
         this.clearAll()
+      )
+      .then(
+        // Removes image data_uri to prevent memory leaks
+        window.URL.revokeObjectURL(objectURL)
       )
       .catch(err => console.log(err))
 
@@ -227,7 +241,7 @@ class Publish extends Component {
                                   <span className="btn btn-primary">
                                       Browse&hellip; 
                                       <input 
-                                        onChange={this.handleBrowse}
+                                        onChange={this.handleFileBrowse}
                                         type="file" 
                                         name="fileupload" 
                                         accept=".jpg, .jpeg, .png"
@@ -244,7 +258,8 @@ class Publish extends Component {
                                 />
                               </div>
                               <span className="small">
-                                Please, upload images at least 1600px in width.
+                                Please, upload images at least 1600px in width.<br/>
+                                Maximum allowable filesize is 5mb.
                               </span>
                             </div>
 

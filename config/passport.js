@@ -59,7 +59,7 @@ module.exports = function(passport) {
                 console.log("made it to new user")
                 // if there is no user with that email
                 // create the user
-
+                console.log(req.body.profilePicture)
                 var newUser = new User();
                 console.log(req.body.email);
                 // set the user's local credentials
@@ -68,6 +68,7 @@ module.exports = function(passport) {
                 newUser.userName = req.body.username;
                 newUser.firstName = req.body.firstName;
                 newUser.lastName = req.body.lastName;
+                newUser.profilePicture = req.body.profilePicture;
 
                 // save the user
                 newUser.save(function(err) {
