@@ -42,6 +42,15 @@ var UsersSchema = new Schema({
   }
 });
 
+const baseUrl = 'http://res.cloudinary.com/cali-cool/image/upload/';
+const imageLarge = 'f_auto,w_1600/';
+const imageExtension = '.png';
+
+UsersSchema.virtual('profileImgUrl').
+  get(function(){
+    return baseUrl + imageLarge + this.profilePicture + imageExtension;
+});
+
 UsersSchema.methods.generateHash = function(passWord) {
     return bcrypt.hashSync(passWord, bcrypt.genSaltSync(8), null);
 };
