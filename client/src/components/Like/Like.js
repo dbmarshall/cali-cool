@@ -1,28 +1,49 @@
-  
 import React, { Component } from "react";
 
-
-class Likes extends Component{
-
-  state = {
-    style: 
-    {
-      ...this.props.style,
-      color: "white",
-      fontSize: "1.1em",
-      backgroundColor : 'rgba(0, 0, 0, 0)',
-      border: "none"
-    }
-  }
-
-  render(){
-    return(
-       <button href="#" style={this.state.style}>
-          <span className="glyphicon glyphicon-thumbs-up"></span> Like
-        </button>
-      );
+const likeStyle = {
+  likeTag: {
+    color: "white",
+    fontSize: "1.1em",
+    marginLeft: "5px"
+  },
+  isLiked: {
+    color: "blue"
+  },
+  isNotLiked: {
+    color: "white"
+  },
+  likeCount: {
+    color: "white",
+    fontSize: "1.1em"
   }
 }
 
-export default Likes;
 
+class Like extends Component{
+
+  render(){
+    return(
+      <span style={this.props.position}>
+        
+        <span style={likeStyle.likeCount}>
+          {this.props.likesCount} 
+        </span>
+        
+        { sessionStorage.getItem("userId") ?
+          <span>
+            <span style={likeStyle.likeTag}> | </span>
+            <a style={likeStyle.likeTag} onClick={this.props.updateLike}>
+              <span style={this.props.isLiked ? likeStyle.isLiked : likeStyle.isNotLiked}
+                className="glyphicon glyphicon-thumbs-up"></span> 
+              <span style={this.props.isLiked ? likeStyle.isLiked : likeStyle.isNotLiked}>Like</span>
+            </a>
+          </span> :
+          <span style={likeStyle.likeTag}>Likes</span>
+        }
+
+      </span>
+    );
+  }
+}
+
+export default Like;

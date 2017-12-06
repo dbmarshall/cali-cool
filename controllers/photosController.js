@@ -41,13 +41,10 @@ module.exports = {
       ])
       .limit(12)
       .then(photos => {
-
-        
-        
         const photoIdArray = photos.map(function(photo){
           return photo._id;
         });
-
+        
         db.Photos
         .find( {_id : { $in : photoIdArray }})
         .populate({
@@ -59,16 +56,13 @@ module.exports = {
           select: ["_id", "userName"]
         })
         .then(photoDBModels => {
-
           let results = [];
           photoIdArray.forEach(function(refPhotoId){
             let result = photoDBModels.filter(function(photoObj){
               return (refPhotoId.toString() == photoObj._id.toString());
             });
-            results.push(result);
+            results.push(result[0]);
           });
-          console.log("4: ",results.length);
-
           res.json(results);
         })
       })

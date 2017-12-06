@@ -24,7 +24,7 @@ class Main extends Component{
   }
 
   loadMostLikedPhotos = () => {
-    API.getRecentPhotos()
+    API.getMostLikedPhotos()
     .then(res => {
       this.setState({mostLikedPhotos: res.data});
     })
@@ -45,7 +45,7 @@ class Main extends Component{
 
         <hr/>
 
-        <h4>Recent Photo uploads</h4>
+        <h4>Recent Photo Uploads</h4>
         {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
       </div>
     );

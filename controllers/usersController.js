@@ -53,6 +53,73 @@ module.exports = {
     // .find({_id:})
   },
 
+  likePhoto: function(req, res) {
+    console.log(req.params.id, req.params.photoId)
+    db.Users
+    .findById(req.params.id)
+    .then( user => {
+      return db.Photos.findOneAndUpdate({"_id": req.params.photoId}, 
+      { $addToSet: { likes: user._id }}, { new: true });
+    })
+    .then(function(photo){
+      res.json(photo);
+    })
+    .catch(function(error){
+      res.json(error);
+    });
+  },
+  unlikePhoto: function(req, res){
+    console.log(req.params.id, req.params.photoId)
+    db.Users
+    .findById(req.params.id)
+    .then( user => {
+      console.log(user);
+      return db.Photos.findOneAndUpdate({"_id": req.params.photoId}, 
+      { $pull: { likes: user._id }}, { new: true });
+    })
+    .then(function(photo){
+      console.log(photo)
+      res.json(photo);
+    })
+    .catch(function(error){
+      res.json(error);
+    });
+  },
+
+  likeAlbum: function(req, res) {
+    console.log(req.params.id, req.params.albumId)
+    db.Users
+    .findById(req.params.id)
+    .then( user => {
+      return db.Albums.findOneAndUpdate({"_id": req.params.albumId}, 
+      { $addToSet: { likes: user._id }}, { new: true });
+    })
+    .then(function(album){
+      res.json(album);
+    })
+    .catch(function(error){
+      res.json(error);
+    });
+  },
+
+  unlikeAlbum: function(req, res){
+    console.log(req.params.id, req.params.albumId)
+    db.Users
+    .findById(req.params.id)
+    .then( user => {
+      console.log(user);
+      return db.Albums.findOneAndUpdate({"_id": req.params.albumId}, 
+      { $pull: { likes: user._id }}, { new: true });
+    })
+    .then(function(album){
+      console.log(album)
+      res.json(album);
+    })
+    .catch(function(error){
+      res.json(error);
+    });
+  },
+
   findUsersAlbums: function(req, res) {
   console.log(req.params.id);
   db.Albums
@@ -61,5 +128,5 @@ module.exports = {
     .populate("owner")
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
-
+  }
 };

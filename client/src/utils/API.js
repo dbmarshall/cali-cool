@@ -65,6 +65,21 @@ export default {
   deletePhoto: function(photoId) {
     console.log(photoId)
     return axios.delete("/api/photos/" +photoId)
-  }
+  },
 
+  likePhoto: function(userId, photoId){
+    return axios.post("/api/users/" + userId + "/photos/" + photoId + "/like");
+  },
+
+  unlikePhoto: function(userId, photoId){
+    return axios.put("/api/users/" + userId + "/photos/" + photoId + "/like");
+  },
+
+  likeAlbum: function(userId, albumId){
+    return axios.post("/api/users/" + userId + "/albums/" + albumId + "/like");
+  },
+
+  unlikeAlbum: function(userId, albumId){
+    return axios.put("/api/users/" + userId + "/albums/" + albumId + "/like");
+  }
 };
