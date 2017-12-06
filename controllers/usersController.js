@@ -120,8 +120,12 @@ module.exports = {
     .find({"owner": req.params.id})
     .populate({
       path: "photos",
-      options: {limit: 5},
-      sort: {dateCreated:'desc'}
+      options: 
+      { limit: 5 ,
+        sort: {
+          _id: -1
+        }
+      }
     })
     .populate("owner")
     .then(dbModel => res.json(dbModel))
