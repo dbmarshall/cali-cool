@@ -41,7 +41,7 @@ class SinglePhoto extends Component {
     API.getSinglePhotoData(
     { id:this.state.photoId })
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({
         photoTitle: res.data[0].title,
         image: res.data[0].link,
@@ -52,9 +52,9 @@ class SinglePhoto extends Component {
         albumName:res.data[0].album.title,
         userName:res.data[0].owner.userName,
       })
-      console.log(this.state.userId)
-      console.log("user auth on single", this.state.userAuth);
-      console.log("user photo on single", this.state.photoId);
+      // console.log(this.state.userId)
+      // console.log("user auth on single", this.state.userAuth);
+      // console.log("user photo on single", this.state.photoId);
     })
     .catch(err => console.log(err))
   }

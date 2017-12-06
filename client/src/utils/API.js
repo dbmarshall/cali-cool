@@ -68,13 +68,18 @@ export default {
   },
 
   createPhotoComment: function(commentData) {
-    // console.log(commentData);
+    console.log(commentData);
     return axios.post("/api/users/" + commentData.userId + "/comments", commentData )
   },
 
   insertCommentToPhoto: function(commentData) {
     console.log(commentData)
-    return axios.post("/api/photos/" + commentData.photoId, commentData)
+    return axios.post("/api/photos/" + commentData.photoId + "/comments", commentData)
+  },
+
+  getComments: function(photoId) {
+    console.log(photoId)
+    return axios.get("/api/photos/" + photoId.id + "/comments")
   }
 
 };

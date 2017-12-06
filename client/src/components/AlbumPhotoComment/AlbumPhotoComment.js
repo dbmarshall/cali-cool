@@ -14,9 +14,25 @@ class AlbumPhotoComment extends Component {
       userId: this.props.userId,
       commentContent:"",
       commentId:"",
-      comments:[],
-      commentUsers:[]
+      comments:[]
     } 
+
+    componentDidMount(){
+      this.getPhotoComments()
+    }
+
+    getPhotoComments = () => {
+      API.getComments({
+        id: this.state.photoId
+      })
+      .then(res => {
+        console.log(res.data[0].comments)
+        this.setState({
+          comments : res.data[0].comments
+        })
+      })
+      .catch(err => console.log(err))
+    }
 
     handleInputChange = event => {
     const { name, value } = event.target;
@@ -28,9 +44,9 @@ class AlbumPhotoComment extends Component {
 
     handleFormSubmit = event => {
     event.preventDefault();
-    console.log(this.state.photoId)
-    console.log(this.state.userId)
-    console.log(this.state.commentContent)
+    // console.log(this.state.photoId)
+    // console.log(this.state.userId)
+    // console.log(this.state.commentContent)
     API.createPhotoComment({
       userId:this.state.userId,
       comment:this.state.commentContent
@@ -60,8 +76,6 @@ class AlbumPhotoComment extends Component {
 
   render(){
 
-
-
     return (
       <div >
        <div style={commentDiv}>
@@ -88,18 +102,15 @@ class AlbumPhotoComment extends Component {
               <Col xs={6} md={8}>
                   <ListGroup>
                   { this.state.comments.map((comment , i) => {
-
-                      const user = this.state.comments.user.map((userName) => {
-                        return (
-                            <span>{userName.userName}</span>
-                          )
-                      })
-
                     return (
-
                       <ListGroupItem key={comment._id}>
-                        <span>{comment.comment}</span>
-                        <span>{user}</span>
+                        <p> Username:<span>{comment.user.userName}</span>
+                        </p>
+                        <p>Comment:<span> {comment.comment}</span> </p>
+                        <p>Date:<span>{comment.dateCreated}</span>
+                        </p>
+                        
+                        
                       </ListGroupItem>
                     )
                   })}
