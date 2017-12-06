@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const session = require('express-session');
 const localkeys = require('./local-keys');
+let keys;
 
   if (process.env.port) {
     let keys =
