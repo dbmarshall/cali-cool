@@ -8,6 +8,7 @@
     "moment": "^2.19.2",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-autosuggest": "^9.3.2",
     "react-bootstrap": "^0.31.5",
     "react-bootstrap-carousel": "^2.2.0",
     "react-dom": "^16.0.0",

@@ -28,4 +28,7 @@ router.route("/:id/albums/:albumId/like")
   .post(usersController.likeAlbum)
   .put(usersController.unlikeAlbum)
 
+router.route("/:id/profilephoto")
+  .put(usersController.updateProfilePhoto)
+
 module.exports = router;

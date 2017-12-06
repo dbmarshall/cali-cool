@@ -16,6 +16,7 @@ const localkeys = require('.local-keys');
         'secret': process.env.secret
       }
   } else {
+    const localkeys = require('.local-keys');
     var keys =
       { 'cloudinary': cloudinary.config({ 
                 cloud_name: localkeys.cloud_name, 

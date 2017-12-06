@@ -7,11 +7,11 @@ const commentDiv = {
   marginBottom: "10px"
 }
 
-class AlbumPhotoComment extends Component {
 
+class AlbumPhotoComment extends Component {
     state = {
       photoId: this.props.photoId,
-      userId: this.props.userId,
+      userId: "",
       commentContent:"",
       commentId:"",
       comments:[]
@@ -28,7 +28,8 @@ class AlbumPhotoComment extends Component {
       .then(res => {
         console.log(res.data[0].comments)
         this.setState({
-          comments : res.data[0].comments
+          comments : res.data[0].comments,
+          userId:sessionStorage.getItem("userId")
         })
       })
       .catch(err => console.log(err))
@@ -44,9 +45,9 @@ class AlbumPhotoComment extends Component {
 
     handleFormSubmit = event => {
     event.preventDefault();
-    // console.log(this.state.photoId)
-    // console.log(this.state.userId)
-    // console.log(this.state.commentContent)
+    console.log(this.state.photoId)
+    console.log(this.state.userId)
+    console.log(this.state.commentContent)
     API.createPhotoComment({
       userId:this.state.userId,
       comment:this.state.commentContent
@@ -109,8 +110,6 @@ class AlbumPhotoComment extends Component {
                         <p>Comment:<span> {comment.comment}</span> </p>
                         <p>Date:<span>{comment.dateCreated}</span>
                         </p>
-                        
-                        
                       </ListGroupItem>
                     )
                   })}
