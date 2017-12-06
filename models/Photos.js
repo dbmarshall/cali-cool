@@ -79,19 +79,18 @@ PhotosSchema.virtual('likesCount').
 */
 
 const baseUrl = 'http://res.cloudinary.com/cali-cool/image/upload/';
-const imageDir = 'ucb/';
 const imageLarge = 'f_auto,w_1600/';
 const imageThumb = 'f_auto,c_thumb,g_center,h_300,w_300/';
 const imageExtension = '.png';
 
 PhotosSchema.virtual('imageUrl').
   get(function(){
-    return baseUrl + imageLarge + imageDir + this.imageUploadId + imageExtension;
+    return baseUrl + imageLarge + this.imageUploadId + imageExtension;
 });
 
 PhotosSchema.virtual('thumbnailUrl').
   get(function(){
-    return baseUrl + imageThumb + imageDir + this.imageUploadId + imageExtension;
+    return baseUrl + imageThumb + this.imageUploadId + imageExtension;
 });
 
 var Photos = mongoose.model("Photos", PhotosSchema);
