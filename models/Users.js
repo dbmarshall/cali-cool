@@ -42,11 +42,11 @@ var UsersSchema = new Schema({
   }
 });
 
-st baseUrl = 'http://res.cloudinary.com/cali-cool/image/upload/';
+const baseUrl = 'http://res.cloudinary.com/cali-cool/image/upload/';
 const imageLarge = 'f_auto,w_1600/';
 const imageExtension = '.png';
 
-PhotosSchema.virtual('profileImgUrl').
+UsersSchema.virtual('profileImgUrl').
   get(function(){
     return baseUrl + imageLarge + this.profilePicture + imageExtension;
 });
