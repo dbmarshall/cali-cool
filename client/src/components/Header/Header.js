@@ -40,6 +40,7 @@ class Header extends Component {
     })
     .then(res => {
       sessionStorage.clear();
+      window.location.reload()
     })
     .catch(err =>{console.log(err)
     })
