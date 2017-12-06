@@ -41,13 +41,10 @@ module.exports = {
       ])
       .limit(12)
       .then(photos => {
-
-        
-        
         const photoIdArray = photos.map(function(photo){
           return photo._id;
         });
-
+        
         db.Photos
         .find( {_id : { $in : photoIdArray }})
         .populate({
@@ -59,19 +56,66 @@ module.exports = {
           select: ["_id", "userName"]
         })
         .then(photoDBModels => {
-
           let results = [];
           photoIdArray.forEach(function(refPhotoId){
             let result = photoDBModels.filter(function(photoObj){
               return (refPhotoId.toString() == photoObj._id.toString());
             });
-            results.push(result);
+            results.push(result[0]);
           });
-          console.log("4: ",results.length);
-
           res.json(results);
         })
       })
       .catch(err => res.status(422).json(err));
+  },
+  getSinglePhoto: function(req, res) {
+    db.Photos
+    .find({_id: req.params.id})
+    .populate("comments")
+    .populate("owner")
+    .populate("album")
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  deletePhoto: function(req, res) {
+    // console.log(req.params.id)
+    db.Photos
+    .remove({_id: req.params.id})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  insertCommentIntoPhotoArray: function(req, res) {
+    console.log("photo id", req.params.id)
+    console.log("comment id", req.body.commentId)
+    db.Photos
+    .findOneAndUpdate({ _id: req.params.id }, {$push: { comments: req.body.commentId }}, { new: true })
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+        model: 'Users'
+      }
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+  getAllPhotoComments: function(req, res) {
+    console.log("route on photos")
+    console.log(req.params.id)
+    db.Photos
+    .find({ _id:req.params.id })
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+        model: 'Users'
+      }
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   }
+
 };
