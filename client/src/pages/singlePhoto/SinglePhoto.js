@@ -25,7 +25,6 @@ class SinglePhoto extends Component {
       userId:"",
       dateAdded:"",
       likes: "",
-      commentContent: "",
       userAuth:"",
       userName:""
     }

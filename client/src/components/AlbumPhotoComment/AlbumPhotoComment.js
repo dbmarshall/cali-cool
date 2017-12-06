@@ -14,7 +14,8 @@ class AlbumPhotoComment extends Component {
       userId: this.props.userId,
       commentContent:"",
       commentId:"",
-      comments:[]
+      comments:[],
+      commentUsers:[]
     } 
 
     handleInputChange = event => {
@@ -47,6 +48,10 @@ class AlbumPhotoComment extends Component {
       })
       .then(res => {
         console.log(res)
+        this.setState({ 
+          comments : res.data.comments
+
+        })
       })
     })
     .catch(err => {
@@ -54,6 +59,8 @@ class AlbumPhotoComment extends Component {
   };
 
   render(){
+
+
 
     return (
       <div >
@@ -80,9 +87,22 @@ class AlbumPhotoComment extends Component {
             <Row>
               <Col xs={6} md={8}>
                   <ListGroup>
-                    <ListGroupItem>Wow what a great photo!</ListGroupItem>
-                    <ListGroupItem>Amazing</ListGroupItem>
-                    <ListGroupItem>How cool!</ListGroupItem>
+                  { this.state.comments.map((comment , i) => {
+
+                      const user = this.state.comments.user.map((userName) => {
+                        return (
+                            <span>{userName.userName}</span>
+                          )
+                      })
+
+                    return (
+
+                      <ListGroupItem key={comment._id}>
+                        <span>{comment.comment}</span>
+                        <span>{user}</span>
+                      </ListGroupItem>
+                    )
+                  })}
                   </ListGroup>
               </Col>
             </Row>
@@ -92,6 +112,8 @@ class AlbumPhotoComment extends Component {
       );
   }
 }
+
+
 
 
 export default AlbumPhotoComment;
