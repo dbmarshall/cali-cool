@@ -32,7 +32,8 @@ class SinglePhoto extends Component {
       likesCount: 0,
       userAuth:"",
       userName:"",
-      photoObj:{}
+      photoObj:{},
+      imageUploadId:""
     }
 
   }
@@ -50,7 +51,7 @@ class SinglePhoto extends Component {
       console.log("singe page data", res.data[0]);
       this.setState({
         photoTitle: res.data[0].title,
-        image: res.data[0].link,
+        image: res.data[0].imageUrl,
         caption: res.data[0].caption,
         albumId: res.data[0].album._id,
         userId: res.data[0].owner._id,
@@ -58,19 +59,20 @@ class SinglePhoto extends Component {
         albumName:res.data[0].album.title,
         userName:res.data[0].owner.userName,
         photoObj:res.data[0],
-        likesCount: res.data[0].likes.length
+        likesCount: res.data[0].likes.length,
+        imageUploadId:res.data[0].imageUploadId
       })
-      // console.log(this.state.userId)
-      // console.log("user auth on single", this.state.userAuth);
-      // console.log("user photo on single", this.state.photoId);
+      console.log(this.state.userId)
+      console.log("user auth on single", this.state.userAuth);
+      console.log("user photo on single", this.state.photoId);
     })
     .catch(err => console.log(err))
   }
   
   updateLike =() => {
     const loggedInUserId = sessionStorage.getItem(sessionKeyUserId);
-    console.log(loggedInUserId);
-    console.log(this.state.likesCount)
+    // console.log(loggedInUserId);
+    // console.log(this.state.likesCount)
     const userIndex = this.state.photoObj.likes.indexOf(loggedInUserId);
     console.log(userIndex)
 
@@ -113,6 +115,18 @@ class SinglePhoto extends Component {
 
 
   // Set as profile photo
+  handleSetProfilePhoto = event => {
+    console.log("set profile clicked")
+    API.updateProfilePhoto({
+      userId:this.state.userAuth,
+      photoId: this.state.photoId,
+      imageUploadId: this.state.imageUploadId
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  }
 
 
   render(){
@@ -153,36 +167,43 @@ class SinglePhoto extends Component {
                     </Like>
                 </Col>
               </Row>
-              {this.state.userId === this.state.userAuth ? (
+              { (this.state.userId === this.state.userAuth) ? (
                 <div>
-                  <Row>
-                  <Col xs={6} md={6}>
-                      <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
-                  </Col>
-                  </Row>
-                  <Row>
+                    <Row>
                     <Col xs={6} md={6}>
                         <Button 
-                        bsStyle="primary" 
-                        bsSize="large" 
-                        style={btnStyle}
-                        value={this.state.photoId}
-                        onClick={this.handleDelete}
-                        >Delete
-                        Photo</Button>
+                          bsStyle="primary" 
+                          bsSize="large" 
+                          style={btnStyle}
+                          onClick={this.handleSetProfilePhoto}
+                          value={this.state.photoId}
+                          name="setProfile"
+                          >
+                          Set as Profile Photo</Button>
                     </Col>
-                  </Row>
-                  <AlbumPhotoComment 
-                      photoId={this.state.photoId}
-                      userId={this.state.userAuth}
-                      />
+                    </Row>
+                    <Row>
+                      <Col xs={6} md={6}>
+                          <Button 
+                          bsStyle="primary" 
+                          bsSize="large" 
+                          style={btnStyle}
+                          value={this.state.imageUploadId}
+                          onClick={this.handleDelete}
+                          >Delete
+                          Photo</Button>
+                      </Col>
+                    </Row>
+                    </div>
+                ) : 
+                  (null)      
+              }
+                <div>
+                <AlbumPhotoComment 
+                    photoId={this.state.photoId}
+                    userAuth={this.state.userAuth}
+                    />
                 </div>
-                ) : (
-                  <AlbumPhotoComment 
-                  photoId={this.state.photoId}
-                  userId={this.state.userAuth}
-                  />
-                )} 
             </Grid>
           </div>
       </div>

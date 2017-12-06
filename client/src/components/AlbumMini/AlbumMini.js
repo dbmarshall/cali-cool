@@ -22,10 +22,6 @@ class AlbumMini extends Component {
       userAlbums: this.props.albums
     } 
 
-    // componentWillMount(){
-    //   console.log(this.state.userAlbums)
-    // }
-
 
   render(){
 
