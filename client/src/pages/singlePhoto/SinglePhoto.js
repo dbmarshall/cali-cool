@@ -153,36 +153,35 @@ class SinglePhoto extends Component {
                     </Like>
                 </Col>
               </Row>
-              {this.state.userId === this.state.userAuth ? (
+              { (this.state.userId === this.state.userAuth) ? (
                 <div>
-                  <Row>
-                  <Col xs={6} md={6}>
-                      <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
-                  </Col>
-                  </Row>
-                  <Row>
+                    <Row>
                     <Col xs={6} md={6}>
-                        <Button 
-                        bsStyle="primary" 
-                        bsSize="large" 
-                        style={btnStyle}
-                        value={this.state.photoId}
-                        onClick={this.handleDelete}
-                        >Delete
-                        Photo</Button>
+                        <Button bsStyle="primary" bsSize="large" style={btnStyle}>Set as Profile Photo</Button>
                     </Col>
-                  </Row>
-                  <AlbumPhotoComment 
-                      photoId={this.state.photoId}
-                      userId={this.state.userAuth}
-                      />
+                    </Row>
+                    <Row>
+                      <Col xs={6} md={6}>
+                          <Button 
+                          bsStyle="primary" 
+                          bsSize="large" 
+                          style={btnStyle}
+                          value={this.state.photoId}
+                          onClick={this.handleDelete}
+                          >Delete
+                          Photo</Button>
+                      </Col>
+                    </Row>
+                    </div>
+                ) : 
+                  (null)      
+              }
+                <div>
+                <AlbumPhotoComment 
+                    photoId={this.state.photoId}
+                    userId={this.state.userAuth}
+                    />
                 </div>
-                ) : (
-                  <AlbumPhotoComment 
-                  photoId={this.state.photoId}
-                  userId={this.state.userAuth}
-                  />
-                )} 
             </Grid>
           </div>
       </div>
