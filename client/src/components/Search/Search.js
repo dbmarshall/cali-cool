@@ -146,7 +146,7 @@ class Search extends Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: "Type album name...",
+      placeholder: "Search for albums...",
       value,
       onChange: this.onChange
     };

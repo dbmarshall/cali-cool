@@ -1,19 +1,22 @@
 import React, { Component } from "react";
+import AlbumMini from '../../components/AlbumMini'
 
 class SearchResult extends Component {
-  state = {
-    
-  }
 
-  componentDidMount(){
-    // console.log(this.props.location.state)
+  state = {
+    searchResults : this.props.location.state.results
+  }
+    
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      searchResults: nextProps.location.state.results
+    })
   }
 
   render(){
-
     return(
-     <h1>I am Search results</h1>
-     );
+       <AlbumMini albums = {this.state.searchResults}/>
+    )
   }
 }
 
