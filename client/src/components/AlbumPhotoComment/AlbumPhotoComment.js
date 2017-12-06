@@ -83,7 +83,8 @@ class AlbumPhotoComment extends Component {
             <Grid>
              <Row>
               <Col xs={6} md={6}>
-                <form onSubmit={this.handleFormSubmit}>
+                  {(this.state.userId) ? (
+                    <form onSubmit={this.handleFormSubmit}>
                   <FormControl
                     id="formControlsText"
                     type="text"
@@ -93,10 +94,13 @@ class AlbumPhotoComment extends Component {
                     value={this.state.commentContent}
                     onChange={this.handleInputChange}
                   />
-                  <Button type="submit" bsStyle="primary" >
+                    <Button type="submit" bsStyle="primary" >
                     Add Comment
-                  </Button>
-                </form>
+                    </Button> 
+                  </form>
+                  ) : (
+                    null
+                  ) }
               </Col>
             </Row>
             <Row>
