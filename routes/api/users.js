@@ -17,4 +17,15 @@ router.route("/:id/photos/new")
 router.route("/:id")
   .get(usersController.findUsersAlbums);
 
+router.route("/:id/comments")
+  .post(usersController.createComment)
+
+router.route("/:id/photos/:photoId/like")
+  .post(usersController.likePhoto)
+  .put(usersController.unlikePhoto); 
+
+router.route("/:id/albums/:albumId/like")
+  .post(usersController.likeAlbum)
+  .put(usersController.unlikeAlbum)
+
 module.exports = router;

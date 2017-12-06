@@ -13,7 +13,8 @@ class User extends Component {
       userId: this.props.location.pathname.split('/')[2],
       userAlbums:[],
       profilePhoto:"",
-      profileTitle:""
+      profileTitle:"",
+      userHasAlbums:""
     } 
 
   }
@@ -23,16 +24,20 @@ class User extends Component {
   }
 
   getUserInfo = event => {
-   API.userProfileData({
+   API.getUserProfileData({
       id: this.state.userId })
      .then(res => {
-      // console.log(res.data);
-      this.setState({ 
-      userAlbums: res.data,
-      profileTitle: res.data[0].owner.firstName,
-      profilePhoto: res.data[0].owner.profilePicture
-    })
-      // console.log(this.state.userAlbums)
+        console.log(res.data)
+        res.data.length !== 0 ?
+        this.setState({ 
+        userAlbums: res.data,
+        profileTitle: res.data[0].owner.firstName,
+        profilePhoto: res.data[0].owner.profilePicture,
+        userHasAlbums: true
+        })
+        : this.setState({
+          userHasAlbums: false
+        })
      })
      .catch(err => console.log(err));
   }
@@ -48,20 +53,35 @@ class User extends Component {
             <Button href="/publish" bsStyle="primary">Add Photos</Button>
           </Row>
          </Grid>
-            <h2>{this.state.profileTitle}'s Page</h2>
-            <Grid>
-              <Row>
-                <Col xs={6} md={3}>
-                  <Image src={this.state.profilePhoto} rounded={true} responsive={true}/>
-                </Col>
-              </Row>
-            </Grid>
+         </div>
+         {this.state.userHasAlbums ? (
+            <div>
+              <div>
+                <h2>{this.state.profileTitle}'s Page</h2>
+                <Grid>
+                  <Row>
+                    <Col xs={6} md={3}>
+                      <Image 
+                      src={this.state.profilePhoto} 
+                      rounded={true} 
+                      responsive={true}/>
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+               <div>       
+                <AlbumMini 
+                  albums={this.state.userAlbums} />
+                <div>
+                  <h1>Default Album componet to go here</h1>
+                </div>
+              </div>
             </div>
-        <AlbumMini 
-          albums={this.state.userAlbums} />
-        <div>
-          <h1>Default Album componet to go here</h1>
-        </div>
+          ) : (
+            <div>
+              <h2> It looks like you don't have any albums! Add some photos</h2>
+            </div>
+          )}
       </div>
       );
   }
