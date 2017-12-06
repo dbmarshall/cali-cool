@@ -88,7 +88,7 @@ var usersData = {
       'firstName': 'Minu',
       'lastName': 'James',
       'role': 'admin',
-      'profilePicture':'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjoqfmmuePXAhUJ4SYKHVMABwcQjRwIBw&url=http%3A%2F%2Fmoziru.com%2Fexplore%2FProfile%2520clipart%2520black%2520and%2520white%2F&psig=AOvVaw2yiY_qfZznYqEKQ-VZe70e&ust=1512033343091997'
+      'profilePicture': 'ucb/minu_04-Tenaya-Lake-_-Tuolumne-Meadows'
     },
     {
       '_id': user_id_david,
@@ -98,7 +98,7 @@ var usersData = {
       'firstName': 'David',
       'lastName': 'Marshall',
       'role': 'admin',
-      'profilePicture':'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj89I71uePXAhUhzIMKHRuQB80QjRwIBw&url=https%3A%2F%2Fpixabay.com%2Fen%2Fman-head-beard-old-people-profile-294173%2F&psig=AOvVaw2ujLyVMc3VuKtG4WCc5VOY&ust=1512033504298980'
+      'profilePicture':''
     },
     {
       '_id': user_id_josh,
@@ -108,7 +108,7 @@ var usersData = {
       'firstName': 'Josh',
       'lastName': 'Siverson',
       'role': 'admin',
-      'profilePicture':'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwikobiIuuPXAhWNw4MKHSIfBdsQjRwIBw&url=https%3A%2F%2Fwww.clker.com%2Fclipart-man-profile.html&psig=AOvVaw2gbsaWmSRv1e5KSJioz1ub&ust=1512033549325748'
+      'profilePicture':'ucb/josh_04-goldengatebeachdownload'
     },
     {
       '_id': user_id_jack,
@@ -118,7 +118,7 @@ var usersData = {
       'firstName': 'Jack',
       'lastName': 'Berkeley',
       'role': 'user',
-      'profilePicture':'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwikobiIuuPXAhWNw4MKHSIfBdsQjRwIBw&url=https%3A%2F%2Fwww.clker.com%2Fclipart-man-profile.html&psig=AOvVaw2gbsaWmSRv1e5KSJioz1ub&ust=1512033549325748'
+      'profilePicture':'ucb/jack_01-1_NZ33GHUb7yNEfWBxLv9psw'
     },
     {
       '_id': user_id_jill,
@@ -128,7 +128,7 @@ var usersData = {
       'firstName': 'Jill',
       'lastName': 'Berkeley',
       'role': 'user',
-      'profilePicture':'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwikobiIuuPXAhWNw4MKHSIfBdsQjRwIBw&url=https%3A%2F%2Fwww.clker.com%2Fclipart-man-profile.html&psig=AOvVaw2gbsaWmSRv1e5KSJioz1ub&ust=1512033549325748'
+      'profilePicture':''
     }
   ]
 };
