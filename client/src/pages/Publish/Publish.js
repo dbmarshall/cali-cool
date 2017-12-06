@@ -24,7 +24,8 @@ class Publish extends Component {
     albumselect: '',
     albumtext: '',
     albumId: '',
-    uploading: '',
+    preview: true,
+    loading: '',
     published: ''
   };
 
@@ -54,12 +55,12 @@ class Publish extends Component {
     let file = event.target.files[0];
     let name = event.target.files[0].name;
     objectURL = window.URL.createObjectURL(file);
-      console.log('objectURL: ', objectURL);
-      // console.log('file: ', file);
 
     this.setState({ 
+      preview: true,
+      loading: false,
       published: false
-    })
+    });
 
     reader.onload = () => {
       let img = new Image();
@@ -71,7 +72,6 @@ class Publish extends Component {
         });
       };
       data_uri = reader.result;
-        // console.log('data_uri: ', data_uri);
 
     };
 
@@ -119,7 +119,10 @@ class Publish extends Component {
       albumname: '',
       albumselect: '', 
       albumtext: '',
-      albumId: ''
+      albumId: '',
+      preview: false,
+      loading: false,
+      published: true
     });
 
     this.clearSelect();
@@ -159,8 +162,12 @@ class Publish extends Component {
   // Handles form submit
   handleFormSubmit = event => {
     event.preventDefault();
-    
-    // console.log('this.state.imagePreviewUrl: ', this.state.imagePreviewUrl);
+
+    this.setState({ 
+      preview: false,
+      loading: true,
+      published: false
+    });
 
     // Checks whether a value entered for "new album name".
     // If not, then go straight to addPhotoUpdateAlbum().
@@ -210,11 +217,6 @@ class Publish extends Component {
       .then( 
         // Clears states
         this.clearAll()
-      )
-      .then(res => 
-        this.setState({ 
-          published: true
-        })
       )
       .then(
         // Removes image data_uri to prevent memory leaks
@@ -353,14 +355,15 @@ class Publish extends Component {
                     <div className="col-md-5">
                       <div className="panel panel-default">
                         <div className="panel-body">
-                          <i className="fa fa-spinner fa-spin" aria-hidden="true" />
-                          {!this.state.published && 
+
+                          {this.state.preview && 
                             <div id="img-preview">
                               {/*{imagePreview}*/}
+                              <p>Image preview:</p>
                               <img 
                                 src={this.state.imagePreviewUrl} 
                                 id="img-preview" 
-                                alt="Upload preview..." 
+                                alt="" 
                                 style={{
                                   maxWidth: '96%', 
                                   maxHeight: '118px'
@@ -383,9 +386,17 @@ class Publish extends Component {
                             </div>
                           }
 
+                          {this.state.loading && 
+                            <div id="uploading">
+                              <p>Your image is uploading...</p>
+                              <i className="fa fa-spinner fa-spin" aria-hidden="true" />
+                            </div>
+                          }
+
                           {this.state.published && 
                             <div id="published">
-                              <h3>Publish Successful</h3>
+                              <h4>Publish Successful</h4>
+                              <p>Feel free to add more photos.</p>
                               {/*<div>
                                   <p>You published the following:<p>
                                   {this.state.photosnew.map( (photosnew , i) => (
