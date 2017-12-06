@@ -135,7 +135,8 @@ class AlbumPreview extends Component{
 
   getCustomControls(){
     let customControls = [
-      <a key={1} style={styles.userLink}>
+      <a href={this.state.currentPhoto.owner && "/user/" + this.state.currentPhoto.owner._id}
+        key={1} style={styles.userLink}>
         <span className="glyphicon glyphicon-user"></span>
         <span style={styles.userNameText}>
           {this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}
@@ -158,7 +159,8 @@ class AlbumPreview extends Component{
     );
 
     customControls.push(
-      <a style={styles.commentLink} key={4}>
+      <a href={this.state.currentPhoto && "/photo/" + this.state.currentPhoto._id} 
+         style={styles.commentLink} key={4}>
         <span className="glyphicon glyphicon-comment"></span>
         <span> Comment</span>    
       </a>
