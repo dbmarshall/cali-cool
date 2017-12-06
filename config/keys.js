@@ -8,7 +8,7 @@ const localkeys = require('./local-keys');
 let keys;
 
   if (process.env.port) {
-    let keys =
+    keys =
       { 'cloudinary': cloudinary.config({ 
                 cloud_name: process.env.cloud_name, 
                 api_key: process.env.api_key, 
@@ -17,7 +17,7 @@ let keys;
         'secret': process.env.secret
       }
   } else {
-    let keys =
+    keys =
       { 'cloudinary': cloudinary.config({ 
                 cloud_name: localkeys.cloud_name, 
                 api_key: localkeys.api_key, 
