@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import { Navbar, Nav, NavItem, Modal, Form, FormGroup, Col, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import Search from "../Search"
 
 class Header extends Component {
 
@@ -131,6 +132,9 @@ class Header extends Component {
                 </LinkContainer>
               )}
           </Nav>
+
+          <Search/>
+
           {this.state.isLoggedIn !== true ? (
             <Nav pullRight>
               <LinkContainer to="/signup">

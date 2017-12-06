@@ -81,5 +81,13 @@ export default {
 
   unlikeAlbum: function(userId, albumId){
     return axios.put("/api/users/" + userId + "/albums/" + albumId + "/like");
+  },
+
+  getAlbumTitles: function(){
+    return axios.get("/api/albums/title");
+  },
+
+  searchForAlbumsByTitle: function(searchStr){
+    return axios.get("/api/albums/search/title/" + searchStr);
   }
 };

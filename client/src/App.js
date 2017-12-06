@@ -8,6 +8,7 @@ import Main from "./pages/main";
 import SinglePhoto from "./pages/singlePhoto";
 // import MainCarousel from "./pages/MainCarousel";
 import AlbumView from "./pages/AlbumView";
+import SearchResult from "./pages/SearchResult";
 
 const App = () =>
   <Router>
@@ -20,6 +21,7 @@ const App = () =>
         <Route exact path="/album/:id" component={AlbumView} />
         <Route exact path="/user/:id" component={User} />
         <Route exact path="/photo/:id" component={SinglePhoto} />
+        <Route exact path="/search/results" component={SearchResult} />
       </Switch>
     </div>
   </Router>;
