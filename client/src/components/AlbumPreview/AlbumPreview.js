@@ -4,7 +4,38 @@ import Gallery from 'react-photo-gallery';
 import Lightbox from 'react-images';
 
 import Like from '../Like'
-import Comment from '../Comment'
+
+import API from '../../utils/API';
+
+const styles = {
+  commentLink: {
+    color: "white",
+    fontSize: "1.1em",
+    position: "absolute", 
+    bottom: "60px", 
+    left: "110px"
+  },
+  userLink: {
+    fontSize: "1.2em", 
+    color: "white", 
+    marginTop: "15px"
+  },
+  userNameText: {
+    marginLeft: "5px"
+  },
+  albumLink: {
+    fontSize: "1.2em", 
+    color: "white", 
+    marginTop: "15px"
+  },
+  likeLink: {
+    position: "absolute", 
+    bottom: "60px", 
+    left: "20px"
+  }
+}
+
+const sessionKeyUserId = "userId";
 
 class AlbumPreview extends Component{
 
@@ -30,7 +61,7 @@ class AlbumPreview extends Component{
 
   getThumbnailArray = () => {
     const thumbnails = this.state.photoObjs.map(function(photo){
-      return { src: photo.thumbnail, width: 4, height: 3 , caption: photo.caption};
+      return { src: photo.thumbnail, width: 4, height: 3, caption: photo.caption};
     });
     return thumbnails;
   }
@@ -72,44 +103,29 @@ class AlbumPreview extends Component{
     });
   }
 
-  updateLike = () =>{
-    // let newPhotoObj = this.state.currentPhoto;
-    // const userIndex = newPhotoObj.likes.indexOf(sessionStorage.getItem("userId"));
-    // console.log("currentUser", userIndex);
+  updateLike = () =>{ 
+    const sessionUserId = sessionStorage.getItem(sessionKeyUserId);
+    const userIndex = this.state.currentPhoto.likes.indexOf(sessionUserId);
 
-    // if(userIndex > -1){
-    //   newPhotoObj.likes.splice(userIndex, 1);
-    // }
-    // else{
-    //   newPhotoObj.likes.push(sessionStorage.getItem("userId"));
-    // }
-
-    // let newPhotoObjs = this.state.photoObjs;
-    // newPhotoObjs[this.state.currentImageIndex] = newPhotoObj;
-
-    // this.setState({
-    //    photoObjs : newPhotoObjs      
-    // });
-
-    const userIndex = this.state.photoObjs[this.state.currentImageIndex].
-      likes.indexOf(sessionStorage.getItem("userId"));
-    console.log("currentUser", userIndex);
     if(userIndex > -1){
-      this.state.photoObjs[this.state.currentImageIndex].likes.splice(userIndex, 1);
+      this.state.currentPhoto.likes.splice(userIndex, 1);
+      API.unlikePhoto(sessionUserId, this.state.currentPhoto._id);
     }
     else{
-      this.state.photoObjs[this.state.currentImageIndex].likes.push(sessionStorage.getItem("userId"));
+     this.state.currentPhoto.likes.push(sessionUserId);
+      API.likePhoto(sessionUserId, this.state.currentPhoto._id);
     }
 
     this.forceUpdate();
-
-    console.log("update like parent clicked");
   }
 
   doesUserLikeCurrentPhoto(){
-    if(sessionStorage.getItem("userId") && this.state.currentPhoto.likes){
-      for(let userId of this.state.currentPhoto.likes){
-        if(userId.toString() === sessionStorage.getItem("userId")){
+    const sessionUserId = sessionStorage.getItem(sessionKeyUserId);
+    const photoLikes = this.state.currentPhoto.likes;
+    
+    if(sessionUserId && photoLikes){
+      for(let userId of photoLikes){
+        if(userId.toString() === sessionUserId){
           return true;
         }
       }
@@ -119,42 +135,39 @@ class AlbumPreview extends Component{
 
   getCustomControls(){
     let customControls = [
-
-      <a style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
+      <a key={1} style={styles.userLink}>
         <span className="glyphicon glyphicon-user"></span>
-        <span style={{marginLeft: "5px"}}>{this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}</span>
+        <span style={styles.userNameText}>
+          {this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}
+        </span>
       </a>,
 
       <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
-        style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
+        style={styles.albumLink} key={2}>
         {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
       </a>
     ];
 
-    if(sessionStorage.getItem("userId")){
-      customControls.push(
-        <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
-        key={2} updateLike={this.updateLike}
+    customControls.push(
+      <Like position={styles.likeLink}
         likesCount={this.state.currentPhoto.likes && this.state.currentPhoto.likes.length}
-        parentId={this.state.currentPhoto._id}
-        parentType="photo"
+        updateLike={this.updateLike}
         isLiked={this.doesUserLikeCurrentPhoto()}
-        currentPhoto={this.state.currentPhoto}></Like>);
+        key={3}>
+      </Like>
+    );
 
-      customControls.push( 
-        <Comment style={{position: "absolute", bottom: "60px", left: "110px"}} 
-        key={3}></Comment>);
-    }
-
-    // console.log(sessionStorage.getItem("userId"), 
-    //             customControls.length);
+    customControls.push(
+      <a style={styles.commentLink} key={4}>
+        <span className="glyphicon glyphicon-comment"></span>
+        <span> Comment</span>    
+      </a>
+    );
 
     return customControls;
-
   }
 
   render(){
-    {console.log(this.state.currentPhoto.likes)}
     return (
       <div>
         <Gallery photos={this.state.thumbnails} onClick={this.openLightbox}/>  

@@ -19,7 +19,10 @@ router.route("/:id")
 
 router.route("/:id/photos/:photoId/like")
   .post(usersController.likePhoto)
-  .put(usersController.dislikePhoto);  
+  .put(usersController.unlikePhoto); 
 
+router.route("/:id/albums/:albumId/like")
+  .post(usersController.likeAlbum)
+  .put(usersController.unlikeAlbum)
 
 module.exports = router;

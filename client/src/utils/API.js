@@ -61,12 +61,18 @@ export default {
   },
 
   likePhoto: function(userId, photoId){
-    console.log(userId, photoId);
     return axios.post("/api/users/" + userId + "/photos/" + photoId + "/like");
   },
 
-  dislikePhoto: function(userId, photoId){
-    console.log(userId, photoId);
+  unlikePhoto: function(userId, photoId){
     return axios.put("/api/users/" + userId + "/photos/" + photoId + "/like");
+  },
+
+  likeAlbum: function(userId, albumId){
+    return axios.post("/api/users/" + userId + "/albums/" + albumId + "/like");
+  },
+
+  unlikeAlbum: function(userId, albumId){
+    return axios.put("/api/users/" + userId + "/albums/" + albumId + "/like");
   }
 };

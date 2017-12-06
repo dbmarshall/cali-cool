@@ -59,7 +59,7 @@ module.exports = {
       res.json(error);
     });
   },
-  dislikePhoto: function(req, res){
+  unlikePhoto: function(req, res){
     console.log(req.params.id, req.params.photoId)
     db.Users
     .findById(req.params.id)
@@ -75,5 +75,40 @@ module.exports = {
     .catch(function(error){
       res.json(error);
     });
+  },
+
+  likeAlbum: function(req, res) {
+    console.log(req.params.id, req.params.albumId)
+    db.Users
+    .findById(req.params.id)
+    .then( user => {
+      return db.Albums.findOneAndUpdate({"_id": req.params.albumId}, 
+      { $addToSet: { likes: user._id }}, { new: true });
+    })
+    .then(function(album){
+      res.json(album);
+    })
+    .catch(function(error){
+      res.json(error);
+    });
+  },
+
+  unlikeAlbum: function(req, res){
+    console.log(req.params.id, req.params.albumId)
+    db.Users
+    .findById(req.params.id)
+    .then( user => {
+      console.log(user);
+      return db.Albums.findOneAndUpdate({"_id": req.params.albumId}, 
+      { $pull: { likes: user._id }}, { new: true });
+    })
+    .then(function(album){
+      console.log(album)
+      res.json(album);
+    })
+    .catch(function(error){
+      res.json(error);
+    });
   }
+
 };

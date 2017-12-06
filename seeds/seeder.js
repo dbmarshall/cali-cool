@@ -268,8 +268,9 @@ var photosData = {
       'likes': [user_id_minu, user_id_josh, user_id_jack],
       'title': 'Tanaya Lake',
       'caption': 'Tanaya Lake is worth the trip whenever you can make it.',
-      'link': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg',
-      'thumbnail': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg'
+      // 'link': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg',
+      // 'thumbnail': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg'
+      'imageUploadId':
     },
     {
       '_id': photo_yosemitte_2_id,

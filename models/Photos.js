@@ -24,7 +24,7 @@ var PhotosSchema = new Schema({
   },
   comments: [{
     type: Schema.Types.ObjectId,
-    ref: "Comments"
+    ref: "Comments" 
   }],
   //use $addToSet to push data to prevent duplication
   likes: [{
