@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Signup from "./pages/signup";
-import Publish from "./pages/Publish";
+import Publish from "./pages/publish";
 import User from "./pages/user";
 import Main from "./pages/main";
 import SinglePhoto from "./pages/singlePhoto";

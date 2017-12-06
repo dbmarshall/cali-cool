@@ -96,5 +96,10 @@ export default {
 
   unlikeAlbum: function(userId, albumId){
     return axios.put("/api/users/" + userId + "/albums/" + albumId + "/like");
+  },
+
+  updateProfilePhoto: function(userData) {
+    console.log(userData);
+    return axios.put("/api/users/" + userData.userId + "/profilephoto", userData)
   }
 };
