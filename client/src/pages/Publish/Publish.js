@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import "./Publish.css";
 // import AlbumsSelect from "../../components/AlbumsSelect";
-// import { DropdownButton, MenuItem, InputGroup } from 'react-bootstrap';
 
 let ownerId;
 let data_uri;
@@ -23,8 +23,10 @@ class Publish extends Component {
     albumname: '',
     albumselect: '',
     albumtext: '',
-    albumId: ''//
-    // published: ''
+    albumId: '',
+    preview: true,
+    loading: '',
+    published: ''
   };
 
   componentDidMount() {
@@ -53,8 +55,12 @@ class Publish extends Component {
     let file = event.target.files[0];
     let name = event.target.files[0].name;
     objectURL = window.URL.createObjectURL(file);
-      console.log('objectURL: ', objectURL);
-      // console.log('file: ', file);
+
+    this.setState({ 
+      preview: true,
+      loading: false,
+      published: false
+    });
 
     reader.onload = () => {
       let img = new Image();
@@ -66,7 +72,6 @@ class Publish extends Component {
         });
       };
       data_uri = reader.result;
-        // console.log('data_uri: ', data_uri);
 
     };
 
@@ -114,7 +119,10 @@ class Publish extends Component {
       albumname: '',
       albumselect: '', 
       albumtext: '',
-      albumId: ''
+      albumId: '',
+      preview: false,
+      loading: false,
+      published: true
     });
 
     this.clearSelect();
@@ -154,8 +162,12 @@ class Publish extends Component {
   // Handles form submit
   handleFormSubmit = event => {
     event.preventDefault();
-    
-    // console.log('this.state.imagePreviewUrl: ', this.state.imagePreviewUrl);
+
+    this.setState({ 
+      preview: false,
+      loading: true,
+      published: false
+    });
 
     // Checks whether a value entered for "new album name".
     // If not, then go straight to addPhotoUpdateAlbum().
@@ -169,6 +181,9 @@ class Publish extends Component {
         this.setState({ 
           albumId: res.data._id
         })
+      )
+      .then( () => 
+        this.loadAlbums()
       )
       .then( () => 
         this.addPhotoUpdateAlbum()
@@ -258,8 +273,8 @@ class Publish extends Component {
                                 />
                               </div>
                               <span className="small">
-                                Please, upload images at least 1600px in width.<br/>
-                                Maximum allowable filesize is 5mb.
+                                Maximum allowable filesize is 5mb.<br/>
+                                Recommended image size is at least 1600px in width.<br/>
                               </span>
                             </div>
 
@@ -309,35 +324,6 @@ class Publish extends Component {
                                   </select>
                                 }
 
-                                {/*<select 
-                                  onChange={this.handleInputChange}
-                                  name="albumselect"
-                                  id="albumselect"
-                                  className="form-control">
-                                  <option value="">Select</option>
-                                  <option value="5a221a8793404dd2c1ff8b6f">SanFrancisco Golden Gate</option>
-                                  <option value="5a221a8793404dd2c1ff8b6d">Yosemite - ThanksGiving Break</option>
-                                </select>*/}
-
-                                {/*<DropdownButton 
-                                  name="albumdropdown"
-                                  title="Default" 
-                                  id="albumdropdown"
-                                  componentClass={InputGroup.Button}>
-                                  <MenuItem 
-                                    onSelect={this.handleSelectChange}
-                                    value="Coastal"
-                                    eventKey="1">
-                                    Coastal
-                                  </MenuItem>
-                                  <MenuItem 
-                                    onSelect={this.handleSelectChange}
-                                    value="Mountains"
-                                    eventKey="2">
-                                    Mountains
-                                  </MenuItem>
-                                </DropdownButton>*/}
-
                                 <input 
                                   value={this.state.albumtext}
                                   onChange={this.handleInputChange}
@@ -369,33 +355,57 @@ class Publish extends Component {
                     <div className="col-md-5">
                       <div className="panel panel-default">
                         <div className="panel-body">
-                    
-                          <div id="img-preview">
-                            {/*{imagePreview}*/}
-                            <img 
-                              src={this.state.imagePreviewUrl} 
-                              id="img-preview" 
-                              alt="Upload preview..." 
-                              style={{
-                                maxWidth: '96%', 
-                                maxHeight: '118px'
-                              }}
-                            />
-                            {this.state.imagePreviewUrl && 
-                              <button 
-                                onClick={this.clearPreview}
-                                type="button" 
-                                title="Deselect this photo"
-                                className="close"
+
+                          {this.state.preview && 
+                            <div id="img-preview">
+                              {/*{imagePreview}*/}
+                              <p>Image preview:</p>
+                              <img 
+                                src={this.state.imagePreviewUrl} 
+                                id="img-preview" 
+                                alt="" 
                                 style={{
-                                  position: 'absolute', 
-                                  zIndex: '10',
-                                  top: '0', 
-                                  right: '20px'
-                                }}>
-                                &times;
-                              </button>}
-                          </div>
+                                  maxWidth: '96%', 
+                                  maxHeight: '118px'
+                                }}
+                              />
+                              {this.state.imagePreviewUrl && 
+                                <button 
+                                  onClick={this.clearPreview}
+                                  type="button" 
+                                  title="Deselect this photo"
+                                  className="close"
+                                  style={{
+                                    position: 'absolute', 
+                                    zIndex: '10',
+                                    top: '0', 
+                                    right: '20px'
+                                  }}>
+                                  &times;
+                                </button>}
+                            </div>
+                          }
+
+                          {this.state.loading && 
+                            <div id="uploading">
+                              <p>Your image is uploading...</p>
+                              <i className="fa fa-spinner fa-spin" aria-hidden="true" />
+                            </div>
+                          }
+
+                          {this.state.published && 
+                            <div id="published">
+                              <h4>Publish Successful</h4>
+                              <p>Feel free to add more photos.</p>
+                              {/*<div>
+                                  <p>You published the following:<p>
+                                  {this.state.photosnew.map( (photosnew , i) => (
+                                    <div>
+                                      <a href={photos._id} key={i}>{photos.title}</a><br/>
+                                    </div>
+                                ))}</div>*/}
+                            </div>
+                          }
 
                         </div>
                       </div>
