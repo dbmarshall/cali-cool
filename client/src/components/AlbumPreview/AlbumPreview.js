@@ -4,7 +4,38 @@ import Gallery from 'react-photo-gallery';
 import Lightbox from 'react-images';
 
 import Like from '../Like'
-import Comment from '../Comment'
+
+import API from '../../utils/API';
+
+const styles = {
+  commentLink: {
+    color: "white",
+    fontSize: "1.1em",
+    position: "absolute", 
+    bottom: "60px", 
+    left: "110px"
+  },
+  userLink: {
+    fontSize: "1.2em", 
+    color: "white", 
+    marginTop: "15px"
+  },
+  userNameText: {
+    marginLeft: "5px"
+  },
+  albumLink: {
+    fontSize: "1.2em", 
+    color: "white", 
+    marginTop: "15px"
+  },
+  likeLink: {
+    position: "absolute", 
+    bottom: "60px", 
+    left: "20px"
+  }
+}
+
+const sessionKeyUserId = "userId";
 
 class AlbumPreview extends Component{
 
@@ -30,14 +61,14 @@ class AlbumPreview extends Component{
 
   getThumbnailArray = () => {
     const thumbnails = this.state.photoObjs.map(function(photo){
-      return { src: photo.thumbnail, width: 4, height: 3 , caption: photo.caption};
+      return { src: photo.thumbnailUrl, width: 4, height: 3 , caption: photo.caption};
     });
     return thumbnails;
   }
 
   getPhotoArray = () => {
     const photos = this.state.photoObjs.map(function(photo){
-      return { src: photo.link, caption: photo.caption, thumbnail: photo.thumbnail};
+      return { src: photo.imageUrl, caption: photo.caption, thumbnail: photo.thumbnailUrl};
     });
     return photos;
   }
@@ -45,7 +76,7 @@ class AlbumPreview extends Component{
   openLightbox = (event, obj) => {
     const current = this.state.photoObjs[obj.index];
     this.setState({
-      currentImageIndex: obj.index,
+      currentImageIndex: obj.index, 
       lightboxIsOpen: true,
       currentPhoto: current
     });
@@ -72,6 +103,70 @@ class AlbumPreview extends Component{
     });
   }
 
+  updateLike = () =>{ 
+    const sessionUserId = sessionStorage.getItem(sessionKeyUserId);
+    const userIndex = this.state.currentPhoto.likes.indexOf(sessionUserId);
+
+    if(userIndex > -1){
+      this.state.currentPhoto.likes.splice(userIndex, 1);
+      API.unlikePhoto(sessionUserId, this.state.currentPhoto._id);
+    }
+    else{
+     this.state.currentPhoto.likes.push(sessionUserId);
+      API.likePhoto(sessionUserId, this.state.currentPhoto._id);
+    }
+
+    this.forceUpdate();
+  }
+
+  doesUserLikeCurrentPhoto(){
+    const sessionUserId = sessionStorage.getItem(sessionKeyUserId);
+    const photoLikes = this.state.currentPhoto.likes;
+    
+    if(sessionUserId && photoLikes){
+      for(let userId of photoLikes){
+        if(userId.toString() === sessionUserId){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  getCustomControls(){
+    let customControls = [
+      <a key={1} style={styles.userLink}>
+        <span className="glyphicon glyphicon-user"></span>
+        <span style={styles.userNameText}>
+          {this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}
+        </span>
+      </a>,
+
+      <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
+        style={styles.albumLink} key={2}>
+        {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
+      </a>
+    ];
+
+    customControls.push(
+      <Like position={styles.likeLink}
+        likesCount={this.state.currentPhoto.likes && this.state.currentPhoto.likes.length}
+        updateLike={this.updateLike}
+        isLiked={this.doesUserLikeCurrentPhoto()}
+        key={3}>
+      </Like>
+    );
+
+    customControls.push(
+      <a style={styles.commentLink} key={4}>
+        <span className="glyphicon glyphicon-comment"></span>
+        <span> Comment</span>    
+      </a>
+    );
+
+    return customControls;
+  }
+
   render(){
     return (
       <div>
@@ -84,20 +179,7 @@ class AlbumPreview extends Component{
             isOpen={this.state.lightboxIsOpen}
             backdropClosesModal={true}
             showCloseButton={false} 
-            customControls={[
-              <a style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={4}>
-                <span className="glyphicon glyphicon-user"></span>
-                <span style={{marginLeft: "5px"}}>{this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}</span>
-              </a>,
-              <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
-                style={{ fontSize: "1.2em", color: "white", marginTop: "15px"}} key={1}>
-                {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
-              </a>,
-              <Like style={{position: "absolute", bottom: "60px", left: "20px"}} 
-                key={2}></Like>,
-              <Comment style={{position: "absolute", bottom: "60px", left: "90px"}} 
-                key={3}></Comment>
-            ]}
+            customControls={this.getCustomControls()}
           />
       </div>
     );

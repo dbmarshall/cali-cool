@@ -65,6 +65,7 @@ class Header extends Component {
         sessionStorage.setItem("userId", this.state.userId);
       }
       else {
+        sessionStorage.clear();
         console.log("user isn't logged in");
         sessionStorage.clear();
       }

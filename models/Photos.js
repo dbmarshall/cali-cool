@@ -24,7 +24,7 @@ var PhotosSchema = new Schema({
   },
   comments: [{
     type: Schema.Types.ObjectId,
-    ref: "Comments"
+    ref: "Comments" 
   }],
   //use $addToSet to push data to prevent duplication
   likes: [{
@@ -55,16 +55,16 @@ var PhotosSchema = new Schema({
   },
   caption: {
     type: String
-  },
+  }//,
   // Fields to be removed
-  thumbnail: {
-    type: String,
-    // required: true
-  },
-  link: {
-    type: String
-    // required: true
-  }
+  // thumbnail: {
+  //   type: String,
+  //   // required: true
+  // },
+  // link: {
+  //   type: String
+  //   // required: true
+  // }
 
 }, schemaOptions);
 
@@ -73,17 +73,25 @@ PhotosSchema.virtual('likesCount').
     return this.likes.length;
 });
 
-const baseUrl = 'https://res.cloudinary.com/cali-cool/image/upload/';
+/* 
+  Actual URL looks like this:
+    http://res.cloudinary.com/cali-cool/image/upload/f_auto/c_thumb,g_center,h_200,w_200/ucb/jack_02-tdih-jan05-HD.jpg
+*/
+
+const baseUrl = 'http://res.cloudinary.com/cali-cool/image/upload/';
+const imageDir = 'ucb/';
+const imageLarge = 'f_auto,w_1600/';
+const imageThumb = 'f_auto,c_thumb,g_center,h_300,w_300/';
 const imageExtension = '.png';
 
 PhotosSchema.virtual('imageUrl').
   get(function(){
-    return baseUrl + this.imageUploadId + imageExtension;
+    return baseUrl + imageLarge + imageDir + this.imageUploadId + imageExtension;
 });
 
 PhotosSchema.virtual('thumbnailUrl').
   get(function(){
-    return baseUrl + 'c_thumb,g_center,h_200,w_200/' + this.imageUploadId + imageExtension;
+    return baseUrl + imageThumb + imageDir + this.imageUploadId + imageExtension;
 });
 
 var Photos = mongoose.model("Photos", PhotosSchema);
