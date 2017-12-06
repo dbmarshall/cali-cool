@@ -146,25 +146,21 @@ class AlbumPreview extends Component{
       <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
         style={styles.albumLink} key={2}>
         {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
-      </a>
-    ];
+      </a>,
 
-    customControls.push(
       <Like position={styles.likeLink}
         likesCount={this.state.currentPhoto.likes && this.state.currentPhoto.likes.length}
         updateLike={this.updateLike}
         isLiked={this.doesUserLikeCurrentPhoto()}
         key={3}>
-      </Like>
-    );
-
-    customControls.push(
+      </Like>,
+    
       <a href={this.state.currentPhoto && "/photo/" + this.state.currentPhoto._id} 
          style={styles.commentLink} key={4}>
         <span className="glyphicon glyphicon-comment"></span>
         <span> Comment</span>    
       </a>
-    );
+    ];
 
     return customControls;
   }

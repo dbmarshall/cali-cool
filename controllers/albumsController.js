@@ -4,7 +4,19 @@ module.exports = {
   findById: function(req, res) {
     db.Albums
       .findById(req.params.id)
-      .populate("photos")
+      .populate({
+        path: "photos",
+        populate: [{
+          path: "owner",
+          model: "Users",
+          select: ["_id", "userName"]
+        },
+        {
+          path: "album",
+          model: "Albums",
+          select: ["_id", "title"]
+        }]
+      })
       .populate("owner")
       .populate("comments")
       .then(dbModel => res.json(dbModel))

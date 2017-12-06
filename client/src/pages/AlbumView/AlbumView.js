@@ -21,7 +21,7 @@ class AlbumView extends Component{
   loadAlbum(){
     API.getAlbumById(this.state.albumId)
     .then(res => {
-      console.log(this.state.albumObj)
+      console.log(res.data)
       this.setState({
         albumObj: res.data,
         albumPhotos: res.data.photos,
