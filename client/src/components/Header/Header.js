@@ -23,7 +23,9 @@ class Header extends Component {
     this.setState({open: true})}
 
   closeModal = event => {
-      this.setState({ open: false })}
+      this.setState({ open: false })
+      window.location.reload()
+    }
  
   saveAndClose = event => {
     this.setState({ open: false })};
