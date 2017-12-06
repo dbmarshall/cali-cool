@@ -128,5 +128,18 @@ module.exports = {
     .populate("owner")
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
+
+  },
+
+  createComment: function(req, res) {
+    db.Comments
+    .create({
+      comment: req.body.comment,
+      user: req.params.id
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   }
+
+
 };
