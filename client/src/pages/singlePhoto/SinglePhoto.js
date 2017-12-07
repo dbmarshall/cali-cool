@@ -63,7 +63,8 @@ class SinglePhoto extends Component {
         userName:res.data.owner.userName,
         photoObj:res.data,
         likesCount: res.data.likes.length,
-        imageUploadId:res.data.imageUploadId
+        imageUploadId:res.data.imageUrl,
+        dateAdded:res.data.dateUpdated
       })
     //   console.log(this.state.userId)
     //   console.log("user auth on single", this.state.userAuth);
@@ -195,7 +196,7 @@ class SinglePhoto extends Component {
                     <span>
                      <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
                      </span>
-                    <span>date added</span> 
+                    <span>{this.state.dateAdded}</span> 
                   </p>
                 </Col>
               </Row>
@@ -208,7 +209,7 @@ class SinglePhoto extends Component {
                     </Like>
                 </Col>
               </Row>
-              { (this.state.userId === this.state.userAuth) ? (
+              { (this.state.ownerId === this.state.userAuth) ? (
                 <div>
                     <Row>
                     <Col xs={6} md={6}>
