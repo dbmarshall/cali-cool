@@ -113,7 +113,7 @@ class SinglePhoto extends Component {
     console.log("delete button clicked")
     API.deletePhoto(this.state.photoId)
     .then(res => {
-      console.log(res)
+      window.location.href("/");
     })
     .catch(err => console.log(err))
   }
@@ -127,7 +127,7 @@ class SinglePhoto extends Component {
       imageUploadId: this.state.imageUploadId
     })
     .then(res => {
-      console.log(res)
+      window.location.href("/");
     })
     .catch(err => console.log(err))
   }
