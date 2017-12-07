@@ -7,7 +7,7 @@ const likeStyle = {
     marginLeft: "5px"
   },
   isLiked: {
-    color: "blue"
+    color: "#66FF66"
   },
   isNotLiked: {
     color: "white"

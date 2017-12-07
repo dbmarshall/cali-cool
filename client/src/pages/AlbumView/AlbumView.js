@@ -24,7 +24,7 @@ class AlbumView extends Component{
   loadAlbum(){
     API.getAlbumById(this.state.albumId)
     .then(res => {
-      console.log(this.state.albumObj)
+      console.log(res.data)
       this.setState({
         albumObj: res.data,
         albumPhotos: res.data.photos,
@@ -109,9 +109,10 @@ handleFormSubmit = event => {
         <div>
           <h3>{this.state.albumObj.title}</h3>
           <h4>
-            <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
-            <span>{this.state.albumObj.owner && this.state.albumObj.owner.firstName}</span> &nbsp;
-            <span>{this.state.albumObj.owner && this.state.albumObj.owner.lastName}</span>
+            <a href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
+              <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
+              <span>{this.state.albumObj.owner && this.state.albumObj.owner.userName}</span>
+            </a>
           </h4>
         </div>
         <div>
