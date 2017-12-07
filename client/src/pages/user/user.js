@@ -23,6 +23,18 @@ class User extends Component {
     this.getUserInfo()
   }
 
+  getUserDetails() {
+    API.getUserProfile({id: this.state.userId})
+    .then(res => {
+      this.setState({
+        profileTitle: res.data.userName,
+        profilePhoto: res.data.profilePicture,
+        userHasAlbums:false
+      })
+    })
+    .catch(err => (console.log(err)))
+  }
+
   getUserInfo = event => {
    API.getUserProfileData({
       id: this.state.userId })
@@ -35,9 +47,7 @@ class User extends Component {
         profilePhoto: res.data[0].owner.profilePicture,
         userHasAlbums: true
         })
-        : this.setState({
-          userHasAlbums: false
-        })
+        : this.getUserDetails()
      })
      .catch(err => console.log(err));
   }
@@ -47,14 +57,15 @@ class User extends Component {
 
     return (
       <div className= "container">
-         <div>
-         <Grid>
-          <Row>
-            <Button href="/publish" bsStyle="primary">Add Photos</Button>
-          </Row>
-         </Grid>
+        <div>
+        {(this.state.userId === sessionStorage.getItem("userId")) ? (
+             <Grid>
+              <Row>
+                <Button href="/publish" bsStyle="primary">Add Photos</Button>
+              </Row>
+            </Grid>
+          ) : (null)}
          </div>
-         {this.state.userHasAlbums ? (
             <div>
               <div>
                 <h2>{this.state.profileTitle}'s Page</h2>
@@ -69,6 +80,7 @@ class User extends Component {
                   </Row>
                 </Grid>
               </div>
+              {this.state.userHasAlbums ? (
                <div>       
                 <AlbumMini 
                   albums={this.state.userAlbums} />
@@ -76,12 +88,12 @@ class User extends Component {
                   <h1>Default Album componet to go here</h1>
                 </div>
               </div>
-            </div>
-          ) : (
+              ) : (
             <div>
               <h2> It looks like you don't have any albums! Add some photos</h2>
             </div>
           )}
+        </div>
       </div>
       );
   }

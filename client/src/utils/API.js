@@ -116,5 +116,9 @@ export default {
   updateProfilePhoto: function(userData) {
     console.log(userData);
     return axios.put("/api/users/" + userData.userId + "/profilephoto", userData)
+  },
+
+  getUserProfile: function(userId) {
+    return axios.get("/api/users/" + userId.id +"/profilephoto")
   }
 };
