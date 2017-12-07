@@ -67,7 +67,8 @@ export default {
     return axios.delete("/api/photos/" + photoId)
   },
 
-  createPhotoComment: function(commentData) {
+  // Create comment for albums or photos
+  createComment: function(commentData) {
     console.log(commentData);
     return axios.post("/api/users/" + commentData.userId + "/comments", commentData )
   },
@@ -78,6 +79,16 @@ export default {
   },
 
   getComments: function(photoId) {
+    console.log(photoId)
+    return axios.get("/api/photos/" + photoId.id + "/comments")
+  },
+  // second test
+  insertCommentToAlbum: function(commentData) {
+    console.log(commentData)
+    return axios.post("/api/photos/" + commentData.photoId + "/comments", commentData)
+  },
+  // third, may not need
+  getAlbumComments: function(photoId) {
     console.log(photoId)
     return axios.get("/api/photos/" + photoId.id + "/comments")
   },

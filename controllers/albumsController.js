@@ -29,5 +29,20 @@ module.exports = {
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
+  },
+  insertCommentIntoAlbumArray: function(req, res) {
+    console.log("album id", req.params.id)
+    console.log("comment id", req.body.commentId)
+    db.Albums
+    .findOneAndUpdate({ _id: req.params.id }, {$push: { comments: req.body.commentId }}, { new: true })
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+        model: 'Users'
+      }
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   }
 };  

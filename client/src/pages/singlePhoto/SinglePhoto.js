@@ -142,7 +142,7 @@ class SinglePhoto extends Component {
     console.log(this.state.photoId)
     console.log(this.state.userId)
     console.log(this.state.commentContent)
-    API.createPhotoComment({
+    API.createComment({
       userId:this.state.userId,
       comment:this.state.commentContent
     })
