@@ -15,7 +15,35 @@ class SearchResult extends Component {
 
   render(){
     return(
-       <AlbumMini albums = {this.state.searchResults}/>
+      <div>
+
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h1>Search Results</h1>
+                </div>
+                <div className="panel-body">
+
+                  <div className="row">
+                    <div className="col-md-12">
+                    {/* start page content*/}
+
+                      <AlbumMini albums = {this.state.searchResults}/>
+
+                    {/* end page content*/}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>    
+        </div>
+
+      </div>
     )
   }
 }

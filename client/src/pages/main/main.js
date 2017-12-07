@@ -48,6 +48,7 @@ class Main extends Component{
 
                   <div className="row">
                     <div className="col-md-12">
+                    {/* start page content*/}
 
                       <h4>Most Liked Photos</h4>
 
@@ -59,6 +60,7 @@ class Main extends Component{
 
                       {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
 
+                    {/* end page content*/}
                     </div>
                   </div>
 
