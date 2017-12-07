@@ -42,7 +42,7 @@ class MainCarousel extends Component{
 
   getThumbnailArray = (photos) => {
     const thumbnails = photos.map(function(photo){
-      return { src: photo.thumbnail, width: 4, height: 3 , caption: photo.caption};
+      return { src: photo.thumbnailUrl, width: 4, height: 3 , caption: photo.caption};
     });
     return thumbnails;
   }

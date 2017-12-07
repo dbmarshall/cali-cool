@@ -1,63 +1,49 @@
 import React, { Component } from "react";
-import { Grid, Row, Col, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import AlbumMiniPhotos from "../AlbumMiniPhotos"
 // import API from '../../utils/API';
 
-const albumPhotoStyle = {
-   margin: "0px",
-   padding:"0px"
-};
-
-const albumMiniWrapper = {
-  margin:"5px",
-}
-
 const albumMini = {
-  backgroundColor:"#c6c6c6",
+  backgroundColor:"rgba(0,0,0,.1)",
   borderRadius:"10px"
-
 }
 
 const header = {
-  color: "white",
-  margin: "5px"
+  color: "#000",
+  margin: "5px",
+  padding: "10px 0 0 10px",
+  fontSize: "25px"
 }
 
-
 class AlbumMini extends Component {
+
+  state = {
+    userAlbums: this.props.albums
+  } 
 
   render(){
 
     return (
-      <div className= "container">
-        <div className="wrapper">
-          <div style={albumMini}>
-            <div><p style={header}>Protype Album Mini</p></div>
-            <div >
-              <Grid>
-               <Row style={albumMiniWrapper}>
-                <Col xs={2} md={2} lg={2} style={albumPhotoStyle}>
-                  <Image src="https://static.pexels.com/photos/33109/fall-autumn-red-season.jpg" thumbnail />
-                </Col>
-                <Col xs={2} md={2} lg={2} style={albumPhotoStyle}>
-                  <Image src="https://static.pexels.com/photos/376464/pexels-photo-376464.jpeg" thumbnail />
-                </Col>
-                <Col xs={2} md={2} lg={2} style={albumPhotoStyle}>
-                  <Image src="https://static.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg" thumbnail />
-                </Col>
-                <Col xs={2} md={2} lg={2} style={albumPhotoStyle}>
-                  <Image src="https://static.pexels.com/photos/39811/pexels-photo-39811.jpeg" thumbnail />
-                </Col>
-                <Col xs={2} md={2} lg={2} style={albumPhotoStyle}>
-                  <Image src="https://static.pexels.com/photos/405140/pexels-photo-405140.jpeg" thumbnail />
-                </Col>
-                </Row>
-              </Grid>
-            </div>
-          </div>
-          </div>
-        </div>
-      );
+      <div>
+
+        {this.props.albums.map( (album, i) => {
+          return (
+            <a href={'/album/' + album._id} 
+                title="click to see full album" 
+                style={{textDecoration: 'none'}}
+                key={album._id}>
+              <div style={albumMini}>
+                <p style={header}>
+                  {album.title}
+                </p>
+                <AlbumMiniPhotos photos={album.photos} />
+              </div>
+            </a>
+          )
+        })}
+        
+      </div>
+    );
   }
 }
 
