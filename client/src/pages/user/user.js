@@ -28,7 +28,7 @@ class User extends Component {
       console.log(res.data)
       this.setState({
         profileTitle: res.data.userName,
-        profilePhoto: res.data.profilePicture,
+        profilePhoto: res.data.profileImgUrl,
         userHasAlbums:false
       })
     })

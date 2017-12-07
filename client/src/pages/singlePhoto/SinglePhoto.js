@@ -65,7 +65,7 @@ class SinglePhoto extends Component {
         userName:res.data.owner.userName,
         photoObj:res.data,
         likesCount: res.data.likes.length,
-        imageUploadId:res.data.imageUrl,
+        imageUploadId:res.data.imageUploadId,
         dateAdded:res.data.dateUpdated
       })
     //   console.log(this.state.userId)
