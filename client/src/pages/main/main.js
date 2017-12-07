@@ -56,7 +56,7 @@ class Main extends Component{
 
                       <hr/>
 
-                        <h4>Most Liked Photos</h4>
+                        <h4>Most Recent Photos</h4>
 
                       {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
 
