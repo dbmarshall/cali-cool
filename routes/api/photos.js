@@ -14,6 +14,5 @@ router.route("/:id")
   
 router.route("/:id/comments")
   .post(photosController.insertCommentIntoPhotoArray)
-  // .get(photosController.getAllPhotoComments)
 
 module.exports = router;

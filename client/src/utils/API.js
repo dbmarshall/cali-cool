@@ -79,11 +79,6 @@ export default {
     return axios.post("/api/photos/" + commentData.photoId + "/comments", commentData)
   },
 
-  // getComments: function(photoId) {
-  //   console.log(photoId)
-  //   return axios.get("/api/photos/" + photoId.id + "/comments")
-  // },
-  // second test
   insertCommentToAlbum: function(commentData) {
     console.log(commentData)
     return axios.post("/api/albums/" + commentData.albumId + "/comments", commentData)
