@@ -51,7 +51,8 @@ class SinglePhoto extends Component {
     API.getAllPhotoData(
     { id:this.state.photoId })
     .then(res => {
-      console.log("singe page data", res.data.comments);
+      // console.log("singe page data", res.data.comments);
+      console.log(res.data)
       this.setState({
         comments:res.data.comments,
         photoTitle: res.data.title,

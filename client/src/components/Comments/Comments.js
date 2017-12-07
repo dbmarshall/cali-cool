@@ -18,10 +18,10 @@ class Comments extends Component {
     comments:[]
   }
 
-  componentDidMount(){
-    console.log("comment component")
+  // componentDidMount(){
+  //   console.log("comment component")
    
-  }
+  // }
 
   componentWillReceiveProps(nextProps){
       // console.log(nextProps.commentsObj)

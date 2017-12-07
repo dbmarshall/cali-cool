@@ -25,6 +25,7 @@ class User extends Component {
   getUserDetails() {
     API.getUserProfile({id: this.state.userId})
     .then(res => {
+      console.log(res.data)
       this.setState({
         profileTitle: res.data.userName,
         profilePhoto: res.data.profilePicture,
@@ -43,7 +44,7 @@ class User extends Component {
         this.setState({ 
         userAlbums: res.data,
         profileTitle: res.data[0].owner.firstName,
-        profilePhoto: res.data[0].owner.profilePicture,
+        profilePhoto: res.data[0].owner.profileImgUrl,
         userHasAlbums: true
         })
         : this.getUserDetails()
