@@ -61,7 +61,6 @@ class Header extends Component {
   getSessionData = event => {
     API.sessionData()
     .then(res => {
-      console.log(res.data);
       const isLoggedIn =res.data.loggedIn;
       const loggedInUser = res.data.userName
       const mongoId = res.data.userId
