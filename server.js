@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Passport ==============================
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use( session( { secret: keys.secret,
+app.use( session( { secret: "crazystring",
                     cookie: { maxAge: 900000 },
                     rolling: true,
                     resave: true, 

@@ -12,7 +12,8 @@ const albumMini = {
 
 const header = {
   color: "white",
-  margin: "5px"
+  margin: "5px",
+  fontSize: "25px"
 }
 
 

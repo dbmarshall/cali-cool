@@ -52,7 +52,8 @@ export default {
     return axios.post("/api/users/" + userId + "/photos/new", photoData)
   },
 
-  getSinglePhotoData: function(photoId) {
+  // Rename getAllPhotoData
+  getAllPhotoData: function(photoId) {
     // console.log(photoId)
     return axios.get("/api/photos/" + photoId.id)
   },
@@ -67,7 +68,8 @@ export default {
     return axios.delete("/api/photos/" + photoId)
   },
 
-  createPhotoComment: function(commentData) {
+  // Create comment for albums or photos
+  createComment: function(commentData) {
     console.log(commentData);
     return axios.post("/api/users/" + commentData.userId + "/comments", commentData )
   },
@@ -77,7 +79,12 @@ export default {
     return axios.post("/api/photos/" + commentData.photoId + "/comments", commentData)
   },
 
-  getComments: function(photoId) {
+  insertCommentToAlbum: function(commentData) {
+    console.log(commentData)
+    return axios.post("/api/albums/" + commentData.albumId + "/comments", commentData)
+  },
+  // third, may not need
+  getAlbumComments: function(photoId) {
     console.log(photoId)
     return axios.get("/api/photos/" + photoId.id + "/comments")
   },
