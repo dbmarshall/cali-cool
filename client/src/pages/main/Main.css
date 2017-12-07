@@ -10,22 +10,21 @@
 .panel-heading h1, 
 .panel-heading p {
   font-family: Arial Black, Arial Bold, Gadget, sans-serif;
-  font-size: 24px;
   font-style: normal;
   font-variant: normal;
   font-weight: 500;
   color: #fff;
-  /*-webkit-text-stroke: 1px #666;*/
+  /*-webkit-text-stroke: 1px #555;*/
   text-shadow:
-    1px 1px 0 #666,
-    -1px -1px 0 #666,  
-    1px -1px 0 #666,
-    -1px 1px 0 #666,
-    1px 1px 0 #666;
+    1px 1px 0 #555,
+    -1px -1px 0 #555,  
+    1px -1px 0 #555,
+    -1px 1px 0 #555,
+    1px 1px 0 #555;
 }
 .panel-heading h1 {
-  font-size: 40px;
-  line-height: 1em;
+  font-size: 50px;
+  line-height: .75em;
 }
 .panel-heading p {
   font-size: 20px;
