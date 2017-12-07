@@ -64,9 +64,9 @@ class Comments extends Component {
                   { this.props.commentsObj.map((comment , i) => {
                     return (
                       <ListGroupItem key={comment._id}>
-                        <p> Username: <span>{comment.user.userName}</span><span> | </span> Date: <span>{comment.dateCreated}</span>
+                        <p><span>{comment.user.userName}</span><span> | </span> Date: <span>{comment.dateCreated}</span>
                         </p>
-                        <p>Comment: <span> {comment.comment}</span> </p>
+                        <p>{comment.comment}</p>
                       </ListGroupItem>
                     )
                   })}
