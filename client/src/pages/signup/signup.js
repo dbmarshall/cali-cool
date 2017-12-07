@@ -62,7 +62,7 @@ class Signup extends Component {
                     {/* start page content*/}
 
                       <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-sm-8">
 
                           <form onSubmit={this.handleFormSubmit}>
 
@@ -111,13 +111,13 @@ class Signup extends Component {
                                 onChange={this.handleInputChange}
                                 value={this.state.passWord}  />
                             </div>
-                            <button type="submit" className="btn btn-warning btn-lg">Signup</button>
+                            <button type="submit" className="btn btn-primary">Signup</button>
                         
                           </form>
 
                           <hr/>
 
-                          <p>Already have an account?  
+                          <p>Already have an account? &nbsp; 
                           <Link to="/login">Login</Link></p>
 
                           <p>Or go the <Link to="/">home</Link> page.</p>
