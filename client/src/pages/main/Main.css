@@ -14,13 +14,13 @@
   font-variant: normal;
   font-weight: 500;
   color: #fff;
-  /*-webkit-text-stroke: 1px #555;*/
+  /*-webkit-text-stroke: 1px #444;*/
   text-shadow:
-    1px 1px 0 #555,
-    -1px -1px 0 #555,  
-    1px -1px 0 #555,
-    -1px 1px 0 #555,
-    1px 1px 0 #555;
+    1px 1px 0 #444,
+    -1px -1px 0 #444,  
+    1px -1px 0 #444,
+    -1px 1px 0 #444,
+    1px 1px 0 #444;
 }
 .panel-heading h1 {
   font-size: 50px;
