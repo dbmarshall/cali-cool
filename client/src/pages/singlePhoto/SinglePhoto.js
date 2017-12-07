@@ -3,6 +3,7 @@ import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 import Like from "../../components/Like";
 import Comments from "../../components/Comments";
 import API from "../../utils/API";
+import Timestamp  from 'react-timestamp';
 
 const btnStyle = {
   marginTop: "5px",
@@ -63,7 +64,8 @@ class SinglePhoto extends Component {
         userName:res.data.owner.userName,
         photoObj:res.data,
         likesCount: res.data.likes.length,
-        imageUploadId:res.data.imageUploadId
+        imageUploadId:res.data.imageUrl,
+        dateAdded:res.data.dateUpdated
       })
     //   console.log(this.state.userId)
     //   console.log("user auth on single", this.state.userAuth);
@@ -180,8 +182,7 @@ class SinglePhoto extends Component {
             <div className="col-md-10 col-md-offset-1">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>Cali.Cool</h1>
-                  <p>A growing visual record of what's going down in our state</p>
+                  <h1>{this.state.photoTitle}</h1>
                 </div>
                 <div className="panel-body">
 
@@ -189,80 +190,83 @@ class SinglePhoto extends Component {
                     <div className="col-md-12">
                     {/* start page content*/}
 
-                      <Grid>
-                        <Row>
-                          <Col>
-                             <h2>{this.state.photoTitle}</h2>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xs={6} md={6}>
-                            <Image src={this.state.image} rounded={true} responsive={true}/>
-                            <p>{this.state.caption}</p>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xs={6} md={6}>
-                           <p> 
-                            <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
-                            by 
-                              <span>
-                               <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
-                               </span>
-                              <span>date added</span> 
-                            </p>
-                          </Col>
-                        </Row>
-                         <Row>
-                          <Col xs={6} md={6} style={likeTemp}>
-                              <Like position={{marginLeft: "10px"}}
-                                likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
-                                updateLike={this.updateLike}
-                                isLiked={this.doesUserLikeAlbum()}>
-                              </Like>
-                          </Col>
-                        </Row>
-                        { (this.state.userId === this.state.userAuth) ? (
-                          <div>
-                              <Row>
-                              <Col xs={6} md={6}>
-                                  <Button 
-                                    bsStyle="primary" 
-                                    bsSize="large" 
-                                    style={btnStyle}
-                                    onClick={this.handleSetProfilePhoto}
-                                    value={this.state.photoId}
-                                    name="setProfile"
-                                    >
-                                    Set as Profile Photo</Button>
-                              </Col>
-                              </Row>
-                              <Row>
+                     <div>
+                        <Grid>
+                          <Row>
+                            <Col>
+                               <h2>{this.state.photoTitle}</h2>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6} md={6}>
+                              <Image src={this.state.image} rounded={true} responsive={true}/>
+                              <p>{this.state.caption}</p>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6} md={6}>
+                             <p> 
+                              <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
+                              by 
+                                <span>
+                                 <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
+                                 </span>
+                                <span><Timestamp time={this.state.dateAdded} format='ago' />
+                                {}</span> 
+                              </p>
+                            </Col>
+                          </Row>
+                           <Row>
+                            <Col xs={6} md={6} style={likeTemp}>
+                                <Like position={{marginLeft: "10px"}}
+                                  likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
+                                  updateLike={this.updateLike}
+                                  isLiked={this.doesUserLikeAlbum()}>
+                                </Like>
+                            </Col>
+                          </Row>
+                          { (this.state.ownerId === this.state.userAuth) ? (
+                            <div>
+                                <Row>
                                 <Col xs={6} md={6}>
                                     <Button 
-                                    bsStyle="primary" 
-                                    bsSize="large" 
-                                    style={btnStyle}
-                                    value={this.state.imageUploadId}
-                                    onClick={this.handleDelete}
-                                    >Delete
-                                    Photo</Button>
+                                      bsStyle="primary" 
+                                      bsSize="large" 
+                                      style={btnStyle}
+                                      onClick={this.handleSetProfilePhoto}
+                                      value={this.state.photoId}
+                                      name="setProfile"
+                                      >
+                                      Set as Profile Photo</Button>
                                 </Col>
-                              </Row>
-                              </div>
-                          ) : 
-                            (null)      
-                        }
-                          <div>
-                              <Comments 
-                                addComment={this.handleInputChange}
-                                commentsObj={this.state.comments}
-                                userAuth={sessionStorage.getItem(sessionKeyUserId)}
-                                commentContent={this.state.commentContent}
-                                submit={this.handleFormSubmit}
-                              />
-                          </div>
-                      </Grid>
+                                </Row>
+                                <Row>
+                                  <Col xs={6} md={6}>
+                                      <Button 
+                                      bsStyle="primary" 
+                                      bsSize="large" 
+                                      style={btnStyle}
+                                      value={this.state.imageUploadId}
+                                      onClick={this.handleDelete}
+                                      >Delete
+                                      Photo</Button>
+                                  </Col>
+                                </Row>
+                                </div>
+                            ) : 
+                              (null)      
+                          }
+                            <div>
+                                <Comments 
+                                  addComment={this.handleInputChange}
+                                  commentsObj={this.state.comments}
+                                  userAuth={sessionStorage.getItem(sessionKeyUserId)}
+                                  commentContent={this.state.commentContent}
+                                  submit={this.handleFormSubmit}
+                                />
+                            </div>
+                        </Grid>
+                      </div>
 
                     {/* end page content*/}
                     </div>

@@ -73,6 +73,11 @@ module.exports = {
     .findById(req.params.id)
     .populate({
       path: 'comments',
+      options: {
+        sort: {
+          dateUpdated: -1
+        }
+      },
       populate: {
         path: 'user',
         model: 'Users'

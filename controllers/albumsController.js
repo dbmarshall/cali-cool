@@ -20,6 +20,11 @@ module.exports = {
       .populate("owner")
       .populate({
         path: 'comments',
+        options: {
+          sort: {
+            dateUpdated: -1
+          }
+        },
         populate: {
           path: 'user',
           model: 'Users'

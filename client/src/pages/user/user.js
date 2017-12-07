@@ -23,6 +23,18 @@ class User extends Component {
     this.getUserInfo()
   }
 
+  getUserDetails() {
+    API.getUserProfile({id: this.state.userId})
+    .then(res => {
+      this.setState({
+        profileTitle: res.data.userName,
+        profilePhoto: res.data.profilePicture,
+        userHasAlbums:false
+      })
+    })
+    .catch(err => (console.log(err)))
+  }
+
   getUserInfo = event => {
    API.getUserProfileData({
       id: this.state.userId })
@@ -32,12 +44,10 @@ class User extends Component {
         this.setState({ 
         userAlbums: res.data,
         profileTitle: res.data[0].owner.firstName,
-        profilePhoto: res.data[0].owner.profileImgUrl,
+        profilePhoto: res.data[0].owner.profilePicture,
         userHasAlbums: true
         })
-        : this.setState({
-          userHasAlbums: false
-        })
+        : this.getUserDetails()
      })
      .catch(err => console.log(err));
   }
@@ -53,8 +63,7 @@ class User extends Component {
             <div className="col-md-10 col-md-offset-1">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>Cali.Cool</h1>
-                  <p>A growing visual record of what's going down in our state</p>
+                  <h1>{this.state.profileTitle}</h1>
                 </div>
                 <div className="panel-body">
 
@@ -62,39 +71,43 @@ class User extends Component {
                     <div className="col-md-12">
                     {/* start page content*/}
 
-                      <Grid>
-                        <Row>
-                          <Button href="/publish" bsStyle="primary">Add Photos</Button>
-                        </Row>
-                      </Grid>
-                      {this.state.userHasAlbums ? (
-                        <div>
-                          <div>
-                            <h2>{this.state.profileTitle}'s Page</h2>
-                            <Grid>
+                      <div>
+                        {(this.state.userId === sessionStorage.getItem("userId")) ? (
+                             <Grid>
                               <Row>
-                                <Col xs={6} md={3}>
-                                  <Image 
-                                  src={this.state.profilePhoto} 
-                                  rounded={true} 
-                                  responsive={true}/>
-                                </Col>
+                                <Button href="/publish" bsStyle="primary">Add Photos</Button>
                               </Row>
                             </Grid>
-                          </div>
-                          <div>       
-                            <AlbumMini 
-                              albums={this.state.userAlbums} />
+                          ) : (null)}
+                         </div>
                             <div>
-                              <h1>Default Album componet to go here</h1>
+                              <div>
+                                <h2>{this.state.profileTitle}'s Page</h2>
+                                <Grid>
+                                  <Row>
+                                    <Col xs={6} md={3}>
+                                      <Image 
+                                      src={this.state.profilePhoto} 
+                                      rounded={true} 
+                                      responsive={true}/>
+                                    </Col>
+                                  </Row>
+                                </Grid>
+                              </div>
+                              {this.state.userHasAlbums ? (
+                               <div>       
+                                <AlbumMini 
+                                  albums={this.state.userAlbums} />
+                                <div>
+                                  <h1>Default Album componet to go here</h1>
+                                </div>
+                              </div>
+                              ) : (
+                            <div>
+                              <h2> It looks like you don't have any albums! Add some photos</h2>
                             </div>
-                          </div>
+                          )}
                         </div>
-                        ) : (
-                        <div>
-                          <h2> It looks like you don't have any albums! Add some photos</h2>
-                        </div>
-                      )}
 
                     {/* end page content*/}
                     </div>
