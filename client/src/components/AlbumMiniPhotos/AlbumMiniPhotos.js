@@ -3,7 +3,7 @@ import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 const albumPhotoStyle = {
   width: "20%",
-  "max-height": "80px",
+  "maxHeight": "80px",
   margin: "0",
   padding:"0",
   float: "left",

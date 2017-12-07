@@ -10,7 +10,7 @@ class Signup extends Component {
     userName:"",
     email: "",
     passWord: "",
-    defaultProfilePhoto: "https://static.pexels.com/photos/258447/pexels-photo-258447.jpeg",
+    defaultProfilePhoto: "ucb/placeholder-profilephoto",
     authenticationError: ""
   }
 
