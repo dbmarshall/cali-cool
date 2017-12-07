@@ -46,63 +46,93 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="container">
-        <form onSubmit={this.handleFormSubmit}>
-           <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
-              <input 
-              type="text" 
-              className="form-control" 
-              name="firstName"
-              onChange={this.handleInputChange}
-              value={this.state.firstName} />
-          </div>
-          <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input 
-              type="text" 
-              className="form-control" 
-              name="lastName"
-              onChange={this.handleInputChange}
-              value={this.state.lastName} />
-          </div>
-           <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input 
-              type="text" 
-              className="form-control" 
-              name="email"
-              onChange={this.handleInputChange}
-              value={this.state.email} />
-          </div>
-          <div className="form-group">
-              <label htmlFor="userName">Create Username</label>
-              <input 
-              type="text" 
-              className="form-control" 
-              name="userName"
-              onChange={this.handleInputChange}
-              value={this.state.userName}  />
-          </div>
-          <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input 
-              type="password" 
-              className="form-control" 
-              name="passWord"
-              onChange={this.handleInputChange}
-              value={this.state.passWord}  />
-          </div>
-          <button type="submit" className="btn btn-warning btn-lg">Signup</button>
-        </form>
-        <hr/>
-        <p>Already have an account? 
-        <Link to="/login">Login</Link></p>
-        <p>Or go <Link to="/">home</Link>.</p>
-    </div>
-      )
-  }
+      <div>
 
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h1>Sign Up</h1>
+                </div>
+                <div className="panel-body">
+
+                  <div className="row">
+                    <div className="col-md-12">
+                    {/* start page content*/}
+
+                      <form onSubmit={this.handleFormSubmit}>
+
+                       <div className="form-group">
+                          <label htmlFor="firstName">First Name</label>
+                          <input 
+                          type="text" 
+                          className="form-control" 
+                          name="firstName"
+                          onChange={this.handleInputChange}
+                          value={this.state.firstName} />
+                      </div>
+                      <div className="form-group">
+                          <label htmlFor="lastName">Last Name</label>
+                          <input 
+                          type="text" 
+                          className="form-control" 
+                          name="lastName"
+                          onChange={this.handleInputChange}
+                          value={this.state.lastName} />
+                      </div>
+                       <div className="form-group">
+                          <label htmlFor="email">Email</label>
+                          <input 
+                          type="text" 
+                          className="form-control" 
+                          name="email"
+                          onChange={this.handleInputChange}
+                          value={this.state.email} />
+                      </div>
+                      <div className="form-group">
+                          <label htmlFor="userName">Create Username</label>
+                          <input 
+                          type="text" 
+                          className="form-control" 
+                          name="userName"
+                          onChange={this.handleInputChange}
+                          value={this.state.userName}  />
+                      </div>
+                      <div className="form-group">
+                          <label htmlFor="password">Password</label>
+                          <input 
+                          type="password" 
+                          className="form-control" 
+                          name="passWord"
+                          onChange={this.handleInputChange}
+                          value={this.state.passWord}  />
+                      </div>
+                      <button type="submit" className="btn btn-warning btn-lg">Signup</button>
+                    
+                    </form>
+
+                    <hr/>
+
+                    <p>Already have an account?  
+                    <Link to="/login">Login</Link></p>
+
+                    <p>Or go the <Link to="/">home</Link> page.</p>
+
+                    {/* end page content*/}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>    
+        </div>
+
+      </div>
+    );
+  }
 }
 
 export default Signup;

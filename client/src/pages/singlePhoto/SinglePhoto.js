@@ -175,88 +175,113 @@ class SinglePhoto extends Component {
   render(){
 
     return (
-      <div className= "container">
-         <div>
-            <Grid>
-              <Row>
-                <Col>
-                   <h2>{this.state.photoTitle}</h2>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={6} md={6}>
-                  <Image src={this.state.image} rounded={true} responsive={true}/>
-                  <p>{this.state.caption}</p>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={6} md={6}>
-                 <p> 
-                  <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
-                  by 
-                    <span>
-                     <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
-                     </span>
-                    <span><Timestamp time={this.state.dateAdded} format='ago' />
-                    {}</span> 
-                  </p>
-                </Col>
-              </Row>
-               <Row>
-                <Col xs={6} md={6} style={likeTemp}>
-                    <Like position={{marginLeft: "10px"}}
-                      likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
-                      updateLike={this.updateLike}
-                      isLiked={this.doesUserLikeAlbum()}>
-                    </Like>
-                </Col>
-              </Row>
-              { (this.state.ownerId === this.state.userAuth) ? (
-                <div>
-                    <Row>
-                    <Col xs={6} md={6}>
-                        <Button 
-                          bsStyle="primary" 
-                          bsSize="large" 
-                          style={btnStyle}
-                          onClick={this.handleSetProfilePhoto}
-                          value={this.state.photoId}
-                          name="setProfile"
-                          >
-                          Set as Profile Photo</Button>
-                    </Col>
-                    </Row>
-                    <Row>
-                      <Col xs={6} md={6}>
-                          <Button 
-                          bsStyle="primary" 
-                          bsSize="large" 
-                          style={btnStyle}
-                          value={this.state.imageUploadId}
-                          onClick={this.handleDelete}
-                          >Delete
-                          Photo</Button>
-                      </Col>
-                    </Row>
-                    </div>
-                ) : 
-                  (null)      
-              }
-                <div>
-                    <Comments 
-                      addComment={this.handleInputChange}
-                      commentsObj={this.state.comments}
-                      userAuth={sessionStorage.getItem(sessionKeyUserId)}
-                      commentContent={this.state.commentContent}
-                      submit={this.handleFormSubmit}
-                    />
+      <div>
+
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h1>{this.state.photoTitle}</h1>
                 </div>
-            </Grid>
-          </div>
+                <div className="panel-body">
+
+                  <div className="row">
+                    <div className="col-md-12">
+                    {/* start page content*/}
+
+                     <div>
+                        <Grid>
+                          <Row>
+                            <Col>
+                               <h2>{this.state.photoTitle}</h2>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6} md={6}>
+                              <Image src={this.state.image} rounded={true} responsive={true}/>
+                              <p>{this.state.caption}</p>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6} md={6}>
+                             <p> 
+                              <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
+                              by 
+                                <span>
+                                 <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
+                                 </span>
+                                <span><Timestamp time={this.state.dateAdded} format='ago' />
+                                {}</span> 
+                              </p>
+                            </Col>
+                          </Row>
+                           <Row>
+                            <Col xs={6} md={6} style={likeTemp}>
+                                <Like position={{marginLeft: "10px"}}
+                                  likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
+                                  updateLike={this.updateLike}
+                                  isLiked={this.doesUserLikeAlbum()}>
+                                </Like>
+                            </Col>
+                          </Row>
+                          { (this.state.ownerId === this.state.userAuth) ? (
+                            <div>
+                                <Row>
+                                <Col xs={6} md={6}>
+                                    <Button 
+                                      bsStyle="primary" 
+                                      bsSize="large" 
+                                      style={btnStyle}
+                                      onClick={this.handleSetProfilePhoto}
+                                      value={this.state.photoId}
+                                      name="setProfile"
+                                      >
+                                      Set as Profile Photo</Button>
+                                </Col>
+                                </Row>
+                                <Row>
+                                  <Col xs={6} md={6}>
+                                      <Button 
+                                      bsStyle="primary" 
+                                      bsSize="large" 
+                                      style={btnStyle}
+                                      value={this.state.imageUploadId}
+                                      onClick={this.handleDelete}
+                                      >Delete
+                                      Photo</Button>
+                                  </Col>
+                                </Row>
+                                </div>
+                            ) : 
+                              (null)      
+                          }
+                            <div>
+                                <Comments 
+                                  addComment={this.handleInputChange}
+                                  commentsObj={this.state.comments}
+                                  userAuth={sessionStorage.getItem(sessionKeyUserId)}
+                                  commentContent={this.state.commentContent}
+                                  submit={this.handleFormSubmit}
+                                />
+                            </div>
+                        </Grid>
+                      </div>
+
+                    {/* end page content*/}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>    
+        </div>
+
       </div>
-      );
+    );
   }
 }
-
 
 export default SinglePhoto;

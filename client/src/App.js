@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Signup from "./pages/signup";
 import Publish from "./pages/Publish";
 import User from "./pages/user";
@@ -23,6 +24,7 @@ const App = () =>
         <Route exact path="/photo/:id" component={SinglePhoto} />
         <Route exact path="/search/results" component={SearchResult} />
       </Switch>
+      <Footer />
     </div>
   </Router>;
 
