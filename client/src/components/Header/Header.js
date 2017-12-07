@@ -15,7 +15,8 @@ class Header extends Component {
     passWord:"",
     isLoggedIn: false,
     displayUser:"",
-    userId:""
+    userId:"",
+    authenticationError: ""
     }
   };
 
@@ -23,9 +24,15 @@ class Header extends Component {
     this.setState({open: true})}
 
   closeModal = event => {
-      this.setState({ open: false })
-      window.location.reload()
-    }
+    this.resetModalState();
+    window.location.reload()
+  }
+
+  resetModalState = event => {
+    this.setState({ 
+      open: false,
+      authenticationError: "" })
+  }
  
   saveAndClose = event => {
     this.setState({ open: false })};
@@ -67,8 +74,6 @@ class Header extends Component {
       }
       else {
         sessionStorage.clear();
-        console.log("user isn't logged in");
-        sessionStorage.clear();
       }
     })
     .catch(err => console.log(err))
@@ -90,9 +95,12 @@ class Header extends Component {
     })
     .then(res => {
       this.closeModal();
-      
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      this.setState({
+        authenticationError: err.response.data.errMessage
+      })
+    });
   };
 
   render(){
@@ -160,64 +168,75 @@ class Header extends Component {
 
         </Navbar>
         
-        <Modal
-          show={this.state.open}
-          onHide={this.closeModal}
-          aria-labelledby="ModalHeader"
-          >
+      <Modal
+        show={this.state.open}
+        onHide={this.resetModalState}
+        aria-labelledby="ModalHeader"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id='ModalHeader'>Login into your Account</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form 
+          horizontal
+          onSubmit={this.handleFormSubmit}>
 
-          <Modal.Header closeButton>
-            <Modal.Title id='ModalHeader'>Log In to Your Account</Modal.Title>
-          </Modal.Header>
 
-          <Modal.Body>
-            <Form 
-            horizontal
-            onSubmit={this.handleFormSubmit}>
-              <FormGroup controlId="formHorizontalUserName"
-              >
-                <Col componentClass={ControlLabel} sm={2}>
-                  Username
-                </Col>
-                <Col sm={10}>
-                  <FormControl 
-                  type="text" 
-                  placeholder="Username"
-                  name="userName"
-                  onChange={this.handleInputChange}
-                  value={this.state.userName}
-                   />
-                </Col>
-              </FormGroup>
+          { this.state.authenticationError &&
+            <FormGroup>
+              <Col sm={12}>
+                <div className="alert alert-danger" role="alert">
+                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;
+                  <span className="sr-only">Error:</span>
+                   {this.state.authenticationError}
+                </div>
+              </Col>
+            </FormGroup>
+          }
 
-              <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={2}>
-                  Password
-                </Col>
-                <Col sm={10}>
-                  <FormControl 
-                  type="password" 
-                  placeholder="Password"
-                  name="passWord"
-                  onChange={this.handleInputChange}
-                  value={this.state.passWord} />
-                </Col>
-              </FormGroup>
 
-              <FormGroup>
-                <Col smOffset={2} sm={10}>
-                  <Button type="submit" className="btn btn-primary">
-                    Login
-                  </Button>
-                </Col>
-              </FormGroup>
-            </Form>
-          </Modal.Body>
+            <FormGroup controlId="formHorizontalUserName"
+            >
+              <Col componentClass={ControlLabel} sm={2}>
+                Username
+              </Col>
+              <Col sm={10}>
+                <FormControl 
+                type="text" 
+                placeholder="Username"
+                name="userName"
+                onChange={this.handleInputChange}
+                value={this.state.userName}
+                 />
+              </Col>
+            </FormGroup>
 
-        </Modal>
+            <FormGroup controlId="formHorizontalPassword">
+              <Col componentClass={ControlLabel} sm={2}>
+                Password
+              </Col>
+              <Col sm={10}>
+                <FormControl 
+                type="password" 
+                placeholder="Password"
+                name="passWord"
+                onChange={this.handleInputChange}
+                value={this.state.passWord} />
+              </Col>
+            </FormGroup>
 
-      </div>
-    );
+            <FormGroup>
+              <Col smOffset={2} sm={10}>
+                <Button type="submit">
+                  Login
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </Modal.Body>
+      </Modal>
+  </div>
+      );
   }
 }
 
