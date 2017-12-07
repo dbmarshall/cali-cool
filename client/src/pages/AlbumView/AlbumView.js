@@ -112,7 +112,9 @@ handleFormSubmit = event => {
             <div className="col-md-10 col-md-offset-1">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>{this.state.albumObj.title}</h1>
+                  <h1>
+                    <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
+                    {this.state.albumObj.title}</h1>
                 </div>
                 <div className="panel-body">
 
@@ -121,7 +123,6 @@ handleFormSubmit = event => {
                     {/* start page content*/}
 
                       <div>
-                        <h3>{this.state.albumObj.title}</h3>
                         <h4>
                           <a href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
                             <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
@@ -132,15 +133,16 @@ handleFormSubmit = event => {
                       <div>
                         {this.state.albumPhotos.length && <AlbumPreview photos={this.state.albumPhotos}/>}
                       </div>
-                      <div style={{backgroundColor : 'rgba(0, 0, 0, .75)',position: "relative"}}>
+                      <div style={{backgroundColor : 'rgba(0, 0, 0, .75)'}}>
 
-                      <Like position={{marginLeft: "10px"}}
-                        likesCount={this.state.albumObj.likes && this.state.albumObj.likes.length}
-                        updateLike={this.updateLike}
-                        isLiked={this.doesUserLikeAlbum()}>
-                      </Like>
-                        
+                        <Like position={{marginLeft: "10px"}}
+                          likesCount={this.state.albumObj.likes && this.state.albumObj.likes.length}
+                          updateLike={this.updateLike}
+                          isLiked={this.doesUserLikeAlbum()}>
+                        </Like>
+                          
                       </div>
+
                       <Comments 
                         addComment={this.handleInputChange}
                         commentsObj={this.state.comments}
@@ -148,7 +150,6 @@ handleFormSubmit = event => {
                         commentContent={this.state.commentContent}
                         submit={this.handleFormSubmit}
                       />
-                      <hr/>
 
                     {/* end page content*/}
                     </div>

@@ -182,7 +182,10 @@ class SinglePhoto extends Component {
             <div className="col-md-10 col-md-offset-1">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>{this.state.photoTitle}</h1>
+                  <h1>
+                    <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                    {this.state.photoTitle}
+                  </h1>
                 </div>
                 <div className="panel-body">
 
@@ -190,25 +193,22 @@ class SinglePhoto extends Component {
                     <div className="col-md-12">
                     {/* start page content*/}
 
-                     <div>
-                        <Grid>
+                      
+                        <Grid style={{maxWidth: '100%'}}>
                           <Row>
                             <Col>
-                               <h2>{this.state.photoTitle}</h2>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col xs={6} md={6}>
                               <Image src={this.state.image} rounded={true} responsive={true}/>
                               <p>{this.state.caption}</p>
                             </Col>
                           </Row>
                           <Row>
-                            <Col xs={6} md={6}>
+                            <Col>
                              <p> 
-                              <a href={'/album/' + this.state.albumId}>{this.state.albumName} </a> 
-                              by 
-                                <span>
+                              <a href={'/album/' + this.state.albumId}>
+                                <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
+                                {this.state.albumName}
+                              </a>&nbsp;by  
+                                <span> 
                                  <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
                                  </span>
                                 <span><Timestamp time={this.state.dateAdded} format='ago' />
@@ -217,7 +217,7 @@ class SinglePhoto extends Component {
                             </Col>
                           </Row>
                            <Row>
-                            <Col xs={6} md={6} style={likeTemp}>
+                            <Col style={likeTemp}>
                                 <Like position={{marginLeft: "10px"}}
                                   likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
                                   updateLike={this.updateLike}
@@ -228,7 +228,7 @@ class SinglePhoto extends Component {
                           { (this.state.ownerId === this.state.userAuth) ? (
                             <div>
                                 <Row>
-                                <Col xs={6} md={6}>
+                                <Col>
                                     <Button 
                                       bsStyle="primary" 
                                       bsSize="large" 
@@ -241,7 +241,7 @@ class SinglePhoto extends Component {
                                 </Col>
                                 </Row>
                                 <Row>
-                                  <Col xs={6} md={6}>
+                                  <Col>
                                       <Button 
                                       bsStyle="primary" 
                                       bsSize="large" 
@@ -257,16 +257,15 @@ class SinglePhoto extends Component {
                               (null)      
                           }
                             <div>
-                                <Comments 
-                                  addComment={this.handleInputChange}
-                                  commentsObj={this.state.comments}
-                                  userAuth={sessionStorage.getItem(sessionKeyUserId)}
-                                  commentContent={this.state.commentContent}
-                                  submit={this.handleFormSubmit}
-                                />
+                              <Comments 
+                                addComment={this.handleInputChange}
+                                commentsObj={this.state.comments}
+                                userAuth={sessionStorage.getItem(sessionKeyUserId)}
+                                commentContent={this.state.commentContent}
+                                submit={this.handleFormSubmit}
+                              />
                             </div>
                         </Grid>
-                      </div>
 
                     {/* end page content*/}
                     </div>
