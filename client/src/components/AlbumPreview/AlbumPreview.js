@@ -12,8 +12,8 @@ const styles = {
     color: "white",
     fontSize: "1.1em",
     position: "absolute", 
-    bottom: "60px", 
-    left: "110px"
+    bottom: "-10px", 
+    left: "90px"
   },
   userLink: {
     fontSize: "1.2em", 
@@ -30,8 +30,8 @@ const styles = {
   },
   likeLink: {
     position: "absolute", 
-    bottom: "60px", 
-    left: "20px"
+    bottom: "-10px", 
+    // left: "20px"
   }
 }
 
@@ -175,8 +175,8 @@ class AlbumPreview extends Component{
             onClickNext={this.gotoNext}
             currentImage={this.state.currentImageIndex}
             isOpen={this.state.lightboxIsOpen}
-            backdropClosesModal={true}
-            showCloseButton={false} 
+            backdropClosesModal={false}
+            showCloseButton={true} 
             customControls={this.getCustomControls()}
           />
       </div>
