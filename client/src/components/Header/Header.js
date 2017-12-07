@@ -125,7 +125,7 @@ class Header extends Component {
 
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/">Cali.Cool</a>
+              <a href="/">Cali.cool</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

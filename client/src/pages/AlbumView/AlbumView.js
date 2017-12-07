@@ -109,7 +109,7 @@ handleFormSubmit = event => {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h1>
