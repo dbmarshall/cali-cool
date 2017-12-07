@@ -70,64 +70,69 @@ class Signup extends Component {
                           </div>
                         </div>
                       }
+                      <div className="row">
+                        <div className="col-sm-8">
 
-                      <form onSubmit={this.handleFormSubmit}>
+                          <form onSubmit={this.handleFormSubmit}>
 
-                       <div className="form-group">
-                          <label htmlFor="firstName">First Name</label>
-                          <input 
-                          type="text" 
-                          className="form-control" 
-                          name="firstName"
-                          onChange={this.handleInputChange}
-                          value={this.state.firstName} />
-                      </div>
-                      <div className="form-group">
-                          <label htmlFor="lastName">Last Name</label>
-                          <input 
-                          type="text" 
-                          className="form-control" 
-                          name="lastName"
-                          onChange={this.handleInputChange}
-                          value={this.state.lastName} />
-                      </div>
-                       <div className="form-group">
-                          <label htmlFor="email">Email</label>
-                          <input 
-                          type="text" 
-                          className="form-control" 
-                          name="email"
-                          onChange={this.handleInputChange}
-                          value={this.state.email} />
-                      </div>
-                      <div className="form-group">
-                          <label htmlFor="userName">Create Username</label>
-                          <input 
-                          type="text" 
-                          className="form-control" 
-                          name="userName"
-                          onChange={this.handleInputChange}
-                          value={this.state.userName}  />
-                      </div>
-                      <div className="form-group">
-                          <label htmlFor="password">Password</label>
-                          <input 
-                          type="password" 
-                          className="form-control" 
-                          name="passWord"
-                          onChange={this.handleInputChange}
-                          value={this.state.passWord}  />
-                      </div>
-                      <button type="submit" className="btn btn-warning btn-lg">Signup</button>
-                    
-                    </form>
+                            <div className="form-group">
+                                <label htmlFor="firstName">First Name</label>
+                                <input 
+                                type="text" 
+                                className="form-control" 
+                                name="firstName"
+                                onChange={this.handleInputChange}
+                                value={this.state.firstName} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="lastName">Last Name</label>
+                                <input 
+                                type="text" 
+                                className="form-control" 
+                                name="lastName"
+                                onChange={this.handleInputChange}
+                                value={this.state.lastName} />
+                            </div>
+                             <div className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input 
+                                type="text" 
+                                className="form-control" 
+                                name="email"
+                                onChange={this.handleInputChange}
+                                value={this.state.email} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="userName">Create Username</label>
+                                <input 
+                                type="text" 
+                                className="form-control" 
+                                name="userName"
+                                onChange={this.handleInputChange}
+                                value={this.state.userName}  />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input 
+                                type="password" 
+                                className="form-control" 
+                                name="passWord"
+                                onChange={this.handleInputChange}
+                                value={this.state.passWord}  />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Signup</button>
+                        
+                          </form>
 
-                    <hr/>
+                          <hr/>
 
-                    <p>Already have an account?  
-                    <Link to="/login">Login</Link></p>
+                          <p>Already have an account? &nbsp; 
+                          <Link to="/login">Login</Link></p>
 
-                    <p>Or go the <Link to="/">home</Link> page.</p>
+                          <p>Or go the <Link to="/">home</Link> page.</p>
+
+                        </div>
+                      </div>
 
                     {/* end page content*/}
                     </div>

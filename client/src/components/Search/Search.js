@@ -12,17 +12,17 @@ const theme = {
     position: 'relative'
   },
   input: {
-    width: 240,
-    height: 30,
-    padding: '10px 20px',
-    fontFamily: 'Helvetica, sans-serif',
-    fontWeight: 300,
-    fontSize: 16,
-    border: '1px solid #aaa',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4
+    // width: 240,
+    // height: 30,
+    padding: '5px 10px',
+    // fontFamily: 'Arial, Helvetica, sans-serif',
+    // fontWeight: 300,
+    // fontSize: 16,
+    // border: '1px solid #aaa',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8
   },
   inputFocused: {
     outline: 'none'
@@ -37,7 +37,7 @@ const theme = {
   suggestionsContainerOpen: {
     display: 'block',
     position: 'absolute',
-    top: 51,
+    top: 34,
     width: 280,
     border: '1px solid #aaa',
     backgroundColor: '#fff',
@@ -152,32 +152,30 @@ class Search extends Component {
     };
 
     return (
-      <div className="wrapper">
-       <Navbar.Form pullLeft>
-        <FormGroup>
-          <Autosuggest 
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={this.renderSuggestion}
-            inputProps={inputProps}
-            theme={theme}
-          />
-        </FormGroup>
-        {' '}
-        <Button type="submit" onClick={this.searchForAlbums}>Submit</Button>
-      </Navbar.Form>
+      <div>
+        <Navbar.Form style={{marginTop: '0', marginBottom: '0'}}>
+          <FormGroup pullLeft style={{float: 'left', marginRight: '6px'}}>
+            <Autosuggest 
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              getSuggestionValue={this.getSuggestionValue}
+              renderSuggestion={this.renderSuggestion}
+              inputProps={inputProps}
+              theme={theme}
+            />
+          </FormGroup>
+          {' '}
+          <Button type="submit" className="btn btn-primary btn-sm" style={{marginTop: '3px'}} onClick={this.searchForAlbums}>Go</Button>
+        </Navbar.Form>
 
-      {this.state.fireRedirect &&
-        <Redirect to={{
-            pathname: '/search/results',
-            state: { results: this.state.albumSearchResults }
-        }}/>
-      }
-
+        {this.state.fireRedirect &&
+          <Redirect to={{
+              pathname: '/search/results',
+              state: { results: this.state.albumSearchResults }
+          }}/>
+        }
       </div>
-
     );
   }
 }

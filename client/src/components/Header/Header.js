@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Navbar, Nav, NavItem, Modal, Form, FormGroup, Col, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
 import Search from "../Search"
 
 class Header extends Component {
@@ -107,63 +106,67 @@ class Header extends Component {
   render(){
 
     return (
-       <div>
-     <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-            <LinkContainer to="/">
-              <Navbar.Brand 
-              onClick={this.getSessionData}>
-                Cali.Cool
-              </Navbar.Brand>
-            </LinkContainer>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
+      <div>
+
+        <Navbar inverse collapseOnSelect>
+
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="/">Cali.Cool</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+
+          <Navbar.Collapse>
             {this.state.isLoggedIn !== true ? (
+              <Nav pullRight>
+                <Navbar.Text style={{marginTop: '8px', marginLeft: '15px', marginBottom: '0px'}}>
+                  {/*<span style={{color: '#fff'}} className="glyphicon glyphicon-search"></span>*/}
+                  <Search/>
+                </Navbar.Text>
+                <Navbar.Text style={{marginLeft: '15px'}}>
+                  Welcome
+                </Navbar.Text>
+                <LinkContainer to="/signup">
+                  <NavItem eventKey={1}>Signup</NavItem>
+                </LinkContainer>
                 <NavItem 
-                eventKey={1}
-                onClick={this.getSessionData}
-                >Welcome Guest!</NavItem>
-              ) : (
+                  onClick={this.showModal}>
+                  Login
+                </NavItem>
+              </Nav>
+                  ) : (
+              <Nav pullRight>
+                <Navbar.Text style={{marginTop: '8px', marginLeft: '15px', marginBottom: '0px'}}>
+                  {/*<span style={{color: '#fff'}} className="glyphicon glyphicon-search"></span>*/}
+                  <Search/>
+                </Navbar.Text>
                 <LinkContainer to={'/user/' + this.state.userId}>
                   <NavItem 
                   eventKey={1}
                   onClick={this.getSessionData}
-                  >{this.state.displayUser} Account</NavItem>
+                  >
+                    <span style={{marginRight: '5px'}} className="glyphicon glyphicon-user"></span>
+                    {this.state.displayUser}
+                  </NavItem>
                 </LinkContainer>
+                <LinkContainer to="/publish">
+                  <NavItem 
+                  eventKey={2}
+                  onClick={this.getSessionData}
+                  >Publish</NavItem>
+                </LinkContainer>
+                <NavItem 
+                  eventKey={3}
+                  onClick={this.logoutUser}
+                  >Logout
+                  </NavItem>
+                </Nav>
               )}
-          </Nav>
 
-          <Search/>
+          </Navbar.Collapse>
 
-          {this.state.isLoggedIn !== true ? (
-            <Nav pullRight>
-              <LinkContainer to="/signup">
-                <NavItem eventKey={1}>Signup</NavItem>
-              </LinkContainer>
-                <NavItem 
-                  onClick={this.showModal}
-                > Login
-                </NavItem>
-            </Nav>
-                ) : (
-            <Nav pullRight>
-              <LinkContainer to="/publish">
-                <NavItem 
-                eventKey={2}
-                onClick={this.getSessionData}
-                >Publish</NavItem>
-              </LinkContainer>
-              <NavItem 
-                eventKey={3}
-                onClick={this.logoutUser}
-                >Logout
-                </NavItem>
-              </Nav>
-            )}
-        </Navbar.Collapse>
-      </Navbar>
+        </Navbar>
         
       <Modal
         show={this.state.open}
@@ -235,8 +238,6 @@ class Header extends Component {
   </div>
       );
   }
-
-
 }
 
 export default Header;

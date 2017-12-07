@@ -86,7 +86,10 @@ class CarouselModal extends Component{
                       <div style={{maxWidth: "1024px", backgroundColor : 'rgba(0, 0, 0, 0)'}} key={photo._id}>
                         <div className="row">
                           <div className="col-md-12" style={{color: "white"}}>
-                            <h3>Album title</h3>
+                            <h3>
+                              <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
+                              Album title
+                            </h3>
                           </div>
                         </div>
                         

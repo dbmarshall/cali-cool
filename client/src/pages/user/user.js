@@ -16,7 +16,6 @@ class User extends Component {
       profileTitle:"",
       userHasAlbums:""
     } 
-
   }
 
   componentDidMount(){
@@ -63,7 +62,9 @@ class User extends Component {
             <div className="col-md-10 col-md-offset-1">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>{this.state.profileTitle}</h1>
+                  <h1>
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;
+                    {this.state.profileTitle}</h1>
                 </div>
                 <div className="panel-body">
 
@@ -72,42 +73,41 @@ class User extends Component {
                     {/* start page content*/}
 
                       <div>
-                        {(this.state.userId === sessionStorage.getItem("userId")) ? (
-                             <Grid>
-                              <Row>
-                                <Button href="/publish" bsStyle="primary">Add Photos</Button>
-                              </Row>
-                            </Grid>
-                          ) : (null)}
-                         </div>
-                            <div>
-                              <div>
-                                <h2>{this.state.profileTitle}'s Page</h2>
-                                <Grid>
-                                  <Row>
-                                    <Col xs={6} md={3}>
-                                      <Image 
-                                      src={this.state.profilePhoto} 
-                                      rounded={true} 
-                                      responsive={true}/>
-                                    </Col>
-                                  </Row>
-                                </Grid>
-                              </div>
-                              {this.state.userHasAlbums ? (
-                               <div>       
-                                <AlbumMini 
-                                  albums={this.state.userAlbums} />
-                                <div>
-                                  <h1>Default Album componet to go here</h1>
-                                </div>
-                              </div>
-                              ) : (
-                            <div>
-                              <h2> It looks like you don't have any albums! Add some photos</h2>
-                            </div>
-                          )}
+                        <Grid style={{maxWidth: '100%'}}>
+                          <Row>
+                            <Col>
+                              <Image 
+                              src={this.state.profilePhoto} 
+                              rounded={true} 
+                              responsive={true}/>
+                            </Col>
+                          </Row>
+                        </Grid>
+                      </div>
+
+                      {this.state.userHasAlbums ? (
+                       
+                        <div> 
+                          <h4>
+                            <i className="fa fa-book" aria-hidden="true"></i>&nbsp;
+                            Albums
+                          </h4>
+                          <AlbumMini 
+                            albums={this.state.userAlbums} />
                         </div>
+
+                      ) : (
+
+                        <div>
+                          <h4>
+                            It looks like you don't have any photo albums! Add some now.
+                          </h4>
+                          {(this.state.userId === sessionStorage.getItem("userId")) ? (
+                            <Button href="/publish" bsStyle="primary">Add Photos</Button>
+                          ) : (null)}
+                        </div>
+
+                      )}
 
                     {/* end page content*/}
                     </div>
