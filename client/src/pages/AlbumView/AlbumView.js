@@ -65,13 +65,15 @@ class AlbumView extends Component{
     }
     return false;
   }
-handleInputChange = event => {
+
+  handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     })
-    };
-handleFormSubmit = event => {
+  }
+  
+  handleFormSubmit = event => {
     event.preventDefault();
     console.log(this.state.albumId)
     console.log(this.state.commentContent)
@@ -84,7 +86,7 @@ handleFormSubmit = event => {
         commmentId: res.data._id
       })
       console.log(this.state.commmentId)
-      })
+    })
     .then(res => {
       API.insertCommentToAlbum({
         commentId: this.state.commmentId,
