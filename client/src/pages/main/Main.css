@@ -1,0 +1,33 @@
+/*
+ Main styles 
+*/
+
+.panel-heading {
+  color: #fff;
+  background-image: url(/assets/img/tahoe_20170325_davidm-reverse.png);
+  background-position: center center; 
+}
+.panel-heading h1, 
+.panel-heading p {
+  font-family: Arial Black, Arial Bold, Gadget, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  color: #fff;
+  /*-webkit-text-stroke: 1px #666;*/
+  text-shadow:
+    1px 1px 0 #666,
+    -1px -1px 0 #666,  
+    1px -1px 0 #666,
+    -1px 1px 0 #666,
+    1px 1px 0 #666;
+}
+.panel-heading h1 {
+  font-size: 40px;
+  line-height: 1em;
+}
+.panel-heading p {
+  font-size: 20px;
+  line-height: 1em;
+}

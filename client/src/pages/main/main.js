@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from '../../utils/API';
+import "./Main.css";
 
 import AlbumPreview from '../../components/AlbumPreview'
 
@@ -41,7 +42,7 @@ class Main extends Component{
             <div className="col-md-10 col-md-offset-1">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>Cali.Cool</h1>
+                  <h1>Cali.cool</h1>
                   <p>A growing visual record of what's going down in our state</p>
                 </div>
                 <div className="panel-body">
