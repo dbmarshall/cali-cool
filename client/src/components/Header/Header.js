@@ -81,24 +81,17 @@ class Header extends Component {
     this.setState({
       [name] : value
     });
-    // console.log(this.state.userName)
-    // console.log(this.state.passWord)
   }
 
    handleFormSubmit = event => {
     event.preventDefault();
-    // console.log(this.state.userName)
-    // console.log(this.state.passWord)
     API.loginUser({
       username:this.state.userName,
       password:this.state.passWord
     })
     .then(res => {
       this.closeModal();
-    })
-    .then(res => {
-      // ****Working on this redirect, go to albums****
-      // this.props.location.reload();
+      
     })
     .catch(err => console.log(err));
   };
