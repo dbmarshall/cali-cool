@@ -3,6 +3,15 @@ const bcrypt   = require('bcrypt-nodejs');
 
 var Schema = mongoose.Schema;
 
+var schemaOptions = {
+  toObject: {
+    virtuals: true
+  }
+  ,toJSON: {
+    virtuals: true
+  }
+};
+
 var UsersSchema = new Schema({
   email: {
     type: String,
@@ -40,7 +49,7 @@ var UsersSchema = new Schema({
     type: Date,
     default: Date.now
   }
-});
+}, schemaOptions);
 
 const baseUrl = 'http://res.cloudinary.com/cali-cool/image/upload/';
 const imageLarge = 'f_auto,w_1600/';
