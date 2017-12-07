@@ -32,7 +32,7 @@ class User extends Component {
         this.setState({ 
         userAlbums: res.data,
         profileTitle: res.data[0].owner.firstName,
-        profilePhoto: res.data[0].owner.profileImgUrl,
+        profilePhoto: res.data[0].owner.profilePicture,
         userHasAlbums: true
         })
         : this.setState({
