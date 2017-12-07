@@ -34,19 +34,41 @@ class Main extends Component{
   render(){
 
     return (
-      <div className="container">
-        <div className="jumbotron">  
-          <h1>Cali.Cool</h1>
-          <p>A growing visual record of what's going down in our state</p>
+      <div>
+
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h1>Cali.Cool</h1>
+                  <p>A growing visual record of what's going down in our state</p>
+                </div>
+                <div className="panel-body">
+
+                  <div className="row">
+                    <div className="col-md-12">
+
+                      <h4>Most Liked Photos</h4>
+
+                      {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
+
+                      <hr/>
+
+                        <h4>Most Liked Photos</h4>
+
+                      {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>    
         </div>
 
-        <h4>Most Liked Photos</h4>
-        {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
-
-        <hr/>
-
-        <h4>Recent Photo Uploads</h4>
-        {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
       </div>
     );
   }
