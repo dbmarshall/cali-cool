@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from '../../utils/API';
-
 import AlbumPreview from '../../components/AlbumPreview'
+import AlbumPhotoComment from "../../components/AlbumPhotoComment";
 import Like from '../../components/Like'
 
 const sessionKeyUserId = "userId";
@@ -85,20 +85,9 @@ class AlbumView extends Component{
         </Like>
           
         </div>
-        <div>
-          <h4>comments</h4>
-          <ul className="list-group">
-            {this.state.albumObj.comments &&
-              this.state.albumObj.comments.map(function(comment){
-              return <li key={comment._id} className="list-group-item">{comment.comment}</li>
-            })}
-          </ul>
-          <div className="input-group">
-            <input type="text" className="form-control" 
-              placeholder="Write comment..." aria-describedby="basic-addon2"></input>
-            <span className="input-group-addon" id="basic-addon2">Post</span>
-          </div>
-        </div>
+        <AlbumPhotoComment
+          albumId={this.state.albumId} 
+        />
         <hr/>
       </div>
     );

@@ -70,7 +70,7 @@ module.exports = {
   },
   getSinglePhoto: function(req, res) {
     db.Photos
-    .find({_id: req.params.id})
+    .findById(req.params.id)
     .populate("comments")
     .populate("owner")
     .populate("album")

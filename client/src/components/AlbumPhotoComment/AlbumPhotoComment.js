@@ -14,7 +14,10 @@ class AlbumPhotoComment extends Component {
       userId: "",
       commentContent:"",
       commentId:"",
-      comments:[]
+      comments:[],
+      albumId: this.props.albumId,
+      albumObj: this.props.albumObj,
+      photoObj: this.propls.photoObj
     } 
 
     componentDidMount(){
