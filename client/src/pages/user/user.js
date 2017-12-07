@@ -43,7 +43,7 @@ class User extends Component {
         this.setState({ 
         userAlbums: res.data,
         profileTitle: res.data[0].owner.firstName,
-        profilePhoto: res.data[0].owner.imageURL,
+        profilePhoto: res.data[0].owner.profilePicture,
         userHasAlbums: true
         })
         : this.getUserDetails()
@@ -63,7 +63,7 @@ class User extends Component {
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h1>
-                    <span class="glyphicon glyphicon-user"></span>&nbsp;
+                    <span className="glyphicon glyphicon-user"></span>&nbsp;
                     {this.state.profileTitle}</h1>
                 </div>
                 <div className="panel-body">
