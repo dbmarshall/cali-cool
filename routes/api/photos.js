@@ -9,11 +9,11 @@ router.route("/mostLiked")
   .get(photosController.mostLiked);
 
 router.route("/:id")
-  .get(photosController.getSinglePhoto)
+  .get(photosController.getAllPhotoData)
   .delete(photosController.deletePhoto)
   
 router.route("/:id/comments")
   .post(photosController.insertCommentIntoPhotoArray)
-  .get(photosController.getAllPhotoComments)
+  // .get(photosController.getAllPhotoComments)
 
 module.exports = router;

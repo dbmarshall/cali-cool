@@ -27,7 +27,7 @@ class SinglePhoto extends Component {
       caption:"",
       albumId:"",
       albumName:"",
-      userId:"",
+      ownerId:"",
       dateAdded:"",
       likesCount: 0,
       userAuth:"",
@@ -47,7 +47,7 @@ class SinglePhoto extends Component {
    
   getPhotoData = event => {
     // console.log(this.state.photoId)
-    API.getSinglePhotoData(
+    API.getAllPhotoData(
     { id:this.state.photoId })
     .then(res => {
       console.log("singe page data", res.data.comments);
@@ -57,7 +57,7 @@ class SinglePhoto extends Component {
         image: res.data.imageUrl,
         caption: res.data.caption,
         albumId: res.data.album._id,
-        userId: res.data.owner._id,
+        ownerId: res.data.owner._id,
         userAuth:sessionStorage.getItem("userId"),
         albumName:res.data.album.title,
         userName:res.data.owner.userName,
@@ -143,7 +143,7 @@ class SinglePhoto extends Component {
     console.log(this.state.userId)
     console.log(this.state.commentContent)
     API.createComment({
-      userId:this.state.userId,
+      userId:sessionStorage.getItem("userId"),
       comment:this.state.commentContent
     })
     .then(res => {
@@ -243,7 +243,7 @@ class SinglePhoto extends Component {
                     <Comments 
                       addComment={this.handleInputChange}
                       commentsObj={this.state.comments}
-                      userAuth={this.state.userId}
+                      userAuth={sessionStorage.getItem(sessionKeyUserId)}
                       commentContent={this.state.commentContent}
                       submit={this.handleFormSubmit}
                     />

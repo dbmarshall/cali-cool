@@ -23,10 +23,10 @@ class Comments extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+      // console.log(nextProps.commentsObj)
       this.setState({
         comments:nextProps.commentsObj,
-        userId:nextProps.userAuth,
-
+        userId:nextProps.userAuth
       })
   }
 

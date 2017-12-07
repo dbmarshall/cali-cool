@@ -74,10 +74,9 @@ handleInputChange = event => {
 handleFormSubmit = event => {
     event.preventDefault();
     console.log(this.state.albumId)
-    console.log(this.state.userId)
     console.log(this.state.commentContent)
     API.createComment({
-      userId:this.state.userId,
+      userId:sessionStorage.getItem("userId"),
       comment:this.state.commentContent
     })
     .then(res => {
@@ -95,7 +94,6 @@ handleFormSubmit = event => {
         console.log(res)
         this.setState({ 
           comments : res.data.comments
-
         })
       })
     })

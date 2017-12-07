@@ -6,7 +6,13 @@ module.exports = {
       .findById(req.params.id)
       .populate("photos")
       .populate("owner")
-      .populate("comments")
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'user',
+          model: 'Users'
+        }
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -68,10 +68,16 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-  getSinglePhoto: function(req, res) {
+  getAllPhotoData: function(req, res) {
     db.Photos
     .findById(req.params.id)
-    .populate("comments")
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+        model: 'Users'
+      }
+    })
     .populate("owner")
     .populate("album")
     .then(dbModel => res.json(dbModel))
@@ -100,22 +106,22 @@ module.exports = {
     })
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
-  },
-
-  getAllPhotoComments: function(req, res) {
-    console.log("route on photos")
-    console.log(req.params.id)
-    db.Photos
-    .find({ _id:req.params.id })
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'user',
-        model: 'Users'
-      }
-    })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
   }
+
+  // getAllPhotoComments: function(req, res) {
+  //   console.log("route on photos")
+  //   console.log(req.params.id)
+  //   db.Photos
+  //   .find({ _id:req.params.id })
+  //   .populate({
+  //     path: 'comments',
+  //     populate: {
+  //       path: 'user',
+  //       model: 'Users'
+  //     }
+  //   })
+  //   .then(dbModel => res.json(dbModel))
+  //   .catch(err => res.status(422).json(err));
+  // }
 
 };
