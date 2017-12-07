@@ -44,7 +44,7 @@ class User extends Component {
         this.setState({ 
         userAlbums: res.data,
         profileTitle: res.data[0].owner.firstName,
-        profilePhoto: res.data[0].owner.profilePicture,
+        profilePhoto: res.data[0].owner.imageURL,
         userHasAlbums: true
         })
         : this.getUserDetails()
