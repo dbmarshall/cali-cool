@@ -12,8 +12,8 @@ const styles = {
     color: "white",
     fontSize: "1.1em",
     position: "absolute", 
-    bottom: "60px", 
-    left: "110px"
+    bottom: "-10px", 
+    left: "90px"
   },
   userLink: {
     fontSize: "1.2em", 
@@ -30,8 +30,8 @@ const styles = {
   },
   likeLink: {
     position: "absolute", 
-    bottom: "60px", 
-    left: "20px"
+    bottom: "-10px", 
+    // left: "20px"
   }
 }
 
@@ -135,7 +135,8 @@ class AlbumPreview extends Component{
 
   getCustomControls(){
     let customControls = [
-      <a key={1} style={styles.userLink}>
+      <a href={this.state.currentPhoto.owner && "/user/" + this.state.currentPhoto.owner._id}
+        key={1} style={styles.userLink}>
         <span className="glyphicon glyphicon-user"></span>
         <span style={styles.userNameText}>
           {this.state.currentPhoto.owner && this.state.currentPhoto.owner.userName}
@@ -145,24 +146,21 @@ class AlbumPreview extends Component{
       <a href={ this.state.currentPhoto.album && "/album/" + this.state.currentPhoto.album._id} 
         style={styles.albumLink} key={2}>
         {this.state.currentPhoto.album && this.state.currentPhoto.album.title}
-      </a>
-    ];
+      </a>,
 
-    customControls.push(
       <Like position={styles.likeLink}
         likesCount={this.state.currentPhoto.likes && this.state.currentPhoto.likes.length}
         updateLike={this.updateLike}
         isLiked={this.doesUserLikeCurrentPhoto()}
         key={3}>
-      </Like>
-    );
-
-    customControls.push(
-      <a style={styles.commentLink} key={4}>
+      </Like>,
+    
+      <a href={this.state.currentPhoto && "/photo/" + this.state.currentPhoto._id} 
+         style={styles.commentLink} key={4}>
         <span className="glyphicon glyphicon-comment"></span>
         <span> Comment</span>    
       </a>
-    );
+    ];
 
     return customControls;
   }
@@ -177,8 +175,8 @@ class AlbumPreview extends Component{
             onClickNext={this.gotoNext}
             currentImage={this.state.currentImageIndex}
             isOpen={this.state.lightboxIsOpen}
-            backdropClosesModal={true}
-            showCloseButton={false} 
+            backdropClosesModal={false}
+            showCloseButton={true} 
             customControls={this.getCustomControls()}
           />
       </div>
