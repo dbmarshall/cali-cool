@@ -61,7 +61,7 @@ class AlbumPreview extends Component{
 
   getThumbnailArray = () => {
     const thumbnails = this.state.photoObjs.map(function(photo){
-      return { src: photo.thumbnailUrl, width: 4, height: 3 , caption: photo.caption};
+      return { src: photo.thumbnailUrl, width: 4, height: 3, caption: photo.caption};
     });
     return thumbnails;
   }
@@ -168,7 +168,7 @@ class AlbumPreview extends Component{
   render(){
     return (
       <div>
-        <Gallery photos={this.state.thumbnails} onClick={this.openLightbox}/>  
+        <Gallery photos={this.state.thumbnails} onClick={this.openLightbox} columns={4}/>  
           <Lightbox images={this.state.photos}
             onClose={this.closeLightbox}
             onClickPrev={this.gotoPrevious}
