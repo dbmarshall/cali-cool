@@ -46,44 +46,69 @@ class User extends Component {
   render(){
 
     return (
-      <div className= "container">
-         <div>
-         <Grid>
-          <Row>
-            <Button href="/publish" bsStyle="primary">Add Photos</Button>
-          </Row>
-         </Grid>
-         </div>
-         {this.state.userHasAlbums ? (
-            <div>
-              <div>
-                <h2>{this.state.profileTitle}'s Page</h2>
-                <Grid>
-                  <Row>
-                    <Col xs={6} md={3}>
-                      <Image 
-                      src={this.state.profilePhoto} 
-                      rounded={true} 
-                      responsive={true}/>
-                    </Col>
-                  </Row>
-                </Grid>
-              </div>
-               <div>       
-                <AlbumMini 
-                  albums={this.state.userAlbums} />
-                <div>
-                  <h1>Default Album componet to go here</h1>
+      <div>
+
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h1>Cali.Cool</h1>
+                  <p>A growing visual record of what's going down in our state</p>
                 </div>
+                <div className="panel-body">
+
+                  <div className="row">
+                    <div className="col-md-12">
+                    {/* start page content*/}
+
+                      <Grid>
+                        <Row>
+                          <Button href="/publish" bsStyle="primary">Add Photos</Button>
+                        </Row>
+                      </Grid>
+                      {this.state.userHasAlbums ? (
+                        <div>
+                          <div>
+                            <h2>{this.state.profileTitle}'s Page</h2>
+                            <Grid>
+                              <Row>
+                                <Col xs={6} md={3}>
+                                  <Image 
+                                  src={this.state.profilePhoto} 
+                                  rounded={true} 
+                                  responsive={true}/>
+                                </Col>
+                              </Row>
+                            </Grid>
+                          </div>
+                          <div>       
+                            <AlbumMini 
+                              albums={this.state.userAlbums} />
+                            <div>
+                              <h1>Default Album componet to go here</h1>
+                            </div>
+                          </div>
+                        </div>
+                        ) : (
+                        <div>
+                          <h2> It looks like you don't have any albums! Add some photos</h2>
+                        </div>
+                      )}
+
+                    {/* end page content*/}
+                    </div>
+                  </div>
+
+                </div>
+
               </div>
             </div>
-          ) : (
-            <div>
-              <h2> It looks like you don't have any albums! Add some photos</h2>
-            </div>
-          )}
+          </div>    
+        </div>
+
       </div>
-      );
+    );
   }
 }
 

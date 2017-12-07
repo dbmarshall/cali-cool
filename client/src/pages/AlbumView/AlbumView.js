@@ -105,36 +105,63 @@ handleFormSubmit = event => {
 
   render(){
     return(
-      <div className="container">
-        <div>
-          <h3>{this.state.albumObj.title}</h3>
-          <h4>
-            <a href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
-              <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
-              <span>{this.state.albumObj.owner && this.state.albumObj.owner.userName}</span>
-            </a>
-          </h4>
-        </div>
-        <div>
-          {this.state.albumPhotos.length && <AlbumPreview photos={this.state.albumPhotos}/>}
-        </div>
-        <div style={{backgroundColor : 'rgba(0, 0, 0, .75)',position: "relative"}}>
+      <div>
 
-        <Like position={{marginLeft: "10px"}}
-          likesCount={this.state.albumObj.likes && this.state.albumObj.likes.length}
-          updateLike={this.updateLike}
-          isLiked={this.doesUserLikeAlbum()}>
-        </Like>
-          
+        <div className="container">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h1>Cali.Cool</h1>
+                  <p>A growing visual record of what's going down in our state</p>
+                </div>
+                <div className="panel-body">
+
+                  <div className="row">
+                    <div className="col-md-12">
+                    {/* start page content*/}
+
+                      <div>
+                        <h3>{this.state.albumObj.title}</h3>
+                        <h4>
+                          <a href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
+                            <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
+                            <span>{this.state.albumObj.owner && this.state.albumObj.owner.userName}</span>
+                          </a>
+                        </h4>
+                      </div>
+                      <div>
+                        {this.state.albumPhotos.length && <AlbumPreview photos={this.state.albumPhotos}/>}
+                      </div>
+                      <div style={{backgroundColor : 'rgba(0, 0, 0, .75)',position: "relative"}}>
+
+                      <Like position={{marginLeft: "10px"}}
+                        likesCount={this.state.albumObj.likes && this.state.albumObj.likes.length}
+                        updateLike={this.updateLike}
+                        isLiked={this.doesUserLikeAlbum()}>
+                      </Like>
+                        
+                      </div>
+                      <Comments 
+                        addComment={this.handleInputChange}
+                        commentsObj={this.state.comments}
+                        userAuth={sessionStorage.getItem(sessionKeyUserId)}
+                        commentContent={this.state.commentContent}
+                        submit={this.handleFormSubmit}
+                      />
+                      <hr/>
+
+                    {/* end page content*/}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>    
         </div>
-        <Comments 
-          addComment={this.handleInputChange}
-          commentsObj={this.state.comments}
-          userAuth={sessionStorage.getItem(sessionKeyUserId)}
-          commentContent={this.state.commentContent}
-          submit={this.handleFormSubmit}
-        />
-        <hr/>
+
       </div>
     );
   }
