@@ -173,22 +173,7 @@ class Publish extends Component {
     // If not, then go straight to addPhotoUpdateAlbum().
     if (this.state.albumtext) {
 
-      API.createAlbum(ownerId, { 
-        title: this.state.albumname, 
-        owner: ownerId
-      })
-      .then(res => 
-        this.setState({ 
-          albumId: res.data._id
-        })
-      )
-      .then( () => 
-        this.loadAlbums()
-      )
-      .then( () => 
-        this.addPhotoUpdateAlbum()
-      )
-      .catch(err => console.log(err));
+      this.createNewAlbum();
 
     } else {
 
@@ -197,6 +182,26 @@ class Publish extends Component {
     }
 
   };
+
+  // Creates new album
+  createNewAlbum = () => {
+    API.createAlbum(ownerId, { 
+          title: this.state.albumname, 
+          owner: ownerId
+        })
+        .then(res => 
+          this.setState({ 
+            albumId: res.data._id
+          })
+        )
+        .then( () => 
+          this.loadAlbums()
+        )
+        .then( () => 
+          this.addPhotoUpdateAlbum()
+        )
+        .catch(err => console.log(err));
+    };
 
   // Adds new photo and inserts new photo ID into Albums collection
   addPhotoUpdateAlbum = () => {
@@ -274,12 +279,13 @@ class Publish extends Component {
                               </div>
                               <span className="small">
                                 Maximum allowable filesize is 5mb.<br/>
-                                Recommended image size is at least 1600px in width.<br/>
+                                Recommended size >1600px in width.<br/>
                               </span>
                             </div>
 
                             <div className="form-group">
-                              <label htmlFor="title">Title:</label>
+                              <label htmlFor="title">Title: 
+                              <span className="redtext"><sup>*</sup></span></label>
                               <input 
                                 value={this.state.phototitle}
                                 onChange={this.handleInputChange}
@@ -303,7 +309,8 @@ class Publish extends Component {
                             </div>
 
                             <div className="form-group">
-                              <label htmlFor="albumselect">Album:</label>
+                              <label htmlFor="albumselect">Album: 
+                              <span className="redtext"><sup>*</sup></span></label>
                               <br/>
                               <div className="input-group">
 
@@ -317,7 +324,7 @@ class Publish extends Component {
                                     name="albumselect"
                                     id="albumselect"
                                     className="form-control">
-                                    <option value="default">Select</option>
+                                    <option value="">Select</option>
                                     {this.state.albums.map( (albums , i) => (
                                       <option value={albums._id} key={i}>{albums.title}</option>
                                     ))}
@@ -342,11 +349,21 @@ class Publish extends Component {
                             <button 
                               type="submit" 
                               className="btn btn-default btn-primary" 
-                              style={{marginTop: '10px'}}>
+                              style={{marginTop: '10px'}}
+                              disabled={
+                                !this.state.imagePreviewUrl || 
+                                !this.state.phototitle || 
+                                (!this.state.albumtext && 
+                                !this.state.albumselect)}
+                              >
                               Upload
                             </button>
 
                           </form>
+
+                          <div className="text-right">
+                            <span className="small redtext">* Required</span>
+                          </div>
 
                         </div>
                       </div>
