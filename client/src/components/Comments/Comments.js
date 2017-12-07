@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Grid, Row, Col, form, FormControl, ListGroup, ListGroupItem } from 'react-bootstrap';
+import Timestamp  from 'react-timestamp';
 
 const commentDiv = {
   marginTop: "10px",
@@ -64,7 +65,8 @@ class Comments extends Component {
                   { this.props.commentsObj.map((comment , i) => {
                     return (
                       <ListGroupItem key={comment._id}>
-                        <p><span>{comment.user.userName}</span><span> | </span> Date: <span>{comment.dateCreated}</span>
+                        <p>{comment.user.userName}<span> | </span>
+                        <Timestamp time={comment.dateCreated} format='ago' />
                         </p>
                         <p>{comment.comment}</p>
                       </ListGroupItem>

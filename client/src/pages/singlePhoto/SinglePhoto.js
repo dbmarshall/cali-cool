@@ -3,6 +3,7 @@ import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 import Like from "../../components/Like";
 import Comments from "../../components/Comments";
 import API from "../../utils/API";
+import Timestamp  from 'react-timestamp';
 
 const btnStyle = {
   marginTop: "5px",
@@ -196,7 +197,8 @@ class SinglePhoto extends Component {
                     <span>
                      <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
                      </span>
-                    <span>{this.state.dateAdded}</span> 
+                    <span><Timestamp time={this.state.dateAdded} format='ago' />
+                    {}</span> 
                   </p>
                 </Col>
               </Row>
