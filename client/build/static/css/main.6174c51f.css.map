@@ -1,1 +1,0 @@
-{"version":3,"sources":["pages/Publish/Publish.css"],"names":[],"mappings":"AAIA,YACE,cAAgB","file":"static/css/main.6174c51f.css","sourcesContent":["/*\n Publish styles \n*/\n\n.fa-spinner {\n  font-size: 50px;\n}\n\n\n// WEBPACK FOOTER //\n// ./src/pages/Publish/Publish.css"],"sourceRoot":""}
