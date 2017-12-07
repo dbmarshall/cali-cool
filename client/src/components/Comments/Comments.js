@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Grid, Row, Col, form, FormControl, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, Grid, Row, Col, form, FormControl, ListGroup, ListGroupItem, FormGroup, InputGroup } from 'react-bootstrap';
 import Timestamp  from 'react-timestamp';
 
 const commentDiv = {
@@ -43,18 +43,27 @@ class Comments extends Component {
               <Col>
                 {(this.state.userId) ? (
                   <form onSubmit={this.props.submit}>
-                    <FormControl
-                      id="formControlsText"
-                      type="text"
-                      label="Text"
-                      placeholder="Enter text"
-                      name="commentContent"
-                      value={this.props.commentContent}
-                      onChange={this.props.addComment}
-                    />
-                    <Button type="submit" bsStyle="primary" >
-                    Add Comment
-                    </Button> 
+                    
+                    <FormGroup>
+                      <InputGroup>
+                        
+                        <FormControl
+                          id="formControlsText"
+                          type="text"
+                          label="Text"
+                          placeholder="Enter text"
+                          name="commentContent"
+                          value={this.props.commentContent}
+                          onChange={this.props.addComment}
+                        />
+
+                        <InputGroup.Button>
+                          <Button type="submit" bsStyle="primary">Post</Button>
+                        </InputGroup.Button>
+
+                      </InputGroup>
+                    </FormGroup>
+
                   </form>
                 ) : (
                   null
