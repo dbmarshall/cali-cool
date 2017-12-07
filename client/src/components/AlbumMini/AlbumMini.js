@@ -3,48 +3,47 @@ import PropTypes from 'prop-types';
 import AlbumMiniPhotos from "../AlbumMiniPhotos"
 // import API from '../../utils/API';
 
-
 const albumMini = {
-  backgroundColor:"#c6c6c6",
+  backgroundColor:"rgba(0,0,0,.1)",
   borderRadius:"10px"
-
 }
 
 const header = {
-  color: "white",
+  color: "#000",
   margin: "5px",
+  padding: "10px 0 0 10px",
   fontSize: "25px"
 }
 
-
 class AlbumMini extends Component {
 
-    state = {
-      userAlbums: this.props.albums
-    } 
-
+  state = {
+    userAlbums: this.props.albums
+  } 
 
   render(){
 
     return (
-      <div className= "container">
-        <div className="wrapper">
-        {this.props.albums.map((album,i) => {
-            return (
-              <a href={'/album/' + album._id} key={album._id} >
-                <div style={albumMini} >
-                  <div>
-                    <p style={header}>{album.title}</p>
-                  </div>
-                  <AlbumMiniPhotos photos={album.photos} />
-                </div>
-              </a>
-              )
+      <div>
+
+        {this.props.albums.map( (album, i) => {
+          return (
+            <a href={'/album/' + album._id} 
+                title="click to see full album" 
+                style={{textDecoration: 'none'}}
+                key={album._id}>
+              <div style={albumMini}>
+                <p style={header}>
+                  {album.title}
+                </p>
+                <AlbumMiniPhotos photos={album.photos} />
+              </div>
+            </a>
+          )
         })}
-          
-        </div>
+        
       </div>
-      );
+    );
   }
 }
 

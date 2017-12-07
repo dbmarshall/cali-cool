@@ -34,53 +34,55 @@ class Comments extends Component {
   render() {
 
     return (
-      <div >
-          <div style={commentDiv}>
-            <Grid>
-             <Row>
-              <Col xs={6} md={6}>
-                  {(this.state.userId) ? (
-                    <form onSubmit={this.props.submit}>
-                  <FormControl
-                    id="formControlsText"
-                    type="text"
-                    label="Text"
-                    placeholder="Enter text"
-                    name="commentContent"
-                    value={this.props.commentContent}
-                    onChange={this.props.addComment}
-                  />
+      <div>
+        <br/>
+        <p><strong>Comments:</strong></p>
+        <div style={commentDiv}>
+          <Grid style={{maxWidth: '100%'}}>
+            <Row>
+              <Col>
+                {(this.state.userId) ? (
+                  <form onSubmit={this.props.submit}>
+                    <FormControl
+                      id="formControlsText"
+                      type="text"
+                      label="Text"
+                      placeholder="Enter text"
+                      name="commentContent"
+                      value={this.props.commentContent}
+                      onChange={this.props.addComment}
+                    />
                     <Button type="submit" bsStyle="primary" >
                     Add Comment
                     </Button> 
                   </form>
-                  ) : (
-                    null
-                  ) }
+                ) : (
+                  null
+                )}
               </Col>
             </Row>
             <Row>
-              <Col xs={6} md={8}>
-                  <ListGroup>
-                  { this.props.commentsObj.map((comment , i) => {
-                    return (
-                      <ListGroupItem key={comment._id}>
-                        <p>{comment.user.userName}<span> | </span>
-                        <Timestamp time={comment.dateCreated} format='ago' />
-                        </p>
-                        <p>{comment.comment}</p>
-                      </ListGroupItem>
-                    )
-                  })}
-                  </ListGroup>
+              <Col>
+                <ListGroup>
+                { this.props.commentsObj.map((comment , i) => {
+                  return (
+                    <ListGroupItem key={comment._id}>
+                      <p>{comment.user.userName}<span> | </span>
+                      <Timestamp time={comment.dateCreated} format='ago' />
+                      </p>
+                      <p>{comment.comment}</p>
+                    </ListGroupItem>
+                  )
+                })}
+                </ListGroup>
               </Col>
             </Row>
           </Grid>
         </div>
       </div>
-      )
-  }
 
+    )
+  }
 }
 
 export default Comments;

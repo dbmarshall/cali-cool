@@ -40,15 +40,15 @@ const user_id_jack = new mongoose.Types.ObjectId();
 const user_id_jill = new mongoose.Types.ObjectId();
 
 
-const album_minu_yosemitte_id = new mongoose.Types.ObjectId();
+const album_minu_yosemite_id = new mongoose.Types.ObjectId();
 // const album_david_lakeTahoe_id = new mongoose.Types.ObjectId();
 const album_josh_beaches_id = new mongoose.Types.ObjectId();
 const album_jack_goldengate_id = new mongoose.Types.ObjectId();
 
-const photo_yosemitte_1_id = new mongoose.Types.ObjectId()
-const photo_yosemitte_2_id = new mongoose.Types.ObjectId()
-const photo_yosemitte_3_id = new mongoose.Types.ObjectId()
-const photo_yosemitte_4_id = new mongoose.Types.ObjectId()
+const photo_yosemite_1_id = new mongoose.Types.ObjectId()
+const photo_yosemite_2_id = new mongoose.Types.ObjectId()
+const photo_yosemite_3_id = new mongoose.Types.ObjectId()
+const photo_yosemite_4_id = new mongoose.Types.ObjectId()
 
 const photo_golden_gate_1_id = new mongoose.Types.ObjectId()
 const photo_golden_gate_2_id = new mongoose.Types.ObjectId()
@@ -66,16 +66,16 @@ const photo_beaches_3_id = new mongoose.Types.ObjectId()
 const photo_beaches_4_id = new mongoose.Types.ObjectId()
 const photo_beaches_5_id = new mongoose.Types.ObjectId()
 
-const comments_yosemitte_album_josh_1 = new mongoose.Types.ObjectId();
-const comments_yosemitte_album_david_1 = new mongoose.Types.ObjectId();
-const comments_yosemitte_album_josh_2 = new mongoose.Types.ObjectId();
-const comments_yosemitte_album_minu_1 = new mongoose.Types.ObjectId();
-const comments_yosemitte_album_david_2 = new mongoose.Types.ObjectId();
-const comments_yosemitte_album_jack_1 =  new mongoose.Types.ObjectId();
+const comments_yosemite_album_josh_1 = new mongoose.Types.ObjectId();
+const comments_yosemite_album_david_1 = new mongoose.Types.ObjectId();
+const comments_yosemite_album_josh_2 = new mongoose.Types.ObjectId();
+const comments_yosemite_album_minu_1 = new mongoose.Types.ObjectId();
+const comments_yosemite_album_david_2 = new mongoose.Types.ObjectId();
+const comments_yosemite_album_jack_1 =  new mongoose.Types.ObjectId();
 
-const comments_yosemitte_photo_1_minu_1 = new mongoose.Types.ObjectId();
-const comments_yosemitte_photo_1_josh_1 = new mongoose.Types.ObjectId();
-const comments_yosemitte_photo_2_josh_1 = new mongoose.Types.ObjectId();
+const comments_yosemite_photo_1_minu_1 = new mongoose.Types.ObjectId();
+const comments_yosemite_photo_1_josh_1 = new mongoose.Types.ObjectId();
+const comments_yosemite_photo_2_josh_1 = new mongoose.Types.ObjectId();
 
 var usersData = {
   'model': 'Users',
@@ -83,7 +83,7 @@ var usersData = {
     {
       '_id': user_id_minu,
       'email': 'minuemiliajames@gmail.com',
-      'userName': 'minu',
+      'userName': 'Minu',
       'passWord': '$2a$08$gjjry6DbnjhZ7PsRnoA/cOJa8usqcZS8Jp0w64DGA2rGA/0DCFwSm',
       'firstName': 'Minu',
       'lastName': 'James',
@@ -93,7 +93,7 @@ var usersData = {
     {
       '_id': user_id_david,
       'email': 'davidbryanmarshall@gmail.com',
-      'userName': 'david',
+      'userName': 'David',
       'passWord': '$2a$08$SNgZ61kxWNplIwnJJ.C7se0bu5B1Z3iy8gh.0COFESJZso1i7QNKi',
       'firstName': 'David',
       'lastName': 'Marshall',
@@ -103,7 +103,7 @@ var usersData = {
     {
       '_id': user_id_josh,
       'email': 'siversonj@gmail.com',
-      'userName': 'josh',
+      'userName': 'Josh',
       'passWord': '$2a$08$vw2MutAR3bThg4Ce3I8x.O3ce/KQGi5HnuxLnu/AjQ5zfMqe5awL.',
       'firstName': 'Josh',
       'lastName': 'Siverson',
@@ -113,7 +113,7 @@ var usersData = {
     {
       '_id': user_id_jack,
       'email': 'jack@gmail.com',
-      'userName': 'jack',
+      'userName': 'Jack',
       'passWord': '$2a$08$v1nQ2jJNXZvr3LT4Y0KFu.LVwG3jkgQvMfiMMn984zrsn1Ot7ax1y',
       'firstName': 'Jack',
       'lastName': 'Berkeley',
@@ -123,7 +123,7 @@ var usersData = {
     {
       '_id': user_id_jill,
       'email': 'jill@gmail.com',
-      'userName': 'jill',
+      'userName': 'Jill',
       'passWord': '$2a$08$YqAtmqKKfBimF8R.laBw1eH5eceb000p3/KSevbR7AGkcDgUzmOnG',
       'firstName': 'Jill',
       'lastName': 'Berkeley',
@@ -158,7 +158,7 @@ var tagsData = {
       'name': '#sanfrancisco'
     },
     {
-      'name': '#yosemitte'
+      'name': '#yosemite'
     },
     {
       'name': '#laketahoe'
@@ -179,47 +179,47 @@ var commentsData = {
   'model': 'Comments',
   'documents': [
     {
-      '_id': comments_yosemitte_album_josh_1,
+      '_id': comments_yosemite_album_josh_1,
       'comment': "El Capitan is majestic!",
       'user': user_id_josh
     },
     {
-      '_id': comments_yosemitte_album_david_1,
+      '_id': comments_yosemite_album_david_1,
       'comment': "Yeah! I tried climbing it last year, but I only got about 100 feet up.",
       'user': user_id_david
     },
     {
-      '_id': comments_yosemitte_album_josh_2,
+      '_id': comments_yosemite_album_josh_2,
       'comment': "The vertical climb is impossible man!",
       'user': user_id_josh
     },
     {
-      '_id': comments_yosemitte_album_minu_1,
+      '_id': comments_yosemite_album_minu_1,
       'comment': "Who would be crazy enough to climb El Capitan??!!",
       'user': user_id_minu
     },
     {
-      '_id': comments_yosemitte_album_jack_1,
+      '_id': comments_yosemite_album_jack_1,
       'comment': "I heard someone climbed it without ropes last year",
       'user': user_id_jack
     },
     {
-      '_id': comments_yosemitte_album_david_2,
+      '_id': comments_yosemite_album_david_2,
       'comment': "Yeah, it was me ;-).. in my dreams",
       'user': user_id_david
     },
     {
-      '_id': comments_yosemitte_photo_1_minu_1,
+      '_id': comments_yosemite_photo_1_minu_1,
       'comment': "This is my favourite photo",
       'user': user_id_minu
     },
     {
-      '_id': comments_yosemitte_photo_1_josh_1,
+      '_id': comments_yosemite_photo_1_josh_1,
       'comment': "Wow! looks great",
       'user': user_id_josh
     },
     {
-      '_id': comments_yosemitte_photo_2_josh_1,
+      '_id': comments_yosemite_photo_2_josh_1,
       'comment': "Wow! amazing!",
       'user': user_id_josh
     }
@@ -230,21 +230,21 @@ var albumsData = {
   'model': 'Albums',
   'documents': [
     {
-      "_id": album_minu_yosemitte_id,
+      "_id": album_minu_yosemite_id,
       'owner': user_id_minu,
-      'photos': [photo_yosemitte_1_id, photo_yosemitte_2_id, photo_yosemitte_3_id, photo_yosemitte_4_id],
-      'comments': [comments_yosemitte_album_josh_1, comments_yosemitte_album_david_1, 
-        comments_yosemitte_album_josh_2, comments_yosemitte_album_minu_1, 
-        comments_yosemitte_album_jack_1, comments_yosemitte_album_david_2],
+      'photos': [photo_yosemite_1_id, photo_yosemite_2_id, photo_yosemite_3_id, photo_yosemite_4_id],
+      'comments': [comments_yosemite_album_josh_1, comments_yosemite_album_david_1, 
+        comments_yosemite_album_josh_2, comments_yosemite_album_minu_1, 
+        comments_yosemite_album_jack_1, comments_yosemite_album_david_2],
       'likes': [user_id_minu, user_id_david, user_id_josh, user_id_jack, user_id_jill],
-      'title': 'Yosemitte - ThanksGiving Break'
+      'title': 'Yosemite - Thanksgiving Break'
     },
     {
       "_id": album_jack_goldengate_id,
       'owner': user_id_jack,
       'photos': [photo_golden_gate_1_id, photo_golden_gate_2_id, photo_golden_gate_3_id],
       'likes': [user_id_minu, user_id_josh],
-      'title': 'SanFrancisco Golden Gate'
+      'title': 'San Francisco Golden Gate'
     },
     {
       "_id": album_josh_beaches_id,
@@ -259,12 +259,12 @@ var albumsData = {
 var photosData = {
   'model': 'Photos',
   'documents': [
-    // Yosemitte
+    // yosemite
     {
-      '_id': photo_yosemitte_1_id,
+      '_id': photo_yosemite_1_id,
       'owner': user_id_minu,
-      'album': album_minu_yosemitte_id,
-      'comments': [comments_yosemitte_photo_1_minu_1, comments_yosemitte_photo_1_josh_1],
+      'album': album_minu_yosemite_id,
+      'comments': [comments_yosemite_photo_1_minu_1, comments_yosemite_photo_1_josh_1],
       'likes': [user_id_minu, user_id_josh, user_id_jack],
       'title': 'Tanaya Lake',
       'caption': 'Tanaya Lake is worth the trip whenever you can make it.',
@@ -273,21 +273,21 @@ var photosData = {
       // 'thumbnail': 'https://www.yosemite.com/wp-content/uploads/2016/04/Tenaya-Lake-_-Tuolumne-Meadows.jpg'
     },
     {
-      '_id': photo_yosemitte_2_id,
+      '_id': photo_yosemite_2_id,
       'owner': user_id_minu,
-      'album': album_minu_yosemitte_id,
-      'comments': [comments_yosemitte_photo_2_josh_1],
+      'album': album_minu_yosemite_id,
+      'comments': [comments_yosemite_photo_2_josh_1],
       'likes': [user_id_josh, user_id_david],
-      'title': 'Yosemitte Falls',
-      'caption': 'There is no waterfall like Yosemitte Falls, great in the summer and winter.',
+      'title': 'yosemite Falls',
+      'caption': 'There is no waterfall like yosemite Falls, great in the summer and winter.',
       'imageUploadId': 'ucb/minu_01-yosemite-falls-81171613_1000x667'
       // 'link': 'http://www.travelyosemite.com/media/198282/yosemite-falls-81171613_1000x667.jpg?anchor=center&mode=crop&width=1000&height=667&rnd=131012949160000000',
       // 'thumbnail': 'http://www.travelyosemite.com/media/198282/yosemite-falls-81171613_1000x667.jpg?anchor=center&mode=crop&width=1000&height=667&rnd=131012949160000000'
     },
     {
-      '_id': photo_yosemitte_3_id,
+      '_id': photo_yosemite_3_id,
       'owner': user_id_minu,
-      'album': album_minu_yosemitte_id,
+      'album': album_minu_yosemite_id,
       'likes': [user_id_josh, user_id_david, user_id_jill],
       'title': 'Glacier Point',
       'caption': 'From 2013',
@@ -296,9 +296,9 @@ var photosData = {
       // 'thumbnail': 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg'
     },
     {
-      '_id': photo_yosemitte_4_id,
+      '_id': photo_yosemite_4_id,
       'owner': user_id_minu,
-      'album': album_minu_yosemitte_id,
+      'album': album_minu_yosemite_id,
       'likes': [user_id_minu],
       'title': 'Sun Set',
       'caption': 'What\'s better than a sunset?',
@@ -324,7 +324,7 @@ var photosData = {
       'album': album_jack_goldengate_id,
       'likes': [user_id_minu, user_id_jack, user_id_jill, user_id_david, user_id_josh],
       'title': 'Full View',
-      'caption': 'As opposed to partial view.',
+      'caption': 'As opposed to partial view.  Well, even this doesn\'t capture the whole bridge',
       'imageUploadId': 'ucb/jack_02-tdih-jan05-HD'
       // 'link': 'http://www.history.com/s3static/video-thumbnails/AETN-History_VMS/21/201/tdih-jan05-HD.jpg',
       // 'thumbnail': 'http://www.history.com/s3static/video-thumbnails/AETN-History_VMS/21/201/tdih-jan05-HD.jpg'
