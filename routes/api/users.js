@@ -30,5 +30,7 @@ router.route("/:id/albums/:albumId/like")
 
 router.route("/:id/profilephoto")
   .put(usersController.updateProfilePhoto)
+  .get(usersController.getUserProfile)
+
 
 module.exports = router;
