@@ -47,17 +47,19 @@ class Main extends Component{
                 <div className="panel-body">
 
                   <div className="row">
+                    <div className="col-md-12">
 
-                    <div class="block">
                       <h4>Most Liked Photos</h4>
+
+                      {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
+
+                      <hr/>
+
+                        <h4>Most Liked Photos</h4>
+
+                      {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
+
                     </div>
-                    {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
-
-                    <hr/>
-
-                    <h4>Recent Photo Uploads</h4>
-                    {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
-
                   </div>
 
                 </div>
