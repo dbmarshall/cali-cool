@@ -46,7 +46,14 @@ class Header extends Component {
     })
     .then(res => {
       sessionStorage.clear();
-      window.location.reload()
+
+      // Redirect to root page if the current page is publish
+      if(window.location.pathname === "/publish"){
+        window.location.href = "/";
+      }
+      else{
+        window.location.reload()
+      }
     })
     .catch(err =>{console.log(err)
     })
@@ -94,7 +101,13 @@ class Header extends Component {
       password:this.state.passWord
     })
     .then(res => {
-      this.closeModal();
+
+       this.closeModal();
+
+      // Redirect to user page if the current page is signup
+      if(window.location.pathname === "/signup"){
+        window.location.href = res.data.successRedirect;
+      }
     })
     .catch(err => {
       this.setState({
