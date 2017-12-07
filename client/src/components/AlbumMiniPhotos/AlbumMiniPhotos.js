@@ -3,7 +3,8 @@ import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 const albumPhotoStyle = {
    margin: "0px",
-   padding:"0px"
+   padding:"0px",
+   position: ""
 };
 
 const albumMiniWrapper = {

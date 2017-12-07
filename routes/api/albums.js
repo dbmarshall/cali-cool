@@ -12,5 +12,8 @@ router.route("/:id")
 router.route("/search/title/:searchStr")
   .get(albumsController.searchByTitle)
 
+router.route("/:id/comments")
+  .post(albumsController.insertCommentIntoAlbumArray)
+
 
 module.exports = router;

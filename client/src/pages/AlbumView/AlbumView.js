@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import API from '../../utils/API';
-
 import AlbumPreview from '../../components/AlbumPreview'
-import Like from '../../components/Like'
+import Comments from "../../components/Comments";
+import Like from '../../components/Like';
 
 const sessionKeyUserId = "userId";
 
@@ -11,7 +11,10 @@ class AlbumView extends Component{
     albumId: this.props.match.params.id,
     albumObj: {},
     albumPhotos: [],
-    likesCount: 0
+    likesCount: 0,
+    comments:[],
+    commentContent:"",
+    commmentId:""
   }
 
   componentDidMount(){
@@ -25,7 +28,8 @@ class AlbumView extends Component{
       this.setState({
         albumObj: res.data,
         albumPhotos: res.data.photos,
-        likesCount: res.data.likes.length
+        likesCount: res.data.likes.length,
+        comments:res.data.comments
       });
     })
     .catch(err => console.log(err))
@@ -61,6 +65,43 @@ class AlbumView extends Component{
     }
     return false;
   }
+handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    })
+    };
+handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.albumId)
+    console.log(this.state.commentContent)
+    API.createComment({
+      userId:sessionStorage.getItem("userId"),
+      comment:this.state.commentContent
+    })
+    .then(res => {
+      this.setState({
+        commmentId: res.data._id
+      })
+      console.log(this.state.commmentId)
+      })
+    .then(res => {
+      API.insertCommentToAlbum({
+        commentId: this.state.commmentId,
+        albumId: this.state.albumId
+      })
+      .then(res => {
+        console.log(res)
+        this.setState({ 
+          comments : res.data.comments
+        })
+      })
+    })
+    .catch(err => {
+      console.log(err)})
+  };
+
+
 
   render(){
     return(
@@ -85,20 +126,13 @@ class AlbumView extends Component{
         </Like>
           
         </div>
-        <div>
-          <h4>comments</h4>
-          <ul className="list-group">
-            {this.state.albumObj.comments &&
-              this.state.albumObj.comments.map(function(comment){
-              return <li key={comment._id} className="list-group-item">{comment.comment}</li>
-            })}
-          </ul>
-          <div className="input-group">
-            <input type="text" className="form-control" 
-              placeholder="Write comment..." aria-describedby="basic-addon2"></input>
-            <span className="input-group-addon" id="basic-addon2">Post</span>
-          </div>
-        </div>
+        <Comments 
+          addComment={this.handleInputChange}
+          commentsObj={this.state.comments}
+          userAuth={sessionStorage.getItem(sessionKeyUserId)}
+          commentContent={this.state.commentContent}
+          submit={this.handleFormSubmit}
+        />
         <hr/>
       </div>
     );

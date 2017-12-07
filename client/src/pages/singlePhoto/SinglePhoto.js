@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Grid, Row, Col, Image} from 'react-bootstrap';
 import Like from "../../components/Like";
-import AlbumPhotoComment from "../../components/AlbumPhotoComment";
+import Comments from "../../components/Comments";
 import API from "../../utils/API";
 
 const btnStyle = {
@@ -27,13 +27,15 @@ class SinglePhoto extends Component {
       caption:"",
       albumId:"",
       albumName:"",
-      userId:"",
+      ownerId:"",
       dateAdded:"",
       likesCount: 0,
       userAuth:"",
       userName:"",
       photoObj:{},
-      imageUploadId:""
+      imageUploadId:"",
+      comments:[],
+      commentContent:"",
     }
 
   }
@@ -45,26 +47,27 @@ class SinglePhoto extends Component {
    
   getPhotoData = event => {
     // console.log(this.state.photoId)
-    API.getSinglePhotoData(
+    API.getAllPhotoData(
     { id:this.state.photoId })
     .then(res => {
-      console.log("singe page data", res.data[0]);
+      console.log("singe page data", res.data.comments);
       this.setState({
-        photoTitle: res.data[0].title,
-        image: res.data[0].imageUrl,
-        caption: res.data[0].caption,
-        albumId: res.data[0].album._id,
-        userId: res.data[0].owner._id,
+        comments:res.data.comments,
+        photoTitle: res.data.title,
+        image: res.data.imageUrl,
+        caption: res.data.caption,
+        albumId: res.data.album._id,
+        ownerId: res.data.owner._id,
         userAuth:sessionStorage.getItem("userId"),
-        albumName:res.data[0].album.title,
-        userName:res.data[0].owner.userName,
-        photoObj:res.data[0],
-        likesCount: res.data[0].likes.length,
-        imageUploadId:res.data[0].imageUploadId
+        albumName:res.data.album.title,
+        userName:res.data.owner.userName,
+        photoObj:res.data,
+        likesCount: res.data.likes.length,
+        imageUploadId:res.data.imageUploadId
       })
-      console.log(this.state.userId)
-      console.log("user auth on single", this.state.userAuth);
-      console.log("user photo on single", this.state.photoId);
+    //   console.log(this.state.userId)
+    //   console.log("user auth on single", this.state.userAuth);
+    //   console.log("user photo on single", this.state.photoId);
     })
     .catch(err => console.log(err))
   }
@@ -113,7 +116,6 @@ class SinglePhoto extends Component {
     .catch(err => console.log(err))
   }
 
-
   // Set as profile photo
   handleSetProfilePhoto = event => {
     console.log("set profile clicked")
@@ -127,6 +129,45 @@ class SinglePhoto extends Component {
     })
     .catch(err => console.log(err))
   }
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    })
+    };
+
+    handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.photoId)
+    console.log(this.state.userId)
+    console.log(this.state.commentContent)
+    API.createComment({
+      userId:sessionStorage.getItem("userId"),
+      comment:this.state.commentContent
+    })
+    .then(res => {
+      this.setState({
+        commmentId: res.data._id
+      })
+      console.log(this.state.commmentId)
+      })
+    .then(res => {
+      API.insertCommentToPhoto({
+        commentId: this.state.commmentId,
+        photoId: this.state.photoId
+      })
+      .then(res => {
+        console.log(res)
+        this.setState({ 
+          comments : res.data.comments
+
+        })
+      })
+    })
+    .catch(err => {
+      console.log(err)})
+  };
 
 
   render(){
@@ -199,9 +240,12 @@ class SinglePhoto extends Component {
                   (null)      
               }
                 <div>
-                <AlbumPhotoComment 
-                    photoId={this.state.photoId}
-                    userAuth={this.state.userAuth}
+                    <Comments 
+                      addComment={this.handleInputChange}
+                      commentsObj={this.state.comments}
+                      userAuth={sessionStorage.getItem(sessionKeyUserId)}
+                      commentContent={this.state.commentContent}
+                      submit={this.handleFormSubmit}
                     />
                 </div>
             </Grid>
