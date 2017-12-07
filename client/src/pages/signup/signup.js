@@ -10,16 +10,16 @@ class Signup extends Component {
     userName:"",
     email: "",
     passWord: "",
-    defaultProfilePhoto: "https://static.pexels.com/photos/258447/pexels-photo-258447.jpeg"
-  };
+    defaultProfilePhoto: "https://static.pexels.com/photos/258447/pexels-photo-258447.jpeg",
+    authenticationError: ""
+  }
 
-  
    handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  };
+  }
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -32,17 +32,17 @@ class Signup extends Component {
       profilePicture:this.state.defaultProfilePhoto
     })
     .then(res => {
-      console.log(res.request.responseURL)
-      // if (res.request.responseURL === window.location.host + "/") {
-      //   // window.location.href = res.request.responseURL;
-      //   console.log("successful login will redirect to /")
-      // } 
-      window.location.href = res.request.responseURL;
-      
+      this.setState({
+        authenticationError: ""
+      })
+      window.location.href = res.data.successRedirect;
     })
-    .catch(err => console.log(err));
-
-  };
+    .catch(err => {
+      this.setState({
+        authenticationError: err.response.data.errMessage
+      })
+    });
+  }
 
   render() {
     return (
@@ -60,6 +60,16 @@ class Signup extends Component {
                   <div className="row">
                     <div className="col-md-12">
                     {/* start page content*/}
+
+                      { this.state.authenticationError &&
+                         <div className="form-group">
+                          <div className="alert alert-danger" role="alert">
+                            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;
+                            <span className="sr-only">Error:</span>
+                             {this.state.authenticationError}
+                          </div>
+                        </div>
+                      }
 
                       <form onSubmit={this.handleFormSubmit}>
 

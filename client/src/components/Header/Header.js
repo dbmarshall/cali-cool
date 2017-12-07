@@ -16,7 +16,8 @@ class Header extends Component {
     passWord:"",
     isLoggedIn: false,
     displayUser:"",
-    userId:""
+    userId:"",
+    authenticationError: ""
     }
   };
 
@@ -24,9 +25,15 @@ class Header extends Component {
     this.setState({open: true})}
 
   closeModal = event => {
-      this.setState({ open: false })
-      window.location.reload()
-    }
+    this.resetModalState();
+    window.location.reload()
+  }
+
+  resetModalState = event => {
+    this.setState({ 
+      open: false,
+      authenticationError: "" })
+  }
  
   saveAndClose = event => {
     this.setState({ open: false })};
@@ -54,6 +61,7 @@ class Header extends Component {
   getSessionData = event => {
     API.sessionData()
     .then(res => {
+      console.log(res.data);
       const isLoggedIn =res.data.loggedIn;
       const loggedInUser = res.data.userName
       const mongoId = res.data.userId
@@ -67,8 +75,6 @@ class Header extends Component {
         sessionStorage.setItem("userId", this.state.userId);
       }
       else {
-        sessionStorage.clear();
-        console.log("user isn't logged in");
         sessionStorage.clear();
       }
     })
@@ -91,9 +97,12 @@ class Header extends Component {
     })
     .then(res => {
       this.closeModal();
-      
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      this.setState({
+        authenticationError: err.response.data.errMessage
+      })
+    });
   };
 
   render(){
@@ -159,7 +168,7 @@ class Header extends Component {
         
       <Modal
         show={this.state.open}
-        onHide={this.closeModal}
+        onHide={this.resetModalState}
         aria-labelledby="ModalHeader"
       >
         <Modal.Header closeButton>
@@ -169,6 +178,21 @@ class Header extends Component {
           <Form 
           horizontal
           onSubmit={this.handleFormSubmit}>
+
+
+          { this.state.authenticationError &&
+            <FormGroup>
+              <Col sm={12}>
+                <div className="alert alert-danger" role="alert">
+                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> &nbsp;
+                  <span className="sr-only">Error:</span>
+                   {this.state.authenticationError}
+                </div>
+              </Col>
+            </FormGroup>
+          }
+
+
             <FormGroup controlId="formHorizontalUserName"
             >
               <Col componentClass={ControlLabel} sm={2}>
