@@ -51,7 +51,8 @@ class SinglePhoto extends Component {
     API.getAllPhotoData(
     { id:this.state.photoId })
     .then(res => {
-      console.log("singe page data", res.data.comments);
+      // console.log("singe page data", res.data.comments);
+      console.log(res.data)
       this.setState({
         comments:res.data.comments,
         photoTitle: res.data.title,
@@ -64,7 +65,7 @@ class SinglePhoto extends Component {
         userName:res.data.owner.userName,
         photoObj:res.data,
         likesCount: res.data.likes.length,
-        imageUploadId:res.data.imageUrl,
+        imageUploadId:res.data.imageUploadId,
         dateAdded:res.data.dateUpdated
       })
     //   console.log(this.state.userId)
@@ -170,7 +171,6 @@ class SinglePhoto extends Component {
     .catch(err => {
       console.log(err)})
   };
-
 
   render(){
 
