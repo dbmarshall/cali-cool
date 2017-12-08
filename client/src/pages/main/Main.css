@@ -2,12 +2,11 @@
  Main styles 
 */
 
-.panel-heading {
-  color: #fff;
+.panel-default>.panel-heading {
+  /*color: #fff;*/
   /*background-image: url(/assets/img/design.jpg);*/
   background-position: center center; 
   background-size: cover;
-
 }
 .panel-heading h1, 
 .panel-heading p {
@@ -36,7 +35,7 @@
   margin-top: 15px;
 }
 
-.album-title{
+.sub-heading{
   font-size: 1.5em;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;

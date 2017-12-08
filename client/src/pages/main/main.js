@@ -53,13 +53,19 @@ class Main extends Component{
 
                       <hr/>
 
-                      <p className="album-title">Most Liked Photos</p>
+                      <h3 className="sub-heading">
+                        <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        Most Liked Photos
+                      </h3>
 
                       {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
 
                       <hr/>
-
-                      <p className="album-title">Most Recent Photos</p>
+                      
+                      <h3 className="sub-heading">
+                        <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        Most Recent Photos
+                      </h3>
 
                       {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
 

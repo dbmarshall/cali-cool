@@ -6,6 +6,16 @@ import Like from '../../components/Like';
 
 const sessionKeyUserId = "userId";
 
+const style = {
+  likeSpan : {
+    backgroundColor : 'rgba(0, 0, 0, .75)', 
+    padding: "7px",
+    borderRadius:"5px",
+    width: "120px",
+    marginTop: "15px"
+  }
+}
+
 class AlbumView extends Component{
   state = {
     albumId: this.props.match.params.id,
@@ -125,17 +135,18 @@ class AlbumView extends Component{
                     {/* start page content*/}
 
                       <div>
-                        <h4>
-                          <a href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
+                        <h3 className="sub-heading">
+                          <a style={{color: "black"}}
+                            href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
                             <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
                             <span>{this.state.albumObj.owner && this.state.albumObj.owner.userName}</span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
                       <div>
                         {this.state.albumPhotos.length && <AlbumPreview photos={this.state.albumPhotos}/>}
                       </div>
-                      <div style={{backgroundColor : 'rgba(0, 0, 0, .75)'}}>
+                      <div style={style.likeSpan}>
 
                         <Like position={{marginLeft: "10px"}}
                           likesCount={this.state.albumObj.likes && this.state.albumObj.likes.length}
