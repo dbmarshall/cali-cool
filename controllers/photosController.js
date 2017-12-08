@@ -104,6 +104,11 @@ module.exports = {
     .findOneAndUpdate({ _id: req.params.id }, {$push: { comments: req.body.commentId }}, { new: true })
     .populate({
       path: 'comments',
+      options: {
+        sort: {
+          dateUpdated: -1
+        }
+      },
       populate: {
         path: 'user',
         model: 'Users'

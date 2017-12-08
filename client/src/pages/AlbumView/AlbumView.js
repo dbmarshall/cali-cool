@@ -6,6 +6,16 @@ import Like from '../../components/Like';
 
 const sessionKeyUserId = "userId";
 
+const style = {
+  likeSpan : {
+    backgroundColor : 'rgba(0, 0, 0, .75)', 
+    padding: "7px",
+    borderRadius:"5px",
+    width: "120px",
+    marginTop: "15px"
+  }
+}
+
 class AlbumView extends Component{
   state = {
     albumId: this.props.match.params.id,
@@ -65,13 +75,15 @@ class AlbumView extends Component{
     }
     return false;
   }
-handleInputChange = event => {
+
+  handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     })
-    };
-handleFormSubmit = event => {
+  }
+  
+  handleFormSubmit = event => {
     event.preventDefault();
     console.log(this.state.albumId)
     console.log(this.state.commentContent)
@@ -84,7 +96,7 @@ handleFormSubmit = event => {
         commmentId: res.data._id
       })
       console.log(this.state.commmentId)
-      })
+    })
     .then(res => {
       API.insertCommentToAlbum({
         commentId: this.state.commmentId,
@@ -93,7 +105,8 @@ handleFormSubmit = event => {
       .then(res => {
         console.log(res)
         this.setState({ 
-          comments : res.data.comments
+          comments : res.data.comments,
+          commentContent: ""
         })
       })
     })
@@ -109,7 +122,7 @@ handleFormSubmit = event => {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h1>
@@ -123,17 +136,18 @@ handleFormSubmit = event => {
                     {/* start page content*/}
 
                       <div>
-                        <h4>
-                          <a href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
+                        <h3 className="sub-heading">
+                          <a style={{color: "black"}}
+                            href={this.state.albumObj.owner && "/user/" + this.state.albumObj.owner._id}>
                             <span style={{marginRight: "5px"}} className="glyphicon glyphicon-user"></span>
                             <span>{this.state.albumObj.owner && this.state.albumObj.owner.userName}</span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
                       <div>
                         {this.state.albumPhotos.length && <AlbumPreview photos={this.state.albumPhotos}/>}
                       </div>
-                      <div style={{backgroundColor : 'rgba(0, 0, 0, .75)'}}>
+                      <div style={style.likeSpan}>
 
                         <Like position={{marginLeft: "10px"}}
                           likesCount={this.state.albumObj.likes && this.state.albumObj.likes.length}

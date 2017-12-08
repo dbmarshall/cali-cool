@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from '../../utils/API';
+import "./Main.css";
 
 import AlbumPreview from '../../components/AlbumPreview'
 
@@ -38,10 +39,10 @@ class Main extends Component{
 
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>Cali.Cool</h1>
+                  <h1>Cali.cool</h1>
                   <p>A growing visual record of what's going down in our state</p>
                 </div>
                 <div className="panel-body">
@@ -50,13 +51,21 @@ class Main extends Component{
                     <div className="col-md-12">
                     {/* start page content*/}
 
-                      <h4>Most Liked Photos</h4>
+                      <hr/>
+
+                      <h3 className="sub-heading">
+                        <i className="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        Most Liked Photos
+                      </h3>
 
                       {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
 
                       <hr/>
-
-                      <h4>Most Recent Photos</h4>
+                      
+                      <h3 className="sub-heading">
+                        <i className="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        Most Recent Photos
+                      </h3>
 
                       {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
 

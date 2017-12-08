@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Grid, Row, Col, form, FormControl, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, Grid, Row, Col, form, FormControl, ListGroup, ListGroupItem, FormGroup, InputGroup } from 'react-bootstrap';
 import Timestamp  from 'react-timestamp';
 
 const commentDiv = {
@@ -18,10 +18,6 @@ class Comments extends Component {
     comments:[]
   }
 
-  componentDidMount(){
-    console.log("comment component")
-   
-  }
 
   componentWillReceiveProps(nextProps){
       // console.log(nextProps.commentsObj)
@@ -36,25 +32,34 @@ class Comments extends Component {
     return (
       <div>
         <br/>
-        <p><strong>Comments:</strong></p>
+        <p className="sub-heading"><strong>
+          <span className="glyphicon glyphicon-comment"></span>&nbsp;
+          Comments:</strong>
+        </p>
         <div style={commentDiv}>
           <Grid style={{maxWidth: '100%'}}>
             <Row>
               <Col>
                 {(this.state.userId) ? (
                   <form onSubmit={this.props.submit}>
-                    <FormControl
-                      id="formControlsText"
-                      type="text"
-                      label="Text"
-                      placeholder="Enter text"
-                      name="commentContent"
-                      value={this.props.commentContent}
-                      onChange={this.props.addComment}
-                    />
-                    <Button type="submit" bsStyle="primary" >
-                    Add Comment
-                    </Button> 
+                   <FormGroup>
+                      <InputGroup>
+                        <FormControl
+                          id="formControlsText"
+                          type="text"
+                          label="Text"
+                          placeholder="Enter text"
+                          name="commentContent"
+                          value={this.props.commentContent}
+                          onChange={this.props.addComment}
+                        />
+
+                        <InputGroup.Button>
+                          <Button type="submit" bsStyle="primary">Post</Button>
+                        </InputGroup.Button>
+                      </InputGroup>
+
+                    </FormGroup>
                   </form>
                 ) : (
                   null
@@ -63,6 +68,7 @@ class Comments extends Component {
             </Row>
             <Row>
               <Col>
+              {this.state.comments.length === 0 ? (<p>No Comments</p>) :
                 <ListGroup>
                 { this.props.commentsObj.map((comment , i) => {
                   return (
@@ -75,6 +81,7 @@ class Comments extends Component {
                   )
                 })}
                 </ListGroup>
+              }
               </Col>
             </Row>
           </Grid>
@@ -82,7 +89,7 @@ class Comments extends Component {
       </div>
 
     )
-  }
+    };
 }
 
 export default Comments;

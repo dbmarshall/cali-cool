@@ -1,0 +1,42 @@
+/*
+ Main styles 
+*/
+
+.panel-default>.panel-heading {
+  /*color: #fff;*/
+  /*background-image: url(/assets/img/design.jpg);*/
+  background-position: center center; 
+  background-size: cover;
+}
+.panel-heading h1, 
+.panel-heading p {
+  /*font-family: Arial Black, Arial Bold, Gadget, sans-serif;*/
+  font-family: 'Heebo', sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 600;
+  /*color: black;*/
+  /*-webkit-text-stroke: 1px #444;*/
+ /* text-shadow:
+    1px 1px 0 #444,
+    -1px -1px 0 #444,  
+    1px -1px 0 #444,
+    -1px 1px 0 #444,
+    1px 1px 0 #444;*/
+}
+.panel-heading h1 {
+  font-size: 40px;
+  line-height: .75em;
+}
+.panel-heading p {
+  font-size: 25px;
+  line-height: 1em;
+  font-family: 'Bad Script', cursive;
+  margin-top: 15px;
+}
+
+.sub-heading{
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
