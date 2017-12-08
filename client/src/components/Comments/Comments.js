@@ -18,10 +18,6 @@ class Comments extends Component {
     comments:[]
   }
 
-  // componentDidMount(){
-  //   console.log("comment component")
-   
-  // }
 
   componentWillReceiveProps(nextProps){
       // console.log(nextProps.commentsObj)
@@ -43,27 +39,18 @@ class Comments extends Component {
               <Col>
                 {(this.state.userId) ? (
                   <form onSubmit={this.props.submit}>
-                    
-                    <FormGroup>
-                      <InputGroup>
-                        
-                        <FormControl
-                          id="formControlsText"
-                          type="text"
-                          label="Text"
-                          placeholder="Enter text"
-                          name="commentContent"
-                          value={this.props.commentContent}
-                          onChange={this.props.addComment}
-                        />
-
-                        <InputGroup.Button>
-                          <Button type="submit" bsStyle="primary">Post</Button>
-                        </InputGroup.Button>
-
-                      </InputGroup>
-                    </FormGroup>
-
+                    <FormControl
+                      id="formControlsText"
+                      type="text"
+                      label="Text"
+                      placeholder="Enter text"
+                      name="commentContent"
+                      value={this.props.commentContent}
+                      onChange={this.props.addComment}
+                    />
+                    <Button type="submit" bsStyle="primary" >
+                    Add Comment
+                    </Button> 
                   </form>
                 ) : (
                   null
@@ -72,6 +59,7 @@ class Comments extends Component {
             </Row>
             <Row>
               <Col>
+              {this.state.comments.length === 0 ? (<p>No Comments</p>) :
                 <ListGroup>
                 { this.props.commentsObj.map((comment , i) => {
                   return (
@@ -84,6 +72,7 @@ class Comments extends Component {
                   )
                 })}
                 </ListGroup>
+              }
               </Col>
             </Row>
           </Grid>
@@ -91,7 +80,7 @@ class Comments extends Component {
       </div>
 
     )
-  }
+    };
 }
 
 export default Comments;

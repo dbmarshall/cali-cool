@@ -10,22 +10,28 @@ class User extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userId: this.props.location.pathname.split('/')[2],
+      userId: window.location.pathname.split('/')[2],
       userAlbums:[],
       profilePhoto:"",
       profileTitle:"",
-      userHasAlbums:""
+      userHasAlbums:"",
+      loadNewUser: ""
     } 
   }
 
   componentDidMount(){
+    console.log("componentDidMount is loaded")
     this.getUserInfo()
-  }
+ }
+
+  // Guest user ("Jane") is on user page of "Joe". When Jane logs in reload page after Jane clicks the "account " link in header
+   componentWillReceiveProps(nextProps){
+    this.getUserInfo()
+   }
 
   getUserDetails() {
     API.getUserProfile({id: this.state.userId})
     .then(res => {
-      console.log(res.data)
       this.setState({
         profileTitle: res.data.userName,
         profilePhoto: res.data.profileImgUrl,
@@ -37,9 +43,8 @@ class User extends Component {
 
   getUserInfo = event => {
    API.getUserProfileData({
-      id: this.state.userId })
+      id: window.location.pathname.split('/')[2] })
      .then(res => {
-        console.log(res.data)
         res.data.length !== 0 ?
         this.setState({ 
         userAlbums: res.data,
@@ -56,8 +61,8 @@ class User extends Component {
   render(){
 
     return (
+      
       <div>
-
         <div className="container">
           <div className="row">
             <div className="col-md-12">
