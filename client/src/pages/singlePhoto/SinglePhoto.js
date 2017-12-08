@@ -115,6 +115,7 @@ class SinglePhoto extends Component {
     API.deletePhoto(this.state.photoId)
     .then(res => {
       console.log(res)
+      window.location.href = "/album/" + this.state.albumId;
     })
     .catch(err => console.log(err))
   }
