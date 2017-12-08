@@ -54,7 +54,7 @@ class Main extends Component{
                       <hr/>
 
                       <h3 className="sub-heading">
-                        <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        <i className="fa fa-camera" aria-hidden="true"></i>&nbsp;
                         Most Liked Photos
                       </h3>
 
@@ -63,7 +63,7 @@ class Main extends Component{
                       <hr/>
                       
                       <h3 className="sub-heading">
-                        <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        <i className="fa fa-camera" aria-hidden="true"></i>&nbsp;
                         Most Recent Photos
                       </h3>
 
