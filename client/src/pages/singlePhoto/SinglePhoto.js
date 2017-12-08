@@ -221,7 +221,7 @@ class SinglePhoto extends Component {
                                 <span >
                                 <span className="glyphicon glyphicon-user" style={{fontSize: "1.5em"}}></span>
                                  <a style={subTitle} 
-                                 href={'/user/' + this.state.userId}> {this.state.userName} </a> 
+                                 href={'/user/' + this.state.ownerId}> {this.state.userName} </a> 
                                  </span>
                                 <span><Timestamp time={this.state.dateAdded} format='ago' />
                                 </span> 
