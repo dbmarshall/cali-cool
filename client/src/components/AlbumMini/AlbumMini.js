@@ -16,7 +16,6 @@ const header = {
 }
 
 class AlbumMini extends Component {
-
   state = {
     userAlbums: this.props.albums
   } 
