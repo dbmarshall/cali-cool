@@ -32,6 +32,16 @@ const styles = {
     position: "absolute", 
     bottom: "-10px", 
     // left: "20px"
+  },
+  albumBody: {
+    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+  },
+  viewPhoto: {
+    color: "white",
+    fontSize: "1.1em",
+    position: "absolute", 
+    bottom: "-10px", 
+    left: "205px"
   }
 }
 
@@ -159,6 +169,12 @@ class AlbumPreview extends Component{
          style={styles.commentLink} key={4}>
         <span className="glyphicon glyphicon-comment"></span>
         <span> Comment</span>    
+      </a>,
+
+      <a href={this.state.currentPhoto && "/photo/" + this.state.currentPhoto._id} 
+         style={styles.viewPhoto} key={5}>
+        <span className="glyphicon glyphicon-camera"></span>&nbsp;
+        <span>View Details</span>    
       </a>
     ];
 
@@ -167,7 +183,7 @@ class AlbumPreview extends Component{
 
   render(){
     return (
-      <div>
+      <div style={styles.albumBody}>
         <Gallery photos={this.state.thumbnails} onClick={this.openLightbox} columns={4}/>  
           <Lightbox images={this.state.photos}
             onClose={this.closeLightbox}

@@ -91,13 +91,15 @@ class User extends Component {
                         </Grid>
                       </div>
 
+                      <hr/>
+
                       {this.state.userHasAlbums ? (
                        
                         <div> 
-                          <h4>
+                          <h3 className="sub-heading">
                             <i className="fa fa-book" aria-hidden="true"></i>&nbsp;
                             Albums
-                          </h4>
+                          </h3>
                           <AlbumMini 
                             albums={this.state.userAlbums} />
                         </div>

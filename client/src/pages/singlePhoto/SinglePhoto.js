@@ -6,12 +6,22 @@ import API from "../../utils/API";
 import Timestamp  from 'react-timestamp';
 
 const btnStyle = {
-  marginTop: "5px",
-  marginBottom: "5px"
+  // marginTop: "5px",
+  // marginBottom: "5px"
+  marginLeft: "5px"
 }
 
 const likeTemp = {
-  backgroundColor: "grey"
+  backgroundColor : 'rgba(0, 0, 0, .75)',
+  padding: "9px 20px 9px 9px",
+  borderRadius:"5px"
+}
+
+const subTitle = {
+  fontSize: "1.5em",
+  fontWeight: "bold",
+  fontFamily: "Roboto, sans-serif",
+  color: "black"
 }
 
 const sessionKeyUserId = "userId";
@@ -164,8 +174,8 @@ class SinglePhoto extends Component {
       .then(res => {
         console.log(res)
         this.setState({ 
-          comments : res.data.comments
-
+          comments : res.data.comments,
+          commentContent: ""
         })
       })
     })
@@ -203,20 +213,33 @@ class SinglePhoto extends Component {
                           <Row>
                             <Col md={8}>
                              <p> 
-                              <a href={'/album/' + this.state.albumId}>
+                              <a style={subTitle} 
+                              href={'/album/' + this.state.albumId}>
                                 <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
                                 {this.state.albumName}
-                              </a>&nbsp;by  
-                                <span> 
-                                 <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
+                              </a>&nbsp;by &nbsp; 
+                                <span >
+                                <span className="glyphicon glyphicon-user" style={{fontSize: "1.5em"}}></span>
+                                 <a style={subTitle} 
+                                 href={'/user/' + this.state.userId}> {this.state.userName} </a> 
                                  </span>
                                 <span><Timestamp time={this.state.dateAdded} format='ago' />
                                 </span> 
                               </p>
                               </Col>
-                              { (this.state.ownerId === this.state.userAuth) ? (
-                                <div>
-                                  <Col md={2}>
+                              
+                          </Row>
+                           <Row>
+
+                            <Col md={12} >
+                              <span style={likeTemp}>
+                                <Like position={{marginLeft: "10px"}}
+                                  likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
+                                  updateLike={this.updateLike}
+                                  isLiked={this.doesUserLikeAlbum()}>
+                                </Like>
+                                </span>
+                            {this.state.ownerId === this.state.userAuth && 
                                       <Button 
                                         bsStyle="primary" 
                                         bsSize="medium" 
@@ -226,8 +249,10 @@ class SinglePhoto extends Component {
                                         name="setProfile"
                                         >
                                         Set as Profile Photo</Button>
-                                  </Col>
-                                  <Col md={2}>
+                                }
+
+                                {
+                                  this.state.ownerId === this.state.userAuth &&
                                       <Button 
                                       bsStyle="danger" 
                                       bsSize="medium" 
@@ -236,20 +261,8 @@ class SinglePhoto extends Component {
                                       onClick={this.handleDelete}
                                       >Delete
                                       Photo</Button>
-                                  </Col>
-                                </div>
-                              ) : 
-                              (null)      
-                            }
-                          </Row>
-                           <Row>
-                            <Col style={likeTemp}>
-                                <Like position={{marginLeft: "10px"}}
-                                  likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
-                                  updateLike={this.updateLike}
-                                  isLiked={this.doesUserLikeAlbum()}>
-                                </Like>
-                            </Col>
+                                }
+                              </Col>
                           </Row>
                             <div>
                               <Comments 

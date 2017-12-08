@@ -51,13 +51,21 @@ class Main extends Component{
                     <div className="col-md-12">
                     {/* start page content*/}
 
-                      <h4>Most Liked Photos</h4>
+                      <hr/>
+
+                      <h3 className="sub-heading">
+                        <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        Most Liked Photos
+                      </h3>
 
                       {this.state.mostLikedPhotos.length && <AlbumPreview photos={this.state.mostLikedPhotos}/>}
 
                       <hr/>
-
-                      <h4>Most Recent Photos</h4>
+                      
+                      <h3 className="sub-heading">
+                        <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;
+                        Most Recent Photos
+                      </h3>
 
                       {this.state.recentPhotos.length && <AlbumPreview photos={this.state.recentPhotos} />}
 

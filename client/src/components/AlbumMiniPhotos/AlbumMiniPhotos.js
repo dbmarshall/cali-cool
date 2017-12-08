@@ -2,12 +2,13 @@ import React from "react";
 import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 const albumPhotoStyle = {
-  width: "18.6%",
-  "max-height": "80px",
+  width: "20%",
+  "maxHeight": "100px",
   margin: "0",
   padding:"0",
   float: "left",
-  overflow: "hidden"
+  overflow: "hidden",
+  boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.10)"
 };
 
 const photoStyle = {
@@ -16,17 +17,18 @@ const photoStyle = {
   margin: "0 4px",
   padding:"0",
   float: "left",
-  overflow: "hidden"
+  overflow: "hidden",
+
 };
 
 const albumMiniWrapper = {
-  margin:"0 0 15px 0",
+  margin:"15px 0 0 0"
 }
 
 const AlbumMiniPhotos = props => {
   return (
     <div>
-      <Grid>
+      <Grid  style={{ width: "100%"}}>
        <Row style={albumMiniWrapper}>
          {props.photos.map((photo, i) => {
             return (
