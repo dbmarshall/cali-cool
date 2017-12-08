@@ -6,12 +6,22 @@ import API from "../../utils/API";
 import Timestamp  from 'react-timestamp';
 
 const btnStyle = {
-  marginTop: "5px",
-  marginBottom: "5px"
+  // marginTop: "5px",
+  // marginBottom: "5px"
+  marginLeft: "5px"
 }
 
 const likeTemp = {
-  backgroundColor: "grey"
+  backgroundColor : 'rgba(0, 0, 0, .75)',
+  padding: "9px 20px 9px 9px",
+  borderRadius:"5px"
+}
+
+const subTitle = {
+  fontSize: "1.5em",
+  fontWeight: "bold",
+  fontFamily: "Roboto, sans-serif",
+  color: "black"
 }
 
 const sessionKeyUserId = "userId";
@@ -51,7 +61,8 @@ class SinglePhoto extends Component {
     API.getAllPhotoData(
     { id:this.state.photoId })
     .then(res => {
-      console.log("singe page data", res.data.comments);
+      // console.log("singe page data", res.data.comments);
+      console.log(res.data)
       this.setState({
         comments:res.data.comments,
         photoTitle: res.data.title,
@@ -64,7 +75,7 @@ class SinglePhoto extends Component {
         userName:res.data.owner.userName,
         photoObj:res.data,
         likesCount: res.data.likes.length,
-        imageUploadId:res.data.imageUrl,
+        imageUploadId:res.data.imageUploadId,
         dateAdded:res.data.dateUpdated
       })
     //   console.log(this.state.userId)
@@ -114,6 +125,7 @@ class SinglePhoto extends Component {
     API.deletePhoto(this.state.photoId)
     .then(res => {
       console.log(res)
+      window.location.href = "/album/" + this.state.albumId;
     })
     .catch(err => console.log(err))
   }
@@ -162,15 +174,14 @@ class SinglePhoto extends Component {
       .then(res => {
         console.log(res)
         this.setState({ 
-          comments : res.data.comments
-
+          comments : res.data.comments,
+          commentContent: ""
         })
       })
     })
     .catch(err => {
       console.log(err)})
   };
-
 
   render(){
 
@@ -179,7 +190,7 @@ class SinglePhoto extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h1>
@@ -192,8 +203,6 @@ class SinglePhoto extends Component {
                   <div className="row">
                     <div className="col-md-12">
                     {/* start page content*/}
-
-                      
                         <Grid style={{maxWidth: '100%'}}>
                           <Row>
                             <Col>
@@ -202,60 +211,59 @@ class SinglePhoto extends Component {
                             </Col>
                           </Row>
                           <Row>
-                            <Col>
+                            <Col md={8}>
                              <p> 
-                              <a href={'/album/' + this.state.albumId}>
+                              <a style={subTitle} 
+                              href={'/album/' + this.state.albumId}>
                                 <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
                                 {this.state.albumName}
-                              </a>&nbsp;by  
-                                <span> 
-                                 <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
+                              </a>&nbsp;by &nbsp; 
+                                <span >
+                                <span className="glyphicon glyphicon-user" style={{fontSize: "1.5em"}}></span>
+                                 <a style={subTitle} 
+                                 href={'/user/' + this.state.ownerId}> {this.state.userName} </a> 
                                  </span>
                                 <span><Timestamp time={this.state.dateAdded} format='ago' />
-                                {}</span> 
+                                </span> 
                               </p>
-                            </Col>
+                              </Col>
+                              
                           </Row>
                            <Row>
-                            <Col style={likeTemp}>
+
+                            <Col md={12} >
+                              <span style={likeTemp}>
                                 <Like position={{marginLeft: "10px"}}
                                   likesCount={this.state.photoObj.likes && this.state.photoObj.likes.length}
                                   updateLike={this.updateLike}
                                   isLiked={this.doesUserLikeAlbum()}>
                                 </Like>
-                            </Col>
-                          </Row>
-                          { (this.state.ownerId === this.state.userAuth) ? (
-                            <div>
-                                <Row>
-                                <Col>
-                                    <Button 
-                                      bsStyle="primary" 
-                                      bsSize="large" 
-                                      style={btnStyle}
-                                      onClick={this.handleSetProfilePhoto}
-                                      value={this.state.photoId}
-                                      name="setProfile"
-                                      >
-                                      Set as Profile Photo</Button>
-                                </Col>
-                                </Row>
-                                <Row>
-                                  <Col>
+                                </span>
+                            {this.state.ownerId === this.state.userAuth && 
                                       <Button 
-                                      bsStyle="primary" 
-                                      bsSize="large" 
+                                        bsStyle="primary" 
+                                        bsSize="medium" 
+                                        style={btnStyle}
+                                        onClick={this.handleSetProfilePhoto}
+                                        value={this.state.photoId}
+                                        name="setProfile"
+                                        >
+                                        Set as Profile Photo</Button>
+                                }
+
+                                {
+                                  this.state.ownerId === this.state.userAuth &&
+                                      <Button 
+                                      bsStyle="danger" 
+                                      bsSize="medium" 
                                       style={btnStyle}
                                       value={this.state.imageUploadId}
                                       onClick={this.handleDelete}
                                       >Delete
                                       Photo</Button>
-                                  </Col>
-                                </Row>
-                                </div>
-                            ) : 
-                              (null)      
-                          }
+                                }
+                              </Col>
+                          </Row>
                             <div>
                               <Comments 
                                 addComment={this.handleInputChange}

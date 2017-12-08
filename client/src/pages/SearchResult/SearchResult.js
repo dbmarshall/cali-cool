@@ -19,10 +19,13 @@ class SearchResult extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>Search Results</h1>
+                  <h1>
+                  <i class="fa fa-search-plus" aria-hidden="true"></i>&nbsp;
+                  Search Results
+                  </h1>
                 </div>
                 <div className="panel-body">
 

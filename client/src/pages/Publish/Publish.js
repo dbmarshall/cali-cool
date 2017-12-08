@@ -239,10 +239,13 @@ class Publish extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-md-12">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h1>Publish</h1>
+                  <h1>
+                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbsp;
+                    Publish
+                  </h1>
                 </div>
                 <div className="panel-body">
 

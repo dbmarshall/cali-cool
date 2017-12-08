@@ -133,7 +133,9 @@ class Search extends Component {
   }
 
   searchForAlbums = () =>{
-
+    if(!this.state.value){
+      return;
+    }
     API.searchForAlbumsByTitle(this.state.value)
     .then(res => {
       this.setState({
