@@ -105,7 +105,8 @@ class AlbumView extends Component{
       .then(res => {
         console.log(res)
         this.setState({ 
-          comments : res.data.comments
+          comments : res.data.comments,
+          commentContent: ""
         })
       })
     })

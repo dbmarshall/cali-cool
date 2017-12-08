@@ -41,7 +41,7 @@ const styles = {
     fontSize: "1.1em",
     position: "absolute", 
     bottom: "-10px", 
-    left: "215px"
+    left: "205px"
   }
 }
 
