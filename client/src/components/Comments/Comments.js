@@ -31,57 +31,55 @@ class Comments extends Component {
 
     return (
       <div>
-      {console.log(this.state.comments.length)}
         <br/>
-
-        {((this.state.comments.length === 0) && (!this.state.userId)) ? ( null) : (
-          <div>
-          <p><strong>Comments:</strong></p>
-          <div style={commentDiv}>
-            <Grid style={{maxWidth: '100%'}}>
-              <Row>
-                <Col>
-                  {((this.state.comments.length === 0) && (this.state.userId )) ? (
-                    <form onSubmit={this.props.submit}>
-                      <FormGroup>
-                        <InputGroup>
-                          <FormControl
-                            id="formControlsText"
-                            type="text"
-                            label="Text"
-                            placeholder="Enter text"
-                            name="commentContent"
-                            value={this.props.commentContent}
-                            onChange={this.props.addComment}
-                          />
-                          <InputGroup.Button>
-                            <Button type="submit" bsStyle="primary">Post</Button>
-                          </InputGroup.Button>
-                        </InputGroup>
-                      </FormGroup>
-                    </form>
+        <p><strong>Comments:</strong></p>
+        <div style={commentDiv}>
+          <Grid style={{maxWidth: '100%'}}>
+            <Row>
+              <Col>
+                {(this.state.userId) ? (
+                  <form onSubmit={this.props.submit}>
+                    <FormControl
+                      id="formControlsText"
+                      type="text"
+                      label="Text"
+                      placeholder="Enter text"
+                      name="commentContent"
+                      value={this.props.commentContent}
+                      onChange={this.props.addComment}
+                    />
+                    <Button type="submit" bsStyle="primary" >
+                    Add Comment
+                    </Button> 
+                  </form>
                 ) : (
-                  <ListGroup>
-                  { this.props.commentsObj.map((comment , i) => {
-                    return (
-                      <ListGroupItem key={comment._id}>
-                        <p>{comment.user.userName}<span> | </span>
-                        <Timestamp time={comment.dateCreated} format='ago' />
-                        </p>
-                        <p>{comment.comment}</p>
-                      </ListGroupItem>
-                      )}
-                    )}
-                  </ListGroup>
-                  )}
-                </Col>
-              </Row>
-            </Grid>
-          </div>
+                  null
+                )}
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              {this.state.comments.length === 0 ? (<p>No Comments</p>) :
+                <ListGroup>
+                { this.props.commentsObj.map((comment , i) => {
+                  return (
+                    <ListGroupItem key={comment._id}>
+                      <p>{comment.user.userName}<span> | </span>
+                      <Timestamp time={comment.dateCreated} format='ago' />
+                      </p>
+                      <p>{comment.comment}</p>
+                    </ListGroupItem>
+                  )
+                })}
+                </ListGroup>
+              }
+              </Col>
+            </Row>
+          </Grid>
         </div>
-          )}
       </div>
-      )
+
+    )
     };
 }
 

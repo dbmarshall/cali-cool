@@ -193,8 +193,6 @@ class SinglePhoto extends Component {
                   <div className="row">
                     <div className="col-md-12">
                     {/* start page content*/}
-
-                      
                         <Grid style={{maxWidth: '100%'}}>
                           <Row>
                             <Col>
@@ -203,7 +201,7 @@ class SinglePhoto extends Component {
                             </Col>
                           </Row>
                           <Row>
-                            <Col>
+                            <Col md={8}>
                              <p> 
                               <a href={'/album/' + this.state.albumId}>
                                 <i class="fa fa-book" aria-hidden="true"></i>&nbsp;
@@ -213,9 +211,36 @@ class SinglePhoto extends Component {
                                  <a href={'/user/' + this.state.userId}> {this.state.userName} </a> 
                                  </span>
                                 <span><Timestamp time={this.state.dateAdded} format='ago' />
-                                {}</span> 
+                                </span> 
                               </p>
-                            </Col>
+                              </Col>
+                              { (this.state.ownerId === this.state.userAuth) ? (
+                                <div>
+                                  <Col md={2}>
+                                      <Button 
+                                        bsStyle="primary" 
+                                        bsSize="medium" 
+                                        style={btnStyle}
+                                        onClick={this.handleSetProfilePhoto}
+                                        value={this.state.photoId}
+                                        name="setProfile"
+                                        >
+                                        Set as Profile Photo</Button>
+                                  </Col>
+                                  <Col md={2}>
+                                      <Button 
+                                      bsStyle="danger" 
+                                      bsSize="medium" 
+                                      style={btnStyle}
+                                      value={this.state.imageUploadId}
+                                      onClick={this.handleDelete}
+                                      >Delete
+                                      Photo</Button>
+                                  </Col>
+                                </div>
+                              ) : 
+                              (null)      
+                            }
                           </Row>
                            <Row>
                             <Col style={likeTemp}>
@@ -226,37 +251,6 @@ class SinglePhoto extends Component {
                                 </Like>
                             </Col>
                           </Row>
-                          { (this.state.ownerId === this.state.userAuth) ? (
-                            <div>
-                                <Row>
-                                <Col>
-                                    <Button 
-                                      bsStyle="primary" 
-                                      bsSize="large" 
-                                      style={btnStyle}
-                                      onClick={this.handleSetProfilePhoto}
-                                      value={this.state.photoId}
-                                      name="setProfile"
-                                      >
-                                      Set as Profile Photo</Button>
-                                </Col>
-                                </Row>
-                                <Row>
-                                  <Col>
-                                      <Button 
-                                      bsStyle="primary" 
-                                      bsSize="large" 
-                                      style={btnStyle}
-                                      value={this.state.imageUploadId}
-                                      onClick={this.handleDelete}
-                                      >Delete
-                                      Photo</Button>
-                                  </Col>
-                                </Row>
-                                </div>
-                            ) : 
-                              (null)      
-                          }
                             <div>
                               <Comments 
                                 addComment={this.handleInputChange}
