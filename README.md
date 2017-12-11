@@ -34,10 +34,9 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
   * [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
 
 ### Hosting
-* [Heroku](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwihmIzp8IDYAhVQxWMKHe_SAOcQFggzMAA&url=https%3A%2F%2Fwww.heroku.com%2F&usg=AOvVaw1V4lhSv6mb_lZj6UUCUXpS) - Application hosting
+* [Heroku](https://heroku.com) - Application hosting
   * [MLab](https://elements.heroku.com/addons/mongolab) - MongoDB hosting
   * [PointDNS](https://devcenter.heroku.com/articles/pointdns) - Domain management
-
 * [Cloudinary](https://cloudinary.com/) - Cloud-based image management
 
 ## Installation
@@ -68,7 +67,7 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 **Heroku Deployment:** 
 
 * Load [https://cali-cool.herokuapp.com/](https://cali-cool.herokuapp.com/) 
-* Load custom domain name [https://cali.cool/](https://cali.cool/) 
+* Load custom domain name [https://cali.cool](https://cali.cool) 
 
 ## Code Highlights
 
