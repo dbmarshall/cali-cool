@@ -16,7 +16,7 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 
 ## Visual Application Walkthrough 
 
-[![Click to see Cali.cool Walkthrough](calicool-screenshot.png)](https://youtu.be/6mco_9hX3A4 "Cali.cool Walkthrough")
+[![Click to see Cali.cool Walkthrough](calicool-screenshot.png)](https://youtu.be/6mco_9hX3A4 "Click image for video walkthrough")
 Click image for video walkthrough.
 
 ## Technologies:
