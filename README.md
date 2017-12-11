@@ -18,6 +18,8 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 
 [![Cali.cool Walkthrough](calicool-screenshot.png)](https://youtu.be/6mco_9hX3A4)
 
+[![Cali.cool Walkthrough](http://img.youtube.com/vi/6mco_9hX3A4/0.jpg)](http://www.youtube.com/watch?v=6mco_9hX3A4)
+
 ![Cali.cool Walkthrough](calicool-walkthrough_20171210.gif "cali.cool walkthrough")
 
 [MP4 Video Walkthrough](calicool-walkthrough_20171210.mp4)
