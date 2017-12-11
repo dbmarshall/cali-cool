@@ -2,15 +2,16 @@
 
 ## User Story
 
-...
+People who love California want an intiential community whereby they can share their artform of photography with like interested people.
 
 ## Synopsis
 
-...
+People love California. From the forests of Redwoods, to the oceans of Huntington to the vibrancy of Los Angles and the wild of Santa Cruz there is much to experience in California. Though many ways to express form of expression, photography captures so much of the life of California. Cali.cool is a platform to share captured experiences about California.
 
 ## Motivation
 
-...
+As creators of Cali.cool we want a platform that is welcoming and encouraging to all those who love share their experiences in and of California.
+
 
 ## Visual Application Walkthrough
 
@@ -18,7 +19,10 @@
 
 ## Technologies:
 
-* 
+* [MongoDB] (https://www.mongodb.com/) - MongoDB is a free and open-source cross-platform document-oriented database program.
+* [Express] (https://reactjs.org/) - A JavaScript library for building user interfaces
+* [React.js] (https://reactjs.org/) - A JavaScript library for building user interfaces
+*[Node.js] (https://reactjs.org/) - A JavaScript library for building user interfaces
 * 
 * 
 
