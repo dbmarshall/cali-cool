@@ -1,6 +1,6 @@
 # Cali.cool
 
-## www.cali.cool 
+**www.cali.cool**
 
 ## Synopsis
 
