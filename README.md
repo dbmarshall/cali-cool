@@ -108,48 +108,25 @@ findById: function(req, res) {
   }
 ```
 
-### Query for main page most liked photos
+### Creating a new Photo w/ Cloudinary API
 ```javascript
-mostLiked: function(req, res){
-    var oneDay = (1000 * 60 * 60 * 24);
-    var twoWeeksBack = new Date(new Date() - (14 * oneDay));
-    console.log(new Date(twoWeeksBack));
-
-    db.Photos.aggregate([
-      {$match: { dateUpdated : { $gte: twoWeeksBack}}},
-      {$unwind: "$likes"}, 
-      {$group: {_id:"$_id", size: {$sum: 1}}},
-      {$sort: {size:-1}},
-      {$project: { caption: "$caption", _id: "$_id"}},
-      ])
-      .limit(12)
-      .then(photos => {
-        const photoIdArray = photos.map(function(photo){
-          return photo._id;
-        });
-        
-        db.Photos
-        .find( {_id : { $in : photoIdArray }})
-        .populate({
-          path: "album",
-          select: ["_id", "title"]
-        })
-        .populate({
-          path: "owner",
-          select: ["_id", "userName"]
-        })
-        .then(photoDBModels => {
-          let results = [];
-          photoIdArray.forEach(function(refPhotoId){
-            let result = photoDBModels.filter(function(photoObj){
-              return (refPhotoId.toString() == photoObj._id.toString());
-            });
-            results.push(result[0]);
-          });
-          res.json(results);
-        })
-      })
-      .catch(err => res.status(422).json(err));
+createPhoto: function(req, res) {
+    // console.log('createPhoto req.body.data_uri: ', req.body.data_uri);
+    cloudinary.uploader.upload(req.body.data_uri, function(result) { 
+        console.log('result: ', result);
+      imageUploadId = result.public_id;
+        // console.log('imageUploadId: ', imageUploadId);
+      newObj = req.body;
+      delete newObj['data_uri'];
+        // console.log(newObj);
+      newObj.imageUploadId = result.public_id;
+        // console.log(newObj);
+      db.Photos
+        .create(newObj)
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    }, 
+      { upload_preset: "cali-cool-ucb" });
   }
 ```
 
