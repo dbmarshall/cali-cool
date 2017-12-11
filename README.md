@@ -18,7 +18,7 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 
 ![Cali.cool Walkthrough](calicool-walkthrough_20171210.gif "cali.cool walkthrough")
 
-[Video Walkthrough](calicool-walkthrough_20171210.mp4)
+[MP4 Video Walkthrough](calicool-walkthrough_20171210.mp4)
 
 ## Technologies:
 
