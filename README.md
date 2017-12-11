@@ -15,15 +15,11 @@ As creators of Cali.cool we want a platform that is welcoming and encouraging to
 
 ## Visual Application Walkthrough
 
-.... <!-- post content -->
-
 <div class="video_container">
   <video controls="controls" allowfullscreen="true" poster="calicool-walkthrough_20171210-poster.png">
     <source src="calicool-walkthrough_20171210.mp4" type="video/mp4">
   </video> 
 </div>
-
-.... <!-- post content -->
 
 ![Cali.cool Walkthrough](calicool-walkthrough_20171210.gif "cali.cool walkthrough")
 
@@ -36,7 +32,7 @@ MERN Stack
 * [React.js](https://reactjs.org/) - JavaScript library for building user interfaces
   * [React Router](https://github.com/ReactTraining/react-router) - Declarative routing for React
   * [Yarn](https://yarnpkg.com/en/) - Dependency management
-* [Node.js](https://nodejs.org/en/) - JavaScript runtime
+* [Node.js](https://nodejs.org/en/) - JavaScript runtime engine
   * [Passport.js](http://www.passportjs.org/docs/) - Authentication middleware
   * [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
 * [Heroku](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwihmIzp8IDYAhVQxWMKHe_SAOcQFggzMAA&url=https%3A%2F%2Fwww.heroku.com%2F&usg=AOvVaw1V4lhSv6mb_lZj6UUCUXpS) - Application hosting
