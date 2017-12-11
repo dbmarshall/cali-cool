@@ -1,6 +1,6 @@
 # Cali.cool
 
-**www.cali.cool**
+**Live application: www.cali.cool**
 
 ## Synopsis
 
