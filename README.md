@@ -33,6 +33,7 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
   * [Passport.js](http://www.passportjs.org/docs/) - Authentication middleware
   * [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
 
+### Hosting
 * [Heroku](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwihmIzp8IDYAhVQxWMKHe_SAOcQFggzMAA&url=https%3A%2F%2Fwww.heroku.com%2F&usg=AOvVaw1V4lhSv6mb_lZj6UUCUXpS) - Application hosting
   * [MLab](https://elements.heroku.com/addons/mongolab) - MongoDB hosting
   * [PointDNS](https://devcenter.heroku.com/articles/pointdns) - Domain management
@@ -58,7 +59,7 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
     yarn start
     ```
 
-## Available Node Commands and URLs
+## Available Commands and URLs
 
 **Local:** 
 
@@ -67,10 +68,12 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 **Heroku Deployment:** 
 
 * Load [https://cali-cool.herokuapp.com/](https://cali-cool.herokuapp.com/) 
+* Load custom domain name [https://cali.cool/](https://cali.cool/) 
 
 ## Code Highlights
+
+### Promise-based syntax to find user by ID with Mongoose and populate with data from photos and user collections
 ```javascript
-<!-- Using promise based syntax to find user by ID with Mongoose and populate with data from photos and user collections -->
 
 findById: function(req, res) {
     db.Albums
@@ -106,8 +109,8 @@ findById: function(req, res) {
   }
 ```
 
+### Query for main page most liked photos
 ```javascript
-<!-- populates main page with most liked photos -->
 mostLiked: function(req, res){
     var oneDay = (1000 * 60 * 60 * 24);
     var twoWeeksBack = new Date(new Date() - (14 * oneDay));
