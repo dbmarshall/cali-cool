@@ -15,13 +15,12 @@ As creators of Cali.cool we want a platform that is welcoming and encouraging to
 
 ## Visual Application Walkthrough
 
-<div class="video_container">
   <video controls="controls" allowfullscreen="true" poster="calicool-walkthrough_20171210-poster.png">
     <source src="calicool-walkthrough_20171210.mp4" type="video/mp4">
   </video> 
-</div>
 
 ![Cali.cool Walkthrough](calicool-walkthrough_20171210.gif "cali.cool walkthrough")
+[Video Walkthrough](calicool-walkthrough_20171210.mp4)
 
 ## Technologies:
 
