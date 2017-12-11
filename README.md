@@ -1,30 +1,28 @@
 # Cali.cool
 
-## User Story
-
-People who love California want an intiential community whereby they can share their artform of photography with like interested people.
+## www.cali.cool 
 
 ## Synopsis
 
-People love California. From the forests of Redwoods, to the oceans of Huntington to the vibrancy of Los Angles and the wild of Santa Cruz there is much to experience in California. Though many ways to express form of expression, photography captures so much of the life of California. Cali.cool is a platform to share captured experiences about California.
+Cali.cool is a photo sharing app for Californians by Californians, a visual platform for sharing the California experience. The collection of photographs is open for public viewing, but requires a user login to share photos, as well as to like and comment on photos and albums.
+
+## User Story
+
+As a Californian, I want to upload photos to a California-oriented photo app so that I can share photos which express life in California with other residents.
 
 ## Motivation
 
-As creators of Cali.cool we want a platform that is welcoming and encouraging to all those who love share their experiences in and of California.
+As creators of Cali.cool, we want a platform that is welcoming and encouraging to all those who love and want to share their experiences in and of California.
 
-
-## Visual Application Walkthrough
-
-  <video controls="controls" allowfullscreen="true" poster="calicool-walkthrough_20171210-poster.png">
-    <source src="calicool-walkthrough_20171210.mp4" type="video/mp4">
-  </video> 
+## Visual Application Walkthrough 
 
 ![Cali.cool Walkthrough](calicool-walkthrough_20171210.gif "cali.cool walkthrough")
+
 [Video Walkthrough](calicool-walkthrough_20171210.mp4)
 
 ## Technologies:
 
-MERN Stack
+### MERN Stack
 * [MongoDB](https://www.mongodb.com/) - Document-oriented NoSQL database
   * [Mongoose](http://mongoosejs.com/) - Schema solution for MongoDB
 * [Express](https://expressjs.com/) - Application framework/server
@@ -34,9 +32,11 @@ MERN Stack
 * [Node.js](https://nodejs.org/en/) - JavaScript runtime engine
   * [Passport.js](http://www.passportjs.org/docs/) - Authentication middleware
   * [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
+
 * [Heroku](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwihmIzp8IDYAhVQxWMKHe_SAOcQFggzMAA&url=https%3A%2F%2Fwww.heroku.com%2F&usg=AOvVaw1V4lhSv6mb_lZj6UUCUXpS) - Application hosting
   * [MLab](https://elements.heroku.com/addons/mongolab) - MongoDB hosting
   * [PointDNS](https://devcenter.heroku.com/articles/pointdns) - Domain management
+
 * [Cloudinary](https://cloudinary.com/) - Cloud-based image management
 
 ## Installation
