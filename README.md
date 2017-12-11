@@ -16,6 +16,8 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 
 ## Visual Application Walkthrough 
 
+[![Cali.cool Walkthrough](calicool-screenshot.png)](https://youtu.be/6mco_9hX3A4)
+
 ![Cali.cool Walkthrough](calicool-walkthrough_20171210.gif "cali.cool walkthrough")
 
 [MP4 Video Walkthrough](calicool-walkthrough_20171210.mp4)
@@ -73,7 +75,6 @@ As creators of Cali.cool, we want a platform that is welcoming and encouraging t
 
 ### Promise-based syntax to find user by ID with Mongoose and populate with data from photos and user collections
 ```javascript
-
 findById: function(req, res) {
     db.Albums
       .findById(req.params.id)
@@ -108,25 +109,20 @@ findById: function(req, res) {
   }
 ```
 
-### Creating a new Photo w/ Cloudinary API
+### Creating a new photo w/ Cloudinary API
 ```javascript
 createPhoto: function(req, res) {
-    // console.log('createPhoto req.body.data_uri: ', req.body.data_uri);
     cloudinary.uploader.upload(req.body.data_uri, function(result) { 
-        console.log('result: ', result);
       imageUploadId = result.public_id;
-        // console.log('imageUploadId: ', imageUploadId);
       newObj = req.body;
       delete newObj['data_uri'];
-        // console.log(newObj);
       newObj.imageUploadId = result.public_id;
-        // console.log(newObj);
       db.Photos
         .create(newObj)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     }, 
-      { upload_preset: "cali-cool-ucb" });
+      { upload_preset: "ccu" });
   }
 ```
 
