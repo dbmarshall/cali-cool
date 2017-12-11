@@ -24,15 +24,15 @@ MERN Stack
 * [Express](https://expressjs.com/) - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 * [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces
 * [Node.js](https://nodejs.org/en/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
-* Cloudinary(https://cloudinary.com/) - Cloudinary is the market leader in providing a comprehensive cloud-based image management solution.
-* Yarn(https://yarnpkg.com/en/) - FAST, RELIABLE, AND SECURE DEPENDENCY MANAGEMENT.
-* Passport.js(http://www.passportjs.org/docs/) - Passport is authentication middleware for Node. It is designed to serve a singular purpose: authenticate requests.
-* Mongoose(http://mongoosejs.com/) - Mongoose provides a straight-forward, schema-based solution to model your application data.
-* Axios(https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js
-* React Router (https://github.com/ReactTraining/react-router) - Declarative routing for React
-* Heroku(https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwihmIzp8IDYAhVQxWMKHe_SAOcQFggzMAA&url=https%3A%2F%2Fwww.heroku.com%2F&usg=AOvVaw1V4lhSv6mb_lZj6UUCUXpS) - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
-* MLab(https://elements.heroku.com/addons/mongolab) - Cloud-hosted MongoDB 
-* PointDNS(https://devcenter.heroku.com/articles/pointdns) - PointDNS is an add-on that will give you power to manage all your domains from a friendly and easy to use interface.
+* [Cloudinary](https://cloudinary.com/) - Cloudinary is the market leader in providing a comprehensive cloud-based image management solution.
+* [Yarn](https://yarnpkg.com/en/) - FAST, RELIABLE, AND SECURE DEPENDENCY MANAGEMENT.
+* [Passport.js](http://www.passportjs.org/docs/) - Passport is authentication middleware for Node. It is designed to serve a singular purpose: authenticate requests.
+* [Mongoose](http://mongoosejs.com/) - Mongoose provides a straight-forward, schema-based solution to model your application data.
+* [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js
+* [React Router](https://github.com/ReactTraining/react-router) - Declarative routing for React
+* [Heroku](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwihmIzp8IDYAhVQxWMKHe_SAOcQFggzMAA&url=https%3A%2F%2Fwww.heroku.com%2F&usg=AOvVaw1V4lhSv6mb_lZj6UUCUXpS) - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+* [MLab](https://elements.heroku.com/addons/mongolab) - Cloud-hosted MongoDB 
+* [PointDNS](https://devcenter.heroku.com/articles/pointdns) - PointDNS is an add-on that will give you power to manage all your domains from a friendly and easy to use interface.
 
 ## Installation
 
@@ -63,10 +63,88 @@ MERN Stack
 
 * Load [https://cali-cool.herokuapp.com/](https://cali-cool.herokuapp.com/) 
 
-## Misc Notes
+## Code Highlights
+```javascript
+<!-- Using promise based syntax to find user by ID with Mongoose and populate with data from photos and user collections -->
 
-* 
-* 
+findById: function(req, res) {
+    db.Albums
+      .findById(req.params.id)
+      .populate({
+        path: "photos",
+        populate: [{
+          path: "owner",
+          model: "Users",
+          select: ["_id", "userName"]
+        },
+        {
+          path: "album",
+          model: "Albums",
+          select: ["_id", "title"]
+        }]
+      })
+      .populate("owner")
+      .populate({
+        path: 'comments',
+        options: {
+          sort: {
+            dateUpdated: -1
+          }
+        },
+        populate: {
+          path: 'user',
+          model: 'Users'
+        }
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  }
+```
+
+```javascript
+<!-- populates main page with most recent photos searching from entire database -->
+mostLiked: function(req, res){
+    var oneDay = (1000 * 60 * 60 * 24);
+    var twoWeeksBack = new Date(new Date() - (14 * oneDay));
+    console.log(new Date(twoWeeksBack));
+
+    db.Photos.aggregate([
+      {$match: { dateUpdated : { $gte: twoWeeksBack}}},
+      {$unwind: "$likes"}, 
+      {$group: {_id:"$_id", size: {$sum: 1}}},
+      {$sort: {size:-1}},
+      {$project: { caption: "$caption", _id: "$_id"}},
+      ])
+      .limit(12)
+      .then(photos => {
+        const photoIdArray = photos.map(function(photo){
+          return photo._id;
+        });
+        
+        db.Photos
+        .find( {_id : { $in : photoIdArray }})
+        .populate({
+          path: "album",
+          select: ["_id", "title"]
+        })
+        .populate({
+          path: "owner",
+          select: ["_id", "userName"]
+        })
+        .then(photoDBModels => {
+          let results = [];
+          photoIdArray.forEach(function(refPhotoId){
+            let result = photoDBModels.filter(function(photoObj){
+              return (refPhotoId.toString() == photoObj._id.toString());
+            });
+            results.push(result[0]);
+          });
+          res.json(results);
+        })
+      })
+      .catch(err => res.status(422).json(err));
+  }
+```
 
 ## Authors
 
