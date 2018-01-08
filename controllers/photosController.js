@@ -28,12 +28,11 @@ module.exports = {
     .catch(err => res.status(422).json(err));
   },
   mostLiked: function(req, res){
-    var oneDay = (1000 * 60 * 60 * 24);
-    var twoWeeksBack = new Date(new Date() - (14 * oneDay));
-    console.log(new Date(twoWeeksBack));
+    // var oneDay = (1000 * 60 * 60 * 24);
+    // var twoWeeksBack = new Date(new Date() - (14 * oneDay));
 
     db.Photos.aggregate([
-      {$match: { dateUpdated : { $gte: twoWeeksBack}}},
+      // {$match: { dateUpdated : { $gte: twoWeeksBack}}},
       {$unwind: "$likes"}, 
       {$group: {_id:"$_id", size: {$sum: 1}}},
       {$sort: {size:-1}},
